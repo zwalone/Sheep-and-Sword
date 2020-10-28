@@ -1,4 +1,4 @@
-﻿// TODO: FIX ATTACK, ADD WALL JUMP, ADD DASH
+﻿// TODO: ADD WALL JUMP, ADD DASH
 
 using UnityEngine;
 
@@ -15,6 +15,12 @@ public class PlayerController : MonoBehaviour
     public Transform groundChecker;
     public float groundCheckerRadius;
     public LayerMask groundLayer;
+
+    // Wall jumping correction parameters:
+    public Transform wallCheckerLeft;
+    public Transform wallCheckerRight;
+    public float wallCheckerRadius;
+    int isWalled = 0;
 
     // Animation correction parameter:
     bool lookRight = true;
@@ -33,6 +39,7 @@ public class PlayerController : MonoBehaviour
         hitPointRight.SetActive(false);
         hitPointLeft.SetActive(false);
         CheckTheGround();
+        CheckTheWall();
 
         Move();
         Jump();
@@ -41,9 +48,25 @@ public class PlayerController : MonoBehaviour
 
     private void CheckTheGround()
     {
-        // Checking if players is on the ground:
+        // Checking if player is on the ground:
         Collider2D collider = Physics2D.OverlapCircle(groundChecker.position, groundCheckerRadius, groundLayer);
         isGrounded = (collider != null) ? true : false;
+    }
+
+
+    // The Player Transform consists of two wall checkers so we know if the wall is on the right or on the left.
+    // Thanks to this information we could implement bouncing behaviour, but... it didn't work. So I leave it 
+    // for the future steps.
+    private void CheckTheWall()
+    {
+        // Checking if player is on the wall:
+        Collider2D collider = Physics2D.OverlapCircle(wallCheckerRight.position, wallCheckerRadius, groundLayer);
+        if (collider != null) { isWalled = -1; }
+        else
+        {
+            collider = Physics2D.OverlapCircle(wallCheckerLeft.position, wallCheckerRadius, groundLayer);
+            isWalled = (collider != null) ? 1 : 0;
+        }
     }
 
     private void Move()
@@ -67,16 +90,27 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        // Jump (from ground or double-jump):
-        if (Input.GetKeyDown(KeyCode.UpArrow) && (isGrounded || jumpedTimes < 1))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            rigbody.velocity = new Vector2(rigbody.velocity.x, jumpForce);
-            jumpedTimes++;
+            if (isGrounded) jumpedTimes = 0;
+
+            // Wall jump:
+            if (isWalled != 0)
+            {
+                rigbody.velocity = new Vector2(rigbody.velocity.x, jumpForce);
+                jumpedTimes = 1;
+                return;
+            }
+
+            // Standard jump (from ground or double-jump):
+            if (isGrounded || jumpedTimes < 2)
+            {
+                rigbody.velocity = new Vector2(rigbody.velocity.x, jumpForce);
+                jumpedTimes++;
+            }
         }
-        if (isGrounded) jumpedTimes = 0;
     }
 
-    // VERY BUGGY, IDK WHY
     private void Attack()
     {
         if (Input.GetKeyDown(KeyCode.Space))
