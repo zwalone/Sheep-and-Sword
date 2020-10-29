@@ -1,13 +1,15 @@
-﻿// TODO: ADD WALL JUMP, ADD DASH
+﻿// TODO: ADD WALL JUMP BOUNCING BEHAVIOUR, ADD DASH
+// BUGGY: ATTACK
 
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Movement parameters:
+    // Basic movement parameters:
     public float speed;
     public float jumpForce;
     Rigidbody2D rigbody;
+    bool lookRight = true;
 
     // Jumping correction parameters:
     int jumpedTimes = 0;
@@ -22,8 +24,12 @@ public class PlayerController : MonoBehaviour
     public float wallCheckerRadius;
     int isWalled = 0;
 
-    // Animation correction parameter:
-    bool lookRight = true;
+    // Crouching parameters:
+    public Transform ceilingChecker;
+    bool isCeilinged = false;
+    bool isCrouched = false;
+    BoxCollider2D boxcol;
+    public float ceilingCheckerRadius;
 
     // Attack parameters:
     public GameObject hitPointRight;
@@ -32,6 +38,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rigbody = GetComponent<Rigidbody2D>();
+        boxcol = GetComponent<BoxCollider2D>();
     }
 
     void Update()
@@ -40,8 +47,10 @@ public class PlayerController : MonoBehaviour
         hitPointLeft.SetActive(false);
         CheckTheGround();
         CheckTheWall();
+        CheckTheCeiling();
 
         Move();
+        Crouch();
         Jump();
         Attack();
     }
@@ -52,7 +61,6 @@ public class PlayerController : MonoBehaviour
         Collider2D collider = Physics2D.OverlapCircle(groundChecker.position, groundCheckerRadius, groundLayer);
         isGrounded = (collider != null) ? true : false;
     }
-
 
     // The Player Transform consists of two wall checkers so we know if the wall is on the right or on the left.
     // Thanks to this information we could implement bouncing behaviour, but... it didn't work. So I leave it 
@@ -67,6 +75,13 @@ public class PlayerController : MonoBehaviour
             collider = Physics2D.OverlapCircle(wallCheckerLeft.position, wallCheckerRadius, groundLayer);
             isWalled = (collider != null) ? 1 : 0;
         }
+    }
+
+    private void CheckTheCeiling()
+    {
+        // Checking if there is a ceiling above the player:
+        Collider2D collider = Physics2D.OverlapCircle(ceilingChecker.position, ceilingCheckerRadius, groundLayer);
+        isCeilinged = (collider != null) ? true : false;
     }
 
     private void Move()
@@ -111,6 +126,35 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void Crouch()
+    {
+        // for faster falling or something like that can be another function - this one is only for crouching on the ground:
+        if (isGrounded)
+        {
+            // if the collider's size reduces to 1/2 of original size, offset needs to go down for 1/4 of original size;
+            // "or isCeilinged" helps in situations when there is still a ceiling above player (but user stopped holding button)
+            if (Input.GetKey(KeyCode.DownArrow) || isCeilinged)
+            {
+                if (!isCrouched)
+                {
+                    boxcol.size = new Vector2(boxcol.size.x, boxcol.size.y / 2);
+                    boxcol.offset = new Vector2(boxcol.offset.x, boxcol.offset.y - (boxcol.size.y / 2));
+                    isCrouched = true;
+                }
+                return;
+            }
+
+            // standing after crouching
+            if (isCrouched)
+            {
+                boxcol.size = new Vector2(boxcol.size.x, boxcol.size.y * 2);
+                boxcol.offset = new Vector2(boxcol.offset.x, boxcol.offset.y + (boxcol.size.y / 4));
+                isCrouched = false;
+            }
+        }
+    }
+
+    // Sometimes it doesn't work...
     private void Attack()
     {
         if (Input.GetKeyDown(KeyCode.Space))
