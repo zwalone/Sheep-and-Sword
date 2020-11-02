@@ -49,7 +49,6 @@ ExportedObj/
 *.mdb.meta
 *.meta
 !*.*.meta
-*.unity
 
 
 # Unity3D generated file on crash reports
