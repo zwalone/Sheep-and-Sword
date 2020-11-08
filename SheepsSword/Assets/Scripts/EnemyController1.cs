@@ -1,0 +1,148 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using UnityEngine.EventSystems;
+
+public class EnemyController1 : MonoBehaviour
+{
+    private EnemyModel _model;
+    private EnemyView _view;
+
+    private List<CircleCollider2D> _checkGroudList;
+    private Rigidbody2D _rd2D;
+
+    private bool _changeDirection;
+    private bool _isAttacking;
+
+    private void Awake()
+    {
+        _view = this.GetComponent<EnemyView>();
+        _model = this.GetComponent<EnemyModel>();
+        _rd2D = this.GetComponent<Rigidbody2D>();
+        _checkGroudList = new List<CircleCollider2D>(this.GetComponentsInChildren<CircleCollider2D>());
+    }
+
+    void Start()
+    {
+        _view.WalkRight();
+        _changeDirection = true;
+        Debug.LogError(_checkGroudList.Count);
+    }
+
+    private void FixedUpdate()
+    {
+        //Move Enemy and check direction
+        _rd2D.MovePosition(_rd2D.position + new Vector2(_model.Speed, 0) * Time.fixedDeltaTime);
+        ChangeMoveDirection();
+        RayCastCheckUpdate();
+    }
+
+    public void TakeDamage(int dmg)
+    {
+        _model.HP -= dmg;
+        if(_model.HP < 0)
+        {
+            StartCoroutine(Die());
+        }
+        else
+        {
+            //TODO ewentualnie zmiana koloru sprita i odepchnięcie
+        }
+    }
+
+    //Check Collision With Player by Raycast
+    private void RayCastCheckUpdate()
+    {
+        Vector2 directionRay;
+        if (_model.Speed < 0) directionRay = new Vector2(-1, 0);
+        else directionRay = new Vector2(1, 0);
+
+        //Add offset to don't hit yourself
+        float offset = (_model.Speed < 0 ? -0.4f : 0.4f);
+        Vector2 start = new Vector2(this.transform.position.x + offset, this.transform.position.y);
+        RaycastHit2D hit = Physics2D.Raycast(start, directionRay, 1f);
+
+        Debug.DrawRay(start, directionRay, Color.red);
+
+        if (hit.collider) 
+        {
+            if(hit.collider.tag == "Player")
+            {
+                if (!_isAttacking)
+                {
+                    Debug.Log("Hit Raycast with " + hit.transform.tag);
+                    //TODO make a laser
+                    StartCoroutine(Attack());
+                }
+            }
+        }
+    }
+
+    //Check and Change direction
+    private void ChangeMoveDirection()
+    {
+        foreach (var col in _checkGroudList)
+        {
+            if (!col.IsTouchingLayers(LayerMask.GetMask("Ground")) && _changeDirection)
+            {
+                _changeDirection = false;
+                StartCoroutine(ChangeDirectionCorutine());
+            }
+        }
+    }
+
+    
+    //Coroutine for Movement
+    IEnumerator ChangeDirectionCorutine()
+    {
+        _model.Speed = -_model.Speed;
+        if (_model.Speed < 0) _view.WalkLeft();
+        else _view.WalkRight();
+        yield return new WaitForSeconds(1);
+        _changeDirection = true;
+    }
+
+    IEnumerator Attack()
+    {
+        _isAttacking = true;
+        float prevSpeed = _model.Speed;
+
+        //Spawn a bullet
+        if (_model.Speed < 0)
+        {
+            _view.AttackLeft();
+            Instantiate(_model.Laser, this.transform.position , Quaternion.Euler(0,180,0));
+        }
+        else
+        {
+            _view.AttackRight();
+            Instantiate(_model.Laser, this.transform.position, Quaternion.identity);
+        }
+
+        //Stop movement during shoot animation 
+        _model.Speed = 0;
+
+        yield return new WaitForSeconds(0.5f);
+
+        //Go to previos Movement
+        _model.Speed = prevSpeed;
+
+        //Return to walk animation
+        if (prevSpeed < 0) _view.WalkLeft();
+        else _view.WalkRight();
+        
+        _isAttacking = false;
+    }
+
+    IEnumerator Die()
+    {
+        _model.Speed = 0;
+        if (_model.Speed < 0) _view.DieLeft();
+        else _view.DieRight();
+
+        yield return new WaitForSeconds(1);
+        Destroy(gameObject);
+    }
+}
