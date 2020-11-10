@@ -1,5 +1,5 @@
-﻿// TODO: ADD WALL JUMP BOUNCING BEHAVIOUR, ADD DASH
-// BUGGY: ATTACK
+﻿// TO DO: ADD WALL JUMP BOUNCING BEHAVIOUR, ADD DASH
+// TO REPAIR: ATTACK (AND IT'S ANIMATION)
 
 using UnityEngine;
 
@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public float speed;
     public float jumpForce;
     Rigidbody2D rigbody;
+    Transform playerGraphics;
     bool lookRight = true;
 
     // Jumping correction parameters:
@@ -39,12 +40,15 @@ public class PlayerController : MonoBehaviour
     {
         rigbody = GetComponent<Rigidbody2D>();
         boxcol = GetComponent<BoxCollider2D>();
+        playerGraphics = transform.Find("Graphics");
+        if (playerGraphics == null) Debug.Log("Graphics component is missing!");
     }
 
     void Update()
     {
         hitPointRight.SetActive(false);
         hitPointLeft.SetActive(false);
+        playerGraphics.GetComponent<Animator>().SetBool("attacked", false);
         CheckTheGround();
         CheckTheWall();
         CheckTheCeiling();
@@ -53,6 +57,7 @@ public class PlayerController : MonoBehaviour
         Crouch();
         Jump();
         Attack();
+        Debug.Log("ciastko");
     }
 
     private void CheckTheGround()
@@ -89,22 +94,27 @@ public class PlayerController : MonoBehaviour
         // Move (left-right):
         float x = Input.GetAxisRaw("Horizontal");
         rigbody.velocity = new Vector2(x * speed, rigbody.velocity.y);
+        playerGraphics.GetComponent<Animator>().SetFloat("speedX", System.Math.Abs(rigbody.velocity.x));
 
         // Flip:
         if (lookRight == true && x < 0)
         {
-            GetComponent<SpriteRenderer>().flipX = true;
+            playerGraphics.GetComponent<SpriteRenderer>().flipX = true;
             lookRight = false;
         }
         if (lookRight == false && x > 0)
         {
-            GetComponent<SpriteRenderer>().flipX = false;
+            playerGraphics.GetComponent<SpriteRenderer>().flipX = false;
             lookRight = true;
         }
     }
 
     private void Jump()
     {
+        playerGraphics.GetComponent<Animator>().SetBool("isGrounded", isGrounded);
+        playerGraphics.GetComponent<Animator>().SetFloat("speedY", rigbody.velocity.y);
+        playerGraphics.GetComponent<Animator>().SetInteger("jumpedTimes", jumpedTimes);
+
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             if (isGrounded) jumpedTimes = 0;
@@ -128,6 +138,7 @@ public class PlayerController : MonoBehaviour
 
     private void Crouch()
     {
+        playerGraphics.GetComponent<Animator>().SetBool("isCrouched", isCrouched);
         // for faster falling or something like that can be another function - this one is only for crouching on the ground:
         if (isGrounded)
         {
@@ -161,6 +172,8 @@ public class PlayerController : MonoBehaviour
         {
             if (lookRight) hitPointRight.SetActive(true);
             else hitPointLeft.SetActive(true);
+
+            playerGraphics.GetComponent<Animator>().SetBool("attacked", true);
         }
     }
 }
