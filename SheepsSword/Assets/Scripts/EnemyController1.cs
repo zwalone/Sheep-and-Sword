@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class EnemyController1 : MonoBehaviour
 {
     private EnemyModel _model;
     private EnemyView _view;
 
-    private List<CircleCollider2D> _checkGroudList;
+    private List<CircleCollider2D> _checkGroundList;
     private Rigidbody2D _rd2D;
 
     private bool _changeDirection;
@@ -21,14 +18,14 @@ public class EnemyController1 : MonoBehaviour
         _view = this.GetComponent<EnemyView>();
         _model = this.GetComponent<EnemyModel>();
         _rd2D = this.GetComponent<Rigidbody2D>();
-        _checkGroudList = new List<CircleCollider2D>(this.GetComponentsInChildren<CircleCollider2D>());
+        _checkGroundList = new List<CircleCollider2D>(this.GetComponentsInChildren<CircleCollider2D>());
     }
 
     void Start()
     {
         _view.WalkRight();
         _changeDirection = true;
-        Debug.LogError(_checkGroudList.Count);
+        Debug.LogError(_checkGroundList.Count);
     }
 
     private void FixedUpdate()
@@ -83,7 +80,7 @@ public class EnemyController1 : MonoBehaviour
     //Check and Change direction
     private void ChangeMoveDirection()
     {
-        foreach (var col in _checkGroudList)
+        foreach (var col in _checkGroundList)
         {
             if (!col.IsTouchingLayers(LayerMask.GetMask("Ground")) && _changeDirection)
             {

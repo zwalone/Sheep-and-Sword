@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player_SomerSault
+  m_Name: Fall
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,13 +20,9 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: eeb6a553ca5cea14caac45dd7bffedb3, type: 3}
-    - time: 0.16666667
-      value: {fileID: 21300000, guid: 704b2f9e07e124d48a4bb9752607865a, type: 3}
+      value: {fileID: 21300000, guid: e77b1286ce2edc54fa05f3fc744684ac, type: 3}
     - time: 0.33333334
-      value: {fileID: 21300000, guid: 6254247338334a04599140aeed66a419, type: 3}
-    - time: 0.5
-      value: {fileID: 21300000, guid: 90a35fec4dea8794b87175b54d5f0fc0, type: 3}
+      value: {fileID: 21300000, guid: 1b91a99ab5092654da9bade96e48b25d, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -46,16 +42,14 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: eeb6a553ca5cea14caac45dd7bffedb3, type: 3}
-    - {fileID: 21300000, guid: 704b2f9e07e124d48a4bb9752607865a, type: 3}
-    - {fileID: 21300000, guid: 6254247338334a04599140aeed66a419, type: 3}
-    - {fileID: 21300000, guid: 90a35fec4dea8794b87175b54d5f0fc0, type: 3}
+    - {fileID: 21300000, guid: e77b1286ce2edc54fa05f3fc744684ac, type: 3}
+    - {fileID: 21300000, guid: 1b91a99ab5092654da9bade96e48b25d, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.51666665
+    m_StopTime: 0.35000002
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -74,11 +68,4 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events:
-  - time: 0
-    functionName: 
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
+  m_Events: []

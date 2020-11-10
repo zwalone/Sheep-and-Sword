@@ -8,6 +8,11 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private Vector3 offsetPosition = new Vector3(0, 2, -1);
 
+    private void Awake()
+    {
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
     private void Update()
     {
         if (target == null)

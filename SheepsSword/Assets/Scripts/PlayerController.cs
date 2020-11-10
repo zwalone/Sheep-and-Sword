@@ -1,54 +1,68 @@
-﻿// TO DO: ADD WALL JUMP BOUNCING BEHAVIOUR, ADD DASH
-// TO REPAIR: ATTACK (AND IT'S ANIMATION)
+﻿// TO DO: 
+// 1. ADD WALL JUMP BOUNCING BEHAVIOUR
+// 2. ADD DASH
+// 3. ADD MORE ATTACKS (WHILE STANDING AS WELL AS WHILE JUMPING OR CROUCHING)
+// 4. FIX MOVEMENT (SLOPES)
+// 5. ADD CROUCHING-MOVING ANIMATION
 
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Basic movement parameters:
-    public float speed;
-    public float jumpForce;
-    Rigidbody2D rigbody;
-    Transform playerGraphics;
-    bool lookRight = true;
+    private PlayerModel model; // speed, jump force, health points
+    private PlayerView view;   // animations
 
-    // Jumping correction parameters:
-    int jumpedTimes = 0;
-    bool isGrounded = false;
-    public Transform groundChecker;
+    private Rigidbody2D rigbody;      // for movement
+    private BoxCollider2D boxcol;     // for crouching
+    private Transform playerGraphics; // for displaying
+
+    // Player's children with parameters:
+    private Transform groundChecker;    // for jumping
     public float groundCheckerRadius;
     public LayerMask groundLayer;
 
-    // Wall jumping correction parameters:
-    public Transform wallCheckerLeft;
-    public Transform wallCheckerRight;
-    public float wallCheckerRadius;
-    int isWalled = 0;
-
-    // Crouching parameters:
-    public Transform ceilingChecker;
-    bool isCeilinged = false;
-    bool isCrouched = false;
-    BoxCollider2D boxcol;
+    private Transform ceilingChecker;   // for crouching
     public float ceilingCheckerRadius;
 
-    // Attack parameters:
-    public GameObject hitPointRight;
-    public GameObject hitPointLeft;
+    private Transform wallCheckerLeft;  // for walljumping
+    private Transform wallCheckerRight;
+    public float wallCheckerRadius;
 
-    void Start()
+    private GameObject hitPointRight;   // for attacking
+    private GameObject hitPointLeft;
+
+    // Parameters:
+    private readonly float animationLength = 0.25f;
+    private bool isAttacking = false;
+    private bool isSomerSaulting = false;
+    private bool isGrounded = false;  // contact with the ground 
+    private bool isCeilinged = false; // contact with the ceiling -> crouched
+    private bool isCrouched = false;
+    private int  isWalled = 0;        // contact with the wall
+    private int  jumpedTimes = 0;
+
+
+
+    private void Awake()
     {
-        rigbody = GetComponent<Rigidbody2D>();
-        boxcol = GetComponent<BoxCollider2D>();
         playerGraphics = transform.Find("Graphics");
-        if (playerGraphics == null) Debug.Log("Graphics component is missing!");
+        view = playerGraphics.GetComponent<PlayerView>();
+
+        model   = GetComponent<PlayerModel>();
+        rigbody = GetComponent<Rigidbody2D>();
+        boxcol  = GetComponent<BoxCollider2D>(); 
+        groundChecker    = transform.Find("GroundChecker");
+        ceilingChecker   = transform.Find("CeilingChecker");
+        wallCheckerLeft  = transform.Find("WallCheckerLeft");
+        wallCheckerRight = transform.Find("WallCheckerRight");
+        hitPointLeft     = transform.Find("HitPointLeft").gameObject;
+        hitPointRight    = transform.Find("HitPointRight").gameObject;
+        hitPointRight.SetActive(false);
+        hitPointLeft.SetActive(false);
     }
 
     void Update()
     {
-        hitPointRight.SetActive(false);
-        hitPointLeft.SetActive(false);
-        playerGraphics.GetComponent<Animator>().SetBool("attacked", false);
         CheckTheGround();
         CheckTheWall();
         CheckTheCeiling();
@@ -57,8 +71,10 @@ public class PlayerController : MonoBehaviour
         Crouch();
         Jump();
         Attack();
-        Debug.Log("ciastko");
+        Animate();
     }
+
+
 
     private void CheckTheGround()
     {
@@ -89,32 +105,31 @@ public class PlayerController : MonoBehaviour
         isCeilinged = (collider != null) ? true : false;
     }
 
+
+
     private void Move()
     {
         // Move (left-right):
-        float x = Input.GetAxisRaw("Horizontal");
-        rigbody.velocity = new Vector2(x * speed, rigbody.velocity.y);
-        playerGraphics.GetComponent<Animator>().SetFloat("speedX", System.Math.Abs(rigbody.velocity.x));
+        float xMove = Input.GetAxisRaw("Horizontal");
+        rigbody.velocity = new Vector2(xMove * model.Speed, rigbody.velocity.y);
 
         // Flip:
-        if (lookRight == true && x < 0)
+        if (view.LookRight == true && xMove < 0)
         {
             playerGraphics.GetComponent<SpriteRenderer>().flipX = true;
-            lookRight = false;
+            view.LookRight = false;
         }
-        if (lookRight == false && x > 0)
+        if (view.LookRight == false && xMove > 0)
         {
             playerGraphics.GetComponent<SpriteRenderer>().flipX = false;
-            lookRight = true;
+            view.LookRight = true;
         }
     }
 
+
+
     private void Jump()
     {
-        playerGraphics.GetComponent<Animator>().SetBool("isGrounded", isGrounded);
-        playerGraphics.GetComponent<Animator>().SetFloat("speedY", rigbody.velocity.y);
-        playerGraphics.GetComponent<Animator>().SetInteger("jumpedTimes", jumpedTimes);
-
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             if (isGrounded) jumpedTimes = 0;
@@ -122,7 +137,7 @@ public class PlayerController : MonoBehaviour
             // Wall jump:
             if (isWalled != 0)
             {
-                rigbody.velocity = new Vector2(rigbody.velocity.x, jumpForce);
+                rigbody.velocity = new Vector2(rigbody.velocity.x, model.JumpForce);
                 jumpedTimes = 1;
                 return;
             }
@@ -130,15 +145,30 @@ public class PlayerController : MonoBehaviour
             // Standard jump (from ground or double-jump):
             if (isGrounded || jumpedTimes < 2)
             {
-                rigbody.velocity = new Vector2(rigbody.velocity.x, jumpForce);
+                rigbody.velocity = new Vector2(rigbody.velocity.x, model.JumpForce);
+                SomerSault();
                 jumpedTimes++;
             }
         }
     }
 
+    private void SomerSault()
+    {
+        if (jumpedTimes == 1)
+        {
+            isSomerSaulting = true;
+
+            view.SomerSault();
+            Invoke(nameof(SomerSaultCompleted), animationLength * 2);
+        }
+    }
+
+    private void SomerSaultCompleted() { isSomerSaulting = false; }
+
+
+
     private void Crouch()
     {
-        playerGraphics.GetComponent<Animator>().SetBool("isCrouched", isCrouched);
         // for faster falling or something like that can be another function - this one is only for crouching on the ground:
         if (isGrounded)
         {
@@ -165,15 +195,59 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Sometimes it doesn't work...
+
+
     private void Attack()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (lookRight) hitPointRight.SetActive(true);
+            isAttacking = true;
+
+            if (view.LookRight) hitPointRight.SetActive(true);
             else hitPointLeft.SetActive(true);
 
-            playerGraphics.GetComponent<Animator>().SetBool("attacked", true);
+            Invoke(nameof(AttackCompleted), animationLength);
+        }
+    }
+
+    private void AttackCompleted()
+    {
+        isAttacking = false; 
+        hitPointRight.SetActive(false);
+        hitPointLeft.SetActive(false);
+    }
+
+
+
+    private void Animate()
+    {
+        if (isCrouched) view.Crouch();
+        else if (isAttacking) view.Attack1();
+        else if (isGrounded)
+        {
+            if (rigbody.velocity.x != 0) view.Run();
+            else view.Idle();
+        }
+        else
+        {
+            if (isSomerSaulting) view.SomerSault();
+            else if (rigbody.velocity.y > 0) view.Jump();
+            else view.Fall();
+        }
+    }
+
+
+
+    public void TakeDamage(int dmg)
+    {
+        model.HP -= dmg;
+        if (model.HP < 0)
+        {
+            // die
+        }
+        else
+        {
+            // hurt
         }
     }
 }

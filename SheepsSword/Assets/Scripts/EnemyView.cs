@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyView : MonoBehaviour
 {
@@ -15,7 +13,7 @@ public class EnemyView : MonoBehaviour
         DieLeft
     }
 
-    private Anim _curretState;
+    private Anim _currentState;
 
     private Animator _animator;
 
@@ -23,17 +21,17 @@ public class EnemyView : MonoBehaviour
     void Start()
     {
         _animator = this.GetComponent<Animator>();
-        _curretState = Anim.WalkRight;
+        _currentState = Anim.WalkRight;
     }
 
     private void ChangeAnimState(Anim state)
     {
         //Stop the same animation playing
-        if (_curretState == state) return;
+        if (_currentState == state) return;
 
-        _curretState = state;
+        _currentState = state;
 
-        _animator.Play(_curretState.ToString());
+        _animator.Play(_currentState.ToString());
     }
 
     public void WalkLeft()
