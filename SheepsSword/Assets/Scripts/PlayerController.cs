@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
 
     // Parameters:
     private readonly float animationLength = 0.25f;
-    private readonly float wallCorrectionParam = 0.2f;
+    private readonly float wallCorrectionParam = 0.21f;
     private bool isAttacking = false;
     private bool isSomerSaulting = false;
     private bool isGrounded = false;  // contact with the ground 
@@ -141,7 +141,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {
             attackedTimes = -1;
 
@@ -178,9 +178,9 @@ public class PlayerController : MonoBehaviour
 
     private void SomerSaultCompleted() { isSomerSaulting = false; }
 
-    private void FastFall() // after clicking DownArrow (or W), player goes down faster
+    private void FastFall() // after clicking DownArrow (or S), player goes down faster
     {
-        if (!isGrounded && (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.W)))
+        if (!isGrounded && (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S)))
             rigbody.velocity = new Vector2(0, -model.JumpForce / 1.5f);
     }
 
@@ -193,7 +193,7 @@ public class PlayerController : MonoBehaviour
             // if the collider's size reduces to 1/2 of original size, offset needs to go down 
             // for 1/4 of original size; "or isCeilinged" helps in situations when there is still 
             // a ceiling above player (but user stopped holding button)
-            if (Input.GetKey(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S) || isCeilinged)
+            if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || isCeilinged)
             {
                 if (!isCrouched)
                 {
