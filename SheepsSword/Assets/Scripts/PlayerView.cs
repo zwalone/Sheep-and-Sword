@@ -11,15 +11,23 @@ public class PlayerView : MonoBehaviour
         Jump,
         Fall,
         Crouch,
+        CrouchWalk,
         Attack1,
-        SomerSault
+        Attack2,
+        Attack3,
+        AirAttack,
+        CrouchAttack,
+        SomerSault,
+        Climb,
+        WallSlide,
+        WallHold
     }
 
     private Anim currentState;
     public Animator GetAnimator { get; private set; }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         LookRight = true;
         GetAnimator = GetComponent<Animator>();
@@ -40,6 +48,14 @@ public class PlayerView : MonoBehaviour
     public void Jump() { ChangeAnimState(Anim.Jump); }
     public void Fall() { ChangeAnimState(Anim.Fall); }
     public void Crouch() { ChangeAnimState(Anim.Crouch); }
+    public void CrouchWalk() { ChangeAnimState(Anim.CrouchWalk); }
     public void Attack1() { ChangeAnimState(Anim.Attack1); }
+    public void Attack2() { ChangeAnimState(Anim.Attack2); }
+    public void Attack3() { ChangeAnimState(Anim.Attack3); }
+    public void AirAttack() { ChangeAnimState(Anim.AirAttack); }
+    public void CrouchAttack() { ChangeAnimState(Anim.CrouchAttack); }
     public void SomerSault() { ChangeAnimState(Anim.SomerSault); }
+    public void Climb() { ChangeAnimState(Anim.Climb); }
+    public void WallSlide() { ChangeAnimState(Anim.WallSlide); }
+    public void WallHold() { ChangeAnimState(Anim.WallHold); }
 }

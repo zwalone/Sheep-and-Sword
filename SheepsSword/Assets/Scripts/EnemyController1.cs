@@ -25,7 +25,6 @@ public class EnemyController1 : MonoBehaviour
     {
         _view.WalkRight();
         _changeDirection = true;
-        Debug.LogError(_checkGroundList.Count);
     }
 
     private void FixedUpdate()

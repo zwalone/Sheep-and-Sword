@@ -17,7 +17,7 @@ public class Laser : MonoBehaviour
     private void Awake()
     {
         _anim = this.GetComponent<Animator>();
-        _rb2D = this.GetComponent<Rigidbody2D>();    
+        _rb2D = this.GetComponent<Rigidbody2D>();
     }
 
     void Start()

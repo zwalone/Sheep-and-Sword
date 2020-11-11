@@ -1,9 +1,7 @@
 ﻿// TO DO: 
-// 1. ADD WALL JUMP BOUNCING BEHAVIOUR
-// 2. ADD DASH
-// 3. ADD MORE ATTACKS (WHILE STANDING AS WELL AS WHILE JUMPING OR CROUCHING)
-// 4. FIX MOVEMENT (SLOPES)
-// 5. ADD CROUCHING-MOVING ANIMATION
+// 1. FIX MOVEMENT (SLOPES)
+// 2. ADD DASH (ARROW_DOWN ON SLOPES?)
+// 3. ADD DYING AND HURTING INSTRUCTIONS AND ANIMATIONS
 
 using UnityEngine;
 
@@ -33,6 +31,7 @@ public class PlayerController : MonoBehaviour
 
     // Parameters:
     private readonly float animationLength = 0.25f;
+    private readonly float wallCorrectionParam = 0.2f;
     private bool isAttacking = false;
     private bool isSomerSaulting = false;
     private bool isGrounded = false;  // contact with the ground 
@@ -40,6 +39,7 @@ public class PlayerController : MonoBehaviour
     private bool isCrouched = false;
     private int  isWalled = 0;        // contact with the wall
     private int  jumpedTimes = 0;
+    private int  attackedTimes = -1;
 
 
 
@@ -70,6 +70,7 @@ public class PlayerController : MonoBehaviour
         Move();
         Crouch();
         Jump();
+        FastFall();
         Attack();
         Animate();
     }
@@ -107,9 +108,9 @@ public class PlayerController : MonoBehaviour
 
 
 
-    private void Move()
+    private void Move() // Run and Climb
     {
-        // Move (left-right):
+        // Run (horizontal movement):
         float xMove = Input.GetAxisRaw("Horizontal");
         rigbody.velocity = new Vector2(xMove * model.Speed, rigbody.velocity.y);
 
@@ -124,6 +125,16 @@ public class PlayerController : MonoBehaviour
             playerGraphics.GetComponent<SpriteRenderer>().flipX = false;
             view.LookRight = true;
         }
+
+        // Climb (vertical movement):
+        if (isWalled != 0)
+        {
+            float yMove = Input.GetAxisRaw("Vertical");
+            if (yMove != 0)
+                rigbody.velocity = new Vector2(rigbody.velocity.x, yMove * model.Speed);
+            else
+                rigbody.velocity = new Vector2(rigbody.velocity.x, wallCorrectionParam); // something is wrong
+        }
     }
 
 
@@ -132,10 +143,12 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
+            attackedTimes = -1;
+
             if (isGrounded) jumpedTimes = 0;
 
             // Wall jump:
-            if (isWalled != 0)
+            if (isWalled != 0) // there is a wall on the left (-1) or right (1)
             {
                 rigbody.velocity = new Vector2(rigbody.velocity.x, model.JumpForce);
                 jumpedTimes = 1;
@@ -165,16 +178,22 @@ public class PlayerController : MonoBehaviour
 
     private void SomerSaultCompleted() { isSomerSaulting = false; }
 
+    private void FastFall() // after clicking DownArrow (or W), player goes down faster
+    {
+        if (!isGrounded && (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.W)))
+            rigbody.velocity = new Vector2(0, -model.JumpForce / 1.5f);
+    }
+
 
 
     private void Crouch()
     {
-        // for faster falling or something like that can be another function - this one is only for crouching on the ground:
         if (isGrounded)
         {
-            // if the collider's size reduces to 1/2 of original size, offset needs to go down for 1/4 of original size;
-            // "or isCeilinged" helps in situations when there is still a ceiling above player (but user stopped holding button)
-            if (Input.GetKey(KeyCode.DownArrow) || isCeilinged)
+            // if the collider's size reduces to 1/2 of original size, offset needs to go down 
+            // for 1/4 of original size; "or isCeilinged" helps in situations when there is still 
+            // a ceiling above player (but user stopped holding button)
+            if (Input.GetKey(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S) || isCeilinged)
             {
                 if (!isCrouched)
                 {
@@ -199,18 +218,23 @@ public class PlayerController : MonoBehaviour
 
     private void Attack()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && isWalled == 0)
         {
             isAttacking = true;
+            attackedTimes = (attackedTimes + 1) % 3;   // there are 3 types of attack
 
-            if (view.LookRight) hitPointRight.SetActive(true);
-            else hitPointLeft.SetActive(true);
-
-            Invoke(nameof(AttackCompleted), animationLength);
+            Invoke(nameof(AttackStart), animationLength / 2.0f); // hit in the half of animation
+            Invoke(nameof(AttackStop), animationLength);
         }
     }
 
-    private void AttackCompleted()
+    private void AttackStart()
+    {
+        if (view.LookRight) hitPointRight.SetActive(true);
+        else hitPointLeft.SetActive(true);
+    }
+
+    private void AttackStop()
     {
         isAttacking = false; 
         hitPointRight.SetActive(false);
@@ -218,21 +242,40 @@ public class PlayerController : MonoBehaviour
     }
 
 
-
     private void Animate()
     {
-        if (isCrouched) view.Crouch();
-        else if (isAttacking) view.Attack1();
-        else if (isGrounded)
+        if (isWalled != 0)
         {
-            if (rigbody.velocity.x != 0) view.Run();
-            else view.Idle();
+            if (rigbody.velocity.y > wallCorrectionParam) view.Climb();
+            else if (rigbody.velocity.y == wallCorrectionParam) view.WallHold();
+            else view.WallSlide();
         }
-        else
+        else if (isGrounded) // on the ground
         {
-            if (isSomerSaulting) view.SomerSault();
-            else if (rigbody.velocity.y > 0) view.Jump();
-            else view.Fall();
+            if (isCrouched)  // crouching
+            {
+                if (isAttacking) view.CrouchAttack();
+                else if (rigbody.velocity.x != 0) view.CrouchWalk();
+                else view.Crouch();
+            }
+            else // standing
+            {
+                if (isAttacking) // 3 standard attacks
+                {
+                    if (attackedTimes == 0) view.Attack1();
+                    else if (attackedTimes == 1) view.Attack2();
+                    else view.Attack3();
+                }
+                else if (rigbody.velocity.x != 0) view.Run();
+                else view.Idle();
+            }
+        }
+        else // in air
+        {
+            if (isAttacking) view.AirAttack();
+            else if (rigbody.velocity.y < 0.5f) view.Fall();
+            else if (isSomerSaulting) view.SomerSault();
+            else view.Jump();
         }
     }
 
