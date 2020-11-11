@@ -64,7 +64,7 @@ public class EnemyController1 : MonoBehaviour
 
         if (hit.collider) 
         {
-            if(hit.collider.tag == "Player")
+            if(hit.collider.CompareTag("Player"))
             {
                 if (!_isAttacking)
                 {

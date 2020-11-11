@@ -1,5 +1,5 @@
 ﻿// TO DO: 
-// 1. FIX MOVEMENT (SLOPES)
+// 1. FIX MOVEMENT (SLOPES) AND HUGE PROBLEM: PLAYER'S POSITION'S VALUE DECREASES ON Y AXIS
 // 2. ADD DASH (ARROW_DOWN ON SLOPES?)
 // 3. ADD DYING AND HURTING INSTRUCTIONS AND ANIMATIONS
 
@@ -10,9 +10,9 @@ public class PlayerController : MonoBehaviour
     private PlayerModel model; // speed, jump force, health points
     private PlayerView view;   // animations
 
-    private Rigidbody2D rigbody;      // for movement
-    private BoxCollider2D boxcol;     // for crouching
-    private Transform playerGraphics; // for displaying
+    private Rigidbody2D rigbody;          // for movement
+    private CapsuleCollider2D capscol;    // for crouching
+    private Transform playerGraphics;     // for displaying
 
     // Player's children with parameters:
     private Transform groundChecker;    // for jumping
@@ -31,15 +31,14 @@ public class PlayerController : MonoBehaviour
 
     // Parameters:
     private readonly float animationLength = 0.25f;
-    private readonly float wallCorrectionParam = 0.21f;
+    private int  attackViewNumber = -1;
+    private bool canSomerSault = false;
     private bool isAttacking = false;
     private bool isSomerSaulting = false;
     private bool isGrounded = false;  // contact with the ground 
-    private bool isCeilinged = false; // contact with the ceiling -> crouched
+    private bool isCeilinged = false; // contact with the ceiling
     private bool isCrouched = false;
     private int  isWalled = 0;        // contact with the wall
-    private int  jumpedTimes = 0;
-    private int  attackedTimes = -1;
 
 
 
@@ -48,15 +47,15 @@ public class PlayerController : MonoBehaviour
         playerGraphics = transform.Find("Graphics");
         view = playerGraphics.GetComponent<PlayerView>();
 
-        model   = GetComponent<PlayerModel>();
+        model = GetComponent<PlayerModel>();
         rigbody = GetComponent<Rigidbody2D>();
-        boxcol  = GetComponent<BoxCollider2D>(); 
-        groundChecker    = transform.Find("GroundChecker");
-        ceilingChecker   = transform.Find("CeilingChecker");
-        wallCheckerLeft  = transform.Find("WallCheckerLeft");
+        capscol = GetComponent<CapsuleCollider2D>();
+        groundChecker = transform.Find("GroundChecker");
+        ceilingChecker = transform.Find("CeilingChecker");
+        wallCheckerLeft = transform.Find("WallCheckerLeft");
         wallCheckerRight = transform.Find("WallCheckerRight");
-        hitPointLeft     = transform.Find("HitPointLeft").gameObject;
-        hitPointRight    = transform.Find("HitPointRight").gameObject;
+        hitPointLeft = transform.Find("HitPointLeft").gameObject;
+        hitPointRight = transform.Find("HitPointRight").gameObject;
         hitPointRight.SetActive(false);
         hitPointLeft.SetActive(false);
     }
@@ -81,12 +80,10 @@ public class PlayerController : MonoBehaviour
     {
         // Checking if player is on the ground:
         Collider2D collider = Physics2D.OverlapCircle(groundChecker.position, groundCheckerRadius, groundLayer);
-        isGrounded = (collider != null) ? true : false;
+        isGrounded = (collider != null);
     }
 
     // The Player Transform consists of two wall checkers so we know if the wall is on the right or on the left.
-    // Thanks to this information we could implement bouncing behaviour, but... it didn't work. So I leave it 
-    // for the future steps.
     private void CheckTheWall()
     {
         // Checking if player is on the wall:
@@ -103,7 +100,7 @@ public class PlayerController : MonoBehaviour
     {
         // Checking if there is a ceiling above the player:
         Collider2D collider = Physics2D.OverlapCircle(ceilingChecker.position, ceilingCheckerRadius, groundLayer);
-        isCeilinged = (collider != null) ? true : false;
+        isCeilinged = (collider != null);
     }
 
 
@@ -127,13 +124,13 @@ public class PlayerController : MonoBehaviour
         }
 
         // Climb (vertical movement):
-        if (isWalled != 0)
+        if (isWalled != 0 && !isCeilinged)
         {
             float yMove = Input.GetAxisRaw("Vertical");
             if (yMove != 0)
                 rigbody.velocity = new Vector2(rigbody.velocity.x, yMove * model.Speed);
-            else
-                rigbody.velocity = new Vector2(rigbody.velocity.x, wallCorrectionParam); // something is wrong
+            else if (xMove == 0)
+                rigbody.velocity = new Vector2(-isWalled * 4.0f, 0.0f); // avoid sliding down 
         }
     }
 
@@ -141,38 +138,29 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
+        if (isGrounded || isWalled != 0) canSomerSault = true;
+
         if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {
-            attackedTimes = -1;
+            attackViewNumber = -1; // reseting standard attacks (view)
 
-            if (isGrounded) jumpedTimes = 0;
-
-            // Wall jump:
-            if (isWalled != 0) // there is a wall on the left (-1) or right (1)
+            if (isGrounded || isWalled != 0) // standard jump (from ground or wall)
             {
                 rigbody.velocity = new Vector2(rigbody.velocity.x, model.JumpForce);
-                jumpedTimes = 1;
-                return;
+                canSomerSault = true;
             }
-
-            // Standard jump (from ground or double-jump):
-            if (isGrounded || jumpedTimes < 2)
-            {
-                rigbody.velocity = new Vector2(rigbody.velocity.x, model.JumpForce);
-                SomerSault();
-                jumpedTimes++;
-            }
+            else SomerSault();               // somersault only while falling
         }
     }
 
     private void SomerSault()
     {
-        if (jumpedTimes == 1)
+        if (canSomerSault == true)
         {
             isSomerSaulting = true;
-
-            view.SomerSault();
+            rigbody.velocity = new Vector2(rigbody.velocity.x, model.JumpForce);
             Invoke(nameof(SomerSaultCompleted), animationLength * 2);
+            canSomerSault = false;
         }
     }
 
@@ -197,8 +185,8 @@ public class PlayerController : MonoBehaviour
             {
                 if (!isCrouched)
                 {
-                    boxcol.size = new Vector2(boxcol.size.x, boxcol.size.y / 2);
-                    boxcol.offset = new Vector2(boxcol.offset.x, boxcol.offset.y - (boxcol.size.y / 2));
+                    capscol.size = new Vector2(capscol.size.x, capscol.size.y / 2);
+                    capscol.offset = new Vector2(capscol.offset.x, capscol.offset.y - (capscol.size.y / 2));
                     isCrouched = true;
                 }
                 return;
@@ -207,8 +195,8 @@ public class PlayerController : MonoBehaviour
             // standing after crouching
             if (isCrouched)
             {
-                boxcol.size = new Vector2(boxcol.size.x, boxcol.size.y * 2);
-                boxcol.offset = new Vector2(boxcol.offset.x, boxcol.offset.y + (boxcol.size.y / 4));
+                capscol.size = new Vector2(capscol.size.x, capscol.size.y * 2);
+                capscol.offset = new Vector2(capscol.offset.x, capscol.offset.y + (capscol.size.y / 4));
                 isCrouched = false;
             }
         }
@@ -221,7 +209,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isWalled == 0)
         {
             isAttacking = true;
-            attackedTimes = (attackedTimes + 1) % 3;   // there are 3 types of attack
+            attackViewNumber = (attackViewNumber + 1) % 3;   // there are 3 types of attack
 
             Invoke(nameof(AttackStart), animationLength / 2.0f); // hit in the half of animation
             Invoke(nameof(AttackStop), animationLength);
@@ -246,8 +234,8 @@ public class PlayerController : MonoBehaviour
     {
         if (isWalled != 0)
         {
-            if (rigbody.velocity.y > wallCorrectionParam) view.Climb();
-            else if (rigbody.velocity.y == wallCorrectionParam) view.WallHold();
+            if (rigbody.velocity.y > 0.0f) view.Climb();
+            else if (rigbody.velocity.y == 0.0f) view.WallHold();
             else view.WallSlide();
         }
         else if (isGrounded) // on the ground
@@ -262,8 +250,8 @@ public class PlayerController : MonoBehaviour
             {
                 if (isAttacking) // 3 standard attacks
                 {
-                    if (attackedTimes == 0) view.Attack1();
-                    else if (attackedTimes == 1) view.Attack2();
+                    if (attackViewNumber == 0) view.Attack1();
+                    else if (attackViewNumber == 1) view.Attack2();
                     else view.Attack3();
                 }
                 else if (rigbody.velocity.x != 0) view.Run();
@@ -284,9 +272,11 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(int dmg)
     {
         model.HP -= dmg;
+        Debug.Log($"Current HP: {model.HP} / 100");
         if (model.HP < 0)
         {
             // die
+            Debug.Log("GameOver");
         }
         else
         {

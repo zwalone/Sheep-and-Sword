@@ -574,7 +574,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Material
       value: 
-      objectReference: {fileID: 6200000, guid: b4228461436953d4eb49e8d8d856b0b3, type: 2}
+      objectReference: {fileID: 0}
+    - target: {fileID: 7925694648754571891, guid: 6d839915d3434d24c963bab187f79e7b,
+        type: 3}
+      propertyPath: m_Simulated
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7925694648754571893, guid: 6d839915d3434d24c963bab187f79e7b,
         type: 3}
       propertyPath: m_Layer
@@ -7795,6 +7800,21 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7549263234636537681, guid: 8b72ff1f8ec8e7d48856bc327e6cce63,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7549263234636537681, guid: 8b72ff1f8ec8e7d48856bc327e6cce63,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7549263234636537681, guid: 8b72ff1f8ec8e7d48856bc327e6cce63,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7549263234636537682, guid: 8b72ff1f8ec8e7d48856bc327e6cce63,
         type: 3}
       propertyPath: m_Size.x
@@ -7803,6 +7823,11 @@ PrefabInstance:
     - target: {fileID: 7549263234636537683, guid: 8b72ff1f8ec8e7d48856bc327e6cce63,
         type: 3}
       propertyPath: wallCheckerRadius
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7549263234636537683, guid: 8b72ff1f8ec8e7d48856bc327e6cce63,
+        type: 3}
+      propertyPath: ceilingCheckerRadius
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7549263234636537687, guid: 8b72ff1f8ec8e7d48856bc327e6cce63,
@@ -7878,7 +7903,7 @@ PrefabInstance:
     - target: {fileID: 7549263234943561113, guid: 8b72ff1f8ec8e7d48856bc327e6cce63,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.05
+      value: 0.045
       objectReference: {fileID: 0}
     - target: {fileID: 7549263235235920364, guid: 8b72ff1f8ec8e7d48856bc327e6cce63,
         type: 3}
@@ -7888,7 +7913,7 @@ PrefabInstance:
     - target: {fileID: 7549263235235920364, guid: 8b72ff1f8ec8e7d48856bc327e6cce63,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.05
+      value: 0.045
       objectReference: {fileID: 0}
     - target: {fileID: 7549263235235920364, guid: 8b72ff1f8ec8e7d48856bc327e6cce63,
         type: 3}

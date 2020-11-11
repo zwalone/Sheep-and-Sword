@@ -1,12 +1,11 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Laser : MonoBehaviour
 {
 
     [SerializeField]
-    private float _speed;
+    private float _speed = 0.5f; // JUST FOR TESTS
 
     [SerializeField]
     private int _dmg;
@@ -27,12 +26,12 @@ public class Laser : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag != "Enemy")
+        if(!collision.CompareTag("Enemy"))
         {
-            //TODO  HIT A PLAYER with the public function 
-            
-            //GameObject obj = collision.GetComponent<Player>();
-            //if (obj != null) obj.TakeDamage(_dmg);
+            //TODO  HIT A PLAYER with the public function            (NOT FINAL VERSION BELOW)
+            if (collision.gameObject.CompareTag("Player"))
+                collision.gameObject.GetComponent<PlayerController>().TakeDamage(20); // (JUST FOR TESTING: _dmg = 20)
+
             Destroy(gameObject);
         }
     }
