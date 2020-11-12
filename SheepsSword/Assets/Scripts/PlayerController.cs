@@ -1,9 +1,10 @@
 ﻿// TO DO: 
-// 1. FIX MOVEMENT (SLOPES) AND HUGE PROBLEM: PLAYER'S POSITION'S VALUE DECREASES ON Y AXIS
+// 1. FIX MOVEMENT (SLOPES) AND HUGE PROBLEM: PLAYER'S POSITION'S VALUE DECREASES ON Y AXIS (ON SLOPES AND WALLS)
 // 2. ADD DASH (ARROW_DOWN ON SLOPES?)
-// 3. ADD DYING AND HURTING INSTRUCTIONS AND ANIMATIONS
+// 3. FIX "FAST ATTACK" BUG - CLICKING TOO FAST ACTIVATES HIT POINTS BUT NOT THE ANIMATION
 
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -39,7 +40,12 @@ public class PlayerController : MonoBehaviour
     private bool isCeilinged = false; // contact with the ceiling
     private bool isCrouched = false;
     private int  isWalled = 0;        // contact with the wall
+    private bool isDead = false;
+    private bool isHurting = false;
 
+    // UI:
+    private Text hpText;
+    private Text gameoverText;
 
 
     private void Awake()
@@ -58,6 +64,10 @@ public class PlayerController : MonoBehaviour
         hitPointRight = transform.Find("HitPointRight").gameObject;
         hitPointRight.SetActive(false);
         hitPointLeft.SetActive(false);
+
+        hpText = GameObject.Find("HealthPointsText").GetComponent<Text>();
+        gameoverText = GameObject.Find("GameOverText").GetComponent<Text>();
+        gameoverText.gameObject.SetActive(false);
     }
 
     void Update()
@@ -145,10 +155,7 @@ public class PlayerController : MonoBehaviour
             attackViewNumber = -1; // reseting standard attacks (view)
 
             if (isGrounded || isWalled != 0) // standard jump (from ground or wall)
-            {
                 rigbody.velocity = new Vector2(rigbody.velocity.x, model.JumpForce);
-                canSomerSault = true;
-            }
             else SomerSault();               // somersault only while falling
         }
     }
@@ -232,7 +239,9 @@ public class PlayerController : MonoBehaviour
 
     private void Animate()
     {
-        if (isWalled != 0)
+        if (isHurting) view.Hurt();
+        else if (isDead) view.Die();
+        else if (isWalled != 0)
         {
             if (rigbody.velocity.y > 0.0f) view.Climb();
             else if (rigbody.velocity.y == 0.0f) view.WallHold();
@@ -271,16 +280,39 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(int dmg)
     {
-        model.HP -= dmg;
-        Debug.Log($"Current HP: {model.HP} / 100");
-        if (model.HP < 0)
+        // Decrease health:
+        if (model.HP > 0)
         {
-            // die
-            Debug.Log("GameOver");
+            model.HP -= dmg;
+            UpdateHPText();
+        }
+
+        // Animate:
+        if (model.HP > 0)
+        {
+            isHurting = true;
+            Invoke(nameof(StopHurting), 0.2f); // "Hurt" animation will last for 0.2 seconds
         }
         else
         {
-            // hurt
+            isDead = true;
+            Invoke(nameof(GameOver), animationLength * 2.1f); // Game freezes after Die animation
         }
+    }
+
+    private void StopHurting()
+    {
+        isHurting = false;
+    }
+
+    private void GameOver()
+    {
+        gameoverText.gameObject.SetActive(true);
+        Time.timeScale = 0;    // freeze everything
+    }
+
+    private void UpdateHPText()
+    {
+        hpText.text = $"HEALTH POINTS: {model.HP} / {model.MaxHP}";
     }
 }

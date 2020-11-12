@@ -3,6 +3,14 @@
 public class PlayerModel : MonoBehaviour
 {
     [SerializeField]
+    private int maxHP;
+    public int MaxHP
+    {
+        get { return maxHP; }
+        set { maxHP = value; }
+    }
+
+    [SerializeField]
     private int hp;
     public int HP
     {

@@ -20,7 +20,9 @@ public class PlayerView : MonoBehaviour
         SomerSault,
         Climb,
         WallSlide,
-        WallHold
+        WallHold,
+        Die,
+        Hurt
     }
 
     private Anim currentState;
@@ -58,4 +60,6 @@ public class PlayerView : MonoBehaviour
     public void Climb() { ChangeAnimState(Anim.Climb); }
     public void WallSlide() { ChangeAnimState(Anim.WallSlide); }
     public void WallHold() { ChangeAnimState(Anim.WallHold); }
+    public void Die() { ChangeAnimState(Anim.Die); }
+    public void Hurt() { ChangeAnimState(Anim.Hurt); }
 }
