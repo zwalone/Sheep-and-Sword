@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MinotaurController : MonoBehaviour
+public class SkeletonController : MonoBehaviour
 {
     public Transform rayCast;
     public LayerMask rayCastMask;
@@ -14,30 +14,30 @@ public class MinotaurController : MonoBehaviour
     private float distance;
     private bool _inRange;
 
-    //To remove !!
-    public bool getdamage;
-
-    private MinotaurModel _model;
-    private MinotaurView _view;
+    private SkeletonModel _model;
+    private SkeletonView _view;
 
     private List<CircleCollider2D> _checkGroundList;
     private Rigidbody2D _rd2D;
 
+    [SerializeField]
     private bool _changeDirection;
     private bool _isAttacking;
-    
+
+    //To remove after check with player
+    public bool getdamage;
 
     private void Awake()
     {
-        _view = this.GetComponent<MinotaurView>();
-        _model = this.GetComponent<MinotaurModel>();
+        _view = this.GetComponent<SkeletonView>();
+        _model = this.GetComponent<SkeletonModel>();
         _rd2D = this.GetComponent<Rigidbody2D>();
         _checkGroundList = new List<CircleCollider2D>(this.GetComponentsInChildren<CircleCollider2D>());
     }
 
     void Start()
     {
-        _view.WalkRight();
+        _view.Walk();
         _changeDirection = true;
     }
 
@@ -54,28 +54,29 @@ public class MinotaurController : MonoBehaviour
 
         if (_inRange)
         {
-            if(_model.Speed > 0) hit = Physics2D.Raycast(rayCast.position, Vector2.right, rayCastLength, rayCastMask);
+            if (_model.Speed > 0) hit = Physics2D.Raycast(rayCast.position, Vector2.right, rayCastLength, rayCastMask);
             else hit = Physics2D.Raycast(rayCast.position, Vector2.left, rayCastLength, rayCastMask);
 
             RaycastDebugger();
         }
 
         //when player is detected
-        if(hit.collider != null)
+        if (hit.collider != null)
         {
             CheckAttack();
 
-        }else if(hit.collider == null)
+        }
+        else if (hit.collider == null)
         {
             _inRange = false;
         }
     }
-    
+
     //Attack
     private void CheckAttack()
     {
         distance = Vector2.Distance(transform.position, target.transform.position);
-        if(distance <= attackDistance && !_isAttacking )
+        if (distance <= attackDistance && !_isAttacking)
         {
             StartCoroutine(Attack());
         }
@@ -84,9 +85,9 @@ public class MinotaurController : MonoBehaviour
     //Onlt for debug
     private void RaycastDebugger()
     {
-        if(distance > attackDistance)
+        if (distance > attackDistance)
         {
-            if(_model.Speed > 0) Debug.DrawRay(rayCast.position, Vector2.right * rayCastLength, Color.red);
+            if (_model.Speed > 0) Debug.DrawRay(rayCast.position, Vector2.right * rayCastLength, Color.red);
             else Debug.DrawRay(rayCast.position, Vector2.left * rayCastLength, Color.red);
         }
         else
@@ -98,12 +99,13 @@ public class MinotaurController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collider.gameObject.tag == "Player")
+        if (collider.gameObject.tag == "Player")
         {
             _inRange = true;
             target = collider.gameObject;
         }
     }
+
 
     //Check and Change direction
     private void ChangeMoveDirection()
@@ -132,49 +134,47 @@ public class MinotaurController : MonoBehaviour
         getdamage = false;
     }
 
+    //Coroutine for Movement
+    IEnumerator ChangeDirectionCorutine()
+    {
+        _model.Speed = -_model.Speed;
+        this.transform.localRotation *= Quaternion.Euler(0, 180, 0);
+        yield return new WaitForSeconds(0.7f);
+        _changeDirection = true;
+    }
+
     IEnumerator Die()
     {
         _model.Speed = 0;
-        if (_model.Speed < 0) _view.DieLeft();
-        else _view.DieRight();
+        _view.Die();
 
         yield return new WaitForSeconds(1);
         Destroy(gameObject);
     }
 
-    //Coroutine for Movement
-    IEnumerator ChangeDirectionCorutine()
-    {
-        _model.Speed = -_model.Speed;
-        if (_model.Speed < 0) _view.WalkLeft();
-        else _view.WalkRight();
-        yield return new WaitForSeconds(0.7f);
-        _changeDirection = true;
-    }
-
+    //Attack
     IEnumerator Attack()
     {
         _isAttacking = true;
-        if (_model.Speed > 0) _view.AttackRight();
-        else _view.AttackLeft();
-
-        _model.Speed *= 10;
+        _view.Attack();
+        _model.Speed *= 3;
 
         yield return new WaitForSeconds(1.1f);
 
-        _model.Speed /= 10;
-        if (_model.Speed > 0) _view.WalkRight();
-        else _view.WalkLeft();
+        _model.Speed /= 3;
+        _view.Walk();
         _isAttacking = false;
     }
 
     IEnumerator TakeDamage()
     {
-        _view.GetDamage();
+        _view.TakeDamage();
+        var prevSpeed = _model.Speed;
+        _model.Speed = 0;
 
-        yield return new WaitForSeconds(0.03f);
+        yield return new WaitForSeconds(0.2f);
 
-        if (_model.Speed > 0) _view.WalkRight();
-        else _view.WalkLeft();
+        _model.Speed = prevSpeed;
+        _view.Walk();
     }
 }
