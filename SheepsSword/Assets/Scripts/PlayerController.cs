@@ -1,7 +1,6 @@
 ﻿// TO DO: 
 // 1. FIX MOVEMENT (SLOPES) AND HUGE PROBLEM: PLAYER'S POSITION'S VALUE DECREASES ON Y AXIS (ON SLOPES AND WALLS)
 // 2. ADD DASH (ARROW_DOWN ON SLOPES?)
-// 3. FIX "FAST ATTACK" BUG - CLICKING TOO FAST ACTIVATES HIT POINTS BUT NOT THE ANIMATION
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -152,7 +151,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {
-            attackViewNumber = -1; // reseting standard attacks (view)
+            attackViewNumber = -1; // reseting standard attacks (view) while in air
 
             if (isGrounded || isWalled != 0) // standard jump (from ground or wall)
                 rigbody.velocity = new Vector2(rigbody.velocity.x, model.JumpForce);
@@ -213,13 +212,15 @@ public class PlayerController : MonoBehaviour
 
     private void Attack()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isWalled == 0)
+        if (Input.GetKeyDown(KeyCode.Space) && isWalled == 0 && !isAttacking)
         {
             isAttacking = true;
             attackViewNumber = (attackViewNumber + 1) % 3;   // there are 3 types of attack
 
             Invoke(nameof(AttackStart), animationLength / 2.0f); // hit in the half of animation
             Invoke(nameof(AttackStop), animationLength);
+
+            if (!isGrounded) attackViewNumber = -1; // reseting standard attacks (view) while in air
         }
     }
 

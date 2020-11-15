@@ -13,6 +13,9 @@ public class EnemyController1 : MonoBehaviour
     private bool _changeDirection;
     private bool _isAttacking;
 
+    private bool _canUseLaser = true;
+    private float _laserCooldown = 1.5f;
+
     private void Awake()
     {
         _view = this.GetComponent<EnemyView>();
@@ -106,15 +109,20 @@ public class EnemyController1 : MonoBehaviour
         float prevSpeed = _model.Speed;
 
         //Spawn a bullet
-        if (_model.Speed < 0)
+        if (_canUseLaser == true)
         {
-            _view.AttackLeft();
-            Instantiate(_model.Laser, this.transform.position , Quaternion.Euler(0,180,0));
-        }
-        else
-        {
-            _view.AttackRight();
-            Instantiate(_model.Laser, this.transform.position, Quaternion.identity);
+            _canUseLaser = false;
+            if (_model.Speed < 0)
+            {
+                _view.AttackLeft();
+                Instantiate(_model.Laser, this.transform.position, Quaternion.Euler(0, 180, 0));
+            }
+            else
+            {
+                _view.AttackRight();
+                Instantiate(_model.Laser, this.transform.position, Quaternion.identity);
+            }
+            Invoke(nameof(CanUseLaser), _laserCooldown);
         }
 
         //Stop movement during shoot animation 
@@ -131,6 +139,8 @@ public class EnemyController1 : MonoBehaviour
         
         _isAttacking = false;
     }
+
+    private void CanUseLaser() { _canUseLaser = true;  }
 
     IEnumerator Die()
     {
