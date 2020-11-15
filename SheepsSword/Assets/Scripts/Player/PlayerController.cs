@@ -1,6 +1,4 @@
-﻿// TO DO: 
-// 1. FIX MOVEMENT (SLOPES) AND HUGE PROBLEM: PLAYER'S POSITION'S VALUE DECREASES ON Y AXIS (ON SLOPES AND WALLS)
-// 2. ADD DASH (ARROW_DOWN ON SLOPES?)
+﻿// TO DO: FIX MOVEMENT ON SLOPES
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,7 +20,7 @@ public class PlayerController : MonoBehaviour
     private Transform ceilingChecker;   // for crouching
     public float ceilingCheckerRadius;
 
-    private Transform wallCheckerLeft;  // for walljumping
+    private Transform wallCheckerLeft;  // for climbing walls
     private Transform wallCheckerRight;
     public float wallCheckerRadius;
 
@@ -30,6 +28,7 @@ public class PlayerController : MonoBehaviour
     private GameObject hitPointLeft;
 
     // Parameters:
+    private readonly float colliderReductor = 0.8f;
     private readonly float animationLength = 0.25f;
     private int  attackViewNumber = -1;
     private bool canSomerSault = false;
@@ -41,6 +40,7 @@ public class PlayerController : MonoBehaviour
     private int  isWalled = 0;        // contact with the wall
     private bool isDead = false;
     private bool isHurting = false;
+    private bool isSliding = false;
 
     // UI:
     private Text hpText;
@@ -75,14 +75,13 @@ public class PlayerController : MonoBehaviour
         CheckTheWall();
         CheckTheCeiling();
 
-        Move();
-        Crouch();
         Jump();
+        Crouch();
         FastFall();
+        Move();
         Attack();
         Animate();
     }
-
 
 
     private void CheckTheGround()
@@ -97,11 +96,11 @@ public class PlayerController : MonoBehaviour
     {
         // Checking if player is on the wall:
         Collider2D collider = Physics2D.OverlapCircle(wallCheckerRight.position, wallCheckerRadius, groundLayer);
-        if (collider != null) { isWalled = -1; }
+        if (collider != null && view.LookRight == true) { isWalled = -1; }
         else
         {
             collider = Physics2D.OverlapCircle(wallCheckerLeft.position, wallCheckerRadius, groundLayer);
-            isWalled = (collider != null) ? 1 : 0;
+            isWalled = (collider != null && view.LookRight == false) ? 1 : 0;
         }
     }
 
@@ -116,9 +115,22 @@ public class PlayerController : MonoBehaviour
 
     private void Move() // Run and Climb
     {
-        // Run (horizontal movement):
+        // Run (horizontal movement) + avoid auto-sliding down on slopes:
         float xMove = Input.GetAxisRaw("Horizontal");
-        rigbody.velocity = new Vector2(xMove * model.Speed, rigbody.velocity.y);
+        if (xMove != 0)
+        {
+            rigbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+            rigbody.velocity = new Vector2(xMove * model.Speed, rigbody.velocity.y);
+
+            if (isGrounded) // MOVEMENT ON SLOPES!
+            {
+                //RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1f, groundLayer);
+                //if (hit.collider != null && Mathf.Abs(hit.normal.x) > 0.1f && hit.normal.x * xMove > 0)
+                //    rigbody.velocity = new Vector2(rigbody.velocity.x, -model.JumpForce);
+            }
+        }
+        else rigbody.constraints = RigidbodyConstraints2D.FreezePositionX
+                                 | RigidbodyConstraints2D.FreezeRotation;
 
         // Flip:
         if (view.LookRight == true && xMove < 0)
@@ -132,14 +144,17 @@ public class PlayerController : MonoBehaviour
             view.LookRight = true;
         }
 
-        // Climb (vertical movement):
+        // Climb (vertical movement) + avoid auto-sliding down on walls:
         if (isWalled != 0 && !isCeilinged)
         {
             float yMove = Input.GetAxisRaw("Vertical");
             if (yMove != 0)
+            {
+                rigbody.constraints = RigidbodyConstraints2D.FreezeRotation;
                 rigbody.velocity = new Vector2(rigbody.velocity.x, yMove * model.Speed);
-            else if (xMove == 0)
-                rigbody.velocity = new Vector2(-isWalled * 4.0f, 0.0f); // avoid sliding down 
+            }
+            else rigbody.constraints = RigidbodyConstraints2D.FreezePositionY
+                                     | RigidbodyConstraints2D.FreezeRotation;
         }
     }
 
@@ -151,7 +166,10 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {
-            attackViewNumber = -1; // reseting standard attacks (view) while in air
+            // Restart all attacks:
+            attackViewNumber = -1;
+            CancelInvoke(nameof(AttackStart));
+            AttackStop();
 
             if (isGrounded || isWalled != 0) // standard jump (from ground or wall)
                 rigbody.velocity = new Vector2(rigbody.velocity.x, model.JumpForce);
@@ -174,8 +192,9 @@ public class PlayerController : MonoBehaviour
 
     private void FastFall() // after clicking DownArrow (or S), player goes down faster
     {
-        if (!isGrounded && (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S)))
-            rigbody.velocity = new Vector2(0, -model.JumpForce / 1.5f);
+        if (!isGrounded) 
+            if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
+                rigbody.velocity = new Vector2(0, -model.JumpForce / 1.5f);
     }
 
 
@@ -184,27 +203,41 @@ public class PlayerController : MonoBehaviour
     {
         if (isGrounded)
         {
-            // if the collider's size reduces to 1/2 of original size, offset needs to go down 
-            // for 1/4 of original size; "or isCeilinged" helps in situations when there is still 
-            // a ceiling above player (but user stopped holding button)
+            // "Or isCeilinged" helps in situations when there is still 
+            // a ceiling above player (but user stopped holding button):
             if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || isCeilinged)
             {
+                Slide();
+
                 if (!isCrouched)
                 {
-                    capscol.size = new Vector2(capscol.size.x, capscol.size.y / 2);
-                    capscol.offset = new Vector2(capscol.offset.x, capscol.offset.y - (capscol.size.y / 2));
+                    capscol.offset = new Vector2(capscol.offset.x, 
+                        capscol.offset.y - capscol.size.y * (1 - colliderReductor) / 2);
+                    capscol.size = new Vector2(capscol.size.x, (float)System.Math.Round(capscol.size.y * colliderReductor, 2));
                     isCrouched = true;
                 }
                 return;
             }
 
-            // standing after crouching
+            // Standing after crouching:
             if (isCrouched)
             {
-                capscol.size = new Vector2(capscol.size.x, capscol.size.y * 2);
-                capscol.offset = new Vector2(capscol.offset.x, capscol.offset.y + (capscol.size.y / 4));
+                capscol.size = new Vector2(capscol.size.x, (float)System.Math.Round(capscol.size.y / colliderReductor, 2));
+                capscol.offset = new Vector2(capscol.offset.x, 
+                    capscol.offset.y + capscol.size.y * (1 - colliderReductor) / 2);
                 isCrouched = false;
             }
+        }
+    }
+
+    private void Slide()
+    {
+        float xMove = Input.GetAxisRaw("Horizontal");
+        if (xMove != 0 && !isCrouched && isWalled == 0 && !isAttacking && !isHurting)
+        {
+            isSliding = true;
+            AttackStart(); // hit just at the beginning of the animation
+            Invoke(nameof(AttackStop), animationLength * 2.0f);  // this animation is two times longer than normal attack
         }
     }
 
@@ -232,16 +265,20 @@ public class PlayerController : MonoBehaviour
 
     private void AttackStop()
     {
-        isAttacking = false; 
+        isAttacking = false;
         hitPointRight.SetActive(false);
         hitPointLeft.SetActive(false);
+
+        isSliding = false;
     }
+
 
 
     private void Animate()
     {
         if (isHurting) view.Hurt();
         else if (isDead) view.Die();
+        else if (isSliding) view.Slide();
         else if (isWalled != 0)
         {
             if (rigbody.velocity.y > 0.0f) view.Climb();
@@ -301,10 +338,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void StopHurting()
-    {
-        isHurting = false;
-    }
+    private void StopHurting() {  isHurting = false; }
 
     private void GameOver()
     {

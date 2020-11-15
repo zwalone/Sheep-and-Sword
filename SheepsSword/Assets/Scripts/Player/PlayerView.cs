@@ -22,7 +22,8 @@ public class PlayerView : MonoBehaviour
         WallSlide,
         WallHold,
         Die,
-        Hurt
+        Hurt,
+        Slide
     }
 
     private Anim currentState;
@@ -62,4 +63,5 @@ public class PlayerView : MonoBehaviour
     public void WallHold() { ChangeAnimState(Anim.WallHold); }
     public void Die() { ChangeAnimState(Anim.Die); }
     public void Hurt() { ChangeAnimState(Anim.Hurt); }
+    public void Slide() { ChangeAnimState(Anim.Slide); }
 }
