@@ -5,7 +5,7 @@ public class Laser : MonoBehaviour
 {
 
     [SerializeField]
-    private float _speed = 0.5f; // JUST FOR TESTS
+    private float _speed = 0.7f; // JUST FOR TESTS
 
     [SerializeField]
     private int _dmg;
@@ -30,9 +30,13 @@ public class Laser : MonoBehaviour
         {
             //TODO  HIT A PLAYER with the public function            (NOT FINAL VERSION BELOW)
             if (collision.gameObject.CompareTag("Player"))
-                collision.gameObject.GetComponent<PlayerController>().TakeDamage(20); // (JUST FOR TESTING: _dmg = 20)
-
-            Destroy(gameObject);
+            {
+                Debug.Log("PLAYER HITTT");
+                collision.gameObject.GetComponent<PlayerController>().TakeDamage(20);// (JUST FOR TESTING: _dmg = 20)
+                Destroy(this.gameObject);
+            }
+                
+            
         }
     }
 
@@ -41,5 +45,6 @@ public class Laser : MonoBehaviour
         _anim.Play("Laser");
         yield return new WaitForSeconds(0.07f);
         _rb2D.velocity = transform.right * _speed;
+        Destroy(gameObject, 5);
     }
 }
