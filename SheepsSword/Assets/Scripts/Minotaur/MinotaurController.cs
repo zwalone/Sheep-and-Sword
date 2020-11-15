@@ -98,7 +98,7 @@ public class MinotaurController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collider.gameObject.tag == "Player")
+        if(collider.gameObject.CompareTag("Player"))
         {
             _inRange = true;
             target = collider.gameObject;

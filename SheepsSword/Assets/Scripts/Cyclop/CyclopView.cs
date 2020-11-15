@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class EnemyView : MonoBehaviour
+public class CyclopView : MonoBehaviour
 {
 
     private enum Anim

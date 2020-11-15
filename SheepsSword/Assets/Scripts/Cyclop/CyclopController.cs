@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController1 : MonoBehaviour
+public class CyclopController : MonoBehaviour
 {
-    private EnemyModel _model;
-    private EnemyView _view;
+    private CyclopModel _model;
+    private CyclopView _view;
 
     private List<CircleCollider2D> _checkGroundList;
     private Rigidbody2D _rd2D;
@@ -14,12 +14,12 @@ public class EnemyController1 : MonoBehaviour
     private bool _isAttacking;
 
     private bool _canUseLaser = true;
-    private float _laserCooldown = 1.5f;
+    private readonly float _laserCooldown = 1.5f;
 
     private void Awake()
     {
-        _view = this.GetComponent<EnemyView>();
-        _model = this.GetComponent<EnemyModel>();
+        _view = this.GetComponent<CyclopView>();
+        _model = this.GetComponent<CyclopModel>();
         _rd2D = this.GetComponent<Rigidbody2D>();
         _checkGroundList = new List<CircleCollider2D>(this.GetComponentsInChildren<CircleCollider2D>());
     }

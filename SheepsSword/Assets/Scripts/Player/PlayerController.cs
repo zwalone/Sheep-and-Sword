@@ -212,7 +212,7 @@ public class PlayerController : MonoBehaviour
 
     private void Attack()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isWalled == 0 && !isAttacking)
+        if (Input.GetKeyDown(KeyCode.Space) && isWalled == 0 && !isAttacking && !isHurting)
         {
             isAttacking = true;
             attackViewNumber = (attackViewNumber + 1) % 3;   // there are 3 types of attack

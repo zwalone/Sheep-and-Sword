@@ -4,10 +4,10 @@ using UnityEngine;
 public class Laser : MonoBehaviour
 {
     [SerializeField]
-    private float _speed; 
+    private float _speed = 0.0f;
 
     [SerializeField]
-    private int _dmg;
+    private int _dmg = 0;
 
     private Rigidbody2D _rb2D;
     private Animator _anim;
@@ -27,11 +27,9 @@ public class Laser : MonoBehaviour
     {
         if(!collision.CompareTag("Enemy"))
         {
-            //TODO  HIT A PLAYER with the public function            (NOT FINAL VERSION BELOW)
             if (collision.gameObject.CompareTag("Player"))
             {
-                Debug.Log("PLAYER HITTT");
-                collision.gameObject.GetComponent<PlayerController>().TakeDamage(20);// (JUST FOR TESTING: _dmg = 20)
+                collision.gameObject.GetComponent<PlayerController>().TakeDamage(_dmg);
                 Destroy(this.gameObject);
             }
                 

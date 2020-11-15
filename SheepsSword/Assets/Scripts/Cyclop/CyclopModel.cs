@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class EnemyModel : MonoBehaviour
+public class CyclopModel : MonoBehaviour
 {
     [SerializeField]
     private int _hp;
