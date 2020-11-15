@@ -58,7 +58,7 @@ public class EnemyController1 : MonoBehaviour
         //Add offset to don't hit yourself
         float offset = (_model.Speed < 0 ? -0.4f : 0.4f);
         Vector2 start = new Vector2(this.transform.position.x + offset, this.transform.position.y);
-        RaycastHit2D hit = Physics2D.Raycast(start, directionRay, 1f);
+        RaycastHit2D hit = Physics2D.Raycast(start, directionRay, 5f);
 
         Debug.DrawRay(start, directionRay, Color.red);
 
