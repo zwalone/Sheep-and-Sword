@@ -4,7 +4,6 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Wall
   - HitPoint
   - Enemy
   layers:
@@ -17,8 +16,8 @@ TagManager:
   - 
   - 
   - Ground
-  - 
-  - 
+  - Player
+  - Enemy
   - 
   - 
   - 
