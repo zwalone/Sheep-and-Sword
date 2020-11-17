@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7169329270196217628}
   - component: {fileID: 7169329270196217629}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7169329270332535953}
   - component: {fileID: 7169329270332535958}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7169329270355546559}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CheckGroudCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,7 +136,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7169329270457782985}
   - component: {fileID: 7169329270457782990}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: TriggeredArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7169329271631723783}
   - component: {fileID: 7169329271631723780}
-  m_Layer: 0
+  - component: {fileID: 6126131782997156465}
+  m_Layer: 10
   m_Name: Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,6 +231,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.46965694, y: 0.3536451}
   m_EdgeRadius: 0
+--- !u!114 &6126131782997156465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7169329271631723782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 387e06aa40410ef4fabf284812f72cea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: Player
 --- !u!1 &7169329271894773352
 GameObject:
   m_ObjectHideFlags: 0
@@ -247,9 +261,9 @@ GameObject:
   - component: {fileID: 7169329271894773353}
   - component: {fileID: 7169329271894773330}
   - component: {fileID: 7169329271894773357}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Minotaur
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -286,6 +300,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hp: 10
   _speed: 0.4
+  _dmg: 20
 --- !u!114 &7169329271894773328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -458,7 +473,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7169329272047668845}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RayCast
   m_TagString: Untagged
   m_Icon: {fileID: 0}

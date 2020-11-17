@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2325511127013240608}
   - component: {fileID: 2325511127013240611}
-  m_Layer: 0
+  - component: {fileID: 1080535444118837757}
+  m_Layer: 10
   m_Name: 'Hitbox '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,6 +58,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.18, y: 0.16}
   m_EdgeRadius: 0
+--- !u!114 &1080535444118837757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2325511127013240609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 387e06aa40410ef4fabf284812f72cea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: Player
 --- !u!1 &2325511127231607623
 GameObject:
   m_ObjectHideFlags: 0
@@ -66,7 +80,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2325511127231607622}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: 'RayCast '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +111,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2325511127321674254}
   - component: {fileID: 2325511127321674249}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: 'TriggeredArea '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +165,7 @@ GameObject:
   - component: {fileID: 2325511127328417942}
   - component: {fileID: 2325511127328417943}
   - component: {fileID: 2325511127328417940}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Skeleton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,6 +204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hp: 10
   _speed: 0.4
+  _dmg: 10
 --- !u!114 &2325511127328417938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -364,7 +379,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2325511128226906862}
   - component: {fileID: 2325511128226906857}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -410,7 +425,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2325511128543358597}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CheckGroudCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

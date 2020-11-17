@@ -1,0 +1,845 @@
+fileFormatVersion: 2
+guid: dbe2851b1f33be2469997944ca2d9a47
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4141561372266925640
+    second: sheep_walk_0
+  - first:
+      213: 3437326131896302325
+    second: sheep_walk_1
+  - first:
+      213: 141981390835164318
+    second: sheep_walk_2
+  - first:
+      213: 5590187191673158414
+    second: sheep_walk_3
+  - first:
+      213: -8876904872118090319
+    second: sheep_walk_4
+  - first:
+      213: -7007470935647453670
+    second: sheep_walk_5
+  - first:
+      213: 3515862702947117709
+    second: sheep_walk_6
+  - first:
+      213: 6121833445067686452
+    second: sheep_walk_7
+  - first:
+      213: 8207710179804543168
+    second: sheep_walk_8
+  - first:
+      213: -5005340848238818491
+    second: sheep_walk_9
+  - first:
+      213: 2835175096917031971
+    second: sheep_walk_10
+  - first:
+      213: 4812322274093791228
+    second: sheep_walk_11
+  - first:
+      213: -6523791797263070873
+    second: sheep_walk_12
+  - first:
+      213: -6185968459272257804
+    second: sheep_walk_13
+  - first:
+      213: -7846514040035597288
+    second: sheep_walk_14
+  - first:
+      213: -578300943220409400
+    second: sheep_walk_15
+  - first:
+      213: 3985709993082771471
+    second: sheep_walk_16
+  - first:
+      213: 3040444277111828266
+    second: sheep_walk_17
+  - first:
+      213: 3995521274513937926
+    second: sheep_walk_18
+  - first:
+      213: -6155524197106465432
+    second: sheep_walk_19
+  - first:
+      213: 3652089144792956463
+    second: sheep_walk_20
+  - first:
+      213: 2369281928043113419
+    second: sheep_walk_21
+  - first:
+      213: -6238174563523292322
+    second: sheep_walk_22
+  - first:
+      213: -7585069105197883883
+    second: sheep_walk_23
+  - first:
+      213: -1150648145958964796
+    second: sheep_walk_24
+  - first:
+      213: 6532726267512211972
+    second: sheep_walk_25
+  - first:
+      213: -4586786114480731858
+    second: sheep_walk_26
+  - first:
+      213: -7412979684293471927
+    second: sheep_walk_27
+  - first:
+      213: 8389297563372240591
+    second: sheep_walk_28
+  - first:
+      213: 1992845567460351563
+    second: sheep_walk_29
+  - first:
+      213: 5276880828014003474
+    second: sheep_walk_30
+  - first:
+      213: 7595701187107932817
+    second: sheep_walk_31
+  - first:
+      213: -6984529767520900306
+    second: sheep_walk_32
+  - first:
+      213: 7423379238185668691
+    second: sheep_walk_33
+  - first:
+      213: -710215758742495199
+    second: sheep_walk_34
+  - first:
+      213: 6139745424701491968
+    second: sheep_walk_35
+  - first:
+      213: 5084051757516081967
+    second: sheep_walk_36
+  - first:
+      213: -504239082557796924
+    second: sheep_walk_37
+  - first:
+      213: 4184435691913828125
+    second: sheep_walk_38
+  - first:
+      213: 6191652982097657973
+    second: sheep_walk_39
+  - first:
+      213: 6228438703473673560
+    second: sheep_walk_40
+  - first:
+      213: 6343523164600719278
+    second: sheep_walk_41
+  - first:
+      213: -1074271778843990808
+    second: sheep_walk_42
+  - first:
+      213: -3153757714541418250
+    second: sheep_walk_43
+  - first:
+      213: 3060672954973581306
+    second: sheep_walk_44
+  - first:
+      213: 4440569297384674884
+    second: sheep_walk_45
+  - first:
+      213: -858940440808208763
+    second: sheep_walk_46
+  - first:
+      213: -410337128968421832
+    second: sheep_walk_47
+  - first:
+      213: 3665758358421689945
+    second: sheep_walk_48
+  - first:
+      213: 883387197885179748
+    second: sheep_walk_49
+  - first:
+      213: 6692858813040574666
+    second: sheep_walk_50
+  - first:
+      213: -6898189244456223070
+    second: sheep_walk_51
+  - first:
+      213: -5403373352608973569
+    second: sheep_walk_52
+  - first:
+      213: -136938541655435226
+    second: sheep_walk_53
+  - first:
+      213: 539815879298458520
+    second: sheep_walk_54
+  - first:
+      213: 7897819586145124009
+    second: sheep_walk_55
+  - first:
+      213: -9220386184511163415
+    second: sheep_walk_56
+  - first:
+      213: -5098102061944488668
+    second: sheep_walk_57
+  - first:
+      213: -6275459290836230117
+    second: sheep_walk_58
+  - first:
+      213: 4188428195320024471
+    second: sheep_walk_59
+  - first:
+      213: -6169078209322905398
+    second: sheep_walk_60
+  - first:
+      213: 1456706389424121200
+    second: sheep_walk_61
+  - first:
+      213: 7681962335571162275
+    second: sheep_walk_62
+  - first:
+      213: -4847246077537879698
+    second: sheep_walk_63
+  - first:
+      213: 6030664005003575474
+    second: sheep_walk_64
+  - first:
+      213: 3051495421319052797
+    second: sheep_walk_65
+  - first:
+      213: 884127792043173475
+    second: sheep_walk_66
+  - first:
+      213: -6055768143040209378
+    second: sheep_walk_67
+  - first:
+      213: 6694069884972121831
+    second: sheep_walk_68
+  - first:
+      213: 6247342651606284105
+    second: sheep_walk_69
+  - first:
+      213: 4482875910957698951
+    second: sheep_walk_70
+  - first:
+      213: 8449166325981729300
+    second: sheep_walk_71
+  - first:
+      213: -7780860700409227411
+    second: sheep_walk_72
+  - first:
+      213: -3863725359246388509
+    second: sheep_walk_73
+  - first:
+      213: -3963995262341969387
+    second: sheep_walk_74
+  - first:
+      213: 3367343190357794837
+    second: sheep_walk_75
+  - first:
+      213: -1546398585426115720
+    second: sheep_walk_76
+  - first:
+      213: 8346237364581945097
+    second: sheep_walk_77
+  - first:
+      213: -5436704548630045434
+    second: sheep_walk_78
+  - first:
+      213: 6730802392472806977
+    second: sheep_walk_79
+  - first:
+      213: 6121343389267374762
+    second: sheep_walk_80
+  - first:
+      213: -8113128360791790375
+    second: sheep_walk_81
+  - first:
+      213: 8524111730755540608
+    second: sheep_walk_82
+  - first:
+      213: -6331379039371820851
+    second: sheep_walk_83
+  - first:
+      213: 6247591332717780217
+    second: sheep_walk_84
+  - first:
+      213: 302594675004791409
+    second: sheep_walk_85
+  - first:
+      213: -7150041896901804834
+    second: sheep_walk_86
+  - first:
+      213: 3019795397854436284
+    second: sheep_walk_87
+  - first:
+      213: -6387845190076642847
+    second: sheep_walk_88
+  - first:
+      213: 5584170614157463466
+    second: sheep_walk_89
+  - first:
+      213: 3646323897138623120
+    second: sheep_walk_90
+  - first:
+      213: -8453842291269145084
+    second: sheep_walk_91
+  - first:
+      213: -4565468518327851139
+    second: sheep_walk_92
+  - first:
+      213: 672806087666697437
+    second: sheep_walk_93
+  - first:
+      213: 2606232831625665333
+    second: sheep_walk_94
+  - first:
+      213: -5360268615815264510
+    second: sheep_walk_95
+  - first:
+      213: 3312798931815887773
+    second: sheep_walk_96
+  - first:
+      213: -5773022647065884075
+    second: sheep_walk_97
+  - first:
+      213: -3553046640218005703
+    second: sheep_walk_98
+  - first:
+      213: 8337292954903991727
+    second: sheep_walk_99
+  - first:
+      213: -6605032341785846622
+    second: sheep_walk_100
+  - first:
+      213: -7336187700128719074
+    second: sheep_walk_101
+  - first:
+      213: -2800087526994363448
+    second: sheep_walk_102
+  - first:
+      213: -8880173425222977931
+    second: sheep_walk_103
+  - first:
+      213: 8209089949519701189
+    second: sheep_walk_104
+  - first:
+      213: -6807439113572220518
+    second: sheep_walk_105
+  - first:
+      213: 7811698668089589808
+    second: sheep_walk_106
+  - first:
+      213: 3024210758040345632
+    second: sheep_walk_107
+  - first:
+      213: 424396153313378819
+    second: sheep_walk_108
+  - first:
+      213: -8359320881908895952
+    second: sheep_walk_109
+  - first:
+      213: 4641536049844128293
+    second: sheep_walk_110
+  - first:
+      213: 8356310641317481462
+    second: sheep_walk_111
+  - first:
+      213: -6370838049391357377
+    second: sheep_walk_112
+  - first:
+      213: -1459002833471209686
+    second: sheep_walk_113
+  - first:
+      213: 6565146870668688538
+    second: sheep_walk_114
+  - first:
+      213: -4777970796956452947
+    second: sheep_walk_115
+  - first:
+      213: 6468147759617787174
+    second: sheep_walk_116
+  - first:
+      213: -825667946743362579
+    second: sheep_walk_117
+  - first:
+      213: 5435106304574046925
+    second: sheep_walk_118
+  - first:
+      213: 4710592517824729324
+    second: sheep_walk_119
+  - first:
+      213: -2278610051684671888
+    second: sheep_walk_120
+  - first:
+      213: -6069774074492839991
+    second: sheep_walk_121
+  - first:
+      213: 4697095513418263549
+    second: sheep_walk_122
+  - first:
+      213: 3976797651175791510
+    second: sheep_walk_123
+  - first:
+      213: 3289990010187065977
+    second: sheep_walk_124
+  - first:
+      213: -2830355274789786898
+    second: sheep_walk_125
+  - first:
+      213: 3664885156921202003
+    second: sheep_walk_126
+  - first:
+      213: -1935254702299100428
+    second: sheep_walk_127
+  - first:
+      213: 3271417561625481570
+    second: sheep_walk_128
+  - first:
+      213: -2292430767765586546
+    second: sheep_walk_129
+  - first:
+      213: 8100091927440334904
+    second: sheep_walk_130
+  - first:
+      213: 7801064598841919820
+    second: sheep_walk_131
+  - first:
+      213: 8718371165670883603
+    second: sheep_walk_132
+  - first:
+      213: 2524176617332629272
+    second: sheep_walk_133
+  - first:
+      213: -7493511720027332920
+    second: sheep_walk_134
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: sheep_walk_0
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 423
+        width: 27
+        height: 49
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b1fc86ffd73686c0800000000000000
+      internalID: -4141561372266925640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheep_walk_1
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 425
+        width: 27
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fab8dcb7e5d3bf20800000000000000
+      internalID: 3437326131896302325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheep_walk_2
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 423
+        width: 27
+        height: 49
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e94227d925b68f100800000000000000
+      internalID: 141981390835164318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheep_walk_3
+      rect:
+        serializedVersion: 2
+        x: 434
+        y: 425
+        width: 27
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0bfd9bf1a5549d40800000000000000
+      internalID: 5590187191673158414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheep_walk_4
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 302
+        width: 49
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b58778fc06eec480800000000000000
+      internalID: -8876904872118090319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheep_walk_5
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 302
+        width: 49
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1efbdaaf4670ce90800000000000000
+      internalID: -7007470935647453670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheep_walk_6
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 301
+        width: 49
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8a2530208adac030800000000000000
+      internalID: 3515862702947117709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheep_walk_7
+      rect:
+        serializedVersion: 2
+        x: 421
+        y: 302
+        width: 49
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4328d5b551f15f450800000000000000
+      internalID: 6121833445067686452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheep_walk_8
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 167
+        width: 27
+        height: 41
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c87b961ce4a7e170800000000000000
+      internalID: 8207710179804543168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheep_walk_9
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 169
+        width: 27
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54b09f89405798ab0800000000000000
+      internalID: -5005340848238818491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheep_walk_10
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 167
+        width: 27
+        height: 41
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32cf5cfaab0985720800000000000000
+      internalID: 2835175096917031971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheep_walk_11
+      rect:
+        serializedVersion: 2
+        x: 434
+        y: 169
+        width: 27
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf77f0c8c9dc8c240800000000000000
+      internalID: 4812322274093791228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheep_walk_12
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 46
+        width: 49
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7690787cce5d675a0800000000000000
+      internalID: -6523791797263070873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheep_walk_13
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 46
+        width: 49
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4fe7e410676072aa0800000000000000
+      internalID: -6185968459272257804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheep_walk_14
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 45
+        width: 49
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 814209e9d059b1390800000000000000
+      internalID: -7846514040035597288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheep_walk_15
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 46
+        width: 49
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cbf21a2b5679f7f0800000000000000
+      internalID: -578300943220409400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

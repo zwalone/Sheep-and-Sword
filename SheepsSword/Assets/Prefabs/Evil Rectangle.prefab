@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 3189916328847575942}
   - component: {fileID: 3189916328847575939}
   m_Layer: 10
-  m_Name: Enemy 1
-  m_TagString: Enemy
+  m_Name: Evil Rectangle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

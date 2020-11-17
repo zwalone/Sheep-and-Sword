@@ -44,6 +44,8 @@ public class PlayerController : MonoBehaviour, IEntityController
     // UI:
     private Text hpText;
     private Text gameoverText;
+    private Button restartButton;
+    private Button returnButton;
 
 
     private void Awake()
@@ -65,7 +67,11 @@ public class PlayerController : MonoBehaviour, IEntityController
 
         hpText = GameObject.Find("HealthPointsText").GetComponent<Text>();
         gameoverText = GameObject.Find("GameOverText").GetComponent<Text>();
+        restartButton = GameObject.Find("RestartGameButton").GetComponent<Button>();
+        returnButton = GameObject.Find("GoToMenuButton").GetComponent<Button>();
         gameoverText.gameObject.SetActive(false);
+        restartButton.gameObject.SetActive(false);
+        returnButton.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -344,6 +350,7 @@ public class PlayerController : MonoBehaviour, IEntityController
         if (model.HP > 0)
         {
             model.HP -= dmg;
+            if (model.HP < 0) model.HP = 0;
             UpdateHPText();
         }
 
@@ -366,6 +373,11 @@ public class PlayerController : MonoBehaviour, IEntityController
     {
         gameoverText.gameObject.SetActive(true);
         Time.timeScale = 0;    // freeze everything
+
+        // Because of the freezing, the animation of these buttons also freezes,
+        // so we need to find solution better than freezing:
+        restartButton.gameObject.SetActive(true);
+        returnButton.gameObject.SetActive(true);
     }
 
     private void UpdateHPText()
