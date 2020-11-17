@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkeletonController : MonoBehaviour
+public class SkeletonController : MonoBehaviour, IEntityController
 {
     public Transform rayCast;
     public LayerMask rayCastMask;
@@ -99,7 +99,7 @@ public class SkeletonController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.tag == "Player")
+        if (collider.gameObject.CompareTag("Player"))
         {
             _inRange = true;
             target = collider.gameObject;
@@ -123,7 +123,7 @@ public class SkeletonController : MonoBehaviour
     public void TakeDamage(int dmg)
     {
         _model.HP -= dmg;
-        if (_model.HP < 0)
+        if (_model.HP <= 0)
         {
             StartCoroutine(Die());
         }

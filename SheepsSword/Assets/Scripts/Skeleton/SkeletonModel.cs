@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class SkeletonModel : MonoBehaviour
+public class SkeletonModel : MonoBehaviour, IEntityModel
 {
     [SerializeField]
     private int _hp;
@@ -18,5 +16,13 @@ public class SkeletonModel : MonoBehaviour
     {
         get { return _speed; }
         set { _speed = value; }
+    }
+
+    [SerializeField]
+    private int _dmg;
+    public int Damage
+    {
+        get { return _dmg; }
+        set { _dmg = value; }
     }
 }

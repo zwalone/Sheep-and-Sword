@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IEntityController
 {
     private PlayerModel model; // speed, jump force, health points
     private PlayerView view;   // animations

@@ -121,7 +121,7 @@ public class MinotaurController : MonoBehaviour
     public void TakeDamage(int dmg)
     {
         _model.HP -= dmg;
-        if (_model.HP < 0)
+        if (_model.HP <= 0)
         {
             StartCoroutine(Die());
         }

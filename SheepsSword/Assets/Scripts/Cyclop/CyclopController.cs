@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CyclopController : MonoBehaviour
+public class CyclopController : MonoBehaviour, IEntityController
 {
     private CyclopModel _model;
     private CyclopView _view;
@@ -41,7 +41,7 @@ public class CyclopController : MonoBehaviour
     public void TakeDamage(int dmg)
     {
         _model.HP -= dmg;
-        if(_model.HP < 0)
+        if(_model.HP <= 0)
         {
             StartCoroutine(Die());
         }
