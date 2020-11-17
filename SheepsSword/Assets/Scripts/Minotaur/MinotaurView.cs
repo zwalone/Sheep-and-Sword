@@ -7,13 +7,9 @@ public class MinotaurView : MonoBehaviour
     private enum Anim
     {
         WalkRight,
-        WalkLeft,
         AttackRight,
         Attack2Right,
-        Attack2Left,
-        AttackLeft,
         DieRight,
-        DieLeft,
         GetDamage
     }
 
@@ -38,11 +34,6 @@ public class MinotaurView : MonoBehaviour
         _animator.Play(_currentState.ToString());
     }
 
-    public void WalkLeft()
-    {
-        ChangeAnimState(Anim.WalkLeft);
-    }
-
     public void WalkRight()
     {
         ChangeAnimState(Anim.WalkRight);
@@ -53,29 +44,16 @@ public class MinotaurView : MonoBehaviour
         ChangeAnimState(Anim.AttackRight);
     }
 
-    public void AttackLeft()
-    {
-        ChangeAnimState(Anim.AttackLeft);
-    }
-
     public void Attack2Right()
     {
         ChangeAnimState(Anim.Attack2Right);
-    }
-
-    public void Attack2Left()
-    {
-        ChangeAnimState(Anim.Attack2Left);
     }
 
     public void DieRight()
     {
         ChangeAnimState(Anim.DieRight);
     }
-    public void DieLeft()
-    {
-        ChangeAnimState(Anim.DieLeft);
-    }
+
     public void GetDamage()
     {
         ChangeAnimState(Anim.GetDamage);

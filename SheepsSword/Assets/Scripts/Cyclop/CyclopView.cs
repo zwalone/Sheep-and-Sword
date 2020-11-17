@@ -10,7 +10,9 @@ public class CyclopView : MonoBehaviour
         AttackRight,
         AttackLeft,
         DieRight,
-        DieLeft
+        DieLeft,
+        TakeDamage,
+        TakeDamageLeft
     }
 
     private Anim _currentState;
@@ -61,5 +63,13 @@ public class CyclopView : MonoBehaviour
     public void DieLeft()
     {
         ChangeAnimState(Anim.DieLeft);
+    }
+    public void TakeDamage()
+    {
+        ChangeAnimState(Anim.TakeDamage);
+    }
+    public void TakeDamageLeft()
+    {
+        ChangeAnimState(Anim.TakeDamageLeft);
     }
 }

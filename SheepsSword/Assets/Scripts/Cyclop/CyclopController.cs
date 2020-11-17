@@ -47,7 +47,7 @@ public class CyclopController : MonoBehaviour, IEntityController
         }
         else
         {
-            //TODO ewentualnie zmiana koloru sprita i odepchnięcie
+            StartCoroutine(TakeDamage());
         }
     }
 
@@ -60,7 +60,7 @@ public class CyclopController : MonoBehaviour, IEntityController
 
         //Add offset to don't hit yourself
         float offset = (_model.Speed < 0 ? -0.4f : 0.4f);
-        Vector2 start = new Vector2(this.transform.position.x + offset, this.transform.position.y);
+        Vector2 start = new Vector2(this.transform.position.x + offset, this.transform.position.y - .5f);
         RaycastHit2D hit = Physics2D.Raycast(start, directionRay, 5f);
 
         Debug.DrawRay(start, directionRay, Color.red);
@@ -140,7 +140,18 @@ public class CyclopController : MonoBehaviour, IEntityController
         _isAttacking = false;
     }
 
-    private void CanUseLaser() { _canUseLaser = true;  }
+    private void CanUseLaser() { _canUseLaser = true; }
+
+    IEnumerator TakeDamage()
+    {
+        if (_model.Speed < 0) _view.TakeDamageLeft();
+        else _view.TakeDamage();
+
+        yield return new WaitForSeconds(.3f);
+
+        if (_model.Speed < 0) _view.WalkLeft();
+        else _view.WalkRight();
+    }
 
     IEnumerator Die()
     {

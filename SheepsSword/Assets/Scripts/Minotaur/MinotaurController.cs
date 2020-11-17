@@ -135,8 +135,7 @@ public class MinotaurController : MonoBehaviour
     IEnumerator Die()
     {
         _model.Speed = 0;
-        if (_model.Speed < 0) _view.DieLeft();
-        else _view.DieRight();
+        _view.DieRight();
 
         yield return new WaitForSeconds(1);
         Destroy(gameObject);
@@ -146,8 +145,7 @@ public class MinotaurController : MonoBehaviour
     IEnumerator ChangeDirectionCorutine()
     {
         _model.Speed = -_model.Speed;
-        if (_model.Speed < 0) _view.WalkLeft();
-        else _view.WalkRight();
+        this.transform.localRotation *= Quaternion.Euler(0, 180, 0);
         yield return new WaitForSeconds(0.7f);
         _changeDirection = true;
     }
@@ -155,16 +153,14 @@ public class MinotaurController : MonoBehaviour
     IEnumerator Attack()
     {
         _isAttacking = true;
-        if (_model.Speed > 0) _view.AttackRight();
-        else _view.AttackLeft();
+        _view.AttackRight();
 
-        _model.Speed *= 10;
+        _model.Speed *= 6;
 
         yield return new WaitForSeconds(1.1f);
 
-        _model.Speed /= 10;
-        if (_model.Speed > 0) _view.WalkRight();
-        else _view.WalkLeft();
+        _model.Speed /= 6;
+        _view.WalkRight();
         _isAttacking = false;
     }
 
@@ -172,9 +168,8 @@ public class MinotaurController : MonoBehaviour
     {
         _view.GetDamage();
 
-        yield return new WaitForSeconds(0.03f);
+        yield return new WaitForSeconds(0.3f);
 
-        if (_model.Speed > 0) _view.WalkRight();
-        else _view.WalkLeft();
+       _view.WalkRight();
     }
 }
