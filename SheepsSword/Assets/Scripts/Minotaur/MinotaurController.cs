@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MinotaurController : MonoBehaviour, IEntityController
@@ -132,6 +131,7 @@ public class MinotaurController : MonoBehaviour, IEntityController
         _model.HP -= dmg;
         if (_model.HP <= 0)
         {
+            _model.HP = 0;
             StartCoroutine(Die());
         }
         else

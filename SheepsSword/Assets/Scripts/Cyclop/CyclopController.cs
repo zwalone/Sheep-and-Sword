@@ -41,8 +41,10 @@ public class CyclopController : MonoBehaviour, IEntityController
     public void TakeDamage(int dmg)
     {
         _model.HP -= dmg;
-        if(_model.HP <= 0)
+
+        if (_model.HP <= 0)
         {
+            _model.HP = 0;
             StartCoroutine(Die());
         }
         else

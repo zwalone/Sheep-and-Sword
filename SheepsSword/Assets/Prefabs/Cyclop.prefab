@@ -55,7 +55,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.19}
@@ -244,6 +244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hp: 10
   _speed: 0.8
+  _dmg: 10
   _raycastDistance: 8
   laser: {fileID: 269858019438725291, guid: ab0cde4178d7db6458ea051269cb8464, type: 3}
 --- !u!114 &4599650969280799321
