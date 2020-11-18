@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MinotaurController : MonoBehaviour
+public class MinotaurController : MonoBehaviour, IEntityController
 {
     public Transform rayCast;
     public LayerMask rayCastMask;
@@ -20,11 +20,19 @@ public class MinotaurController : MonoBehaviour
     private MinotaurModel _model;
     private MinotaurView _view;
 
-    private List<CircleCollider2D> _checkGroundList;
+    [SerializeField]
+    private CircleCollider2D _isGoroudBottom;
+
+    [SerializeField]
+    private CircleCollider2D _isGroundOposite;
+
     private Rigidbody2D _rd2D;
 
     private bool _changeDirection;
     private bool _isAttacking;
+
+    [SerializeField]
+    private GameObject hitbox;
     
 
     private void Awake()
@@ -32,7 +40,6 @@ public class MinotaurController : MonoBehaviour
         _view = this.GetComponent<MinotaurView>();
         _model = this.GetComponent<MinotaurModel>();
         _rd2D = this.GetComponent<Rigidbody2D>();
-        _checkGroundList = new List<CircleCollider2D>(this.GetComponentsInChildren<CircleCollider2D>());
     }
 
     void Start()
@@ -50,7 +57,7 @@ public class MinotaurController : MonoBehaviour
 
     private void Update()
     {
-        if (getdamage) TakeDamage(1);
+        //if (getdamage) TakeDamage(1);
 
         if (_inRange)
         {
@@ -108,13 +115,15 @@ public class MinotaurController : MonoBehaviour
     //Check and Change direction
     private void ChangeMoveDirection()
     {
-        foreach (var col in _checkGroundList)
+
+        if (!_isGoroudBottom.IsTouchingLayers(LayerMask.GetMask("Ground")) && _changeDirection)
         {
-            if (!col.IsTouchingLayers(LayerMask.GetMask("Ground")) && _changeDirection)
-            {
-                _changeDirection = false;
-                StartCoroutine(ChangeDirectionCorutine());
-            }
+            _changeDirection = false;
+            StartCoroutine(ChangeDirectionCorutine());
+        }else if(_isGroundOposite.IsTouchingLayers(LayerMask.GetMask("Ground")) && _changeDirection)
+        {
+            _changeDirection = false;
+            StartCoroutine(ChangeDirectionCorutine());
         }
     }
 
@@ -152,6 +161,7 @@ public class MinotaurController : MonoBehaviour
 
     IEnumerator Attack()
     {
+        hitbox.GetComponent<BoxCollider2D>().enabled = true;
         _isAttacking = true;
         _view.AttackRight();
 
@@ -162,6 +172,7 @@ public class MinotaurController : MonoBehaviour
         _model.Speed /= 6;
         _view.WalkRight();
         _isAttacking = false;
+        hitbox.GetComponent<BoxCollider2D>().enabled = true;
     }
 
     IEnumerator TakeDamage()

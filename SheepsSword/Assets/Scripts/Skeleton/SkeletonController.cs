@@ -17,12 +17,20 @@ public class SkeletonController : MonoBehaviour, IEntityController
     private SkeletonModel _model;
     private SkeletonView _view;
 
-    private List<CircleCollider2D> _checkGroundList;
     private Rigidbody2D _rd2D;
 
     [SerializeField]
     private bool _changeDirection;
     private bool _isAttacking;
+
+    [SerializeField]
+    private GameObject hitbox;
+
+    [SerializeField]
+    private CircleCollider2D _isGoroudBottom;
+
+    [SerializeField]
+    private CircleCollider2D _isGroundOposite;
 
     //To remove after check with player
     public bool getdamage;
@@ -32,7 +40,6 @@ public class SkeletonController : MonoBehaviour, IEntityController
         _view = this.GetComponent<SkeletonView>();
         _model = this.GetComponent<SkeletonModel>();
         _rd2D = this.GetComponent<Rigidbody2D>();
-        _checkGroundList = new List<CircleCollider2D>(this.GetComponentsInChildren<CircleCollider2D>());
     }
 
     void Start()
@@ -110,13 +117,15 @@ public class SkeletonController : MonoBehaviour, IEntityController
     //Check and Change direction
     private void ChangeMoveDirection()
     {
-        foreach (var col in _checkGroundList)
+        if (!_isGoroudBottom.IsTouchingLayers(LayerMask.GetMask("Ground")) && _changeDirection)
         {
-            if (!col.IsTouchingLayers(LayerMask.GetMask("Ground")) && _changeDirection)
-            {
-                _changeDirection = false;
-                StartCoroutine(ChangeDirectionCorutine());
-            }
+            _changeDirection = false;
+            StartCoroutine(ChangeDirectionCorutine());
+        }
+        else if (_isGroundOposite.IsTouchingLayers(LayerMask.GetMask("Ground")) && _changeDirection)
+        {
+            _changeDirection = false;
+            StartCoroutine(ChangeDirectionCorutine());
         }
     }
 
@@ -155,6 +164,7 @@ public class SkeletonController : MonoBehaviour, IEntityController
     //Attack
     IEnumerator Attack()
     {
+        hitbox.GetComponent<BoxCollider2D>().enabled = true;
         _isAttacking = true;
         _view.Attack();
         _model.Speed *= 3;
@@ -164,6 +174,7 @@ public class SkeletonController : MonoBehaviour, IEntityController
         _model.Speed /= 3;
         _view.Walk();
         _isAttacking = false;
+        hitbox.GetComponent<BoxCollider2D>().enabled = false;
     }
 
     IEnumerator TakeDamage()

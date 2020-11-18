@@ -9,7 +9,7 @@ public class HitBoxController : MonoBehaviour
     {
         // Checking tag (checking layer doesn't work):
         if (collision.CompareTag(target))
-            collision.gameObject.GetComponent<IEntityController>().TakeDamage(
+            collision.gameObject.GetComponentInParent<IEntityController>().TakeDamage(
                 gameObject.GetComponentInParent<IEntityModel>().Damage);
     }
 }
