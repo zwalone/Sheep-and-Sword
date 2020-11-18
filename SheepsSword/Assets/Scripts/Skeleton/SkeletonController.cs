@@ -31,8 +31,13 @@ public class SkeletonController : MonoBehaviour, IEntityController
     [SerializeField]
     private CircleCollider2D _isGroundOpposite;
 
-    //To remove after check with player
-    public bool getdamage;
+
+    //Parameters:
+    bool isHurting;
+    bool isDead;
+
+
+
 
     private void Awake()
     {
@@ -56,7 +61,7 @@ public class SkeletonController : MonoBehaviour, IEntityController
 
     private void Update()
     {
-        if (getdamage) TakeDamage(1);
+        Animate();
 
         if (_inRange)
         {
@@ -140,7 +145,6 @@ public class SkeletonController : MonoBehaviour, IEntityController
         {
             StartCoroutine(TakeDamage());
         }
-        getdamage = false;
     }
 
     //Coroutine for Movement
@@ -155,7 +159,7 @@ public class SkeletonController : MonoBehaviour, IEntityController
     IEnumerator Die()
     {
         _model.Speed = 0;
-        _view.Die();
+        isDead = true;
 
         yield return new WaitForSeconds(1);
         Destroy(gameObject);
@@ -166,20 +170,18 @@ public class SkeletonController : MonoBehaviour, IEntityController
     {
         hitbox.GetComponent<BoxCollider2D>().enabled = true;
         _isAttacking = true;
-        _view.Attack();
         _model.Speed *= 3;
 
         yield return new WaitForSeconds(1.1f);
 
         _model.Speed /= 3;
-        _view.Walk();
         _isAttacking = false;
         hitbox.GetComponent<BoxCollider2D>().enabled = false;
     }
 
     IEnumerator TakeDamage()
     {
-        _view.TakeDamage();
+        isHurting = true;
         var prevSpeed = _model.Speed;
         _model.Speed = 0;
 
@@ -187,5 +189,16 @@ public class SkeletonController : MonoBehaviour, IEntityController
 
         _model.Speed = prevSpeed;
         _view.Walk();
+        isHurting = false;
+    }
+
+
+
+    private void Animate()
+    {
+        if (isHurting) _view.TakeDamage();
+        else if (isDead) _view.Die();
+        else if (_isAttacking) _view.Attack();
+        else _view.Walk();
     }
 }

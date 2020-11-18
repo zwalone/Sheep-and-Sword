@@ -159,9 +159,9 @@ public class CyclopController : MonoBehaviour, IEntityController
     IEnumerator Die()
     {
         _canUseLaser = false;
-        _model.Speed = 0;
         if (_model.Speed < 0) _view.DieLeft();
         else _view.DieRight();
+        _model.Speed = 0;
 
         yield return new WaitForSeconds(.5f);
         Destroy(gameObject);
