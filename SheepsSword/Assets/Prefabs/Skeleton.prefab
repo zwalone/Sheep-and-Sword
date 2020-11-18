@@ -71,7 +71,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: Player
-  damage: 10
+  damage: 20
 --- !u!1 &2325511127231607623
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,7 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2558af263ac8aef44ba79c032d5fb74c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 10
+  _hp: 20
   _speed: 0.4
 --- !u!114 &2325511127328417938
 MonoBehaviour:
@@ -224,11 +224,10 @@ MonoBehaviour:
     m_Bits: 512
   rayCastLength: 5
   attackDistance: 5
-  _changeDirection: 0
   hitbox: {fileID: 2325511127013240609}
   _isGroundBottom: {fileID: 2325511128226906857}
   _isGroundOpposite: {fileID: 4369730026972571889}
-  getdamage: 1
+  _changeDirection: 0
 --- !u!114 &2325511127328417939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -497,7 +496,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: Player
-  damage: 0
+  damage: 10
 --- !u!61 &8473807805893563364
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -568,6 +567,6 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.12, y: -0.21}
+  m_Offset: {x: 0.12, y: -0.18}
   serializedVersion: 2
   m_Radius: 0.04

@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: Player
-  damage: 0
+  damage: 5
 --- !u!61 &129116209276333897
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -259,6 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0655428d3e9cc8c468987271f4b3a6f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _changeDirection: 0
 --- !u!114 &4599650969280799325
 MonoBehaviour:
   m_ObjectHideFlags: 0

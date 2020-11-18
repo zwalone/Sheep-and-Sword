@@ -8,9 +8,7 @@ public class MinotaurController : MonoBehaviour, IEntityController
     public float rayCastLength;
     public float attackDistance;
 
-    private RaycastHit2D hit;
     private GameObject target;
-    private float distance;
     private bool _inRange;
 
     private MinotaurModel _model;
@@ -24,12 +22,15 @@ public class MinotaurController : MonoBehaviour, IEntityController
 
     private Rigidbody2D _rd2D;
 
-    private bool _changeDirection;
-    private bool _isAttacking;
-
     [SerializeField]
     private GameObject hitbox;
-    
+
+    //Parameters:
+    [SerializeField]
+    private bool _changeDirection;
+    private bool _isAttacking;
+    bool isHurting;
+    bool isDead;
 
     private void Awake()
     {
@@ -53,48 +54,21 @@ public class MinotaurController : MonoBehaviour, IEntityController
 
     private void Update()
     {
+        Animate();
 
         if (_inRange)
         {
-            if(_model.Speed > 0) hit = Physics2D.Raycast(rayCast.position, Vector2.right, rayCastLength, rayCastMask);
-            else hit = Physics2D.Raycast(rayCast.position, Vector2.left, rayCastLength, rayCastMask);
-
-            RaycastDebugger();
-        }
-
-        //when player is detected
-        if(hit.collider != null)
-        {
             CheckAttack();
-
-        }else if(hit.collider == null)
-        {
-            _inRange = false;
         }
+
     }
     
     //Attack
     private void CheckAttack()
     {
-        distance = Vector2.Distance(transform.position, target.transform.position);
-        if(distance <= attackDistance && !_isAttacking )
+        if(!_isAttacking )
         {
             StartCoroutine(Attack());
-        }
-    }
-
-    //Onlt for debug
-    private void RaycastDebugger()
-    {
-        if(distance > attackDistance)
-        {
-            if(_model.Speed > 0) Debug.DrawRay(rayCast.position, Vector2.right * rayCastLength, Color.red);
-            else Debug.DrawRay(rayCast.position, Vector2.left * rayCastLength, Color.red);
-        }
-        else
-        {
-            if (_model.Speed > 0) Debug.DrawRay(rayCast.position, Vector2.right * rayCastLength, Color.green);
-            else Debug.DrawRay(rayCast.position, Vector2.left * rayCastLength, Color.green);
         }
     }
 
@@ -104,6 +78,15 @@ public class MinotaurController : MonoBehaviour, IEntityController
         {
             _inRange = true;
             target = collider.gameObject;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            _inRange = false;
+            target = null;
         }
     }
 
@@ -140,6 +123,7 @@ public class MinotaurController : MonoBehaviour, IEntityController
     {
         _model.Speed = 0;
         _view.DieRight();
+        isDead = true;
 
         yield return new WaitForSeconds(1);
         Destroy(gameObject);
@@ -173,9 +157,19 @@ public class MinotaurController : MonoBehaviour, IEntityController
     IEnumerator TakeDamage()
     {
         _view.GetDamage();
+        isHurting = true;
 
         yield return new WaitForSeconds(0.3f);
 
+        isHurting = false;
        _view.WalkRight();
+    }
+
+    private void Animate()
+    {
+        if (isHurting) _view.GetDamage();
+        else if (isDead) _view.DieRight();
+        else if (_isAttacking) _view.AttackRight();
+        else _view.WalkRight();
     }
 }

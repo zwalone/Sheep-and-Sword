@@ -8,19 +8,13 @@ public class SkeletonController : MonoBehaviour, IEntityController
     public float rayCastLength;
     public float attackDistance;
 
-    private RaycastHit2D hit;
     private GameObject target;
-    private float distance;
     private bool _inRange;
 
     private SkeletonModel _model;
     private SkeletonView _view;
 
     private Rigidbody2D _rd2D;
-
-    [SerializeField]
-    private bool _changeDirection;
-    private bool _isAttacking;
 
     [SerializeField]
     private GameObject hitbox;
@@ -33,6 +27,9 @@ public class SkeletonController : MonoBehaviour, IEntityController
 
 
     //Parameters:
+    [SerializeField]
+    private bool _changeDirection;
+    private bool _isAttacking;
     bool isHurting;
     bool isDead;
 
@@ -65,46 +62,16 @@ public class SkeletonController : MonoBehaviour, IEntityController
 
         if (_inRange)
         {
-            if (_model.Speed > 0) hit = Physics2D.Raycast(rayCast.position, Vector2.right, rayCastLength, rayCastMask);
-            else hit = Physics2D.Raycast(rayCast.position, Vector2.left, rayCastLength, rayCastMask);
-
-            RaycastDebugger();
-        }
-
-        //when player is detected
-        if (hit.collider != null)
-        {
             CheckAttack();
-
-        }
-        else if (hit.collider == null)
-        {
-            _inRange = false;
         }
     }
 
     //Attack
     private void CheckAttack()
     {
-        distance = Vector2.Distance(transform.position, target.transform.position);
-        if (distance <= attackDistance && !_isAttacking)
+        if (!_isAttacking)
         {
             StartCoroutine(Attack());
-        }
-    }
-
-    //Only for debug
-    private void RaycastDebugger()
-    {
-        if (distance > attackDistance)
-        {
-            if (_model.Speed > 0) Debug.DrawRay(rayCast.position, Vector2.right * rayCastLength, Color.red);
-            else Debug.DrawRay(rayCast.position, Vector2.left * rayCastLength, Color.red);
-        }
-        else
-        {
-            if (_model.Speed > 0) Debug.DrawRay(rayCast.position, Vector2.right * rayCastLength, Color.green);
-            else Debug.DrawRay(rayCast.position, Vector2.left * rayCastLength, Color.green);
         }
     }
 
@@ -114,6 +81,15 @@ public class SkeletonController : MonoBehaviour, IEntityController
         {
             _inRange = true;
             target = collider.gameObject;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            _inRange = false;
+            target = null;
         }
     }
 
