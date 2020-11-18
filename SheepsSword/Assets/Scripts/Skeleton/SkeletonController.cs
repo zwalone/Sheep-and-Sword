@@ -26,10 +26,10 @@ public class SkeletonController : MonoBehaviour, IEntityController
     private GameObject hitbox;
 
     [SerializeField]
-    private CircleCollider2D _isGoroudBottom;
+    private CircleCollider2D _isGroundBottom;
 
     [SerializeField]
-    private CircleCollider2D _isGroundOposite;
+    private CircleCollider2D _isGroundOpposite;
 
     //To remove after check with player
     public bool getdamage;
@@ -88,7 +88,7 @@ public class SkeletonController : MonoBehaviour, IEntityController
         }
     }
 
-    //Onlt for debug
+    //Only for debug
     private void RaycastDebugger()
     {
         if (distance > attackDistance)
@@ -116,12 +116,12 @@ public class SkeletonController : MonoBehaviour, IEntityController
     //Check and Change direction
     private void ChangeMoveDirection()
     {
-        if (!_isGoroudBottom.IsTouchingLayers(LayerMask.GetMask("Ground")) && _changeDirection)
+        if (!_isGroundBottom.IsTouchingLayers(LayerMask.GetMask("Ground")) && _changeDirection)
         {
             _changeDirection = false;
             StartCoroutine(ChangeDirectionCorutine());
         }
-        else if (_isGroundOposite.IsTouchingLayers(LayerMask.GetMask("Ground")) && _changeDirection)
+        else if (_isGroundOpposite.IsTouchingLayers(LayerMask.GetMask("Ground")) && _changeDirection)
         {
             _changeDirection = false;
             StartCoroutine(ChangeDirectionCorutine());

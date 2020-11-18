@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerModel : MonoBehaviour, IEntityModel
+public class PlayerModel : MonoBehaviour
 {
     [SerializeField]
     private int maxHP;
@@ -32,13 +32,5 @@ public class PlayerModel : MonoBehaviour, IEntityModel
     {
         get { return jumpForce; }
         set { jumpForce = value; }
-    }
-
-    [SerializeField]
-    private int _dmg;
-    public int Damage
-    {
-        get { return _dmg; }
-        set { _dmg = value; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class CyclopModel : MonoBehaviour, IEntityModel
+public class CyclopModel : MonoBehaviour
 {
     [SerializeField]
     private int _hp;
@@ -19,16 +19,7 @@ public class CyclopModel : MonoBehaviour, IEntityModel
     }
 
     [SerializeField]
-    private int _dmg;
-    public int Damage
-    {
-        get { return _dmg; }
-        set { _dmg = value; }
-    }
-
-    [SerializeField]
     private float _raycastDistance;
-
     public float RaycastDistance
     {
         get { return _raycastDistance; }
@@ -37,7 +28,6 @@ public class CyclopModel : MonoBehaviour, IEntityModel
 
     [SerializeField]
     private GameObject laser;
-
     public GameObject Laser
     {
         get { return laser; }

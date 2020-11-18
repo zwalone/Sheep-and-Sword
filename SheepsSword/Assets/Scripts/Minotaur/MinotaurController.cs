@@ -13,17 +13,14 @@ public class MinotaurController : MonoBehaviour, IEntityController
     private float distance;
     private bool _inRange;
 
-    //To remove !!
-    public bool getdamage;
-
     private MinotaurModel _model;
     private MinotaurView _view;
 
     [SerializeField]
-    private CircleCollider2D _isGoroudBottom;
+    private CircleCollider2D _isGroundBottom;
 
     [SerializeField]
-    private CircleCollider2D _isGroundOposite;
+    private CircleCollider2D _isGroundOpposite;
 
     private Rigidbody2D _rd2D;
 
@@ -56,7 +53,6 @@ public class MinotaurController : MonoBehaviour, IEntityController
 
     private void Update()
     {
-        //if (getdamage) TakeDamage(1);
 
         if (_inRange)
         {
@@ -115,11 +111,11 @@ public class MinotaurController : MonoBehaviour, IEntityController
     private void ChangeMoveDirection()
     {
 
-        if (!_isGoroudBottom.IsTouchingLayers(LayerMask.GetMask("Ground")) && _changeDirection)
+        if (!_isGroundBottom.IsTouchingLayers(LayerMask.GetMask("Ground")) && _changeDirection)
         {
             _changeDirection = false;
             StartCoroutine(ChangeDirectionCorutine());
-        }else if(_isGroundOposite.IsTouchingLayers(LayerMask.GetMask("Ground")) && _changeDirection)
+        }else if(_isGroundOpposite.IsTouchingLayers(LayerMask.GetMask("Ground")) && _changeDirection)
         {
             _changeDirection = false;
             StartCoroutine(ChangeDirectionCorutine());
@@ -138,7 +134,6 @@ public class MinotaurController : MonoBehaviour, IEntityController
         {
             StartCoroutine(TakeDamage());
         }
-        getdamage = false;
     }
 
     IEnumerator Die()

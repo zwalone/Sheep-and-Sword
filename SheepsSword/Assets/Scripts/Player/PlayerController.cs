@@ -346,6 +346,8 @@ public class PlayerController : MonoBehaviour, IEntityController
 
     public void TakeDamage(int dmg)
     {
+        if (dmg <= 0) return; 
+
         // Decrease health:
         if (model.HP > 0)
         {

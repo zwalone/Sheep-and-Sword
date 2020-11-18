@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class SkeletonModel : MonoBehaviour, IEntityModel
+public class SkeletonModel : MonoBehaviour
 {
     [SerializeField]
     private int _hp;
@@ -16,13 +16,5 @@ public class SkeletonModel : MonoBehaviour, IEntityModel
     {
         get { return _speed; }
         set { _speed = value; }
-    }
-
-    [SerializeField]
-    private int _dmg;
-    public int Damage
-    {
-        get { return _dmg; }
-        set { _dmg = value; }
     }
 }

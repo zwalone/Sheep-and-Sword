@@ -270,7 +270,6 @@ MonoBehaviour:
   hp: 100
   speed: 4
   jumpForce: 6
-  _dmg: 5
 --- !u!70 &8876845735017060407
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -388,6 +387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: Enemy
+  damage: 5
 --- !u!1 &8876845736356240807
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,6 +459,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: Enemy
+  damage: 5
 --- !u!1 &8876845736431416659
 GameObject:
   m_ObjectHideFlags: 0

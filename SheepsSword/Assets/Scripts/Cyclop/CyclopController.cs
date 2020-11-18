@@ -73,7 +73,8 @@ public class CyclopController : MonoBehaviour, IEntityController
             {
                 if (!_isAttacking)
                 {
-                    Debug.Log("Hit Raycast with " + hit.transform.tag);
+                    //Debug.Log("Hit Raycast with " + hit.transform.tag);
+                    
                     //TODO make a laser
                     StartCoroutine(Attack());
                 }
