@@ -13,12 +13,13 @@ public class CyclopController : MonoBehaviour, IEntityController
     private bool _canUseLaser = true;
     private readonly float _laserCooldown = 1.5f;
 
-    //Parameters:
+    // Parameters:
     [SerializeField]
     private bool _changeDirection;
     private bool _isAttacking;
-    bool isHurting;
-    bool isDead;
+
+    public bool IsHurting { get; private set; }
+    public bool IsDead { get; private set; }
 
     private void Awake()
     {
@@ -116,50 +117,53 @@ public class CyclopController : MonoBehaviour, IEntityController
 
     IEnumerator Attack()
     {
-        _isAttacking = true;
-        float prevSpeed = _model.Speed;
-
-        //Spawn a bullet
-        if (_canUseLaser == true)
+        if (!IsDead)
         {
-            _canUseLaser = false;
-            if (_model.Speed < 0)
+            _isAttacking = true;
+            float prevSpeed = _model.Speed;
+
+            //Spawn a bullet
+            if (_canUseLaser == true)
             {
-                Instantiate(_model.Laser, this.transform.position, Quaternion.Euler(0, 180, 0));
+                _canUseLaser = false;
+                if (_model.Speed < 0)
+                {
+                    Instantiate(_model.Laser, this.transform.position, Quaternion.Euler(0, 180, 0));
+                }
+                else
+                {
+                    Instantiate(_model.Laser, this.transform.position, Quaternion.identity);
+                }
+                _view.AttackRight();
+                Invoke(nameof(CanUseLaser), _laserCooldown);
             }
-            else
-            {
-                Instantiate(_model.Laser, this.transform.position, Quaternion.identity);
-            }
-            _view.AttackRight();
-            Invoke(nameof(CanUseLaser), _laserCooldown);
+
+            //Stop movement during shoot animation 
+            _model.Speed = 0;
+
+            yield return new WaitForSeconds(1.5f);
+
+            //Go to previos Movement
+            _model.Speed = prevSpeed;
+            _isAttacking = false;
         }
-
-        //Stop movement during shoot animation 
-        _model.Speed = 0;
-
-        yield return new WaitForSeconds(1.5f);
-
-        //Go to previos Movement
-        _model.Speed = prevSpeed;
-        _isAttacking = false;
     }
 
     private void CanUseLaser() { _canUseLaser = true; }
 
     IEnumerator TakeDamage()
     {
-        isHurting = true;
+        IsHurting = true;
 
         yield return new WaitForSeconds(.3f);
 
-        isHurting = false;
+        IsHurting = false;
     }
 
     IEnumerator Die()
     {
         _canUseLaser = false;
-        isDead = true;
+        IsDead = true;
         _model.Speed = 0;
 
         yield return new WaitForSeconds(.5f);
@@ -168,8 +172,8 @@ public class CyclopController : MonoBehaviour, IEntityController
 
     private void Animate()
     {
-        if (isHurting) _view.TakeDamage();
-        else if (isDead) _view.DieRight();
+        if (IsHurting) _view.TakeDamage();
+        else if (IsDead) _view.DieRight();
         else if (_isAttacking) _view.AttackRight();
         else _view.WalkRight();
     }

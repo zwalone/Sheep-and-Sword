@@ -37,9 +37,10 @@ public class PlayerController : MonoBehaviour, IEntityController
     private bool isCeilinged; // contact with the ceiling
     private bool isCrouched;
     private int isWalled;     // contact with the wall
-    private bool isDead;
-    private bool isHurting;
-    private bool isSliding;
+
+    public bool IsHurting { get; private set; }
+    public bool IsDead { get; private set; }
+    public bool IsSliding { get; private set;  } // can't be attacked if true
 
     // UI:
     private Text hpText;
@@ -162,6 +163,8 @@ public class PlayerController : MonoBehaviour, IEntityController
         // Climb (vertical movement) + avoid auto-sliding down on walls:
         if (isWalled != 0 && !isCeilinged)
         {
+            AttackStop(); // hide sword, stop sliding
+
             float yMove = Input.GetAxisRaw("Vertical");
             if (yMove != 0)
             {
@@ -248,9 +251,9 @@ public class PlayerController : MonoBehaviour, IEntityController
 
     private void Slide()
     {
-        if (Input.GetAxisRaw("Horizontal") != 0 && !isCrouched && isWalled == 0 && !isAttacking && !isHurting)
+        if (Input.GetAxisRaw("Horizontal") != 0 && !isCrouched && isWalled == 0 && !isAttacking && !IsHurting)
         {
-            isSliding = true;
+            IsSliding = true;
             AttackStart(); // hit just at the beginning of the animation
             Invoke(nameof(AttackStop), animationLength * 2.0f);  // this animation is two times longer than normal attack
         }
@@ -260,7 +263,7 @@ public class PlayerController : MonoBehaviour, IEntityController
 
     private void Attack()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isWalled == 0 && !isAttacking && !isHurting)
+        if (Input.GetKeyDown(KeyCode.Space) && isWalled == 0 && !isAttacking && !IsHurting)
         {
             isAttacking = true;
             attackViewNumber = (attackViewNumber + 1) % 3;   // there are 3 types of attack
@@ -284,7 +287,7 @@ public class PlayerController : MonoBehaviour, IEntityController
         hitPointRight.SetActive(false);
         hitPointLeft.SetActive(false);
 
-        isSliding = false;
+        IsSliding = false;
     }
 
 
@@ -304,9 +307,9 @@ public class PlayerController : MonoBehaviour, IEntityController
         }
 
         // Change animation:
-        if (isHurting) view.Hurt();
-        else if (isDead) view.Die();
-        else if (isSliding) view.Slide();
+        if (IsHurting) view.Hurt();
+        else if (IsDead) view.Die();
+        else if (IsSliding) view.Slide();
         else if (isWalled != 0)
         {
             if (rigbody.velocity.y > 0.0f) view.Climb();
@@ -359,17 +362,17 @@ public class PlayerController : MonoBehaviour, IEntityController
         // Animate:
         if (model.HP > 0)
         {
-            isHurting = true;
+            IsHurting = true;
             Invoke(nameof(StopHurting), 0.2f); // "Hurt" animation will last for 0.2 seconds
         }
         else
         {
-            isDead = true;
+            IsDead = true;
             Invoke(nameof(GameOver), animationLength * 2.1f); // Game freezes after Die animation
         }
     }
 
-    private void StopHurting() {  isHurting = false; }
+    private void StopHurting() {  IsHurting = false; }
 
     private void GameOver()
     {

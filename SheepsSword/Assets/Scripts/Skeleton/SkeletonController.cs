@@ -26,12 +26,13 @@ public class SkeletonController : MonoBehaviour, IEntityController
     private CircleCollider2D _isGroundOpposite;
 
 
-    //Parameters:
+    // Parameters:
     [SerializeField]
     private bool _changeDirection;
     private bool _isAttacking;
-    bool isHurting;
-    bool isDead;
+
+    public bool IsHurting { get; private set; }
+    public bool IsDead { get; private set; }
 
 
 
@@ -135,7 +136,7 @@ public class SkeletonController : MonoBehaviour, IEntityController
     IEnumerator Die()
     {
         _model.Speed = 0;
-        isDead = true;
+        IsDead = true;
 
         yield return new WaitForSeconds(1);
         Destroy(gameObject);
@@ -157,7 +158,7 @@ public class SkeletonController : MonoBehaviour, IEntityController
 
     IEnumerator TakeDamage()
     {
-        isHurting = true;
+        IsHurting = true;
         var prevSpeed = _model.Speed;
         _model.Speed = 0;
 
@@ -165,15 +166,15 @@ public class SkeletonController : MonoBehaviour, IEntityController
 
         _model.Speed = prevSpeed;
         _view.Walk();
-        isHurting = false;
+        IsHurting = false;
     }
 
 
 
     private void Animate()
     {
-        if (isHurting) _view.TakeDamage();
-        else if (isDead) _view.Die();
+        if (IsHurting) _view.TakeDamage();
+        else if (IsDead) _view.Die();
         else if (_isAttacking) _view.Attack();
         else _view.Walk();
     }

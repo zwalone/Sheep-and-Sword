@@ -25,12 +25,13 @@ public class MinotaurController : MonoBehaviour, IEntityController
     [SerializeField]
     private GameObject hitbox;
 
-    //Parameters:
+    // Parameters:
     [SerializeField]
     private bool _changeDirection;
     private bool _isAttacking;
-    bool isHurting;
-    bool isDead;
+
+    public bool IsHurting { get; private set; }
+    public bool IsDead { get; private set; }
 
     private void Awake()
     {
@@ -123,7 +124,7 @@ public class MinotaurController : MonoBehaviour, IEntityController
     {
         _model.Speed = 0;
         _view.DieRight();
-        isDead = true;
+        IsDead = true;
 
         yield return new WaitForSeconds(1);
         Destroy(gameObject);
@@ -157,18 +158,18 @@ public class MinotaurController : MonoBehaviour, IEntityController
     IEnumerator TakeDamage()
     {
         _view.GetDamage();
-        isHurting = true;
+        IsHurting = true;
 
         yield return new WaitForSeconds(0.3f);
 
-        isHurting = false;
+        IsHurting = false;
        _view.WalkRight();
     }
 
     private void Animate()
     {
-        if (isHurting) _view.GetDamage();
-        else if (isDead) _view.DieRight();
+        if (IsHurting) _view.GetDamage();
+        else if (IsDead) _view.DieRight();
         else if (_isAttacking) _view.AttackRight();
         else _view.WalkRight();
     }

@@ -12,6 +12,14 @@ public class HitBoxController : MonoBehaviour
     {
         // Checking tag (checking layer doesn't work):
         if (collision.CompareTag(target))
-            collision.gameObject.GetComponentInParent<IEntityController>().TakeDamage(damage);
+        {
+            // If player is sliding - you can't hit him:
+            if (target == "Player" && collision.gameObject.GetComponent<PlayerController>().IsSliding) return;
+
+            // Apply damage:
+            if (!gameObject.GetComponentInParent<IEntityController>().IsDead 
+                && !gameObject.GetComponentInParent<IEntityController>().IsHurting)
+                collision.gameObject.GetComponentInParent<IEntityController>().TakeDamage(damage);
+        }
     }
 }

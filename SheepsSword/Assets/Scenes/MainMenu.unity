@@ -552,7 +552,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: SHEEP'S SWORD
+  m_Text: SHEEP AND SWORD
 --- !u!222 &345960811
 CanvasRenderer:
   m_ObjectHideFlags: 0
