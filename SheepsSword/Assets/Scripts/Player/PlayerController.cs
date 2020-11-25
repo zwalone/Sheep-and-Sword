@@ -80,7 +80,6 @@ public class PlayerController : MonoBehaviour, IEntityController
         CheckTheGround();
         CheckTheWall();
         CheckTheCeiling();
-        //CheckTheSlope();
 
         Jump();
         Crouch();
@@ -121,61 +120,58 @@ public class PlayerController : MonoBehaviour, IEntityController
 
     private void Move()
     {
-        if (!IsDead)
+        //Check if you can go:
+        Vector2 slopeCheckerPosition = transform.position - new Vector3(0.0f, capscol.size.y / 2, 0.0f);
+        RaycastHit2D slopeHitRight = Physics2D.Raycast(slopeCheckerPosition,
+            transform.right, slopeCheckerRadius, groundLayer);
+        RaycastHit2D slopeHitLeft = Physics2D.Raycast(slopeCheckerPosition,
+            -transform.right, slopeCheckerRadius, groundLayer);
+
+
+        // Run (horizontal movement) + avoid auto-sliding down on slopes:
+        float xMove = Input.GetAxisRaw("Horizontal");
+        if (xMove != 0 && !IsDead)
         {
-            //Check if you can go:
-            Vector2 slopeCheckerPosition = transform.position - new Vector3(0.0f, capscol.size.y / 2, 0.0f);
-            RaycastHit2D slopeHitRight = Physics2D.Raycast(slopeCheckerPosition,
-                transform.right, slopeCheckerRadius, groundLayer);
-            RaycastHit2D slopeHitLeft = Physics2D.Raycast(slopeCheckerPosition,
-                -transform.right, slopeCheckerRadius, groundLayer);
 
+            rigbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+            rigbody.velocity = new Vector2(xMove * model.Speed, rigbody.velocity.y);
 
-            // Run (horizontal movement) + avoid auto-sliding down on slopes:
-            float xMove = Input.GetAxisRaw("Horizontal");
-            if (xMove != 0)
+            // Running on the slopes:
+            RaycastHit2D hit = Physics2D.Raycast(groundChecker.position, Vector2.down,
+                groundCheckerRadius, groundLayer);
+            if (isGrounded && Input.GetAxisRaw("Vertical") == 0 &&
+                hit.collider != null && Mathf.Abs(hit.normal.x) > 0.1f)
             {
+                if (hit.normal.x * xMove > 0) // running down
+                    rigbody.velocity = new Vector2(rigbody.velocity.x, -model.JumpForce);
+                else if (!slopeHitLeft && !slopeHitRight) // running up (at the end of the slope)
+                    rigbody.velocity = new Vector2(rigbody.velocity.x, 1.0f);
+            }
+        }
+        // Stopping on the slope => freezing whole movement:
+        else if (Input.GetAxisRaw("Vertical") == 0 && isGrounded && isWalled == 0 &&
+            ((slopeHitLeft && !view.LookRight) || (slopeHitRight && view.LookRight)))
+            rigbody.constraints = RigidbodyConstraints2D.FreezePositionX
+                                | RigidbodyConstraints2D.FreezePositionY
+                                | RigidbodyConstraints2D.FreezeRotation;
+        // Not moving => freezing on the X:
+        else rigbody.constraints = RigidbodyConstraints2D.FreezePositionX
+                                 | RigidbodyConstraints2D.FreezeRotation;
 
+
+        // Climb (vertical movement) + avoid auto-sliding down on walls:
+        if (isWalled != 0 && !isCeilinged && !IsDead)
+        {
+            AttackStop(); // hide sword, stop sliding
+
+            float yMove = Input.GetAxisRaw("Vertical");
+            if (yMove != 0)
+            {
                 rigbody.constraints = RigidbodyConstraints2D.FreezeRotation;
-                rigbody.velocity = new Vector2(xMove * model.Speed, rigbody.velocity.y);
-
-                // Running on the slopes:
-                RaycastHit2D hit = Physics2D.Raycast(groundChecker.position, Vector2.down,
-                    groundCheckerRadius, groundLayer);
-                if (isGrounded && Input.GetAxisRaw("Vertical") == 0 &&
-                    hit.collider != null && Mathf.Abs(hit.normal.x) > 0.1f)
-                {
-                    if (hit.normal.x * xMove > 0) // running down
-                        rigbody.velocity = new Vector2(rigbody.velocity.x, -model.JumpForce);
-                    else if (!slopeHitLeft && !slopeHitRight) // running up (at the end of the slope)
-                        rigbody.velocity = new Vector2(rigbody.velocity.x, 1.0f);
-                }
+                rigbody.velocity = new Vector2(rigbody.velocity.x, yMove * model.Speed);
             }
-            // Stopping on the slope => freezing whole movement:
-            else if (Input.GetAxisRaw("Vertical") == 0 && isGrounded && isWalled == 0 &&
-                ((slopeHitLeft && !view.LookRight) || (slopeHitRight && view.LookRight)))
-                rigbody.constraints = RigidbodyConstraints2D.FreezePositionX
-                                    | RigidbodyConstraints2D.FreezePositionY
-                                    | RigidbodyConstraints2D.FreezeRotation;
-            // Not moving => freezing on the X:
-            else rigbody.constraints = RigidbodyConstraints2D.FreezePositionX
+            else rigbody.constraints = RigidbodyConstraints2D.FreezePositionY
                                      | RigidbodyConstraints2D.FreezeRotation;
-
-
-            // Climb (vertical movement) + avoid auto-sliding down on walls:
-            if (isWalled != 0 && !isCeilinged)
-            {
-                AttackStop(); // hide sword, stop sliding
-
-                float yMove = Input.GetAxisRaw("Vertical");
-                if (yMove != 0)
-                {
-                    rigbody.constraints = RigidbodyConstraints2D.FreezeRotation;
-                    rigbody.velocity = new Vector2(rigbody.velocity.x, yMove * model.Speed);
-                }
-                else rigbody.constraints = RigidbodyConstraints2D.FreezePositionY
-                                         | RigidbodyConstraints2D.FreezeRotation;
-            }
         }
     }
 

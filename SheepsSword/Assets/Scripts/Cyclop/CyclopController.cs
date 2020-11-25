@@ -21,6 +21,8 @@ public class CyclopController : MonoBehaviour, IEntityController
     public bool IsHurting { get; private set; }
     public bool IsDead { get; private set; }
 
+
+
     private void Awake()
     {
         _view = this.GetComponent<CyclopView>();
@@ -31,7 +33,6 @@ public class CyclopController : MonoBehaviour, IEntityController
 
     void Start()
     {
-        _view.WalkRight();
         _changeDirection = true;
     }
 
@@ -48,6 +49,9 @@ public class CyclopController : MonoBehaviour, IEntityController
         Animate();
     }
 
+
+
+
     public void TakeDamage(int dmg)
     {
         _model.HP -= dmg;
@@ -55,13 +59,22 @@ public class CyclopController : MonoBehaviour, IEntityController
         if (_model.HP <= 0)
         {
             _model.HP = 0;
-            StartCoroutine(Die());
+            _model.Speed = 0;
+            IsDead = true;
+            _canUseLaser = false;
+            Invoke(nameof(DestroyMe), 0.5f);
         }
         else
         {
-            StartCoroutine(TakeDamage());
+            IsHurting = true;
+            Invoke(nameof(StopHurting), 0.3f);
         }
     }
+
+    private void DestroyMe() { Destroy(gameObject); }
+    private void StopHurting() { IsHurting = false; }
+
+
 
     //Check Collision With Player by Raycast
     private void RayCastCheckUpdate()
@@ -83,12 +96,7 @@ public class CyclopController : MonoBehaviour, IEntityController
                 && !hit.collider.gameObject.GetComponentInParent<IEntityController>().IsDead)
             {
                 if (!_isAttacking)
-                {
-                    //Debug.Log("Hit Raycast with " + hit.transform.tag);
-                    
-                    //TODO make a laser
                     StartCoroutine(Attack());
-                }
             }
         }
     }
@@ -96,6 +104,8 @@ public class CyclopController : MonoBehaviour, IEntityController
     //Check and Change direction
     private void ChangeMoveDirection()
     {
+        if (IsDead) return;
+
         foreach (var col in _checkGroundList)
         {
             if (!col.IsTouchingLayers(LayerMask.GetMask("Ground")) && _changeDirection)
@@ -106,7 +116,6 @@ public class CyclopController : MonoBehaviour, IEntityController
         }
     }
 
-
     //Coroutine for Movement
     IEnumerator ChangeDirectionCorutine()
     {
@@ -115,6 +124,8 @@ public class CyclopController : MonoBehaviour, IEntityController
         yield return new WaitForSeconds(0.7f);
         _changeDirection = true;
     }
+
+
 
     IEnumerator Attack()
     {
@@ -127,15 +138,8 @@ public class CyclopController : MonoBehaviour, IEntityController
             if (_canUseLaser == true)
             {
                 _canUseLaser = false;
-                if (_model.Speed < 0)
-                {
-                    Instantiate(_model.Laser, this.transform.position, Quaternion.Euler(0, 180, 0));
-                }
-                else
-                {
-                    Instantiate(_model.Laser, this.transform.position, Quaternion.identity);
-                }
-                _view.AttackRight();
+                if (_model.Speed < 0) Instantiate(_model.Laser, this.transform.position, Quaternion.Euler(0, 180, 0));
+                else Instantiate(_model.Laser, this.transform.position, Quaternion.identity);
                 Invoke(nameof(CanUseLaser), _laserCooldown);
             }
 
@@ -151,25 +155,6 @@ public class CyclopController : MonoBehaviour, IEntityController
     }
 
     private void CanUseLaser() { _canUseLaser = true; }
-
-    IEnumerator TakeDamage()
-    {
-        IsHurting = true;
-
-        yield return new WaitForSeconds(.3f);
-
-        IsHurting = false;
-    }
-
-    IEnumerator Die()
-    {
-        _canUseLaser = false;
-        IsDead = true;
-        _model.Speed = 0;
-
-        yield return new WaitForSeconds(.5f);
-        Destroy(gameObject);
-    }
 
     private void Animate()
     {

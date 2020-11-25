@@ -46,7 +46,6 @@ public class SkeletonController : MonoBehaviour, IEntityController
 
     void Start()
     {
-        _view.Walk();
         _changeDirection = true;
     }
 
@@ -60,12 +59,10 @@ public class SkeletonController : MonoBehaviour, IEntityController
     private void Update()
     {
         Animate();
-
-        if (_inRange)
-        {
-            CheckAttack();
-        }
+        if (_inRange) CheckAttack();
     }
+
+
 
     //Attack
     private void CheckAttack()
@@ -95,55 +92,7 @@ public class SkeletonController : MonoBehaviour, IEntityController
         }
     }
 
-
-    //Check and Change direction
-    private void ChangeMoveDirection()
-    {
-        if (!_isGroundBottom.IsTouchingLayers(LayerMask.GetMask("Ground")) && _changeDirection)
-        {
-            _changeDirection = false;
-            StartCoroutine(ChangeDirectionCorutine());
-        }
-        else if (_isGroundOpposite.IsTouchingLayers(LayerMask.GetMask("Ground")) && _changeDirection)
-        {
-            _changeDirection = false;
-            StartCoroutine(ChangeDirectionCorutine());
-        }
-    }
-
-    public void TakeDamage(int dmg)
-    {
-        _model.HP -= dmg;
-        if (_model.HP <= 0)
-        {
-            _model.HP = 0;
-            StartCoroutine(Die());
-        }
-        else
-        {
-            StartCoroutine(TakeDamage());
-        }
-    }
-
-    //Coroutine for Movement
-    IEnumerator ChangeDirectionCorutine()
-    {
-        _model.Speed = -_model.Speed;
-        this.transform.localRotation *= Quaternion.Euler(0, 180, 0);
-        yield return new WaitForSeconds(0.7f);
-        _changeDirection = true;
-    }
-
-    IEnumerator Die()
-    {
-        _model.Speed = 0;
-        IsDead = true;
-
-        yield return new WaitForSeconds(1);
-        Destroy(gameObject);
-    }
-
-    //Attack
+    // Coroutine for Attack
     IEnumerator Attack()
     {
         hitbox.GetComponent<BoxCollider2D>().enabled = true;
@@ -157,25 +106,62 @@ public class SkeletonController : MonoBehaviour, IEntityController
         hitbox.GetComponent<BoxCollider2D>().enabled = false;
     }
 
-    IEnumerator TakeDamage()
+
+
+    //Check and Change direction
+    private void ChangeMoveDirection()
     {
-        IsHurting = true;
-        var prevSpeed = _model.Speed;
-        _model.Speed = 0;
+        if (IsDead || _isAttacking) return;
 
-        yield return new WaitForSeconds(0.2f);
-
-        _model.Speed = prevSpeed;
-        _view.Walk();
-        IsHurting = false;
+        if (!_isGroundBottom.IsTouchingLayers(LayerMask.GetMask("Ground")) && _changeDirection)
+        {
+            _changeDirection = false;
+            StartCoroutine(ChangeDirectionCorutine());
+        }
+        else if (_isGroundOpposite.IsTouchingLayers(LayerMask.GetMask("Ground")) && _changeDirection)
+        {
+            _changeDirection = false;
+            StartCoroutine(ChangeDirectionCorutine());
+        }
     }
+
+    //Coroutine for Movement
+    IEnumerator ChangeDirectionCorutine()
+    {
+        _model.Speed = -_model.Speed;
+        this.transform.localRotation *= Quaternion.Euler(0, 180, 0);
+        yield return new WaitForSeconds(0.7f);
+        _changeDirection = true;
+    }
+
+
+
+    public void TakeDamage(int dmg)
+    {
+        _model.HP -= dmg;
+        if (_model.HP <= 0)
+        {
+            _model.HP = 0;
+            _model.Speed = 0;
+
+            IsDead = true;
+            Invoke(nameof(DestroyMe), 1.0f);
+        }
+        else
+        {
+            IsHurting = true;
+            Invoke(nameof(StopHurting), 0.2f);
+        }
+    }
+    private void DestroyMe() { Destroy(gameObject); }
+    private void StopHurting() { IsHurting = false; }
 
 
 
     private void Animate()
     {
-        if (IsHurting) _view.TakeDamage();
-        else if (IsDead) _view.Die();
+        if (IsDead) _view.Die();
+        else if (IsHurting) _view.TakeDamage();
         else if (_isAttacking) _view.Attack();
         else _view.Walk();
     }

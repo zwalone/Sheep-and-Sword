@@ -33,6 +33,8 @@ public class MinotaurController : MonoBehaviour, IEntityController
     public bool IsHurting { get; private set; }
     public bool IsDead { get; private set; }
 
+
+
     private void Awake()
     {
         _view = this.GetComponent<MinotaurView>();
@@ -42,7 +44,6 @@ public class MinotaurController : MonoBehaviour, IEntityController
 
     void Start()
     {
-        _view.WalkRight();
         _changeDirection = true;
     }
 
@@ -58,19 +59,16 @@ public class MinotaurController : MonoBehaviour, IEntityController
         Animate();
 
         if (_inRange)
-        {
             CheckAttack();
-        }
-
     }
     
+
+
     //Attack
     private void CheckAttack()
     {
         if(!_isAttacking )
-        {
             StartCoroutine(Attack());
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -92,43 +90,38 @@ public class MinotaurController : MonoBehaviour, IEntityController
         }
     }
 
+    IEnumerator Attack()
+    {
+        if (!IsDead)
+        {
+            hitbox.GetComponent<BoxCollider2D>().enabled = true;
+            _isAttacking = true;
+            _model.Speed *= 3;
+
+            yield return new WaitForSeconds(1.1f);
+
+            _model.Speed /= 3;
+            _isAttacking = false;
+            hitbox.GetComponent<BoxCollider2D>().enabled = false;
+        }
+    }
+
+
+
     //Check and Change direction
     private void ChangeMoveDirection()
     {
+        if (IsDead || _isAttacking) return;
 
         if (!_isGroundBottom.IsTouchingLayers(LayerMask.GetMask("Ground")) && _changeDirection)
         {
             _changeDirection = false;
             StartCoroutine(ChangeDirectionCorutine());
-        }else if(_isGroundOpposite.IsTouchingLayers(LayerMask.GetMask("Ground")) && _changeDirection)
+        } else if (_isGroundOpposite.IsTouchingLayers(LayerMask.GetMask("Ground")) && _changeDirection)
         {
             _changeDirection = false;
             StartCoroutine(ChangeDirectionCorutine());
         }
-    }
-
-    public void TakeDamage(int dmg)
-    {
-        _model.HP -= dmg;
-        if (_model.HP <= 0)
-        {
-            _model.HP = 0;
-            StartCoroutine(Die());
-        }
-        else
-        {
-            StartCoroutine(TakeDamage());
-        }
-    }
-
-    IEnumerator Die()
-    {
-        _model.Speed = 0;
-        _view.DieRight();
-        IsDead = true;
-
-        yield return new WaitForSeconds(1);
-        Destroy(gameObject);
     }
 
     //Coroutine for Movement
@@ -140,37 +133,35 @@ public class MinotaurController : MonoBehaviour, IEntityController
         _changeDirection = true;
     }
 
-    IEnumerator Attack()
+
+
+    public void TakeDamage(int dmg)
     {
-        hitbox.GetComponent<BoxCollider2D>().enabled = true;
-        _isAttacking = true;
-        _view.AttackRight();
+        _model.HP -= dmg;
+        if (_model.HP <= 0)
+        {
+            _model.HP = 0;
+            _model.Speed = 0;
 
-        _model.Speed *= 6;
-
-        yield return new WaitForSeconds(1.1f);
-
-        _model.Speed /= 6;
-        _view.WalkRight();
-        _isAttacking = false;
-        hitbox.GetComponent<BoxCollider2D>().enabled = true;
+            IsDead = true;
+            Invoke(nameof(DestroyMe), 1.0f);
+        }
+        else
+        {
+            IsHurting = true;
+            Invoke(nameof(StopHurting), 0.25f);
+        }
     }
 
-    IEnumerator TakeDamage()
-    {
-        _view.GetDamage();
-        IsHurting = true;
+    private void DestroyMe() { Destroy(gameObject); }
+    private void StopHurting() { IsHurting = false; }
 
-        yield return new WaitForSeconds(0.3f);
 
-        IsHurting = false;
-       _view.WalkRight();
-    }
 
     private void Animate()
     {
-        if (IsHurting) _view.GetDamage();
-        else if (IsDead) _view.DieRight();
+        if (IsDead) _view.DieRight();
+        else if (IsHurting) _view.GetDamage();
         else if (_isAttacking) _view.AttackRight();
         else _view.WalkRight();
     }
