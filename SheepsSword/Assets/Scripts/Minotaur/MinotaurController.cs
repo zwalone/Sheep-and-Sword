@@ -75,7 +75,8 @@ public class MinotaurController : MonoBehaviour, IEntityController
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collider.gameObject.CompareTag("Player"))
+        if(collider.gameObject.CompareTag("Player") 
+            && !collider.gameObject.GetComponentInParent<IEntityController>().IsDead)
         {
             _inRange = true;
             target = collider.gameObject;

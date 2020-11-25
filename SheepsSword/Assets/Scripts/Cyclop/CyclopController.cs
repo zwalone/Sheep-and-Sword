@@ -79,7 +79,8 @@ public class CyclopController : MonoBehaviour, IEntityController
 
         if (hit.collider) 
         {
-            if(hit.collider.CompareTag("Player"))
+            if(hit.collider.CompareTag("Player") 
+                && !hit.collider.gameObject.GetComponentInParent<IEntityController>().IsDead)
             {
                 if (!_isAttacking)
                 {
