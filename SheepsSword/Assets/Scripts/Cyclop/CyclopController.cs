@@ -54,6 +54,15 @@ public class CyclopController : MonoBehaviour, IEntityController
 
     public void TakeDamage(int dmg)
     {
+        //check distance
+        var p = GameObject.FindGameObjectWithTag("Player").transform;
+        Vector3 toTarget = (p.position - transform.position).normalized;
+        if (Vector3.Dot(toTarget, transform.forward) < 0)
+        {
+            Debug.Log("Is behaind");
+            ChangeMoveDirection(true);
+        }
+
         _model.HP -= dmg;
 
         if (_model.HP <= 0)
@@ -102,9 +111,15 @@ public class CyclopController : MonoBehaviour, IEntityController
     }
 
     //Check and Change direction
-    private void ChangeMoveDirection()
+    private void ChangeMoveDirection(bool behind = false)
     {
         if (IsDead) return;
+
+        if (behind)
+        {
+            _changeDirection = false;
+            StartCoroutine(ChangeDirectionCorutine());
+        }
 
         foreach (var col in _checkGroundList)
         {
