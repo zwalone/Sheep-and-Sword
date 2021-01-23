@@ -200,6 +200,126 @@ TextureImporter:
   - first:
       213: 6628196436259505223
     second: spr_Death_strip_65
+  - first:
+      213: -5363427902708114334
+    second: spr_Death_strip_0
+  - first:
+      213: 42894552758328807
+    second: spr_Death_strip_2
+  - first:
+      213: 2944545230792405794
+    second: spr_Death_strip_3
+  - first:
+      213: -95636973037346477
+    second: spr_Death_strip_4
+  - first:
+      213: -4333295676949328999
+    second: spr_Death_strip_6
+  - first:
+      213: 3006460718532576877
+    second: spr_Death_strip_7
+  - first:
+      213: 4026300310150252189
+    second: spr_Death_strip_9
+  - first:
+      213: -5635295274670764231
+    second: spr_Death_strip_10
+  - first:
+      213: -8452388262118633240
+    second: spr_Death_strip_12
+  - first:
+      213: -5820111073007059712
+    second: spr_Death_strip_14
+  - first:
+      213: 8245938289511601144
+    second: spr_Death_strip_16
+  - first:
+      213: -163394845572824328
+    second: spr_Death_strip_17
+  - first:
+      213: -7960561720672945041
+    second: spr_Death_strip_19
+  - first:
+      213: -9087753261127462398
+    second: spr_Death_strip_20
+  - first:
+      213: -1314233509751719556
+    second: spr_Death_strip_22
+  - first:
+      213: -5207223378465309663
+    second: spr_Death_strip_24
+  - first:
+      213: -68173189550758800
+    second: spr_Death_strip_25
+  - first:
+      213: -3340418539592128214
+    second: spr_Death_strip_27
+  - first:
+      213: -4120980159476696786
+    second: spr_Death_strip_29
+  - first:
+      213: 3982467343954313502
+    second: spr_Death_strip_30
+  - first:
+      213: 2717457006561293675
+    second: spr_Death_strip_32
+  - first:
+      213: 4491360032273150132
+    second: spr_Death_strip_34
+  - first:
+      213: 4751103125283919655
+    second: spr_Death_strip_35
+  - first:
+      213: -6991946491283124214
+    second: spr_Death_strip_37
+  - first:
+      213: -661612848725703737
+    second: spr_Death_strip_39
+  - first:
+      213: 1833145595826939086
+    second: spr_Death_strip_40
+  - first:
+      213: 2984253340836769605
+    second: spr_Death_strip_42
+  - first:
+      213: 6728417494033474250
+    second: spr_Death_strip_43
+  - first:
+      213: -9218126767268848583
+    second: spr_Death_strip_45
+  - first:
+      213: 8623835233223439084
+    second: spr_Death_strip_47
+  - first:
+      213: -3414442849144207831
+    second: spr_Death_strip_49
+  - first:
+      213: -4090981518080190847
+    second: spr_Death_strip_50
+  - first:
+      213: 5536428664524286983
+    second: spr_Death_strip_52
+  - first:
+      213: -1891363279381645260
+    second: spr_Death_strip_54
+  - first:
+      213: 8912789202059088217
+    second: spr_Death_strip_55
+  - first:
+      213: -6412827574114231653
+    second: spr_Death_strip_57
+  - first:
+      213: 2263310934067541791
+    second: spr_Death_strip_59
+  - first:
+      213: 4924082395425351892
+    second: spr_Death_strip_60
+  - first:
+      213: -822861340129420986
+    second: spr_Death_strip_63
+  - first:
+      213: -7832956495877610258
+    second: spr_Death_strip_65
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -300,8 +420,8 @@ TextureImporter:
       name: spr_Death_strip_0
       rect:
         serializedVersion: 2
-        x: 62
-        y: 17
+        x: 60
+        y: 20
         width: 64
         height: 64
       alignment: 0
@@ -311,8 +431,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b2df259e985b64fa0800000000000000
-      internalID: -5816762264772739797
+      spriteID: 26c1aa83db64195b0800000000000000
+      internalID: -5363427902708114334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_Death_strip_1
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 20
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9607f56a3c5655f0800000000000000
+      internalID: -768325280531544420
       vertices: []
       indices: 
       edges: []
@@ -321,8 +462,8 @@ TextureImporter:
       name: spr_Death_strip_2
       rect:
         serializedVersion: 2
-        x: 230
-        y: 17
+        x: 400
+        y: 20
         width: 64
         height: 64
       alignment: 0
@@ -332,8 +473,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d9eb20fb9bd7b790800000000000000
-      internalID: -7514295990448559657
+      spriteID: 7ed95f35e54689000800000000000000
+      internalID: 42894552758328807
       vertices: []
       indices: 
       edges: []
@@ -342,8 +483,8 @@ TextureImporter:
       name: spr_Death_strip_3
       rect:
         serializedVersion: 2
-        x: 401
-        y: 17
+        x: 570
+        y: 20
         width: 64
         height: 64
       alignment: 0
@@ -353,8 +494,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7140aea20aad46a00800000000000000
-      internalID: 748963819499947031
+      spriteID: 223b37a59402dd820800000000000000
+      internalID: 2944545230792405794
       vertices: []
       indices: 
       edges: []
@@ -363,8 +504,8 @@ TextureImporter:
       name: spr_Death_strip_4
       rect:
         serializedVersion: 2
-        x: 571
-        y: 18
+        x: 740
+        y: 20
         width: 64
         height: 64
       alignment: 0
@@ -374,8 +515,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 54634a1b0e9a95d30800000000000000
-      internalID: 4420751291758949957
+      spriteID: 35127b20eaa3caef0800000000000000
+      internalID: -95636973037346477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_Death_strip_5
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 20
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef88fd086b3f6dd80800000000000000
+      internalID: -8226119704173901570
       vertices: []
       indices: 
       edges: []
@@ -384,8 +546,8 @@ TextureImporter:
       name: spr_Death_strip_6
       rect:
         serializedVersion: 2
-        x: 740
-        y: 17
+        x: 1080
+        y: 20
         width: 64
         height: 64
       alignment: 0
@@ -395,8 +557,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2883c94fc24c8be30800000000000000
-      internalID: 4519577923427776642
+      spriteID: 99b03b46a8a0dd3c0800000000000000
+      internalID: -4333295676949328999
       vertices: []
       indices: 
       edges: []
@@ -405,8 +567,8 @@ TextureImporter:
       name: spr_Death_strip_7
       rect:
         serializedVersion: 2
-        x: 906
-        y: 17
+        x: 1250
+        y: 20
         width: 64
         height: 64
       alignment: 0
@@ -416,8 +578,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a32cdf4d16cb403a0800000000000000
-      internalID: -6700023217249205702
+      spriteID: d66cc47381819b920800000000000000
+      internalID: 3006460718532576877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_Death_strip_8
+      rect:
+        serializedVersion: 2
+        x: 1420
+        y: 20
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64a822b0b532c9120800000000000000
+      internalID: 2421849573554293318
       vertices: []
       indices: 
       edges: []
@@ -426,8 +609,8 @@ TextureImporter:
       name: spr_Death_strip_9
       rect:
         serializedVersion: 2
-        x: 1078
-        y: 17
+        x: 1590
+        y: 20
         width: 64
         height: 64
       alignment: 0
@@ -437,8 +620,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0f7dda371f225c930800000000000000
-      internalID: 4162771850997127152
+      spriteID: d960d81ccca40e730800000000000000
+      internalID: 4026300310150252189
       vertices: []
       indices: 
       edges: []
@@ -447,8 +630,8 @@ TextureImporter:
       name: spr_Death_strip_10
       rect:
         serializedVersion: 2
-        x: 1246
-        y: 17
+        x: 1760
+        y: 20
         width: 64
         height: 64
       alignment: 0
@@ -458,8 +641,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b4b14d8fbc73cf90800000000000000
-      internalID: -6934561839069940554
+      spriteID: 93fcfc40ec86bc1b0800000000000000
+      internalID: -5635295274670764231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_Death_strip_11
+      rect:
+        serializedVersion: 2
+        x: 1930
+        y: 20
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ddce2634c61b38e50800000000000000
+      internalID: 6810482140059462877
       vertices: []
       indices: 
       edges: []
@@ -468,8 +672,8 @@ TextureImporter:
       name: spr_Death_strip_12
       rect:
         serializedVersion: 2
-        x: 1412
-        y: 17
+        x: 2100
+        y: 20
         width: 64
         height: 64
       alignment: 0
@@ -479,8 +683,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 47414fe6c4fec34b0800000000000000
-      internalID: -5459225536721841036
+      spriteID: 8e0dcb488a513ba80800000000000000
+      internalID: -8452388262118633240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_Death_strip_13
+      rect:
+        serializedVersion: 2
+        x: 2270
+        y: 20
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00017d5d6e56fbcc0800000000000000
+      internalID: -3693121127315992576
       vertices: []
       indices: 
       edges: []
@@ -489,8 +714,8 @@ TextureImporter:
       name: spr_Death_strip_14
       rect:
         serializedVersion: 2
-        x: 1591
-        y: 17
+        x: 2440
+        y: 20
         width: 64
         height: 64
       alignment: 0
@@ -500,8 +725,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 64f4236f0390c8b50800000000000000
-      internalID: 6596657660084506438
+      spriteID: 00db81cb0dfca3fa0800000000000000
+      internalID: -5820111073007059712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_Death_strip_15
+      rect:
+        serializedVersion: 2
+        x: 2610
+        y: 20
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 822a7da9b6f515640800000000000000
+      internalID: 5066935971532481064
       vertices: []
       indices: 
       edges: []
@@ -510,8 +756,8 @@ TextureImporter:
       name: spr_Death_strip_16
       rect:
         serializedVersion: 2
-        x: 1760
-        y: 17
+        x: 2780
+        y: 20
         width: 64
         height: 64
       alignment: 0
@@ -521,8 +767,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 53ac1cd812c9a22b0800000000000000
-      internalID: -5608498718010389963
+      spriteID: 8f3912a7f257f6270800000000000000
+      internalID: 8245938289511601144
       vertices: []
       indices: 
       edges: []
@@ -531,8 +777,8 @@ TextureImporter:
       name: spr_Death_strip_17
       rect:
         serializedVersion: 2
-        x: 1931
-        y: 17
+        x: 2950
+        y: 20
         width: 64
         height: 64
       alignment: 0
@@ -542,8 +788,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c9efc24385ffa5680800000000000000
-      internalID: -8765412970425680228
+      spriteID: 8f2808fe0418bbdf0800000000000000
+      internalID: -163394845572824328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_Death_strip_18
+      rect:
+        serializedVersion: 2
+        x: 3120
+        y: 20
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e549f056c98e25400800000000000000
+      internalID: 311567082650047582
       vertices: []
       indices: 
       edges: []
@@ -552,8 +819,8 @@ TextureImporter:
       name: spr_Death_strip_19
       rect:
         serializedVersion: 2
-        x: 2101
-        y: 17
+        x: 3290
+        y: 20
         width: 64
         height: 64
       alignment: 0
@@ -563,8 +830,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc30c28d0d38465e0800000000000000
-      internalID: -1917262608349789233
+      spriteID: f6c77baba47668190800000000000000
+      internalID: -7960561720672945041
       vertices: []
       indices: 
       edges: []
@@ -573,8 +840,8 @@ TextureImporter:
       name: spr_Death_strip_20
       rect:
         serializedVersion: 2
-        x: 2270
-        y: 17
+        x: 3460
+        y: 20
         width: 64
         height: 64
       alignment: 0
@@ -584,8 +851,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8f485bfafa4cb6530800000000000000
-      internalID: 3849386565364450552
+      spriteID: 2029918de80d1e180800000000000000
+      internalID: -9087753261127462398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_Death_strip_21
+      rect:
+        serializedVersion: 2
+        x: 3630
+        y: 20
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c5d673d190d2e940800000000000000
+      internalID: 5324047034241963461
       vertices: []
       indices: 
       edges: []
@@ -594,8 +882,8 @@ TextureImporter:
       name: spr_Death_strip_22
       rect:
         serializedVersion: 2
-        x: 2440
-        y: 17
+        x: 3800
+        y: 20
         width: 64
         height: 64
       alignment: 0
@@ -605,8 +893,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 80d8d92650f999370800000000000000
-      internalID: 8329863831276588296
+      spriteID: c7975530697e2cde0800000000000000
+      internalID: -1314233509751719556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_Death_strip_23
+      rect:
+        serializedVersion: 2
+        x: 3970
+        y: 20
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4889cfe229c6ace80800000000000000
+      internalID: -8157588399918901116
       vertices: []
       indices: 
       edges: []
@@ -615,8 +924,8 @@ TextureImporter:
       name: spr_Death_strip_24
       rect:
         serializedVersion: 2
-        x: 2610
-        y: 17
+        x: 4140
+        y: 20
         width: 64
         height: 64
       alignment: 0
@@ -626,8 +935,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f5d154e212dbd0860800000000000000
-      internalID: 7497856904849595743
+      spriteID: 12c37742de93cb7b0800000000000000
+      internalID: -5207223378465309663
       vertices: []
       indices: 
       edges: []
@@ -636,8 +945,8 @@ TextureImporter:
       name: spr_Death_strip_25
       rect:
         serializedVersion: 2
-        x: 2780
-        y: 17
+        x: 4310
+        y: 20
         width: 64
         height: 64
       alignment: 0
@@ -647,8 +956,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7e01cf16bdecda9c0800000000000000
-      internalID: -3914245059478023961
+      spriteID: 0742f9568dccd0ff0800000000000000
+      internalID: -68173189550758800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_Death_strip_26
+      rect:
+        serializedVersion: 2
+        x: 4480
+        y: 20
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6cd514f19b36a2cc0800000000000000
+      internalID: -3735063294205927994
       vertices: []
       indices: 
       edges: []
@@ -657,8 +987,8 @@ TextureImporter:
       name: spr_Death_strip_27
       rect:
         serializedVersion: 2
-        x: 2947
-        y: 17
+        x: 4650
+        y: 20
         width: 64
         height: 64
       alignment: 0
@@ -668,8 +998,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8f2fe3d111e083140800000000000000
-      internalID: 4699521677829010168
+      spriteID: a296b7a590374a1d0800000000000000
+      internalID: -3340418539592128214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_Death_strip_28
+      rect:
+        serializedVersion: 2
+        x: 4820
+        y: 20
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 122d4ad39acd28270800000000000000
+      internalID: 8251400086737965601
       vertices: []
       indices: 
       edges: []
@@ -678,8 +1029,8 @@ TextureImporter:
       name: spr_Death_strip_29
       rect:
         serializedVersion: 2
-        x: 3119
-        y: 17
+        x: 4990
+        y: 20
         width: 64
         height: 64
       alignment: 0
@@ -689,8 +1040,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1977674177a8aeab0800000000000000
-      internalID: -4978014194055612527
+      spriteID: e2975fbf0665fc6c0800000000000000
+      internalID: -4120980159476696786
       vertices: []
       indices: 
       edges: []
@@ -699,8 +1050,8 @@ TextureImporter:
       name: spr_Death_strip_30
       rect:
         serializedVersion: 2
-        x: 3291
-        y: 17
+        x: 5160
+        y: 20
         width: 64
         height: 64
       alignment: 0
@@ -710,8 +1061,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 12c98f6d3b22fcab0800000000000000
-      internalID: -4985728106674742239
+      spriteID: e118df503f0944730800000000000000
+      internalID: 3982467343954313502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_Death_strip_31
+      rect:
+        serializedVersion: 2
+        x: 5330
+        y: 20
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a1229fad2fab2420800000000000000
+      internalID: 2606369420117942688
       vertices: []
       indices: 
       edges: []
@@ -720,8 +1092,8 @@ TextureImporter:
       name: spr_Death_strip_32
       rect:
         serializedVersion: 2
-        x: 3457
-        y: 17
+        x: 5500
+        y: 20
         width: 64
         height: 64
       alignment: 0
@@ -731,8 +1103,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9edf516829c0588c0800000000000000
-      internalID: -3997775270767100439
+      spriteID: b657b70ffb856b520800000000000000
+      internalID: 2717457006561293675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_Death_strip_33
+      rect:
+        serializedVersion: 2
+        x: 5670
+        y: 20
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e33d0b1d6d7855d50800000000000000
+      internalID: 6725430975258481470
       vertices: []
       indices: 
       edges: []
@@ -741,8 +1134,8 @@ TextureImporter:
       name: spr_Death_strip_34
       rect:
         serializedVersion: 2
-        x: 3630
-        y: 17
+        x: 5840
+        y: 20
         width: 64
         height: 64
       alignment: 0
@@ -752,8 +1145,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2a71ef8211aac8470800000000000000
-      internalID: 8398274395818039202
+      spriteID: 4b037023724845e30800000000000000
+      internalID: 4491360032273150132
       vertices: []
       indices: 
       edges: []
@@ -762,8 +1155,8 @@ TextureImporter:
       name: spr_Death_strip_35
       rect:
         serializedVersion: 2
-        x: 3799
-        y: 17
+        x: 6010
+        y: 20
         width: 64
         height: 64
       alignment: 0
@@ -773,8 +1166,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0191d190f789e0c80800000000000000
-      internalID: -8354572587344520944
+      spriteID: 727dbc9be1f4fe140800000000000000
+      internalID: 4751103125283919655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_Death_strip_36
+      rect:
+        serializedVersion: 2
+        x: 6180
+        y: 20
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9ee9d2ee22b28250800000000000000
+      internalID: 5945510372526648988
       vertices: []
       indices: 
       edges: []
@@ -783,8 +1197,8 @@ TextureImporter:
       name: spr_Death_strip_37
       rect:
         serializedVersion: 2
-        x: 3964
-        y: 17
+        x: 6350
+        y: 20
         width: 64
         height: 64
       alignment: 0
@@ -794,8 +1208,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 19e09d2392932e270800000000000000
-      internalID: 8278241914169921169
+      spriteID: a00d78a06bd97fe90800000000000000
+      internalID: -6991946491283124214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_Death_strip_38
+      rect:
+        serializedVersion: 2
+        x: 6520
+        y: 20
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d85a55bff56fd2af0800000000000000
+      internalID: -419408298176567923
       vertices: []
       indices: 
       edges: []
@@ -804,323 +1239,8 @@ TextureImporter:
       name: spr_Death_strip_39
       rect:
         serializedVersion: 2
-        x: 4138
-        y: 17
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9d59199696b1c7600800000000000000
-      internalID: 467278600896353753
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_Death_strip_40
-      rect:
-        serializedVersion: 2
-        x: 4305
-        y: 17
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f13802cbff41f0b90800000000000000
-      internalID: -7273571784574598369
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_Death_strip_42
-      rect:
-        serializedVersion: 2
-        x: 4476
-        y: 17
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2d130cb312e785ba0800000000000000
-      internalID: -6099987014071864878
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_Death_strip_43
-      rect:
-        serializedVersion: 2
-        x: 4647
-        y: 17
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1307cd531d36c2f10800000000000000
-      internalID: 2246280064353988657
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_Death_strip_45
-      rect:
-        serializedVersion: 2
-        x: 4818
-        y: 17
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1004619f2e7092d90800000000000000
-      internalID: -7122152664286740479
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_Death_strip_47
-      rect:
-        serializedVersion: 2
-        x: 4988
-        y: 17
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e5c0881fd6c185f00800000000000000
-      internalID: 1105664967048694878
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_Death_strip_49
-      rect:
-        serializedVersion: 2
-        x: 5159
-        y: 17
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 608b27f52b1e938b0800000000000000
-      internalID: -5171854540836521978
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_Death_strip_50
-      rect:
-        serializedVersion: 2
-        x: 5332
-        y: 17
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dfde70c1928f35b10800000000000000
-      internalID: 1969190317538668029
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_Death_strip_52
-      rect:
-        serializedVersion: 2
-        x: 5500
-        y: 17
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c705cb1c0293379f0800000000000000
-      internalID: -471970723091689348
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_Death_strip_54
-      rect:
-        serializedVersion: 2
-        x: 5671
-        y: 17
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9dddbd89a2b94b600800000000000000
-      internalID: 483181667290963417
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_Death_strip_55
-      rect:
-        serializedVersion: 2
-        x: 5840
-        y: 17
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5fb478eb0a1fe95f0800000000000000
-      internalID: -747894815403324427
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_Death_strip_57
-      rect:
-        serializedVersion: 2
-        x: 6009
-        y: 17
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 54468d352a0b212f0800000000000000
-      internalID: -1003545555712318395
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_Death_strip_59
-      rect:
-        serializedVersion: 2
-        x: 6180
-        y: 17
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 516db841181c8c990800000000000000
-      internalID: -7365424430424795627
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_Death_strip_60
-      rect:
-        serializedVersion: 2
-        x: 6351
-        y: 17
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8475616e0adfdf890800000000000000
-      internalID: -7422497743339890872
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_Death_strip_63
-      rect:
-        serializedVersion: 2
-        x: 6520
-        y: 17
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0e57b49462eeb11e0800000000000000
-      internalID: -2225923742598728224
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_Death_strip_65
-      rect:
-        serializedVersion: 2
         x: 6690
-        y: 17
+        y: 20
         width: 64
         height: 64
       alignment: 0
@@ -1130,8 +1250,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 74402c48a851cfb50800000000000000
-      internalID: 6628196436259505223
+      spriteID: 7c3ced49e9a71d6f0800000000000000
+      internalID: -661612848725703737
       vertices: []
       indices: 
       edges: []
