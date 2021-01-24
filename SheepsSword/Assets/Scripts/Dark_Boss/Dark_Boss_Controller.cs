@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Dark_Boss_Controller : MonoBehaviour, IEntityController
@@ -259,4 +258,9 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
         }
         else _view.Walk();
     }
+
+
+
+    public int ReturnCurrentHP() { return _model.HP; }
+    public int ReturnMaxHP() { return _model.MaxHP; }
 }
