@@ -44,10 +44,10 @@ public class PlayerController : MonoBehaviour, IEntityController
     public bool IsSliding { get; private set;  } // can't be attacked if true
 
     // UI:
-    private Text hpText;
     private Text gameoverText;
     private Button restartButton;
     private Button returnButton;
+    private Image playerHealthBar;
 
     // Sounds:
     private SoundController actionSounds;
@@ -57,9 +57,11 @@ public class PlayerController : MonoBehaviour, IEntityController
 
     private void Awake()
     {
+        // Display:
         playerGraphics = transform.Find("Graphics");
         view = playerGraphics.GetComponent<PlayerView>();
 
+        // Movement:
         model = GetComponent<PlayerModel>();
         rigbody = GetComponent<Rigidbody2D>();
         capscol = GetComponent<CapsuleCollider2D>();
@@ -72,14 +74,17 @@ public class PlayerController : MonoBehaviour, IEntityController
         hitPointRight.SetActive(false);
         hitPointLeft.SetActive(false);
 
-        hpText = GameObject.Find("HealthPointsText").GetComponent<Text>();
+        // UI:
         gameoverText = GameObject.Find("GameOverText").GetComponent<Text>();
         restartButton = GameObject.Find("RestartGameButton").GetComponent<Button>();
         returnButton = GameObject.Find("GoToMenuButton").GetComponent<Button>();
+        playerHealthBar = GameObject.Find("PlayerHealthBar_Fill").GetComponent<Image>();
         gameoverText.gameObject.SetActive(false);
         restartButton.gameObject.SetActive(false);
         returnButton.gameObject.SetActive(false);
+        UpdatePlayerHealthBar((float)model.HP / model.MaxHP);
 
+        // Sounds:
         movementAudioSource = gameObject.GetComponents<AudioSource>()[0];
         actionSounds = gameObject.GetComponent<SoundController>();
         gameAudioSources = GameObject.Find("Music").GetComponents<AudioSource>();
@@ -311,7 +316,7 @@ public class PlayerController : MonoBehaviour, IEntityController
         {
             model.HP -= dmg;
             if (model.HP < 0) model.HP = 0;
-            UpdateHPText();
+            UpdatePlayerHealthBar((float)model.HP / model.MaxHP);
         }
 
         // Animate:
@@ -341,11 +346,14 @@ public class PlayerController : MonoBehaviour, IEntityController
         gameAudioSources[1].Play();
     }
 
-    private void UpdateHPText()
+    private void UpdatePlayerHealthBar(float value)
     {
-        hpText.text = $"HEALTH POINTS: {model.HP} / {model.MaxHP}";
+        playerHealthBar.fillAmount = value;
+        if (playerHealthBar.fillAmount < 0.25f) playerHealthBar.color = Color.red;
+        else if (playerHealthBar.fillAmount < 0.5f) playerHealthBar.color = Color.yellow;
+        else if (playerHealthBar.fillAmount < 0.75f) playerHealthBar.color =  new Color(1.0f, 0.64f, 0.0f);
+        else playerHealthBar.color = Color.green;
     }
-
 
 
     private void Animate()
