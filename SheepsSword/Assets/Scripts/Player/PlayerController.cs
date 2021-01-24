@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour, IEntityController
 {
-    private PlayerModel model; // speed, jump force, health points
-    private PlayerView view;   // animations
+    private PlayerModel model;               // speed, jump force, health points
+    private PlayerView view;                 // animations
 
     private Rigidbody2D rigbody;          // for movement
     private CapsuleCollider2D capscol;    // for crouching
@@ -48,6 +49,11 @@ public class PlayerController : MonoBehaviour, IEntityController
     private Button restartButton;
     private Button returnButton;
 
+    // Sounds:
+    private SoundController actionSounds;
+    public List<AudioClip> movementClips;
+    private AudioSource movementAudioSource;
+    private AudioSource[] gameAudioSources;
 
     private void Awake()
     {
@@ -73,6 +79,10 @@ public class PlayerController : MonoBehaviour, IEntityController
         gameoverText.gameObject.SetActive(false);
         restartButton.gameObject.SetActive(false);
         returnButton.gameObject.SetActive(false);
+
+        movementAudioSource = gameObject.GetComponents<AudioSource>()[0];
+        actionSounds = gameObject.GetComponent<SoundController>();
+        gameAudioSources = GameObject.Find("Music").GetComponents<AudioSource>();
     }
 
     private void Update()
@@ -86,6 +96,7 @@ public class PlayerController : MonoBehaviour, IEntityController
         FastFall();
         Move();
         Attack();
+        Soundimate();
         Animate();
     }
 
@@ -291,6 +302,52 @@ public class PlayerController : MonoBehaviour, IEntityController
 
 
 
+    public void TakeDamage(int dmg)
+    {
+        if (dmg <= 0) return; 
+
+        // Decrease health:
+        if (model.HP > 0)
+        {
+            model.HP -= dmg;
+            if (model.HP < 0) model.HP = 0;
+            UpdateHPText();
+        }
+
+        // Animate:
+        if (model.HP > 0)
+        {
+            IsHurting = true;
+            Invoke(nameof(StopHurting), 0.2f); // "Hurt" animation will last for 0.2 seconds
+        }
+        else
+        {
+            IsDead = true;
+            Invoke(nameof(GameOver), animationLength * 2.1f); // Game freezes after Die animation
+        }
+    }
+
+    private void StopHurting() {  IsHurting = false; }
+
+    private void GameOver()
+    {
+        gameObject.layer = 31; // DeadPlayer Layer, ignored by enemies
+
+        gameoverText.gameObject.SetActive(true);
+        restartButton.gameObject.SetActive(true);
+        returnButton.gameObject.SetActive(true);
+
+        gameAudioSources[0].volume = 0.05f;
+        gameAudioSources[1].Play();
+    }
+
+    private void UpdateHPText()
+    {
+        hpText.text = $"HEALTH POINTS: {model.HP} / {model.MaxHP}";
+    }
+
+
+
     private void Animate()
     {
         // Flip:
@@ -347,48 +404,66 @@ public class PlayerController : MonoBehaviour, IEntityController
         }
     }
 
-
-
-    public void TakeDamage(int dmg)
+    private void Soundimate()
     {
-        if (dmg <= 0) return; 
-
-        // Decrease health:
-        if (model.HP > 0)
+        // Running:
+        if (rigbody.velocity.x != 0 && isGrounded && !IsHurting 
+            && !IsSliding && isWalled == 0 && !isCrouched)
         {
-            model.HP -= dmg;
-            if (model.HP < 0) model.HP = 0;
-            UpdateHPText();
+            movementAudioSource.clip = movementClips[0];
+            if (!movementAudioSource.isPlaying) movementAudioSource.Play();
         }
-
-        // Animate:
-        if (model.HP > 0)
+        // Sliding:
+        else if (IsSliding)
         {
-            IsHurting = true;
-            Invoke(nameof(StopHurting), 0.2f); // "Hurt" animation will last for 0.2 seconds
+            movementAudioSource.clip = movementClips[1];
+            if (!movementAudioSource.isPlaying) movementAudioSource.Play();
         }
-        else
+        // Movement on the wall:
+        else if (rigbody.velocity.y != 0.0f && isWalled != 0)
         {
-            IsDead = true;
-            Invoke(nameof(GameOver), animationLength * 2.1f); // Game freezes after Die animation
+            if (rigbody.velocity.y > 0.0f)
+            {
+                movementAudioSource.clip = movementClips[2];
+                if (!movementAudioSource.isPlaying) movementAudioSource.Play();
+            }
+            else
+            {
+                movementAudioSource.clip = movementClips[1];
+                if (!movementAudioSource.isPlaying) movementAudioSource.Play();
+            }
         }
-    }
+        else movementAudioSource.Stop();
 
-    private void StopHurting() {  IsHurting = false; }
-
-    private void GameOver()
-    {
-        gameoverText.gameObject.SetActive(true);
-        gameObject.layer = 31; // DeadPlayer Layer, ignored by enemies
-
-        // Because of the freezing, the animation of these buttons also freezes,
-        // so we need to find solution better than freezing:
-        restartButton.gameObject.SetActive(true);
-        returnButton.gameObject.SetActive(true);
-    }
-
-    private void UpdateHPText()
-    {
-        hpText.text = $"HEALTH POINTS: {model.HP} / {model.MaxHP}";
+        // Other sound effects:
+        if (IsHurting) actionSounds.PlaySound(5);
+        else if (IsDead || IsSliding || isWalled != 0) return;
+        else if (isGrounded) // on the ground
+        {
+            if (isCrouched)  // crouching
+            {
+                if (isAttacking && Input.GetKeyDown(KeyCode.Space)) // attack while crouching
+                    actionSounds.PlaySound(0);
+            }
+            else // standing
+            {
+                if (isAttacking && Input.GetKeyDown(KeyCode.Space)) // attacks
+                {
+                    if (attackViewNumber == 0) actionSounds.PlaySound(0);
+                    else if (attackViewNumber == 1) actionSounds.PlaySound(1);
+                    else actionSounds.PlaySound(2);
+                }
+                else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) // jump from ground
+                    actionSounds.PlaySound(4);
+            }
+        }
+        else // in air
+        {
+            if (isAttacking && Input.GetKeyDown(KeyCode.Space)) // attack in air
+                actionSounds.PlaySound(0);
+            else if (isSomerSaulting
+                && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))) // somersault
+                actionSounds.PlaySound(3);
+        }
     }
 }
