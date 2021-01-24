@@ -243,6 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30fc7b7b1e37e9c4fab89d3f1f43bf37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxHP: 10
   _hp: 10
   _speed: 0.8
   _raycastDistance: 8

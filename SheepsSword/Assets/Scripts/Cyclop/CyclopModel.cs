@@ -3,6 +3,14 @@
 public class CyclopModel : MonoBehaviour
 {
     [SerializeField]
+    private int _maxHP;
+    public int MaxHP
+    {
+        get { return _maxHP; }
+        set { _maxHP = value; }
+    }
+
+    [SerializeField]
     private int _hp;
     public int HP
     {

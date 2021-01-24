@@ -148,13 +148,10 @@ public class SkeletonController : MonoBehaviour, IEntityController
         //check distance
         var p = GameObject.FindGameObjectWithTag("Player").transform;
         Vector3 toTarget = (p.position - transform.position).normalized;
-        if(Vector3.Dot(toTarget, transform.forward) < 0)
-        {
-            Debug.Log("Is behaind");
-            ChangeMoveDirection(true);
+        if (Vector3.Dot(toTarget, transform.forward) < 0)
+        { 
+            ChangeMoveDirection(true); 
         }
-
-
 
         _model.HP -= dmg;
         if (_model.HP <= 0)
@@ -183,4 +180,9 @@ public class SkeletonController : MonoBehaviour, IEntityController
         else if (_isAttacking) _view.Attack();
         else _view.Walk();
     }
+
+
+
+    public int ReturnCurrentHP() { return _model.HP; }
+    public int ReturnMaxHP() { return _model.MaxHP; }
 }

@@ -79,6 +79,7 @@ public class PlayerController : MonoBehaviour, IEntityController
         restartButton = GameObject.Find("RestartGameButton").GetComponent<Button>();
         returnButton = GameObject.Find("GoToMenuButton").GetComponent<Button>();
         playerHealthBar = GameObject.Find("PlayerHealthBar_Fill").GetComponent<Image>();
+        GameObject.Find("EnemyHealthBar").SetActive(false);
         gameoverText.gameObject.SetActive(false);
         restartButton.gameObject.SetActive(false);
         returnButton.gameObject.SetActive(false);
@@ -351,7 +352,7 @@ public class PlayerController : MonoBehaviour, IEntityController
         playerHealthBar.fillAmount = value;
         if (playerHealthBar.fillAmount < 0.25f) playerHealthBar.color = Color.red;
         else if (playerHealthBar.fillAmount < 0.5f) playerHealthBar.color = Color.yellow;
-        else if (playerHealthBar.fillAmount < 0.75f) playerHealthBar.color =  new Color(1.0f, 0.64f, 0.0f);
+        else if (playerHealthBar.fillAmount < 0.75f) playerHealthBar.color =  new Color(1.0f, 0.64f, 0.0f); //orange
         else playerHealthBar.color = Color.green;
     }
 
@@ -474,4 +475,9 @@ public class PlayerController : MonoBehaviour, IEntityController
                 actionSounds.PlaySound(3);
         }
     }
+
+
+
+    public int ReturnCurrentHP() { return model.HP;  }
+    public int ReturnMaxHP() { return model.MaxHP; }
 }

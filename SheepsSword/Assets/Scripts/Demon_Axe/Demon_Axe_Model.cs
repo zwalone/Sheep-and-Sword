@@ -1,9 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Demon_Axe_Model : MonoBehaviour
 {
+    [SerializeField]
+    private int _maxHP;
+    public int MaxHP
+    {
+        get { return _maxHP; }
+        set { _maxHP = value; }
+    }
+
     [SerializeField]
     private int _hp;
     public int HP
