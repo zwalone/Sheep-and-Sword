@@ -77,8 +77,6 @@ public class Hammer_Controller : MonoBehaviour, IEntityController
         {
             AttackNumber = Random.Range(0, 3);
             AttackStart();
-
-            //StartCoroutine(Attack());
         }
     }
 
@@ -239,4 +237,9 @@ public class Hammer_Controller : MonoBehaviour, IEntityController
         }
         else _view.Walk();
     }
+
+
+
+    public int ReturnCurrentHP() { return _model.HP; }
+    public int ReturnMaxHP() { return _model.MaxHP; }
 }

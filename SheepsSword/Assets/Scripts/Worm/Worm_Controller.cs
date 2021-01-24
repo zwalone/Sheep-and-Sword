@@ -182,4 +182,10 @@ public class Worm_Controller : MonoBehaviour, IEntityController
         else if (_isAttacking) _view.Attack();
         else _view.Walk();
     }
+
+
+
+    public int ReturnCurrentHP() { return _model.HP; }
+    public int ReturnMaxHP() { return _model.MaxHP; }
+
 }

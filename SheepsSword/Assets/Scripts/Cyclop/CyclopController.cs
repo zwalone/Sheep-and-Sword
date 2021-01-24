@@ -58,9 +58,8 @@ public class CyclopController : MonoBehaviour, IEntityController
         var p = GameObject.FindGameObjectWithTag("Player").transform;
         Vector3 toTarget = (p.position - transform.position).normalized;
         if (Vector3.Dot(toTarget, transform.forward) < 0)
-        {
-            Debug.Log("Is behaind");
-            ChangeMoveDirection(true);
+        { 
+            ChangeMoveDirection(true); 
         }
 
         _model.HP -= dmg;
@@ -178,4 +177,9 @@ public class CyclopController : MonoBehaviour, IEntityController
         else if (_isAttacking) _view.AttackRight();
         else _view.WalkRight();
     }
+
+
+
+    public int ReturnCurrentHP() { return _model.HP; }
+    public int ReturnMaxHP() { return _model.MaxHP; }
 }

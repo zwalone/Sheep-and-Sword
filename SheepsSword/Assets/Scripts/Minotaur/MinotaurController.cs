@@ -183,4 +183,9 @@ public class MinotaurController : MonoBehaviour, IEntityController
         else if (_isAttacking) _view.AttackRight();
         else _view.WalkRight();
     }
+
+
+
+    public int ReturnCurrentHP() { return _model.HP; }
+    public int ReturnMaxHP() { return _model.MaxHP; }
 }
