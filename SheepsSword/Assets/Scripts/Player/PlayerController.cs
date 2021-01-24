@@ -1,11 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour, IEntityController
 {
     private PlayerModel model;               // speed, jump force, health points
     private PlayerView view;                 // animations
-    private SoundController soundController; // sounds
 
     private Rigidbody2D rigbody;          // for movement
     private CapsuleCollider2D capscol;    // for crouching
@@ -50,7 +50,10 @@ public class PlayerController : MonoBehaviour, IEntityController
     private Button returnButton;
 
     // Sounds:
-    private AudioSource audioSource;
+    private SoundController actionSounds;
+    public List<AudioClip> movementClips;
+    private AudioSource movementAudioSource;
+    private AudioSource[] gameAudioSources;
 
     private void Awake()
     {
@@ -77,8 +80,9 @@ public class PlayerController : MonoBehaviour, IEntityController
         restartButton.gameObject.SetActive(false);
         returnButton.gameObject.SetActive(false);
 
-        soundController = gameObject.GetComponent<SoundController>();
-        audioSource = gameObject.GetComponent<AudioSource>();
+        movementAudioSource = gameObject.GetComponents<AudioSource>()[0];
+        actionSounds = gameObject.GetComponent<SoundController>();
+        gameAudioSources = GameObject.Find("Music").GetComponents<AudioSource>();
     }
 
     private void Update()
@@ -92,8 +96,8 @@ public class PlayerController : MonoBehaviour, IEntityController
         FastFall();
         Move();
         Attack();
+        Soundimate();
         Animate();
-        MakeASound();
     }
 
 
@@ -327,13 +331,14 @@ public class PlayerController : MonoBehaviour, IEntityController
 
     private void GameOver()
     {
-        gameoverText.gameObject.SetActive(true);
         gameObject.layer = 31; // DeadPlayer Layer, ignored by enemies
 
-        // Because of the freezing, the animation of these buttons also freezes,
-        // so we need to find solution better than freezing:
+        gameoverText.gameObject.SetActive(true);
         restartButton.gameObject.SetActive(true);
         returnButton.gameObject.SetActive(true);
+
+        gameAudioSources[0].volume = 0.05f;
+        gameAudioSources[1].Play();
     }
 
     private void UpdateHPText()
@@ -399,20 +404,66 @@ public class PlayerController : MonoBehaviour, IEntityController
         }
     }
 
-    private void MakeASound()
+    private void Soundimate()
     {
-        // There are no sounds for this actions (at least for now):
-        if (IsHurting || IsDead || isCrouched || isWalled != 0 || IsSliding) 
-            audioSource.Stop();
+        // Running:
+        if (rigbody.velocity.x != 0 && isGrounded && !IsHurting 
+            && !IsSliding && isWalled == 0 && !isCrouched)
+        {
+            movementAudioSource.clip = movementClips[0];
+            if (!movementAudioSource.isPlaying) movementAudioSource.Play();
+        }
+        // Sliding:
+        else if (IsSliding)
+        {
+            movementAudioSource.clip = movementClips[1];
+            if (!movementAudioSource.isPlaying) movementAudioSource.Play();
+        }
+        // Movement on the wall:
+        else if (rigbody.velocity.y != 0.0f && isWalled != 0)
+        {
+            if (rigbody.velocity.y > 0.0f)
+            {
+                movementAudioSource.clip = movementClips[2];
+                if (!movementAudioSource.isPlaying) movementAudioSource.Play();
+            }
+            else
+            {
+                movementAudioSource.clip = movementClips[1];
+                if (!movementAudioSource.isPlaying) movementAudioSource.Play();
+            }
+        }
+        else movementAudioSource.Stop();
 
-        // If is attacking (on land, in air, whatever):
-        else if (isAttacking) soundController.PlaySound(1);
-
-        // If is running:
-        else if (rigbody.velocity.x != 0 && isGrounded) soundController.PlaySound(0);
-
-        // MORE SITUATIONS WILL BE IMPLEMENTED HERE...
-
-        else audioSource.Stop();
+        // Other sound effects:
+        if (IsHurting) actionSounds.PlaySound(5);
+        else if (IsDead || IsSliding || isWalled != 0) return;
+        else if (isGrounded) // on the ground
+        {
+            if (isCrouched)  // crouching
+            {
+                if (isAttacking && Input.GetKeyDown(KeyCode.Space)) // attack while crouching
+                    actionSounds.PlaySound(0);
+            }
+            else // standing
+            {
+                if (isAttacking && Input.GetKeyDown(KeyCode.Space)) // attacks
+                {
+                    if (attackViewNumber == 0) actionSounds.PlaySound(0);
+                    else if (attackViewNumber == 1) actionSounds.PlaySound(1);
+                    else actionSounds.PlaySound(2);
+                }
+                else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) // jump from ground
+                    actionSounds.PlaySound(4);
+            }
+        }
+        else // in air
+        {
+            if (isAttacking && Input.GetKeyDown(KeyCode.Space)) // attack in air
+                actionSounds.PlaySound(0);
+            else if (isSomerSaulting
+                && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))) // somersault
+                actionSounds.PlaySound(3);
+        }
     }
 }

@@ -8,13 +8,11 @@ public class SoundController : MonoBehaviour
 
     void Start()
     {
-        audioSource = GetComponents<AudioSource>()[0];
+        audioSource = GetComponents<AudioSource>()[1];
     }
 
     public void PlaySound(int indexOfAudioClip)
     {
-        if (audioSource.isPlaying) return;
-
         audioSource.Stop();
         audioSource.clip = audioClip[indexOfAudioClip];
         audioSource.Play();
