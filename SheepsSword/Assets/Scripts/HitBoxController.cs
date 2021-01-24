@@ -3,10 +3,10 @@
 public class HitBoxController : MonoBehaviour
 {
     [SerializeField]
-    private string target = "";
+    public string target = "";
 
     [SerializeField]
-    private int damage = 0;
+    public int damage = 0;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

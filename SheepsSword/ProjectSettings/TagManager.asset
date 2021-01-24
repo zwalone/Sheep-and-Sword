@@ -37,7 +37,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - EnemyDash
   - DeadPlayer
   m_SortingLayers:
   - name: Default
