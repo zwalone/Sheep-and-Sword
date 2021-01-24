@@ -3,8 +3,9 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour, IEntityController
 {
-    private PlayerModel model; // speed, jump force, health points
-    private PlayerView view;   // animations
+    private PlayerModel model;               // speed, jump force, health points
+    private PlayerView view;                 // animations
+    private SoundController soundController; // sounds
 
     private Rigidbody2D rigbody;          // for movement
     private CapsuleCollider2D capscol;    // for crouching
@@ -48,6 +49,8 @@ public class PlayerController : MonoBehaviour, IEntityController
     private Button restartButton;
     private Button returnButton;
 
+    // Sounds:
+    private AudioSource audioSource;
 
     private void Awake()
     {
@@ -73,6 +76,9 @@ public class PlayerController : MonoBehaviour, IEntityController
         gameoverText.gameObject.SetActive(false);
         restartButton.gameObject.SetActive(false);
         returnButton.gameObject.SetActive(false);
+
+        soundController = gameObject.GetComponent<SoundController>();
+        audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -87,6 +93,7 @@ public class PlayerController : MonoBehaviour, IEntityController
         Move();
         Attack();
         Animate();
+        MakeASound();
     }
 
 
@@ -291,6 +298,51 @@ public class PlayerController : MonoBehaviour, IEntityController
 
 
 
+    public void TakeDamage(int dmg)
+    {
+        if (dmg <= 0) return; 
+
+        // Decrease health:
+        if (model.HP > 0)
+        {
+            model.HP -= dmg;
+            if (model.HP < 0) model.HP = 0;
+            UpdateHPText();
+        }
+
+        // Animate:
+        if (model.HP > 0)
+        {
+            IsHurting = true;
+            Invoke(nameof(StopHurting), 0.2f); // "Hurt" animation will last for 0.2 seconds
+        }
+        else
+        {
+            IsDead = true;
+            Invoke(nameof(GameOver), animationLength * 2.1f); // Game freezes after Die animation
+        }
+    }
+
+    private void StopHurting() {  IsHurting = false; }
+
+    private void GameOver()
+    {
+        gameoverText.gameObject.SetActive(true);
+        gameObject.layer = 31; // DeadPlayer Layer, ignored by enemies
+
+        // Because of the freezing, the animation of these buttons also freezes,
+        // so we need to find solution better than freezing:
+        restartButton.gameObject.SetActive(true);
+        returnButton.gameObject.SetActive(true);
+    }
+
+    private void UpdateHPText()
+    {
+        hpText.text = $"HEALTH POINTS: {model.HP} / {model.MaxHP}";
+    }
+
+
+
     private void Animate()
     {
         // Flip:
@@ -347,48 +399,20 @@ public class PlayerController : MonoBehaviour, IEntityController
         }
     }
 
-
-
-    public void TakeDamage(int dmg)
+    private void MakeASound()
     {
-        if (dmg <= 0) return; 
+        // There are no sounds for this actions (at least for now):
+        if (IsHurting || IsDead || isCrouched || isWalled != 0 || IsSliding) 
+            audioSource.Stop();
 
-        // Decrease health:
-        if (model.HP > 0)
-        {
-            model.HP -= dmg;
-            if (model.HP < 0) model.HP = 0;
-            UpdateHPText();
-        }
+        // If is attacking (on land, in air, whatever):
+        else if (isAttacking) soundController.PlaySound(1);
 
-        // Animate:
-        if (model.HP > 0)
-        {
-            IsHurting = true;
-            Invoke(nameof(StopHurting), 0.2f); // "Hurt" animation will last for 0.2 seconds
-        }
-        else
-        {
-            IsDead = true;
-            Invoke(nameof(GameOver), animationLength * 2.1f); // Game freezes after Die animation
-        }
-    }
+        // If is running:
+        else if (rigbody.velocity.x != 0 && isGrounded) soundController.PlaySound(0);
 
-    private void StopHurting() {  IsHurting = false; }
+        // MORE SITUATIONS WILL BE IMPLEMENTED HERE...
 
-    private void GameOver()
-    {
-        gameoverText.gameObject.SetActive(true);
-        gameObject.layer = 31; // DeadPlayer Layer, ignored by enemies
-
-        // Because of the freezing, the animation of these buttons also freezes,
-        // so we need to find solution better than freezing:
-        restartButton.gameObject.SetActive(true);
-        returnButton.gameObject.SetActive(true);
-    }
-
-    private void UpdateHPText()
-    {
-        hpText.text = $"HEALTH POINTS: {model.HP} / {model.MaxHP}";
+        else audioSource.Stop();
     }
 }

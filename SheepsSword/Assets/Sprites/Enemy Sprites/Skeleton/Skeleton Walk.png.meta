@@ -41,6 +41,786 @@ TextureImporter:
   - first:
       213: -4988383733850832283
     second: Skeleton Walk_12
+  - first:
+      213: 7555545521680191772
+    second: Skeleton Walk_0
+  - first:
+      213: 1442258707702141482
+    second: Skeleton Walk_1
+  - first:
+      213: 8648910703460699646
+    second: Skeleton Walk_2
+  - first:
+      213: 7764133903391936829
+    second: Skeleton Walk_3
+  - first:
+      213: 5023068632886964908
+    second: Skeleton Walk_4
+  - first:
+      213: 3844749321560858918
+    second: Skeleton Walk_5
+  - first:
+      213: -4014073352512658527
+    second: Skeleton Walk_6
+  - first:
+      213: -8787667629371018725
+    second: Skeleton Walk_7
+  - first:
+      213: -1283953799133435057
+    second: Skeleton Walk_8
+  - first:
+      213: 9210960840156838020
+    second: Skeleton Walk_9
+  - first:
+      213: -7000016595175952424
+    second: Skeleton Walk_10
+  - first:
+      213: 146000959039683084
+    second: Skeleton Walk_11
+  - first:
+      213: -8663524718042885764
+    second: Skeleton Walk_12
+  - first:
+      213: -8644744228833102748
+    second: Skeleton Walk_13
+  - first:
+      213: -3750939331599910062
+    second: Skeleton Walk_14
+  - first:
+      213: 8216103674112304319
+    second: Skeleton Walk_15
+  - first:
+      213: 2631324630314034563
+    second: Skeleton Walk_16
+  - first:
+      213: 8943460483631672521
+    second: Skeleton Walk_17
+  - first:
+      213: -3756309863784142434
+    second: Skeleton Walk_18
+  - first:
+      213: 3421950020781701697
+    second: Skeleton Walk_19
+  - first:
+      213: 7526561554317283569
+    second: Skeleton Walk_20
+  - first:
+      213: 6256943142077903158
+    second: Skeleton Walk_21
+  - first:
+      213: -156094419686829615
+    second: Skeleton Walk_22
+  - first:
+      213: 1260632742798977167
+    second: Skeleton Walk_23
+  - first:
+      213: 316113733942218102
+    second: Skeleton Walk_24
+  - first:
+      213: -651972378959843421
+    second: Skeleton Walk_25
+  - first:
+      213: -8199340804329932701
+    second: Skeleton Walk_26
+  - first:
+      213: -7807821910174086002
+    second: Skeleton Walk_27
+  - first:
+      213: -8841770854816161057
+    second: Skeleton Walk_28
+  - first:
+      213: -6405434636970704899
+    second: Skeleton Walk_29
+  - first:
+      213: 3280640995392149690
+    second: Skeleton Walk_30
+  - first:
+      213: 2081859045450556524
+    second: Skeleton Walk_31
+  - first:
+      213: 3924080880824047226
+    second: Skeleton Walk_32
+  - first:
+      213: 8426811774318180365
+    second: Skeleton Walk_33
+  - first:
+      213: 5164496899742396724
+    second: Skeleton Walk_34
+  - first:
+      213: 4125497059940517615
+    second: Skeleton Walk_35
+  - first:
+      213: 2163767327423340725
+    second: Skeleton Walk_36
+  - first:
+      213: -8101314282473087374
+    second: Skeleton Walk_37
+  - first:
+      213: -2691301580191974286
+    second: Skeleton Walk_38
+  - first:
+      213: -3254050434649379639
+    second: Skeleton Walk_39
+  - first:
+      213: -5654205696584561966
+    second: Skeleton Walk_40
+  - first:
+      213: 7282484121567548494
+    second: Skeleton Walk_41
+  - first:
+      213: -2020283315716076405
+    second: Skeleton Walk_42
+  - first:
+      213: 3519824971609627845
+    second: Skeleton Walk_43
+  - first:
+      213: -211681822033893029
+    second: Skeleton Walk_44
+  - first:
+      213: 8993526458400883723
+    second: Skeleton Walk_45
+  - first:
+      213: -3060442152577760007
+    second: Skeleton Walk_46
+  - first:
+      213: 4446594461574360187
+    second: Skeleton Walk_47
+  - first:
+      213: -4810702518220044309
+    second: Skeleton Walk_48
+  - first:
+      213: 3191244796464915433
+    second: Skeleton Walk_49
+  - first:
+      213: 4047635273374700299
+    second: Skeleton Walk_50
+  - first:
+      213: -3434807058346463993
+    second: Skeleton Walk_51
+  - first:
+      213: -6154237531403094256
+    second: Skeleton Walk_52
+  - first:
+      213: -8500577463439208021
+    second: Skeleton Walk_53
+  - first:
+      213: 715713973174700843
+    second: Skeleton Walk_54
+  - first:
+      213: 7001973078583127756
+    second: Skeleton Walk_55
+  - first:
+      213: 1999547953463236378
+    second: Skeleton Walk_56
+  - first:
+      213: 8430762693437859777
+    second: Skeleton Walk_57
+  - first:
+      213: -4873230565936231711
+    second: Skeleton Walk_58
+  - first:
+      213: 3437979834344807376
+    second: Skeleton Walk_59
+  - first:
+      213: 5194715579742627137
+    second: Skeleton Walk_60
+  - first:
+      213: -2361489107156111165
+    second: Skeleton Walk_61
+  - first:
+      213: 4577748838883763199
+    second: Skeleton Walk_62
+  - first:
+      213: -5776677159897222236
+    second: Skeleton Walk_63
+  - first:
+      213: -7432862131494339443
+    second: Skeleton Walk_64
+  - first:
+      213: 8137297390622973845
+    second: Skeleton Walk_65
+  - first:
+      213: -5752467464045713730
+    second: Skeleton Walk_66
+  - first:
+      213: -4529062558152921741
+    second: Skeleton Walk_67
+  - first:
+      213: 4303401377118988916
+    second: Skeleton Walk_68
+  - first:
+      213: 4673372377060406471
+    second: Skeleton Walk_69
+  - first:
+      213: 5381091005502113354
+    second: Skeleton Walk_70
+  - first:
+      213: -987536484803904878
+    second: Skeleton Walk_71
+  - first:
+      213: -8824357757229994524
+    second: Skeleton Walk_72
+  - first:
+      213: -2498617198046284025
+    second: Skeleton Walk_73
+  - first:
+      213: -5982547660485961339
+    second: Skeleton Walk_74
+  - first:
+      213: 1614799364330463404
+    second: Skeleton Walk_75
+  - first:
+      213: -5969912420211366014
+    second: Skeleton Walk_76
+  - first:
+      213: -755095428630007282
+    second: Skeleton Walk_77
+  - first:
+      213: -7877214105179870117
+    second: Skeleton Walk_78
+  - first:
+      213: -4504897439618024327
+    second: Skeleton Walk_79
+  - first:
+      213: 4223333204130371120
+    second: Skeleton Walk_80
+  - first:
+      213: -8695591440753898274
+    second: Skeleton Walk_81
+  - first:
+      213: 2229215873536689421
+    second: Skeleton Walk_82
+  - first:
+      213: -6458361720980545077
+    second: Skeleton Walk_83
+  - first:
+      213: -3320338381241572813
+    second: Skeleton Walk_84
+  - first:
+      213: -8980517143270729529
+    second: Skeleton Walk_85
+  - first:
+      213: 7103542350917113786
+    second: Skeleton Walk_86
+  - first:
+      213: 7207246266013200926
+    second: Skeleton Walk_87
+  - first:
+      213: 3897518900113580747
+    second: Skeleton Walk_88
+  - first:
+      213: -7833684150885744666
+    second: Skeleton Walk_89
+  - first:
+      213: 4966306850804934771
+    second: Skeleton Walk_90
+  - first:
+      213: -1197856582208718990
+    second: Skeleton Walk_91
+  - first:
+      213: -47410515594054530
+    second: Skeleton Walk_92
+  - first:
+      213: -2917060035773154285
+    second: Skeleton Walk_93
+  - first:
+      213: 5889716734949195873
+    second: Skeleton Walk_94
+  - first:
+      213: -698803103315808999
+    second: Skeleton Walk_95
+  - first:
+      213: 5850590232718818183
+    second: Skeleton Walk_96
+  - first:
+      213: 7867290689614831893
+    second: Skeleton Walk_97
+  - first:
+      213: -5658662550793184991
+    second: Skeleton Walk_98
+  - first:
+      213: 2401947274719357076
+    second: Skeleton Walk_99
+  - first:
+      213: -660326974893405200
+    second: Skeleton Walk_100
+  - first:
+      213: 3983526349751645677
+    second: Skeleton Walk_101
+  - first:
+      213: 7575130132515237937
+    second: Skeleton Walk_102
+  - first:
+      213: 4284023966936010629
+    second: Skeleton Walk_103
+  - first:
+      213: 2356174365806738501
+    second: Skeleton Walk_104
+  - first:
+      213: 2832236147959745641
+    second: Skeleton Walk_105
+  - first:
+      213: -688383448146930934
+    second: Skeleton Walk_106
+  - first:
+      213: 7205285122005054125
+    second: Skeleton Walk_107
+  - first:
+      213: -313776591073957288
+    second: Skeleton Walk_108
+  - first:
+      213: 4549062399939613905
+    second: Skeleton Walk_109
+  - first:
+      213: -7852922150449109016
+    second: Skeleton Walk_110
+  - first:
+      213: -2328629112110636660
+    second: Skeleton Walk_111
+  - first:
+      213: 4209218727146056606
+    second: Skeleton Walk_112
+  - first:
+      213: -1918833199160582926
+    second: Skeleton Walk_113
+  - first:
+      213: 553402816831436772
+    second: Skeleton Walk_114
+  - first:
+      213: 8110591311426235748
+    second: Skeleton Walk_115
+  - first:
+      213: 1730474147876350369
+    second: Skeleton Walk_116
+  - first:
+      213: -5961751286355966583
+    second: Skeleton Walk_117
+  - first:
+      213: -6387219493154416303
+    second: Skeleton Walk_118
+  - first:
+      213: 5603017566145477564
+    second: Skeleton Walk_119
+  - first:
+      213: 3487622534658795702
+    second: Skeleton Walk_120
+  - first:
+      213: 2394590029231091555
+    second: Skeleton Walk_121
+  - first:
+      213: -5658484930184610277
+    second: Skeleton Walk_122
+  - first:
+      213: 7641778338764411637
+    second: Skeleton Walk_123
+  - first:
+      213: -4295688489263567394
+    second: Skeleton Walk_124
+  - first:
+      213: 869670894373453750
+    second: Skeleton Walk_125
+  - first:
+      213: 813505659006924827
+    second: Skeleton Walk_126
+  - first:
+      213: 948227414777856381
+    second: Skeleton Walk_127
+  - first:
+      213: -1710390502216685534
+    second: Skeleton Walk_128
+  - first:
+      213: -1170177023600946358
+    second: Skeleton Walk_129
+  - first:
+      213: -5049702284793964082
+    second: Skeleton Walk_130
+  - first:
+      213: 6402845430275257497
+    second: Skeleton Walk_131
+  - first:
+      213: 5863682134509350211
+    second: Skeleton Walk_132
+  - first:
+      213: 3840167723529195368
+    second: Skeleton Walk_133
+  - first:
+      213: 1671363061653443223
+    second: Skeleton Walk_134
+  - first:
+      213: 546936648553354299
+    second: Skeleton Walk_135
+  - first:
+      213: -6948192836733715982
+    second: Skeleton Walk_136
+  - first:
+      213: 4102197352256475064
+    second: Skeleton Walk_137
+  - first:
+      213: 5920805638031972952
+    second: Skeleton Walk_138
+  - first:
+      213: -1042194414183547486
+    second: Skeleton Walk_139
+  - first:
+      213: 3522515173603320002
+    second: Skeleton Walk_140
+  - first:
+      213: -7589765049617366737
+    second: Skeleton Walk_141
+  - first:
+      213: -5756457921728906814
+    second: Skeleton Walk_142
+  - first:
+      213: -8689769474078085860
+    second: Skeleton Walk_143
+  - first:
+      213: 2428682976136822074
+    second: Skeleton Walk_144
+  - first:
+      213: -8945868307201873547
+    second: Skeleton Walk_145
+  - first:
+      213: 3406674277190365100
+    second: Skeleton Walk_146
+  - first:
+      213: -7194246878090682107
+    second: Skeleton Walk_147
+  - first:
+      213: 2436291573119389734
+    second: Skeleton Walk_148
+  - first:
+      213: -2767333639831723269
+    second: Skeleton Walk_149
+  - first:
+      213: -2002232256666289263
+    second: Skeleton Walk_150
+  - first:
+      213: 258064559894904649
+    second: Skeleton Walk_151
+  - first:
+      213: 7978981472483045726
+    second: Skeleton Walk_152
+  - first:
+      213: 983974711755090733
+    second: Skeleton Walk_153
+  - first:
+      213: -7758710881582149373
+    second: Skeleton Walk_154
+  - first:
+      213: 8460594503236794827
+    second: Skeleton Walk_155
+  - first:
+      213: -4483090928306629724
+    second: Skeleton Walk_156
+  - first:
+      213: 477696619041565990
+    second: Skeleton Walk_157
+  - first:
+      213: 8438790650589204746
+    second: Skeleton Walk_158
+  - first:
+      213: -5304642567770529178
+    second: Skeleton Walk_159
+  - first:
+      213: -2797633767374602521
+    second: Skeleton Walk_160
+  - first:
+      213: 8087529638108243655
+    second: Skeleton Walk_161
+  - first:
+      213: 7444311392309597497
+    second: Skeleton Walk_162
+  - first:
+      213: -7647490304056505696
+    second: Skeleton Walk_163
+  - first:
+      213: -1800664030124542025
+    second: Skeleton Walk_164
+  - first:
+      213: 678452102539467465
+    second: Skeleton Walk_165
+  - first:
+      213: 2088419872360994869
+    second: Skeleton Walk_166
+  - first:
+      213: 2334232393484830718
+    second: Skeleton Walk_167
+  - first:
+      213: 7955327934164251566
+    second: Skeleton Walk_168
+  - first:
+      213: 7695008583982301309
+    second: Skeleton Walk_169
+  - first:
+      213: 3331077136310397121
+    second: Skeleton Walk_170
+  - first:
+      213: -9059882458768152938
+    second: Skeleton Walk_171
+  - first:
+      213: 8159828274034018806
+    second: Skeleton Walk_172
+  - first:
+      213: 5451924909888481784
+    second: Skeleton Walk_173
+  - first:
+      213: -3330917133333934428
+    second: Skeleton Walk_174
+  - first:
+      213: 5145039207172783389
+    second: Skeleton Walk_175
+  - first:
+      213: 7444573500992621546
+    second: Skeleton Walk_176
+  - first:
+      213: 445410056907860628
+    second: Skeleton Walk_177
+  - first:
+      213: 6540987270924080837
+    second: Skeleton Walk_178
+  - first:
+      213: 2790676751303255323
+    second: Skeleton Walk_179
+  - first:
+      213: 250026741111296359
+    second: Skeleton Walk_180
+  - first:
+      213: 2633674301692458973
+    second: Skeleton Walk_181
+  - first:
+      213: -4836784590090260187
+    second: Skeleton Walk_182
+  - first:
+      213: -847189155346946369
+    second: Skeleton Walk_183
+  - first:
+      213: 7807455831607108836
+    second: Skeleton Walk_184
+  - first:
+      213: 6368862223540432447
+    second: Skeleton Walk_185
+  - first:
+      213: -2250345049591989118
+    second: Skeleton Walk_186
+  - first:
+      213: -9049752026603005893
+    second: Skeleton Walk_187
+  - first:
+      213: -1375299281666061870
+    second: Skeleton Walk_188
+  - first:
+      213: -5399778164571351579
+    second: Skeleton Walk_189
+  - first:
+      213: -5822865106516514671
+    second: Skeleton Walk_190
+  - first:
+      213: -2870632420769328979
+    second: Skeleton Walk_191
+  - first:
+      213: 6841361097028689314
+    second: Skeleton Walk_192
+  - first:
+      213: -5074048019100138580
+    second: Skeleton Walk_193
+  - first:
+      213: -8047817232047246143
+    second: Skeleton Walk_194
+  - first:
+      213: -5388672174137697134
+    second: Skeleton Walk_195
+  - first:
+      213: -7786468785338928040
+    second: Skeleton Walk_196
+  - first:
+      213: -1704069111913211519
+    second: Skeleton Walk_197
+  - first:
+      213: 1432183452013960085
+    second: Skeleton Walk_198
+  - first:
+      213: -3014879225744383416
+    second: Skeleton Walk_199
+  - first:
+      213: 4779667573176228848
+    second: Skeleton Walk_200
+  - first:
+      213: -7007842106001262204
+    second: Skeleton Walk_201
+  - first:
+      213: 6036449495265069483
+    second: Skeleton Walk_202
+  - first:
+      213: -678008130347627584
+    second: Skeleton Walk_203
+  - first:
+      213: 1353552932700046738
+    second: Skeleton Walk_204
+  - first:
+      213: -1350087816853452338
+    second: Skeleton Walk_205
+  - first:
+      213: 1286461995855983858
+    second: Skeleton Walk_206
+  - first:
+      213: -6607023173999436061
+    second: Skeleton Walk_207
+  - first:
+      213: -6393914514072294968
+    second: Skeleton Walk_208
+  - first:
+      213: 5024991064961044374
+    second: Skeleton Walk_209
+  - first:
+      213: -1777439682651054870
+    second: Skeleton Walk_210
+  - first:
+      213: -6414755769319262802
+    second: Skeleton Walk_211
+  - first:
+      213: -6427596272218671336
+    second: Skeleton Walk_212
+  - first:
+      213: -1604823904874472095
+    second: Skeleton Walk_213
+  - first:
+      213: -7649379954992406942
+    second: Skeleton Walk_214
+  - first:
+      213: 4453077235066425981
+    second: Skeleton Walk_215
+  - first:
+      213: -2532145461287916899
+    second: Skeleton Walk_216
+  - first:
+      213: -1548057288125833017
+    second: Skeleton Walk_217
+  - first:
+      213: 7888596147575250175
+    second: Skeleton Walk_218
+  - first:
+      213: 5308963618676908332
+    second: Skeleton Walk_219
+  - first:
+      213: -8521762672497955265
+    second: Skeleton Walk_220
+  - first:
+      213: -2492180128974347599
+    second: Skeleton Walk_221
+  - first:
+      213: -6816440054584412318
+    second: Skeleton Walk_222
+  - first:
+      213: 1002211558761263908
+    second: Skeleton Walk_223
+  - first:
+      213: 616791872617177666
+    second: Skeleton Walk_224
+  - first:
+      213: -3838866047695283754
+    second: Skeleton Walk_225
+  - first:
+      213: -2916710252879715631
+    second: Skeleton Walk_226
+  - first:
+      213: -3646061658694153746
+    second: Skeleton Walk_227
+  - first:
+      213: 6566140553666558727
+    second: Skeleton Walk_228
+  - first:
+      213: -731787527893888201
+    second: Skeleton Walk_229
+  - first:
+      213: 6778464278432975631
+    second: Skeleton Walk_230
+  - first:
+      213: 5672044627208132663
+    second: Skeleton Walk_231
+  - first:
+      213: 2815011519431013295
+    second: Skeleton Walk_232
+  - first:
+      213: -5847676024567123259
+    second: Skeleton Walk_233
+  - first:
+      213: 4304213551071520637
+    second: Skeleton Walk_234
+  - first:
+      213: 2946372482664490172
+    second: Skeleton Walk_235
+  - first:
+      213: -8714947496395992620
+    second: Skeleton Walk_236
+  - first:
+      213: 5202515508628511742
+    second: Skeleton Walk_237
+  - first:
+      213: -8594189050041571547
+    second: Skeleton Walk_238
+  - first:
+      213: 1926412904407789194
+    second: Skeleton Walk_239
+  - first:
+      213: -8380514112150416594
+    second: Skeleton Walk_240
+  - first:
+      213: 3203651369648183438
+    second: Skeleton Walk_241
+  - first:
+      213: -7077655166166320320
+    second: Skeleton Walk_242
+  - first:
+      213: 8225448128237020992
+    second: Skeleton Walk_243
+  - first:
+      213: 4383330724142468982
+    second: Skeleton Walk_244
+  - first:
+      213: 933181306787322373
+    second: Skeleton Walk_245
+  - first:
+      213: 5019550383450618253
+    second: Skeleton Walk_246
+  - first:
+      213: 6559287132774791800
+    second: Skeleton Walk_247
+  - first:
+      213: 114841152203689193
+    second: Skeleton Walk_248
+  - first:
+      213: -7610556001561096120
+    second: Skeleton Walk_249
+  - first:
+      213: -6349917457192183388
+    second: Skeleton Walk_250
+  - first:
+      213: 2380443054233909510
+    second: Skeleton Walk_251
+  - first:
+      213: -485814515691906446
+    second: Skeleton Walk_252
+  - first:
+      213: 7463320786313973829
+    second: Skeleton Walk_253
+  - first:
+      213: 2779632551791291108
+    second: Skeleton Walk_254
+  - first:
+      213: -3493104346076387008
+    second: Skeleton Walk_255
+  - first:
+      213: -5513540968625392900
+    second: Skeleton Walk_256
+  - first:
+      213: 52864518705193329
+    second: Skeleton Walk_257
+  - first:
+      213: 6469239507744379461
+    second: Skeleton Walk_258
+  - first:
+      213: -4949649771846264369
+    second: Skeleton Walk_259
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -141,10 +921,10 @@ TextureImporter:
       name: Skeleton Walk_0
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 0
-        width: 18
-        height: 32
+        width: 21
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,8 +932,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 986e51cf94e43a000800000000000000
-      internalID: 45966500872709769
+      spriteID: c119a08fe90bad860800000000000000
+      internalID: 7555545521680191772
       vertices: []
       indices: 
       edges: []
@@ -162,10 +942,10 @@ TextureImporter:
       name: Skeleton Walk_1
       rect:
         serializedVersion: 2
-        x: 23
+        x: 22
         y: 0
-        width: 18
-        height: 32
+        width: 21
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,8 +953,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3e8e53adf1b355160800000000000000
-      internalID: 7013577002690406627
+      spriteID: a22dcca37aee30410800000000000000
+      internalID: 1442258707702141482
       vertices: []
       indices: 
       edges: []
@@ -183,10 +963,10 @@ TextureImporter:
       name: Skeleton Walk_2
       rect:
         serializedVersion: 2
-        x: 45
+        x: 44
         y: 0
-        width: 18
-        height: 32
+        width: 21
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -194,8 +974,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3cdbefae8facd4fd0800000000000000
-      internalID: -2356003859601637949
+      spriteID: efd49ddf57a170870800000000000000
+      internalID: 8648910703460699646
       vertices: []
       indices: 
       edges: []
@@ -206,7 +986,7 @@ TextureImporter:
         serializedVersion: 2
         x: 66
         y: 0
-        width: 20
+        width: 21
         height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -215,8 +995,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 69f35fb54e612e020800000000000000
-      internalID: 2369481524001456022
+      spriteID: d315e3426aebfbb60800000000000000
+      internalID: 7764133903391936829
       vertices: []
       indices: 
       edges: []
@@ -236,8 +1016,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 341b25cd319be9ae0800000000000000
-      internalID: -1540590527562206909
+      spriteID: ca272a9ee4685b540800000000000000
+      internalID: 5023068632886964908
       vertices: []
       indices: 
       edges: []
@@ -248,7 +1028,7 @@ TextureImporter:
         serializedVersion: 2
         x: 110
         y: 0
-        width: 22
+        width: 21
         height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -257,8 +1037,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bf631c19cc57ba890800000000000000
-      internalID: -7445728037447846149
+      spriteID: 6212f0a332b4b5530800000000000000
+      internalID: 3844749321560858918
       vertices: []
       indices: 
       edges: []
@@ -269,8 +1049,8 @@ TextureImporter:
         serializedVersion: 2
         x: 132
         y: 0
-        width: 22
-        height: 32
+        width: 21
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -278,8 +1058,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 526f23ece29e08240800000000000000
-      internalID: 4792086390759421477
+      spriteID: 1a32f19ad852b48c0800000000000000
+      internalID: -4014073352512658527
       vertices: []
       indices: 
       edges: []
@@ -290,8 +1070,8 @@ TextureImporter:
         serializedVersion: 2
         x: 154
         y: 0
-        width: 22
-        height: 32
+        width: 21
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -299,8 +1079,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a496776a6c4b1ffc0800000000000000
-      internalID: -3462787873181832886
+      spriteID: b123423a9deeb0680800000000000000
+      internalID: -8787667629371018725
       vertices: []
       indices: 
       edges: []
@@ -311,8 +1091,8 @@ TextureImporter:
         serializedVersion: 2
         x: 176
         y: 0
-        width: 22
-        height: 32
+        width: 21
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -320,8 +1100,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 20933f83d3a308b60800000000000000
-      internalID: 7746255393700133122
+      spriteID: f4b63a682da7e2ee0800000000000000
+      internalID: -1283953799133435057
       vertices: []
       indices: 
       edges: []
@@ -332,8 +1112,8 @@ TextureImporter:
         serializedVersion: 2
         x: 198
         y: 0
-        width: 22
-        height: 32
+        width: 21
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -341,8 +1121,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: abfddabc39b063e30800000000000000
-      internalID: 4482783208499175354
+      spriteID: 488f4951518e3df70800000000000000
+      internalID: 9210960840156838020
       vertices: []
       indices: 
       edges: []
@@ -351,10 +1131,10 @@ TextureImporter:
       name: Skeleton Walk_10
       rect:
         serializedVersion: 2
-        x: 221
+        x: 220
         y: 0
-        width: 20
-        height: 32
+        width: 21
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -362,8 +1142,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7f44f66bb61320510800000000000000
-      internalID: 1513826763441915127
+      spriteID: 8dfa2be8ef1fade90800000000000000
+      internalID: -7000016595175952424
       vertices: []
       indices: 
       edges: []
@@ -372,10 +1152,10 @@ TextureImporter:
       name: Skeleton Walk_11
       rect:
         serializedVersion: 2
-        x: 244
+        x: 242
         y: 0
-        width: 18
-        height: 32
+        width: 21
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -383,8 +1163,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ad25096bb6f2532e0800000000000000
-      internalID: -2146757507701255462
+      spriteID: c0a3d644913b60200800000000000000
+      internalID: 146000959039683084
       vertices: []
       indices: 
       edges: []
@@ -393,10 +1173,10 @@ TextureImporter:
       name: Skeleton Walk_12
       rect:
         serializedVersion: 2
-        x: 266
+        x: 264
         y: 0
-        width: 17
-        height: 32
+        width: 21
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -404,8 +1184,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5620c747c63b5cab0800000000000000
-      internalID: -4988383733850832283
+      spriteID: c71dc369b2af4c780800000000000000
+      internalID: -8663524718042885764
       vertices: []
       indices: 
       edges: []
