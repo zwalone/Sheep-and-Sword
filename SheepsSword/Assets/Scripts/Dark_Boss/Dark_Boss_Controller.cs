@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,8 +9,6 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
     public LayerMask rayCastMask;
     public float rayCastLength;
     public float attackDistance;
-
-    private Image enemyHealthBar;
 
     private GameObject target;
     private bool _inRange;
@@ -42,7 +41,14 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
     public bool IsDead { get; private set; }
     private int AttackNumber;
 
+    // Sounds:
+    private SoundController actionSounds;
+    private AudioSource movementAudioSource;
 
+
+    // Boss health bar:
+    //private GameObject enemyHealthBar;
+    //private Image enemyHealthBarFill;
 
 
     private void Awake()
@@ -50,6 +56,11 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
         _view = this.GetComponent<Dark_Boss_View>();
         _model = this.GetComponent<Dark_Boss_Model>();
         _rd2D = this.GetComponent<Rigidbody2D>();
+        actionSounds = gameObject.GetComponent<SoundController>();
+        movementAudioSource = gameObject.GetComponents<AudioSource>()[1];
+        //enemyHealthBar = GameObject.Find("EnemyHealthBar");
+        //enemyHealthBar.SetActive(true);
+        //enemyHealthBarFill = GameObject.Find("EnemyHealthBar_Fill").GetComponent<Image>();
     }
 
     void Start()
@@ -79,7 +90,6 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
         {
             AttackNumber = Random.Range(0, 3);
             AttackStart();
-
         }
     }
 
@@ -113,7 +123,12 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
 
         if (AttackNumber != 2)
         {
-            Invoke(nameof(AttackStop), 1.1f);
+            Invoke(nameof(SoundAttack), 0.1f);
+            Invoke(nameof(SoundAttack), 0.3f);
+            Invoke(nameof(SoundAttack), 0.6f);
+
+
+            Invoke(nameof(AttackStop), 0.65f);
 
             foreach (var h in hitbox)
             {
@@ -125,10 +140,18 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
         else
         {
             //If have max hp
-            if(_model.HP > _model.MaxHP - 20)
+            if(_model.HP < _model.MaxHP - 20)
             {
+                Heal();
+            }
+            else
+            {
+                Invoke(nameof(SoundAttack), 0.1f);
+                Invoke(nameof(SoundAttack), 0.3f);
+                Invoke(nameof(SoundAttack), 0.6f);
+
                 AttackNumber = 1;
-                Invoke(nameof(AttackStop), 1.1f);
+                Invoke(nameof(AttackStop), 0.65f);
 
                 foreach (var h in hitbox)
                 {
@@ -137,13 +160,10 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
                     _model.Speed *= 3;
                 }
             }
-            else
-            {
-                Heal();
-            }
         }
         
     }
+    private void SoundAttack() { actionSounds.PlaySound(3); }
 
     private void AttackStop()
     {
@@ -157,11 +177,12 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
 
     private void Heal()
     {
+        actionSounds.PlaySound(0);
         _rd2D.constraints = RigidbodyConstraints2D.FreezeAll;
-        _model.HP += 10;
+        _model.HP = 100;
         Invoke(nameof(IsAttack), 1.1f);
-        enemyHealthBar = GameObject.Find("EnemyHealthBar_Fill").GetComponent<Image>();
-        enemyHealthBar.fillAmount = (float)ReturnCurrentHP() / ReturnMaxHP();
+
+        //enemyHealthBarFill.fillAmount = (float)ReturnCurrentHP() / ReturnMaxHP();
     }
 
     //Check and Change direction
@@ -198,6 +219,9 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
 
     public void TakeDamage(int dmg)
     {
+        if (IsDead) return;
+        CancelInvoke(nameof(SoundAttack));
+
         //check distance
         var p = GameObject.FindGameObjectWithTag("Player").transform;
         Vector3 toTarget = (p.position - transform.position).normalized;
@@ -212,6 +236,7 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
             _model.HP -= dmg;
             if (_model.HP <= 0)
             {
+                actionSounds.PlaySound(2);
                 _model.HP = 0;
                 _model.Speed = 0;
 
@@ -220,6 +245,7 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
             }
             else
             {
+                actionSounds.PlaySound(1);
                 IsHurting = true;
                 Invoke(nameof(StopHurting), 0.2f);
             }
@@ -233,6 +259,8 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
 
     private void Dash()
     {
+        if (!movementAudioSource.isPlaying) movementAudioSource.Play();
+
         _canDash = false;
         _isDash = true;
 
@@ -246,6 +274,8 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
     }
     private void StopDashing()
     {
+        if (movementAudioSource.isPlaying) movementAudioSource.Stop();
+
         _isDash = false;
         gameObject.layer = 0;
         gameObject.GetComponentInChildren<HitBoxController>().damage = 5;
@@ -260,6 +290,7 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
     private void CanDash() { _canDash = true; }
     private void IsAttack() {
         _isAttacking = false;
+        CanUseAttack();
         _rd2D.constraints = RigidbodyConstraints2D.None;
     }
 
@@ -277,7 +308,6 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
         }
         else _view.Walk();
     }
-
 
 
     public int ReturnCurrentHP() { return _model.HP; }

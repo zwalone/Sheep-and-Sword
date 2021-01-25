@@ -21,6 +21,8 @@ public class CyclopController : MonoBehaviour, IEntityController
     public bool IsHurting { get; private set; }
     public bool IsDead { get; private set; }
 
+    // Sounds:
+    private SoundController actionSounds;
 
 
     private void Awake()
@@ -29,6 +31,7 @@ public class CyclopController : MonoBehaviour, IEntityController
         _model = this.GetComponent<CyclopModel>();
         _rd2D = this.GetComponent<Rigidbody2D>();
         _checkGroundList = new List<CircleCollider2D>(this.GetComponentsInChildren<CircleCollider2D>());
+        actionSounds = gameObject.GetComponent<SoundController>();
     }
 
     void Start()
@@ -54,6 +57,8 @@ public class CyclopController : MonoBehaviour, IEntityController
 
     public void TakeDamage(int dmg)
     {
+        if (IsDead) return;
+
         //check distance
         var p = GameObject.FindGameObjectWithTag("Player").transform;
         Vector3 toTarget = (p.position - transform.position).normalized;
@@ -66,6 +71,7 @@ public class CyclopController : MonoBehaviour, IEntityController
 
         if (_model.HP <= 0)
         {
+            actionSounds.PlaySound(2);
             _model.HP = 0;
             _model.Speed = 0;
             IsDead = true;
@@ -74,6 +80,7 @@ public class CyclopController : MonoBehaviour, IEntityController
         }
         else
         {
+            actionSounds.PlaySound(1);
             IsHurting = true;
             Invoke(nameof(StopHurting), 0.3f);
         }
@@ -154,6 +161,7 @@ public class CyclopController : MonoBehaviour, IEntityController
                 _canUseLaser = false;
                 if (_model.Speed < 0) Instantiate(_model.Laser, this.transform.position, Quaternion.Euler(0, 180, 0));
                 else Instantiate(_model.Laser, this.transform.position, Quaternion.identity);
+                actionSounds.PlaySound(0);
                 Invoke(nameof(CanUseLaser), _laserCooldown);
             }
 

@@ -41,6 +41,9 @@ public class Hammer_Controller : MonoBehaviour, IEntityController
     private int AttackNumber;
 
 
+    // Sounds:
+    private SoundController actionSounds;
+    private AudioSource movementAudioSource;
 
 
     private void Awake()
@@ -48,6 +51,8 @@ public class Hammer_Controller : MonoBehaviour, IEntityController
         _view = this.GetComponent<Hammer_View>();
         _model = this.GetComponent<Hammer_Model>();
         _rd2D = this.GetComponent<Rigidbody2D>();
+        actionSounds = gameObject.GetComponent<SoundController>();
+        movementAudioSource = gameObject.GetComponents<AudioSource>()[1];
     }
 
     void Start()
@@ -73,7 +78,7 @@ public class Hammer_Controller : MonoBehaviour, IEntityController
     //Attack
     private void CheckAttack()
     {
-        if (!_isAttacking && _canUseAttack)
+        if (!_isAttacking && _canUseAttack && !IsDead)
         {
             AttackNumber = Random.Range(0, 3);
             AttackStart();
@@ -102,9 +107,27 @@ public class Hammer_Controller : MonoBehaviour, IEntityController
 
     private void AttackStart()
     {
-
         _isAttacking = true;
         _canUseAttack = false;
+
+
+        // Sounds:
+        switch(AttackNumber)
+        {
+            case 0:
+                Invoke(nameof(SoundAttack), 0.1f);
+                Invoke(nameof(SoundAttack), 0.5f);
+                Invoke(nameof(SoundAttack), 1.0f);
+                break;
+            case 1:
+                Invoke(nameof(SoundAttack), 0.3f);
+                break;
+            case 2:
+                Invoke(nameof(SoundAttack), 0.5f);
+                break;
+            default:
+                break;
+        }
 
         Invoke(nameof(CanUseAttack), 3f);
         Invoke(nameof(AttackStop), 1.1f);  
@@ -112,14 +135,15 @@ public class Hammer_Controller : MonoBehaviour, IEntityController
         foreach (var h in hitbox)
         {
             h.GetComponent<BoxCollider2D>().enabled = true;
-
         }
         //TOChange
         _model.Speed *= 3;        
     }
 
+    private void SoundAttack() { actionSounds.PlaySound(0); }
     private void AttackStop()
     {
+        if (movementAudioSource.isPlaying) movementAudioSource.Stop();
         _model.Speed /= 3;
         _isAttacking = false;
         foreach (var h in hitbox)
@@ -162,6 +186,9 @@ public class Hammer_Controller : MonoBehaviour, IEntityController
 
     public void TakeDamage(int dmg)
     {
+        if (IsDead) return;
+        CancelInvoke(nameof(SoundAttack));
+
         //check distance
         var p = GameObject.FindGameObjectWithTag("Player").transform;
         Vector3 toTarget = (p.position - transform.position).normalized;
@@ -176,6 +203,7 @@ public class Hammer_Controller : MonoBehaviour, IEntityController
             _model.HP -= dmg;
             if (_model.HP <= 0)
             {
+                actionSounds.PlaySound(2);
                 _model.HP = 0;
                 _model.Speed = 0;
 
@@ -184,6 +212,7 @@ public class Hammer_Controller : MonoBehaviour, IEntityController
             }
             else
             {
+                actionSounds.PlaySound(1);
                 IsHurting = true;
                 Invoke(nameof(StopHurting), 0.2f);
             }
@@ -197,6 +226,8 @@ public class Hammer_Controller : MonoBehaviour, IEntityController
 
     private void Dash()
     {
+        movementAudioSource.Play();
+
         _canDash = false;
         _isDash = true;
 
@@ -210,6 +241,8 @@ public class Hammer_Controller : MonoBehaviour, IEntityController
     }
     private void StopDashing()
     {
+        movementAudioSource.Stop();
+
         _isDash = false;
         gameObject.layer = 0;
         gameObject.GetComponentInChildren<HitBoxController>().damage = 5;

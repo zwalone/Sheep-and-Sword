@@ -21,6 +21,7 @@ public class CheckPointController : MonoBehaviour
                     child.gameObject.SetActive(true);
             }
             hasBeenReached = true;
+            gameObject.GetComponent<AudioSource>().Play();
         }
     }
 

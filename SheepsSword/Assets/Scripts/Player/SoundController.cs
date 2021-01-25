@@ -8,7 +8,7 @@ public class SoundController : MonoBehaviour
 
     void Start()
     {
-        audioSource = GetComponents<AudioSource>()[1];
+        audioSource = GetComponents<AudioSource>()[0];
     }
 
     public void PlaySound(int indexOfAudioClip)
