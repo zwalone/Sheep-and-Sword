@@ -3,19 +3,14 @@ using UnityEngine.UI;
 
 public class HitBoxController : MonoBehaviour
 {
-    [SerializeField]
     public string target = "";
-
-    [SerializeField]
     public int damage = 0;
-
     private GameObject enemyHealthBarFill;
     private GameObject enemyHealthBar;
 
     private void Awake()
     {
         enemyHealthBar = GameObject.Find("EnemyHealthBar");
-        enemyHealthBarFill = GameObject.Find("EnemyHealthBar_Fill");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -32,25 +27,27 @@ public class HitBoxController : MonoBehaviour
                 collision.gameObject.GetComponentInParent<IEntityController>().TakeDamage(damage);
 
             // Update health bar:
-            if (target != "Player" && collision.gameObject != null)
+            if (target != "Player" && collision.gameObject != null && enemyHealthBar != null)
             {
                 CancelInvoke(nameof(HideEnemyHealthBar));
                 enemyHealthBar.SetActive(true);
+                enemyHealthBarFill = GameObject.Find("EnemyHealthBar_Fill");
                 enemyHealthBarFill.GetComponent<Image>().fillAmount = (float)collision.gameObject.GetComponentInParent<IEntityController>().ReturnCurrentHP()
                     / collision.gameObject.GetComponentInParent<IEntityController>().ReturnMaxHP();
                 Invoke(nameof(HideEnemyHealthBar), 5.0f);
             }
-            else if (target == "Player")
+            else if (target == "Player" && enemyHealthBar != null)
             {
                 CancelInvoke(nameof(HideEnemyHealthBar));
                 enemyHealthBar.SetActive(true);
+                enemyHealthBarFill = GameObject.Find("EnemyHealthBar_Fill");
                 enemyHealthBarFill.GetComponent<Image>().fillAmount = (float)gameObject.GetComponentInParent<IEntityController>().ReturnCurrentHP()
                     / gameObject.GetComponentInParent<IEntityController>().ReturnMaxHP();
                 Invoke(nameof(HideEnemyHealthBar), 5.0f);
             }
 
             // Hide health bar if enemy died:
-            if (enemyHealthBarFill.GetComponent<Image>().fillAmount == 0) HideEnemyHealthBar();
+            if (enemyHealthBarFill != null && enemyHealthBarFill.GetComponent<Image>().fillAmount == 0) HideEnemyHealthBar();
         }
     }
 

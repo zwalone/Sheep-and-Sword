@@ -35,13 +35,15 @@ public class SkeletonController : MonoBehaviour, IEntityController
     public bool IsDead { get; private set; }
 
 
-
+    // Sounds:
+    private SoundController actionSounds;
 
     private void Awake()
     {
         _view = this.GetComponent<SkeletonView>();
         _model = this.GetComponent<SkeletonModel>();
         _rd2D = this.GetComponent<Rigidbody2D>();
+        actionSounds = gameObject.GetComponent<SoundController>();
     }
 
     void Start()
@@ -67,7 +69,7 @@ public class SkeletonController : MonoBehaviour, IEntityController
     //Attack
     private void CheckAttack()
     {
-        if (!_isAttacking)
+        if (!_isAttacking && !IsDead)
         {
             StartCoroutine(Attack());
         }
@@ -99,6 +101,7 @@ public class SkeletonController : MonoBehaviour, IEntityController
         hitbox.GetComponent<BoxCollider2D>().enabled = true;
         _isAttacking = true;
         _model.Speed *= 3;
+        Invoke(nameof(SoundAttack), 0.5f);
 
         yield return new WaitForSeconds(1.1f);
 
@@ -106,6 +109,7 @@ public class SkeletonController : MonoBehaviour, IEntityController
         _isAttacking = false;
         hitbox.GetComponent<BoxCollider2D>().enabled = false;
     }
+    private void SoundAttack() { actionSounds.PlaySound(0); }
 
 
 
@@ -145,6 +149,9 @@ public class SkeletonController : MonoBehaviour, IEntityController
 
     public void TakeDamage(int dmg)
     {
+        if (IsDead) return;
+        CancelInvoke(nameof(SoundAttack));
+
         //check distance
         var p = GameObject.FindGameObjectWithTag("Player").transform;
         Vector3 toTarget = (p.position - transform.position).normalized;
@@ -156,6 +163,7 @@ public class SkeletonController : MonoBehaviour, IEntityController
         _model.HP -= dmg;
         if (_model.HP <= 0)
         {
+            actionSounds.PlaySound(2);
             _model.HP = 0;
             _model.Speed = 0;
 
@@ -164,6 +172,7 @@ public class SkeletonController : MonoBehaviour, IEntityController
         }
         else
         {
+            actionSounds.PlaySound(1);
             IsHurting = true;
             Invoke(nameof(StopHurting), 0.2f);
         }

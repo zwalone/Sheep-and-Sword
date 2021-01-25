@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour, IEntityController
 
     public bool IsHurting { get; private set; }
     public bool IsDead { get; private set; }
-    public bool IsSliding { get; private set;  } // can't be attacked if true
+    public bool IsSliding { get; private set; } // can't be attacked if true
 
     // UI:
     private Text gameoverText;
@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour, IEntityController
         UpdatePlayerHealthBar((float)model.HP / model.MaxHP);
 
         // Sounds:
-        movementAudioSource = gameObject.GetComponents<AudioSource>()[0];
+        movementAudioSource = gameObject.GetComponents<AudioSource>()[1];
         actionSounds = gameObject.GetComponent<SoundController>();
         gameAudioSources = GameObject.Find("Music").GetComponents<AudioSource>();
 
@@ -232,7 +232,7 @@ public class PlayerController : MonoBehaviour, IEntityController
     private void FastFall()
     {
         // after clicking DownArrow (or S), player goes down faster
-        if (!isGrounded) 
+        if (!isGrounded)
             if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
                 rigbody.velocity = new Vector2(0, -model.JumpForce / 1.5f);
     }
@@ -251,7 +251,7 @@ public class PlayerController : MonoBehaviour, IEntityController
 
                 if (!isCrouched)
                 {
-                    capscol.offset = new Vector2(capscol.offset.x, 
+                    capscol.offset = new Vector2(capscol.offset.x,
                         capscol.offset.y - capscol.size.y * (1 - colliderReductor) / 2);
                     capscol.size = new Vector2(capscol.size.x, (float)System.Math.Round(capscol.size.y * colliderReductor, 2));
                     isCrouched = true;
@@ -263,7 +263,7 @@ public class PlayerController : MonoBehaviour, IEntityController
             if (isCrouched)
             {
                 capscol.size = new Vector2(capscol.size.x, (float)System.Math.Round(capscol.size.y / colliderReductor, 2));
-                capscol.offset = new Vector2(capscol.offset.x, 
+                capscol.offset = new Vector2(capscol.offset.x,
                     capscol.offset.y + capscol.size.y * (1 - colliderReductor) / 2);
                 isCrouched = false;
             }
@@ -315,7 +315,7 @@ public class PlayerController : MonoBehaviour, IEntityController
 
     public void TakeDamage(int dmg)
     {
-        if (dmg <= 0) return; 
+        if (dmg <= 0) return;
 
         // Decrease health:
         if (model.HP > 0)
@@ -328,6 +328,7 @@ public class PlayerController : MonoBehaviour, IEntityController
         // Animate:
         if (model.HP > 0)
         {
+            actionSounds.PlaySound(5); // "Hurt" sound
             IsHurting = true;
             Invoke(nameof(StopHurting), 0.2f); // "Hurt" animation will last for 0.2 seconds
         }
@@ -338,7 +339,7 @@ public class PlayerController : MonoBehaviour, IEntityController
         }
     }
 
-    private void StopHurting() {  IsHurting = false; }
+    private void StopHurting() { IsHurting = false; }
 
     private void GameOver()
     {
@@ -357,7 +358,7 @@ public class PlayerController : MonoBehaviour, IEntityController
         playerHealthBar.fillAmount = value;
         if (playerHealthBar.fillAmount < 0.25f) playerHealthBar.color = Color.red;
         else if (playerHealthBar.fillAmount < 0.5f) playerHealthBar.color = Color.yellow;
-        else if (playerHealthBar.fillAmount < 0.75f) playerHealthBar.color =  new Color(1.0f, 0.64f, 0.0f); //orange
+        else if (playerHealthBar.fillAmount < 0.75f) playerHealthBar.color = new Color(1.0f, 0.64f, 0.0f); //orange
         else playerHealthBar.color = Color.green;
     }
 
@@ -421,7 +422,7 @@ public class PlayerController : MonoBehaviour, IEntityController
     private void Soundimate()
     {
         // Running:
-        if (rigbody.velocity.x != 0 && isGrounded && !IsHurting 
+        if (rigbody.velocity.x != 0 && isGrounded && !IsHurting
             && !IsSliding && isWalled == 0 && !isCrouched)
         {
             movementAudioSource.clip = movementClips[0];
@@ -450,8 +451,7 @@ public class PlayerController : MonoBehaviour, IEntityController
         else movementAudioSource.Stop();
 
         // Other sound effects:
-        if (IsHurting) actionSounds.PlaySound(5);
-        else if (IsDead || IsSliding || isWalled != 0) return;
+        if (IsHurting || IsDead || IsSliding || isWalled != 0) return;
         else if (isGrounded) // on the ground
         {
             if (isCrouched)  // crouching
