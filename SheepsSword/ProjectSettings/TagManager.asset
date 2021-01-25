@@ -7,6 +7,8 @@ TagManager:
   - HitPoint
   - Enemy
   - Checkpoint
+  - Checkpoint_Reached
+  - Checkpoint_Unreached
   layers:
   - Default
   - TransparentFX
