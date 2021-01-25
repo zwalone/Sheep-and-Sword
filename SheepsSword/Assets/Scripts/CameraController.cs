@@ -8,6 +8,8 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private Vector3 offsetPosition = new Vector3(0, 2, -1);
 
+    private bool isLocked = false;
+
     private void Awake()
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
@@ -20,7 +22,9 @@ public class CameraController : MonoBehaviour
             Debug.LogWarning("Missing Target ref!", this);
             return;
         }
-
-        transform.position = target.position + offsetPosition;
+        
+        if (!isLocked) transform.position = target.position + offsetPosition;
     }
+
+    public void LockCamera() { isLocked = true; }
 }
