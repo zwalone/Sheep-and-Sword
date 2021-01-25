@@ -143,7 +143,7 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
         _model.HP += 10;
         Invoke(nameof(IsAttack), 1.1f);
 
-        Debug.Log("HEal");
+        Debug.Log("Healing");
     }
 
     //Check and Change direction

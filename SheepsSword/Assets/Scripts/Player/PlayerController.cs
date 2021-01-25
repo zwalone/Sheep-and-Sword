@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour, IEntityController
 {
+    private GameController gm;
     private PlayerModel model;               // speed, jump force, health points
     private PlayerView view;                 // animations
 
@@ -89,6 +90,10 @@ public class PlayerController : MonoBehaviour, IEntityController
         movementAudioSource = gameObject.GetComponents<AudioSource>()[0];
         actionSounds = gameObject.GetComponent<SoundController>();
         gameAudioSources = GameObject.Find("Music").GetComponents<AudioSource>();
+
+        // Good position:
+        gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        transform.position = gm.LastCheckpointPosition;
     }
 
     private void Update()
