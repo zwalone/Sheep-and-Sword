@@ -15,7 +15,13 @@ public class Dark_Boss_Model : MonoBehaviour
     public int HP
     {
         get { return _hp; }
-        set { _hp = value; }
+        set {
+            if(_hp > MaxHP)
+            {
+                _hp = MaxHP;
+            }
+            _hp = value; 
+        }
     }
 
     [SerializeField]

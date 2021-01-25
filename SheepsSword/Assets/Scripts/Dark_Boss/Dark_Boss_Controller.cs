@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Dark_Boss_Controller : MonoBehaviour, IEntityController
 {
@@ -7,6 +8,8 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
     public LayerMask rayCastMask;
     public float rayCastLength;
     public float attackDistance;
+
+    private Image enemyHealthBar;
 
     private GameObject target;
     private bool _inRange;
@@ -121,7 +124,23 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
         }
         else
         {
-            Heal();
+            //If have max hp
+            if(_model.HP > _model.MaxHP - 20)
+            {
+                AttackNumber = 1;
+                Invoke(nameof(AttackStop), 1.1f);
+
+                foreach (var h in hitbox)
+                {
+                    h.GetComponent<BoxCollider2D>().enabled = true;
+                    //TOChange
+                    _model.Speed *= 3;
+                }
+            }
+            else
+            {
+                Heal();
+            }
         }
         
     }
@@ -138,12 +157,11 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
 
     private void Heal()
     {
-        var prevSpeed = _model.Speed;
-        //_model.Speed = 0;
+        _rd2D.constraints = RigidbodyConstraints2D.FreezeAll;
         _model.HP += 10;
         Invoke(nameof(IsAttack), 1.1f);
-
-        Debug.Log("Healing");
+        enemyHealthBar = GameObject.Find("EnemyHealthBar_Fill").GetComponent<Image>();
+        enemyHealthBar.fillAmount = (float)ReturnCurrentHP() / ReturnMaxHP();
     }
 
     //Check and Change direction
@@ -241,7 +259,8 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
     private void CanUseAttack() { _canUseAttack = true; }
     private void CanDash() { _canDash = true; }
     private void IsAttack() {
-        _isAttacking = false; 
+        _isAttacking = false;
+        _rd2D.constraints = RigidbodyConstraints2D.None;
     }
 
 
