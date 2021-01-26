@@ -304,6 +304,7 @@ GameObject:
   - component: {fileID: 2322331039196172066}
   - component: {fileID: 7272854928296611253}
   - component: {fileID: 6683781457456530615}
+  - component: {fileID: 1368580192232854330}
   m_Layer: 0
   m_Name: Hammer
   m_TagString: Enemy
@@ -697,6 +698,8 @@ MonoBehaviour:
   - {fileID: 1764283816940034555}
   _isGroundBottom: {fileID: 649009328692065212}
   _isGroundOpposite: {fileID: 6037040023068352750}
+  AttackSpeed: 2
+  DashSpeed: 2
   _changeDirection: 0
 --- !u!114 &6683781457456530615
 MonoBehaviour:
@@ -710,6 +713,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97b153ec041154546ba21b716fdeb7d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1368580192232854330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2446705398597773592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f40f5e8a8a93a84bb181dc2ba73e55f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Wall: {fileID: 0}
 --- !u!1 &2648665418716889157
 GameObject:
   m_ObjectHideFlags: 0
