@@ -27,6 +27,11 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
     [SerializeField]
     private CircleCollider2D _isGroundOpposite;
 
+    [SerializeField]
+    private float SpeedDash = 3;
+
+    [SerializeField]
+    private float SpeedAttack = 3;
 
     // Parameters:
     [SerializeField]
@@ -119,7 +124,7 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
         _isAttacking = true;
         _canUseAttack = false;
 
-        Invoke(nameof(CanUseAttack), 4f);
+        Invoke(nameof(CanUseAttack), 5f);
 
         if (AttackNumber != 2)
         {
@@ -134,7 +139,7 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
             {
                 h.GetComponent<BoxCollider2D>().enabled = true;
                 //TOChange
-                _model.Speed *= 3;
+                _model.Speed *= SpeedAttack;
             }
         }
         else
@@ -167,7 +172,7 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
 
     private void AttackStop()
     {
-        _model.Speed /= 3;
+        _model.Speed /= SpeedAttack;
         _isAttacking = false;
         foreach (var h in hitbox)
         {
@@ -179,7 +184,7 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
     {
         actionSounds.PlaySound(0);
         _rd2D.constraints = RigidbodyConstraints2D.FreezeAll;
-        _model.HP = 100;
+        _model.HP += 10;
         Invoke(nameof(IsAttack), 1.1f);
 
         //enemyHealthBarFill.fillAmount = (float)ReturnCurrentHP() / ReturnMaxHP();
@@ -266,7 +271,9 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
 
         gameObject.layer = 30;
         gameObject.GetComponentInChildren<HitBoxController>().damage = 0;
-        _model.Speed *= 3;
+
+        //Speed
+        _model.Speed *= SpeedDash;
 
         Invoke(nameof(StopDashing), 0.3f);
         //Delay Dash
@@ -279,7 +286,7 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
         _isDash = false;
         gameObject.layer = 0;
         gameObject.GetComponentInChildren<HitBoxController>().damage = 5;
-        _model.Speed /= 3;
+        _model.Speed /= SpeedDash;
     }
 
 
