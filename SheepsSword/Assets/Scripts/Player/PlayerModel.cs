@@ -15,7 +15,10 @@ public class PlayerModel : MonoBehaviour
     public int HP
     {
         get { return hp; }
-        set { hp = value; }
+        set {
+            hp = value;
+            if (hp > MaxHP) hp = MaxHP;
+        }
     }
 
     [SerializeField]
