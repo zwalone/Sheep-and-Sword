@@ -45,16 +45,12 @@ public class PlayerController : MonoBehaviour, IEntityController
     public bool IsSliding { get; private set; } // can't be attacked if true
 
     // UI:
-    private Text gameoverText;
-    private Button restartButton;
-    private Button returnButton;
     private Image playerHealthBar;
 
     // Sounds:
     private SoundController actionSounds;
     public List<AudioClip> movementClips;
     private AudioSource movementAudioSource;
-    private AudioSource[] gameAudioSources;
 
     private void Awake()
     {
@@ -76,20 +72,12 @@ public class PlayerController : MonoBehaviour, IEntityController
         hitPointLeft.SetActive(false);
 
         // UI:
-        gameoverText = GameObject.Find("GameOverText").GetComponent<Text>();
-        restartButton = GameObject.Find("RestartGameButton").GetComponent<Button>();
-        returnButton = GameObject.Find("GoToMenuButton").GetComponent<Button>();
         playerHealthBar = GameObject.Find("PlayerHealthBar_Fill").GetComponent<Image>();
-        GameObject.Find("EnemyHealthBar").SetActive(false);
-        gameoverText.gameObject.SetActive(false);
-        restartButton.gameObject.SetActive(false);
-        returnButton.gameObject.SetActive(false);
         UpdatePlayerHealthBar((float)model.HP / model.MaxHP);
 
         // Sounds:
         movementAudioSource = gameObject.GetComponents<AudioSource>()[1];
         actionSounds = gameObject.GetComponent<SoundController>();
-        gameAudioSources = GameObject.Find("Music").GetComponents<AudioSource>();
 
         // Good position:
         gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
@@ -335,7 +323,7 @@ public class PlayerController : MonoBehaviour, IEntityController
         else
         {
             IsDead = true;
-            Invoke(nameof(GameOver), animationLength * 2.1f); // Game freezes after Die animation
+            Invoke(nameof(GameOver), animationLength * 2.1f); // Game ends after Die animation
         }
     }
 
@@ -344,13 +332,7 @@ public class PlayerController : MonoBehaviour, IEntityController
     private void GameOver()
     {
         gameObject.layer = 31; // DeadPlayer Layer, ignored by enemies
-
-        gameoverText.gameObject.SetActive(true);
-        restartButton.gameObject.SetActive(true);
-        returnButton.gameObject.SetActive(true);
-
-        gameAudioSources[0].volume = 0.05f;
-        gameAudioSources[1].Play();
+        gm.GameOver();
     }
 
     private void UpdatePlayerHealthBar(float value)
