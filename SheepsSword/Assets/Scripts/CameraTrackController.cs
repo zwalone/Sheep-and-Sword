@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
+public class CameraTrackController : MonoBehaviour
 {
     [SerializeField]
     private Transform target;
@@ -17,7 +17,6 @@ public class CameraController : MonoBehaviour
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
         darkEffect = gameObject.GetComponentInChildren<SpriteRenderer>();
-        StartCoroutine(LightsOff());
     }
 
     private void Update()
@@ -41,7 +40,6 @@ public class CameraController : MonoBehaviour
                 darkEffect.color.b, darkEffect.color.a + 0.01f);
             yield return new WaitForSeconds(darkEffectSpeed);
         }
-        StartCoroutine(LightsOn());
     }
 
     public IEnumerator LightsOn()

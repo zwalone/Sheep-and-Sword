@@ -8,7 +8,7 @@ public class CheckPointController : MonoBehaviour
 
     private void Awake()
     {
-        gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        gm = GameObject.Find("GameMaster").GetComponent<GameController>();
         if (isFirst && gm.WaitingForFirstPosition)
         {
             gm.WaitingForFirstPosition = false;

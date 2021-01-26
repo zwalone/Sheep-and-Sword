@@ -775,7 +775,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283a1e71d0b22544f8fc081ffaa62430, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHP: 0
+  _maxHP: 100
   _hp: 100
   _speed: 1
 --- !u!114 &1861253617656853208
@@ -801,9 +801,6 @@ MonoBehaviour:
   _isGroundBottom: {fileID: 6334987033019295993}
   _isGroundOpposite: {fileID: 949138318124579755}
   _changeDirection: 0
-  movementClips:
-  - {fileID: 8300000, guid: 413f2fe27f615824e892a568950df06a, type: 3}
-  - {fileID: 8300000, guid: 2cb642519dd550d4997c9cf67d1049e3, type: 3}
 --- !u!114 &6790712745193472622
 MonoBehaviour:
   m_ObjectHideFlags: 0

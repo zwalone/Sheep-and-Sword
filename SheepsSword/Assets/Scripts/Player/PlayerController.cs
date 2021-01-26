@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour, IEntityController
 
     // UI:
     private Image playerHealthBar;
+    private bool isReading; // can't move if true
 
     // Sounds:
     private SoundController actionSounds;
@@ -80,7 +81,7 @@ public class PlayerController : MonoBehaviour, IEntityController
         actionSounds = gameObject.GetComponent<SoundController>();
 
         // Good position:
-        gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        gm = GameObject.Find("GameMaster").GetComponent<GameController>();
         transform.position = gm.LastCheckpointPosition;
     }
 
@@ -130,6 +131,12 @@ public class PlayerController : MonoBehaviour, IEntityController
 
     private void Move()
     {
+        if (IsDead || isReading)
+        {
+            rigbody.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+            return; 
+        }
+
         //Check if you can go:
         Vector2 slopeCheckerPosition = transform.position - new Vector3(0.0f, capscol.size.y / 2, 0.0f);
         RaycastHit2D slopeHitRight = Physics2D.Raycast(slopeCheckerPosition,
@@ -142,7 +149,6 @@ public class PlayerController : MonoBehaviour, IEntityController
         float xMove = Input.GetAxisRaw("Horizontal");
         if (xMove != 0 && !IsDead)
         {
-
             rigbody.constraints = RigidbodyConstraints2D.FreezeRotation;
             rigbody.velocity = new Vector2(xMove * model.Speed, rigbody.velocity.y);
 
@@ -189,6 +195,8 @@ public class PlayerController : MonoBehaviour, IEntityController
 
     private void Jump()
     {
+        if (IsDead || isReading) return;
+
         if (isGrounded || isWalled != 0) canSomerSault = true;
 
         if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
@@ -229,6 +237,8 @@ public class PlayerController : MonoBehaviour, IEntityController
 
     private void Crouch()
     {
+        if (IsDead || isReading) return;
+
         if (isGrounded)
         {
             // "Or isCeilinged" helps in situations when there is still 
@@ -272,6 +282,8 @@ public class PlayerController : MonoBehaviour, IEntityController
 
     private void Attack()
     {
+        if (IsDead || isReading) return;
+
         if (Input.GetKeyDown(KeyCode.Space) && isWalled == 0 && !isAttacking && !IsHurting)
         {
             isAttacking = true;
@@ -303,7 +315,7 @@ public class PlayerController : MonoBehaviour, IEntityController
 
     public void TakeDamage(int dmg)
     {
-        if (dmg <= 0) return;
+        if (IsDead || isReading) return;
 
         // Decrease health:
         if (model.HP > 0)
@@ -403,6 +415,8 @@ public class PlayerController : MonoBehaviour, IEntityController
 
     private void Soundimate()
     {
+        if (isReading) return;
+
         // Running:
         if (rigbody.velocity.x != 0 && isGrounded && !IsHurting
             && !IsSliding && isWalled == 0 && !isCrouched)
@@ -467,4 +481,6 @@ public class PlayerController : MonoBehaviour, IEntityController
 
     public int ReturnCurrentHP() { return model.HP;  }
     public int ReturnMaxHP() { return model.MaxHP; }
+    public void StartReading() { isReading = true; gameObject.layer = 31; }
+    public void StopReading() { isReading = false; gameObject.layer = 9; }
 }
