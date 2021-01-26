@@ -16,11 +16,8 @@ public class Dark_Boss_Model : MonoBehaviour
     {
         get { return _hp; }
         set {
-            if(_hp > MaxHP)
-            {
-                _hp = MaxHP;
-            }
-            _hp = value; 
+            _hp = value;
+            if (_hp > MaxHP) _hp = MaxHP;
         }
     }
 
