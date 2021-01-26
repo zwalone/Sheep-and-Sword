@@ -360,7 +360,7 @@ public class PlayerController : MonoBehaviour, IEntityController
     private void Animate()
     {
         // Flip:
-        if (!IsDead)
+        if (!IsDead && !isReading)
         {
             if (view.LookRight == true && Input.GetAxisRaw("Horizontal") < 0)
             {
@@ -415,8 +415,6 @@ public class PlayerController : MonoBehaviour, IEntityController
 
     private void Soundimate()
     {
-        if (isReading) return;
-
         // Running:
         if (rigbody.velocity.x != 0 && isGrounded && !IsHurting
             && !IsSliding && isWalled == 0 && !isCrouched)
@@ -446,7 +444,9 @@ public class PlayerController : MonoBehaviour, IEntityController
         }
         else movementAudioSource.Stop();
 
+
         // Other sound effects:
+        if (isReading) return;
         if (IsHurting || IsDead || IsSliding || isWalled != 0) return;
         else if (isGrounded) // on the ground
         {
