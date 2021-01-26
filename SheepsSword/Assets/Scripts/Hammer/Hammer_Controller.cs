@@ -26,6 +26,11 @@ public class Hammer_Controller : MonoBehaviour, IEntityController
     [SerializeField]
     private CircleCollider2D _isGroundOpposite;
 
+    [SerializeField]
+    private float AttackSpeed = 2;
+
+    [SerializeField]
+    private float DashSpeed = 2;
 
     // Parameters:
     [SerializeField]
@@ -137,14 +142,14 @@ public class Hammer_Controller : MonoBehaviour, IEntityController
             h.GetComponent<BoxCollider2D>().enabled = true;
         }
         //TOChange
-        _model.Speed *= 3;        
+        _model.Speed *= AttackSpeed;        
     }
 
     private void SoundAttack() { actionSounds.PlaySound(0); }
     private void AttackStop()
     {
         if (movementAudioSource.isPlaying) movementAudioSource.Stop();
-        _model.Speed /= 3;
+        _model.Speed /= AttackSpeed;
         _isAttacking = false;
         foreach (var h in hitbox)
         {
@@ -233,7 +238,7 @@ public class Hammer_Controller : MonoBehaviour, IEntityController
 
         gameObject.layer = 30;
         gameObject.GetComponentInChildren<HitBoxController>().damage = 0;
-        _model.Speed *= 10;
+        _model.Speed *= DashSpeed;
 
         Invoke(nameof(StopDashing), 0.3f);
         //Delay Dash
@@ -246,7 +251,7 @@ public class Hammer_Controller : MonoBehaviour, IEntityController
         _isDash = false;
         gameObject.layer = 0;
         gameObject.GetComponentInChildren<HitBoxController>().damage = 5;
-        _model.Speed /= 10;
+        _model.Speed /= DashSpeed;
     }
 
 

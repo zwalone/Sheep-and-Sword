@@ -182,7 +182,7 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
     {
         actionSounds.PlaySound(0);
         _rd2D.constraints = RigidbodyConstraints2D.FreezeAll;
-        _model.HP += 10;
+        _model.HP += 5;
         Invoke(nameof(IsAttack), 1.1f);
 
         enemyHealthBar.SetActive(true);
