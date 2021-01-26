@@ -8,27 +8,13 @@ public class GameController : MonoBehaviour
     public bool WaitingForFirstPosition = true;
     public Vector2 LastCheckpointPosition;
 
-    // UI and music:
-    private GameObject dialog;
-    private GameObject gameoverText;
-    private GameObject restartButton;
-    private GameObject returnButton;
-    private GameObject enemyHealthBar;
-    private AudioSource[] gameAudioSources;
-
     private void Awake()
     {
-        dialog = GameObject.Find("Dialog");
-        gameoverText = GameObject.Find("GameOverText");
-        restartButton = GameObject.Find("RestartGameButton");
-        returnButton = GameObject.Find("GoToMenuButton");
-        enemyHealthBar = GameObject.Find("EnemyHealthBar");
-        dialog.SetActive(false);
-        gameoverText.SetActive(false);
-        restartButton.SetActive(false);
-        returnButton.SetActive(false);
-        enemyHealthBar.SetActive(false);
-        gameAudioSources = GameObject.Find("Music").GetComponents<AudioSource>();
+        GameObject.Find("Dialog").SetActive(false);
+        GameObject.Find("GameOverText").SetActive(false);
+        GameObject.Find("RestartGameButton").SetActive(false);
+        GameObject.Find("GoToMenuButton").SetActive(false);
+        GameObject.Find("EnemyHealthBar").SetActive(false);
 
         if (instance == null)
         {
@@ -40,11 +26,10 @@ public class GameController : MonoBehaviour
 
     public void GameOver()
     {
-        gameoverText.SetActive(true);
-        restartButton.SetActive(true);
-        returnButton.SetActive(true);
-
-        gameAudioSources[0].volume /= 2;
-        gameAudioSources[1].Play();
+        GameObject.Find("UI").transform.Find("GameOverText").gameObject.SetActive(true);
+        GameObject.Find("UI").transform.Find("RestartGameButton").gameObject.SetActive(true);
+        GameObject.Find("UI").transform.Find("GoToMenuButton").gameObject.SetActive(true);
+        GameObject.Find("Music").GetComponents<AudioSource>()[0].volume /= 2;
+        GameObject.Find("Music").GetComponents<AudioSource>()[1].Play();
     }
 }

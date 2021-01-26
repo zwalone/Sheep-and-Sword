@@ -25,12 +25,13 @@ public class DialogShowController : MonoBehaviour
     private void Update()
     {
         if (isDisplayed)
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
                 NextSentence();
     }
 
     public void StartDialog()
     {
+        textDisplay.text = "";
         isDisplayed = true;
         dialog.SetActive(true);
         typing = StartCoroutine(Type());

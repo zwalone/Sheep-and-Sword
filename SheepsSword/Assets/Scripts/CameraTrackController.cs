@@ -17,6 +17,7 @@ public class CameraTrackController : MonoBehaviour
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
         darkEffect = gameObject.GetComponentInChildren<SpriteRenderer>();
+        StartCoroutine(LightsOn());
     }
 
     private void Update()
