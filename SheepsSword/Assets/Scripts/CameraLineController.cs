@@ -12,7 +12,7 @@ public class CameraLineController : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            mainCamera.GetComponent<CameraController>().LockCamera();
+            mainCamera.GetComponent<CameraTrackController>().LockCamera();
         }
     }
 }

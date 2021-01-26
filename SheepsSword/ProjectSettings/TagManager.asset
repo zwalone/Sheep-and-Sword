@@ -9,6 +9,7 @@ TagManager:
   - Checkpoint
   - Checkpoint_Reached
   - Checkpoint_Unreached
+  - EnemyHealthBar
   layers:
   - Default
   - TransparentFX

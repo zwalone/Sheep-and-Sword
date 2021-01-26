@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -52,8 +51,8 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
 
 
     // Boss health bar:
-    //private GameObject enemyHealthBar;
-    //private Image enemyHealthBarFill;
+    private GameObject enemyHealthBar;
+    private Image enemyHealthBarFill;
 
 
     private void Awake()
@@ -63,9 +62,8 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
         _rd2D = this.GetComponent<Rigidbody2D>();
         actionSounds = gameObject.GetComponent<SoundController>();
         movementAudioSource = gameObject.GetComponents<AudioSource>()[1];
-        //enemyHealthBar = GameObject.Find("EnemyHealthBar");
-        //enemyHealthBar.SetActive(true);
-        //enemyHealthBarFill = GameObject.Find("EnemyHealthBar_Fill").GetComponent<Image>();
+        enemyHealthBar = GameObject.Find("UI").transform.Find("EnemyHealthBar").gameObject;
+        enemyHealthBarFill = GameObject.Find("UI").transform.Find("EnemyHealthBar").transform.Find("EnemyHealthBar_Fill").gameObject.GetComponent<Image>();
     }
 
     void Start()
@@ -187,7 +185,8 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
         _model.HP += 10;
         Invoke(nameof(IsAttack), 1.1f);
 
-        //enemyHealthBarFill.fillAmount = (float)ReturnCurrentHP() / ReturnMaxHP();
+        enemyHealthBar.SetActive(true);
+        enemyHealthBarFill.fillAmount = (float)ReturnCurrentHP() / ReturnMaxHP();
     }
 
     //Check and Change direction
