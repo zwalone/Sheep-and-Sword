@@ -53,6 +53,9 @@ public class PlayerController : MonoBehaviour, IEntityController
     public List<AudioClip> movementClips;
     private AudioSource movementAudioSource;
 
+    // For checkpoints:
+    public float checkpointHeightDifference = 0.01f;
+
     private void Awake()
     {
         // Display:
@@ -85,7 +88,8 @@ public class PlayerController : MonoBehaviour, IEntityController
     {
         // Good position:
         gm = GameObject.Find("GameMaster").GetComponent<GameController>();
-        transform.position = gm.LastCheckpointPosition;
+        transform.position = new Vector2(gm.LastCheckpointPosition.x, 
+            gm.LastCheckpointPosition.y - checkpointHeightDifference);
     }
 
     private void Update()
