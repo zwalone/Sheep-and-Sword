@@ -389,6 +389,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: Player
   damage: 20
+  isBoss: 1
 --- !u!1 &9160227320734921309
 GameObject:
   m_ObjectHideFlags: 0
@@ -800,6 +801,8 @@ MonoBehaviour:
   - {fileID: 8802892975764118272}
   _isGroundBottom: {fileID: 6334987033019295993}
   _isGroundOpposite: {fileID: 949138318124579755}
+  SpeedDash: 3
+  SpeedAttack: 3
   _changeDirection: 0
 --- !u!114 &6790712745193472622
 MonoBehaviour:

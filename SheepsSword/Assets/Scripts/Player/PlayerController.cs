@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour, IEntityController
 
         // UI:
         playerHealthBar = GameObject.Find("PlayerHealthBar_Fill").GetComponent<Image>();
-        UpdatePlayerHealthBar((float)model.HP / model.MaxHP);
+        UpdatePlayerHealthBar();
 
         // Sounds:
         movementAudioSource = gameObject.GetComponents<AudioSource>()[1];
@@ -322,7 +322,7 @@ public class PlayerController : MonoBehaviour, IEntityController
         {
             model.HP -= dmg;
             if (model.HP < 0) model.HP = 0;
-            UpdatePlayerHealthBar((float)model.HP / model.MaxHP);
+            UpdatePlayerHealthBar();
         }
 
         // Animate:
@@ -347,12 +347,12 @@ public class PlayerController : MonoBehaviour, IEntityController
         gm.GameOver();
     }
 
-    private void UpdatePlayerHealthBar(float value)
+    public void UpdatePlayerHealthBar()
     {
-        playerHealthBar.fillAmount = value;
+        playerHealthBar.fillAmount = (float)model.HP / model.MaxHP;
         if (playerHealthBar.fillAmount < 0.25f) playerHealthBar.color = Color.red;
-        else if (playerHealthBar.fillAmount < 0.5f) playerHealthBar.color = Color.yellow;
-        else if (playerHealthBar.fillAmount < 0.75f) playerHealthBar.color = new Color(1.0f, 0.64f, 0.0f); //orange
+        else if (playerHealthBar.fillAmount < 0.5f) playerHealthBar.color = new Color(1.0f, 0.64f, 0.0f); //orange
+        else if (playerHealthBar.fillAmount < 0.75f) playerHealthBar.color = Color.yellow;
         else playerHealthBar.color = Color.green;
     }
 

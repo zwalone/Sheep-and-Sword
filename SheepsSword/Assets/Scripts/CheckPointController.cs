@@ -30,6 +30,10 @@ public class CheckPointController : MonoBehaviour
 
         if (collision.CompareTag("Player"))
         {
+            if (gm.LastCheckpointPosition.x != transform.position.x
+                && gm.LastCheckpointPosition.y != transform.position.y)
+                gameObject.GetComponent<AudioSource>().Play();
+
             gm.LastCheckpointPosition = transform.position;
             foreach(Transform child in transform)
             {
@@ -39,7 +43,6 @@ public class CheckPointController : MonoBehaviour
                     child.gameObject.SetActive(true);
             }
             hasBeenReached = true;
-            gameObject.GetComponent<AudioSource>().Play();
         }
     }
 }

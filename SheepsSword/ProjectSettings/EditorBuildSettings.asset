@@ -21,9 +21,9 @@ EditorBuildSettings:
     path: Assets/Scenes/FG_3.unity
     guid: a0de25c3a926722458fe4cf68cb6ee25
   - enabled: 1
-    path: Assets/Scenes/PrototypeLevel.unity
+    path: Assets/Scenes/DM_1.unity
     guid: 9265b53af69ef4f41a593a67e4ebef99
   - enabled: 1
-    path: Assets/Scenes/DM2.unity
+    path: Assets/Scenes/DM_2.unity
     guid: 7b506970d310fec46ad6419b57776005
   m_configObjects: {}

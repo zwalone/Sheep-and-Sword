@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 228630093535444265}
   - component: {fileID: 8026705059417455651}
   m_Layer: 5
-  m_Name: HealthBar_Fill
+  m_Name: PlayerHealthBar_Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 7691377922300027175}
   - component: {fileID: 3384759425950002168}
   m_Layer: 5
-  m_Name: HealthBar_Border
+  m_Name: PlayerHealthBar_Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -159,7 +159,7 @@ GameObject:
   - component: {fileID: 6888744445137605652}
   - component: {fileID: 8618382492496824931}
   m_Layer: 5
-  m_Name: HealthBar 1
+  m_Name: PlayerHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -184,8 +184,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 125.5, y: -32}
-  m_SizeDelta: {x: 200.63, y: 14.166534}
+  m_AnchoredPosition: {x: 176, y: -37.19}
+  m_SizeDelta: {x: 300, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8618382492496824931
 CanvasRenderer:
@@ -207,7 +207,7 @@ GameObject:
   - component: {fileID: 7768072592884157473}
   - component: {fileID: 7768072592884157472}
   m_Layer: 5
-  m_Name: HealthBar_Heart
+  m_Name: PlayerHealthBar_Heart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -229,8 +229,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -96.5, y: -0.0000085834}
-  m_SizeDelta: {x: 22, y: 20}
+  m_AnchoredPosition: {x: -146.3, y: 0.000039101}
+  m_SizeDelta: {x: 35, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7768072592884157473
 CanvasRenderer:

@@ -285,6 +285,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: Player
   damage: 20
+  isBoss: 1
 --- !u!1 &2446705398597773592
 GameObject:
   m_ObjectHideFlags: 0
@@ -798,6 +799,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: Player
   damage: 20
+  isBoss: 1
 --- !u!1 &4454570130639301379
 GameObject:
   m_ObjectHideFlags: 0

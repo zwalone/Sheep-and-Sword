@@ -5,6 +5,7 @@ public class HitBoxController : MonoBehaviour
 {
     public string target = "";
     public int damage = 0;
+    public bool isBoss = false;
     private GameObject enemyHealthBarFill;
     private GameObject enemyHealthBar;
 
@@ -30,19 +31,19 @@ public class HitBoxController : MonoBehaviour
             enemyHealthBar.SetActive(true);
             if (target != "Player" && collision.gameObject != null)
             {
-                CancelInvoke(nameof(HideEnemyHealthBar));
+                if (!isBoss) CancelInvoke(nameof(HideEnemyHealthBar));
                 enemyHealthBarFill = GameObject.Find("EnemyHealthBar_Fill");
                 enemyHealthBarFill.GetComponent<Image>().fillAmount = (float)collision.gameObject.GetComponentInParent<IEntityController>().ReturnCurrentHP()
                     / collision.gameObject.GetComponentInParent<IEntityController>().ReturnMaxHP();
-                Invoke(nameof(HideEnemyHealthBar), 5.0f);
+                if (!isBoss) Invoke(nameof(HideEnemyHealthBar), 5.0f);
             }
             else if (target == "Player")
             {
-                CancelInvoke(nameof(HideEnemyHealthBar));
+                if (!isBoss) CancelInvoke(nameof(HideEnemyHealthBar));
                 enemyHealthBarFill = GameObject.Find("EnemyHealthBar_Fill");
                 enemyHealthBarFill.GetComponent<Image>().fillAmount = (float)gameObject.GetComponentInParent<IEntityController>().ReturnCurrentHP()
                     / gameObject.GetComponentInParent<IEntityController>().ReturnMaxHP();
-                Invoke(nameof(HideEnemyHealthBar), 5.0f);
+                if (!isBoss) Invoke(nameof(HideEnemyHealthBar), 5.0f);
             }
 
             // Hide health bar if enemy died:
