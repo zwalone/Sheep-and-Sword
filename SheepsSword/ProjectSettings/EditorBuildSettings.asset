@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DM_2.unity
     guid: 7b506970d310fec46ad6419b57776005
+  - enabled: 1
+    path: Assets/Scenes/Outro.unity
+    guid: 98b1653be182b264b87bff5a8899e6e7
   m_configObjects: {}
