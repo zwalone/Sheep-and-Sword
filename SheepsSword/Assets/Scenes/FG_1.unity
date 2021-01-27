@@ -573,6 +573,11 @@ PrefabInstance:
       propertyPath: textDisplay
       value: 
       objectReference: {fileID: 1996451262}
+    - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: typingSpeed
+      value: 0.02
+      objectReference: {fileID: 0}
     - target: {fileID: 3373912202178638275, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -30139,17 +30144,17 @@ PrefabInstance:
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
       propertyPath: sentences.Array.data[0]
-      value: 'MAN: SOMEBODY KINDAPPED MY SHEEP!'
+      value: SOMEBODY KINDAPPED MY SHEEP!
       objectReference: {fileID: 0}
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
       propertyPath: sentences.Array.data[1]
-      value: 'MAN: POOR SHEEP! SHE''S SO SCARED!'
+      value: POOR SHEEP! SHE'S SO SCARED!
       objectReference: {fileID: 0}
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
       propertyPath: sentences.Array.data[2]
-      value: 'MAN: I NEED TO FIND HER!'
+      value: I NEED TO FIND HER!
       objectReference: {fileID: 0}
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
@@ -30726,7 +30731,7 @@ PrefabInstance:
     - target: {fileID: 2619413884443844657, guid: 6d8abc57ae1e0354bb53c9691ce21fe2,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 57.5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2619413884443844669, guid: 6d8abc57ae1e0354bb53c9691ce21fe2,
         type: 3}
@@ -30840,7 +30845,7 @@ PrefabInstance:
     - target: {fileID: 6762862609323666493, guid: 25ca8486c8759f84caeef795059e1ffd,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 31.7
+      value: 29.03
       objectReference: {fileID: 0}
     - target: {fileID: 6762862609323666493, guid: 25ca8486c8759f84caeef795059e1ffd,
         type: 3}

@@ -1215,6 +1215,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1055217248}
     m_Modifications:
+    - target: {fileID: 7449697867559578312, guid: e8be5c33833de53479668a9d69233cf2,
+        type: 3}
+      propertyPath: m_Text
+      value: '''Sheep and Sword'' is a story in which you play as shepherd''s son
+        who just lost his father. All he has now is his sheep and the sword that
+        in the past belonged to his grandfather. But it''s not the end of the series
+        of unfortunate events. One day somebody kidnaps the sheep and the young man
+        needs to start the most dangerous journey in his life.'
+      objectReference: {fileID: 0}
     - target: {fileID: 7449697867746775272, guid: e8be5c33833de53479668a9d69233cf2,
         type: 3}
       propertyPath: m_FontData.m_FontSize

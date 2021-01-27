@@ -2426,7 +2426,7 @@ MonoBehaviour:
   - 
   - Sheeeep?! Are you there?!
   - Nooo! I won't let you hurt her!
-  typingSpeed: 0.03
+  typingSpeed: 0.02
 --- !u!1001 &1759887412
 PrefabInstance:
   m_ObjectHideFlags: 0
