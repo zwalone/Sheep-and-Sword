@@ -7,6 +7,7 @@ public class OutroController : MonoBehaviour
     // Event:
     private GameObject dialog;
     private GameObject mainCamera;
+    private GameObject credits;
     private AudioSource[] sounds;
 
     private void Awake()
@@ -14,6 +15,7 @@ public class OutroController : MonoBehaviour
         sounds = GameObject.Find("Music").GetComponents<AudioSource>();
         dialog = GameObject.Find("Dialog").gameObject;
         mainCamera = GameObject.Find("Main Camera");
+        credits = GameObject.Find("UI").transform.Find("CreditBoard").gameObject;
         dialog.GetComponent<OutroDialogController>().StartDialog();
     }
 
@@ -21,18 +23,23 @@ public class OutroController : MonoBehaviour
     {
         sounds[0].Stop();
         sounds[1].Play();
-        Invoke(nameof(Credits), 1.0f);
+        Invoke(nameof(EndScene2), 1.0f);
     }
-    private void Credits()
+    private void EndScene2()
     {
         sounds[2].Play();
         StartCoroutine(mainCamera.GetComponent<CameraTrackController>().LightsOff());
         StartCoroutine(VolumeUp());
-
-        // credits here
-
-        Invoke(nameof(ReturnToMenu), 1.0f);
+        Invoke(nameof(ShowCredits), 3.0f);
+        Invoke(nameof(StartVolumeDown), 10.0f);
+        Invoke(nameof(ReturnToMenu), 15.0f);
     }
+    private void ShowCredits() 
+    { 
+        credits.SetActive(true);
+        GameObject.Find("UI").GetComponent<Animator>().Play("CreditsAnimation");
+    }
+    private void StartVolumeDown() { StartCoroutine(VolumeDown());  }
 
     private IEnumerator VolumeUp()
     {
@@ -41,6 +48,15 @@ public class OutroController : MonoBehaviour
         {
             music.volume += 0.01f;
             yield return new WaitForSeconds(0.2f);
+        }
+    }
+    private IEnumerator VolumeDown()
+    {
+        AudioSource music = sounds[2];
+        while (music.volume > 0)
+        {
+            music.volume -= 0.02f;
+            yield return new WaitForSeconds(0.5f);
         }
     }
 
