@@ -67,7 +67,7 @@ public class OutroDialogController : MonoBehaviour
             gameObject.SetActive(false);
             textDisplay.text = "";
             isDisplayed = false;
-            GameObject.Find("GameMaster").GetComponent<OutroController>().EndScene();
+            GameObject.Find("OutroMaster").GetComponent<OutroController>().EndScene();
         }
     }
 }

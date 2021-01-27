@@ -8,7 +8,6 @@ public class OutroController : MonoBehaviour
     private GameObject dialog;
     private GameObject mainCamera;
     private GameObject credits;
-    [SerializeField]
     private GameObject UI;
     private AudioSource[] sounds;
 
@@ -17,6 +16,7 @@ public class OutroController : MonoBehaviour
         sounds = GameObject.Find("Music").GetComponents<AudioSource>();
         dialog = GameObject.Find("Dialog").gameObject;
         mainCamera = GameObject.Find("Main Camera");
+        UI = GameObject.Find("UI");
         credits = GameObject.Find("UI").transform.Find("CreditBoard").gameObject;
         dialog.GetComponent<OutroDialogController>().StartDialog();
     }
@@ -32,9 +32,9 @@ public class OutroController : MonoBehaviour
         sounds[2].Play();
         StartCoroutine(mainCamera.GetComponent<CameraTrackController>().LightsOff());
         StartCoroutine(VolumeUp());
-        Invoke(nameof(ShowCredits), 3.0f);
+        Invoke(nameof(ShowCredits), 2.0f);
         Invoke(nameof(StartVolumeDown), 10.0f);
-        Invoke(nameof(ReturnToMenu), 20.0f);
+        Invoke(nameof(ReturnToMenu), 18.0f);
     }
     private void ShowCredits() 
     { 
@@ -63,5 +63,5 @@ public class OutroController : MonoBehaviour
     }
 
     private void SheepSound() { GameObject.Find("Music").GetComponents<AudioSource>()[1].Play(); }
-    private void ReturnToMenu() { SceneManager.LoadScene(0); }
+    private void ReturnToMenu() { SceneManager.LoadScene(0); Destroy(GameObject.Find("GameMaster")); }
 }

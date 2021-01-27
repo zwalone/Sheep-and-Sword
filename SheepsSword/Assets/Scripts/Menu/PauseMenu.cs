@@ -46,11 +46,12 @@ public class PauseMenu : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
-        Debug.Log("Game is exit");
     }
 
     public void MainMenu()
     {
         SceneManager.LoadScene(0);
+        Time.timeScale = 1;
+        Destroy(GameObject.Find("GameMaster"));
     }
 }
