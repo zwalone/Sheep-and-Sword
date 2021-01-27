@@ -507,6 +507,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 48c4d2db927bc8246ab22cc5f3c12064, type: 3}
   - {fileID: 8300000, guid: 413f2fe27f615824e892a568950df06a, type: 3}
   - {fileID: 8300000, guid: 21e3d0e7a05d0f142b35ce41ae14e601, type: 3}
+  checkpointHeightDifference: 0.4
 --- !u!1 &8876845736051774822
 GameObject:
   m_ObjectHideFlags: 0

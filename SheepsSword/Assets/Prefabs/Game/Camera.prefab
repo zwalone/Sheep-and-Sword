@@ -128,8 +128,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  offsetPosition: {x: 0, y: 2, z: -1}
-  darkEffectSpeed: 0.03
+  offsetPosition: {x: 0, y: 1, z: -20}
+  darkEffectSpeed: 0.01
 --- !u!20 &2110625627314452515
 Camera:
   m_ObjectHideFlags: 0

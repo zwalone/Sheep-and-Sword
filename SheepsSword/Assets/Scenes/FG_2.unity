@@ -784,7 +784,7 @@ PrefabInstance:
     - target: {fileID: 2110625627314452513, guid: f60e30a0636e2e34d995ce96e08d8412,
         type: 3}
       propertyPath: darkEffectSpeed
-      value: 0.03
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 2110625627314452514, guid: f60e30a0636e2e34d995ce96e08d8412,
         type: 3}
