@@ -79,7 +79,10 @@ public class PlayerController : MonoBehaviour, IEntityController
         // Sounds:
         movementAudioSource = gameObject.GetComponents<AudioSource>()[1];
         actionSounds = gameObject.GetComponent<SoundController>();
+    }
 
+    private void Start()
+    {
         // Good position:
         gm = GameObject.Find("GameMaster").GetComponent<GameController>();
         transform.position = gm.LastCheckpointPosition;
@@ -362,12 +365,12 @@ public class PlayerController : MonoBehaviour, IEntityController
         // Flip:
         if (!IsDead && !isReading)
         {
-            if (view.LookRight == true && Input.GetAxisRaw("Horizontal") < 0)
+            if (Input.GetAxisRaw("Horizontal") < 0)
             {
                 playerGraphics.GetComponent<SpriteRenderer>().flipX = true;
                 view.LookRight = false;
             }
-            if (view.LookRight == false && Input.GetAxisRaw("Horizontal") > 0)
+            if (Input.GetAxisRaw("Horizontal") > 0)
             {
                 playerGraphics.GetComponent<SpriteRenderer>().flipX = false;
                 view.LookRight = true;

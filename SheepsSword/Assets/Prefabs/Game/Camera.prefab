@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 2110625627169904840}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 5}
-  m_LocalScale: {x: 1000, y: 1000, z: 0}
+  m_LocalScale: {x: 500, y: 500, z: 0}
   m_Children: []
   m_Father: {fileID: 2110625627314452514}
   m_RootOrder: 0
@@ -69,9 +69,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 42d1c7d00f9cc0644ba5be33d01ceaf7, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 2110625627314452515}
   - component: {fileID: 2110625627314452516}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   offsetPosition: {x: 0, y: 2, z: -1}
-  darkEffectSpeed: 0.01
+  darkEffectSpeed: 0.03
 --- !u!20 &2110625627314452515
 Camera:
   m_ObjectHideFlags: 0

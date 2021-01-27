@@ -68695,7 +68695,7 @@ PrefabInstance:
     - target: {fileID: 3427507811513498958, guid: a86f2e4d9ee754c40b5b3b56ab8174fa,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 3427507811513498958, guid: a86f2e4d9ee754c40b5b3b56ab8174fa,
         type: 3}
@@ -68970,6 +68970,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8300406169178771969, guid: 503c72a7f03a1d340be18b839b18b220,
+        type: 3}
+      propertyPath: m_FlipX
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8876845735882930965, guid: 503c72a7f03a1d340be18b839b18b220,
         type: 3}
       propertyPath: m_Name
@@ -69153,7 +69158,7 @@ PrefabInstance:
     - target: {fileID: 2110625627169904854, guid: f60e30a0636e2e34d995ce96e08d8412,
         type: 3}
       propertyPath: m_Color.a
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2110625627314452513, guid: f60e30a0636e2e34d995ce96e08d8412,
         type: 3}
