@@ -8,6 +8,8 @@ public class OutroController : MonoBehaviour
     private GameObject dialog;
     private GameObject mainCamera;
     private GameObject credits;
+    [SerializeField]
+    private GameObject UI;
     private AudioSource[] sounds;
 
     private void Awake()
@@ -37,7 +39,8 @@ public class OutroController : MonoBehaviour
     private void ShowCredits() 
     { 
         credits.SetActive(true);
-        GameObject.Find("UI").GetComponent<Animator>().Play("CreditsAnimation");
+        UI.GetComponent<Animator>().Play("CreditsAnimation");
+        Debug.Log("PLAYING elo");
     }
     private void StartVolumeDown() { StartCoroutine(VolumeDown());  }
 
