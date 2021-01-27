@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
+        WaitingForFirstPosition = true;
         GameObject.Find("Dialog").SetActive(false);
         GameObject.Find("GameOverText").SetActive(false);
         GameObject.Find("RestartGameButton").SetActive(false);

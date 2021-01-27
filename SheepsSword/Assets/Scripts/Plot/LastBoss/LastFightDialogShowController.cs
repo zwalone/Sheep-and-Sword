@@ -80,4 +80,16 @@ public class LastFightDialogShowController : MonoBehaviour
             sounds[0].Play();
         }
     }
+
+    public void BossMusicVolumeDown() { StartCoroutine(VolumeDown()); }
+
+    private IEnumerator VolumeDown()
+    {
+        AudioSource music = GameObject.Find("Music").GetComponents<AudioSource>()[0];
+        while (music.volume > 0)
+        {
+            music.volume -= 0.01f;
+            yield return new WaitForSeconds(0.05f);
+        }
+    }
 }

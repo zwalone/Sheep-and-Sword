@@ -24,18 +24,8 @@ public class HammerPostDieController : MonoBehaviour
             itIsDone = true;
             Wall.SetActive(false);
             foreach (var h in Hole) h.SetActive(false);
-            StartCoroutine(VolumeDown());
+            GameObject.Find("DialogPoint").GetComponent<LastFightDialogShowController>().BossMusicVolumeDown();
             sounds[3].Play();
-        }
-    }
-
-    private IEnumerator VolumeDown()
-    {
-        AudioSource music = sounds[0];
-        while (music.volume > 0)
-        {
-            music.volume -= 0.01f;
-            yield return new WaitForSeconds(0.1f);
         }
     }
 }

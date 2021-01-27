@@ -20,9 +20,9 @@ public class IntroController : MonoBehaviour
         StartCoroutine(mainCamera.GetComponent<CameraTrackController>().LightsOff());
         StartCoroutine(VolumeDown());
         Invoke(nameof(SheepSound), 6.0f);
+        Invoke(nameof(SheepSound), 8.0f);
         Invoke(nameof(SheepSound), 10.0f);
-        Invoke(nameof(SheepSound), 13.0f);
-        Invoke(nameof(NewLevel), 15.0f);
+        Invoke(nameof(NewLevel), 12.0f);
     }
 
     private IEnumerator VolumeDown()
