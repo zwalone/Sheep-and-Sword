@@ -17,6 +17,7 @@ public class IntroController : MonoBehaviour
 
     public void EndScene()
     {
+        StopCoroutine(mainCamera.GetComponent<CameraTrackController>().lightsOn);
         StartCoroutine(mainCamera.GetComponent<CameraTrackController>().LightsOff());
         StartCoroutine(VolumeDown());
         Invoke(nameof(SheepSound), 6.0f);

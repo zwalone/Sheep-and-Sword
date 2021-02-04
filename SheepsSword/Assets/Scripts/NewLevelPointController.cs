@@ -21,12 +21,13 @@ public class NewLevelPointController : MonoBehaviour
             hasBeenReached = true;
             gm.WaitingForFirstPosition = true;
             StartCoroutine(mainCamera.GetComponent<CameraTrackController>().LightsOff());
-            Invoke(nameof(NewLevel), 1.0f);
+            Invoke(nameof(NewLevel), 1.25f);
         }
     }
 
     private void NewLevel()
     {
+        Destroy(GameObject.Find("GameMaster"));
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
