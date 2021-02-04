@@ -10,12 +10,6 @@ public class OutroDialogController : MonoBehaviour
     public float typingSpeed;
     private Coroutine typing;
     private bool isDisplayed = false;
-    private AudioSource[] sounds;
-
-    private void Awake()
-    {
-        sounds = GameObject.Find("Music").GetComponents<AudioSource>();
-    }
 
     private void Update()
     {
@@ -33,18 +27,17 @@ public class OutroDialogController : MonoBehaviour
 
     public IEnumerator Type()
     {
-        gameObject.GetComponent<AudioSource>().Play();
+        gameObject.GetComponent<SoundController>().PlaySound(index);
         foreach (char letter in sentences[index].ToCharArray())
         {
             textDisplay.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
-        gameObject.GetComponent<AudioSource>().Stop();
 
         if (index == 0)
         {
             yield return new WaitForSeconds(1.0f);
-            sounds[1].Play();
+            GameObject.Find("Music").GetComponents<AudioSource>()[1].Play();
         }
     }
 

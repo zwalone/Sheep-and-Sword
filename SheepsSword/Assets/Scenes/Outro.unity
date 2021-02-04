@@ -128,6 +128,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3044678451861393548, guid: 1d0c42ce46c5bdb41914dcc5bb419718,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5771970276287064323, guid: 1d0c42ce46c5bdb41914dcc5bb419718,
         type: 3}
       propertyPath: m_Name
@@ -778,9 +783,25 @@ MonoBehaviour:
   textDisplay: {fileID: 1237771153}
   sentences:
   - Oh, sheep, my dear sheep!
-  - I was so worried... I... was looking for you for so long...
+  - I was so worried... I was looking for you for so long...
   - I am so glad that you're safe now. Let's go home.
-  typingSpeed: 0.02
+  typingSpeed: 0.05
+--- !u!114 &541714403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 541714400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90cadfcd2f9a0fb4792413fbdddb9016, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClip:
+  - {fileID: 8300000, guid: 42ea70950b451344388a654e436902e1, type: 3}
+  - {fileID: 8300000, guid: 79dc14b3c0dd89d4e8a76b099a6d95f9, type: 3}
+  - {fileID: 8300000, guid: b80c59efb4568c44eb0fad0821bb6c71, type: 3}
 --- !u!1 &658565382 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3006686844494175935, guid: 830e33f1c8bdf13499fbbd4985b8b3ab,

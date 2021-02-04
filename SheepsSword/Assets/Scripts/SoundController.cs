@@ -8,11 +8,12 @@ public class SoundController : MonoBehaviour
 
     void Awake()
     {
-        audioSource = GetComponents<AudioSource>()[0];
+        audioSource = gameObject.GetComponents<AudioSource>()[0];
     }
 
     public void PlaySound(int indexOfAudioClip)
     {
+        if (audioSource == null) audioSource = gameObject.GetComponents<AudioSource>()[0];
         audioSource.Stop();
         audioSource.clip = audioClip[indexOfAudioClip];
         audioSource.Play();

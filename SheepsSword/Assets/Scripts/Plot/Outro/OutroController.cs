@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class OutroController : MonoBehaviour
 {
     // Event:
-    private GameObject dialog;
+    private OutroDialogController dialog;
     private GameObject mainCamera;
     private GameObject credits;
     private GameObject UI;
@@ -14,11 +14,14 @@ public class OutroController : MonoBehaviour
     private void Awake()
     {
         sounds = GameObject.Find("Music").GetComponents<AudioSource>();
-        dialog = GameObject.Find("Dialog").gameObject;
         mainCamera = GameObject.Find("Main Camera");
         UI = GameObject.Find("UI");
+        dialog = UI.transform.Find("Dialog").GetComponent<OutroDialogController>();
         credits = GameObject.Find("UI").transform.Find("CreditBoard").gameObject;
-        dialog.GetComponent<OutroDialogController>().StartDialog();
+    }
+    private void Start()
+    {
+        dialog.StartDialog();
     }
 
     public void EndScene()
