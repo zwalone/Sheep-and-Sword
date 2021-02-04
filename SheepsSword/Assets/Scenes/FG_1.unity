@@ -429,6 +429,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3044678451861393548, guid: 174ac70a4f0264d4a8a319c1cce647aa,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -8929267164231188436, guid: 3f1cc7920e0e4394db21bb3755573972,
+        type: 2}
     - target: {fileID: 3044678452571871560, guid: 174ac70a4f0264d4a8a319c1cce647aa,
         type: 3}
       propertyPath: m_AnchoredPosition.x

@@ -2879,6 +2879,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1620136685010915292, guid: 174ac70a4f0264d4a8a319c1cce647aa,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -35.25
+      objectReference: {fileID: 0}
     - target: {fileID: 5771970276287064323, guid: 174ac70a4f0264d4a8a319c1cce647aa,
         type: 3}
       propertyPath: m_Name
@@ -9215,7 +9220,7 @@ PrefabInstance:
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
       propertyPath: sentences.Array.data[0]
-      value: That was really long way up here...
+      value: That was really long way...
       objectReference: {fileID: 0}
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
