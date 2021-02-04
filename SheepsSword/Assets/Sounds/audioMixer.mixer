@@ -44,7 +44,7 @@ AudioMixerGroupController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Sound Group
+  m_Name: Effect Group
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: eb6b73833a0f4cf4c85c0e797e923cee
   m_Children: []
@@ -73,8 +73,14 @@ AudioMixerController:
   m_EnableSuspend: 1
   m_UpdateMode: 0
   m_ExposedParameters:
+  - guid: 804796643dd643044b1304e091e2e999
+    name: Dialog
   - guid: d1ac384dc843d4345a1655ebdbff160f
-    name: volume
+    name: MyExposedParam
+  - guid: f63b8dbcbcdb36c43b32e39b4e101f1b
+    name: Music
+  - guid: af87f9c7a7ac8ce4eba7713b20ed7834
+    name: Effect
   m_AudioMixerGroupViews:
   - guids:
     - c0aa337c1e5affa4e9f65d9db1a096d9
@@ -130,7 +136,10 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: f84ff4c5194127f4d95657e6158ee9a3
   m_FloatValues:
-    f63b8dbcbcdb36c43b32e39b4e101f1b: 0
+    804796643dd643044b1304e091e2e999: -18.547323
+    af87f9c7a7ac8ce4eba7713b20ed7834: -14.775571
+    f63b8dbcbcdb36c43b32e39b4e101f1b: -15.993548
+    d1ac384dc843d4345a1655ebdbff160f: 0
   m_TransitionOverrides: {}
 --- !u!244 &614934270043776410
 AudioMixerEffectController:
