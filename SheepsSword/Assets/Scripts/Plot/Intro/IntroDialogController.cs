@@ -58,6 +58,7 @@ public class IntroDialogController : MonoBehaviour
             gameObject.SetActive(false);
             textDisplay.text = "";
             isDisplayed = false;
+            gameObject.GetComponent<AudioSource>().Stop();
             GameObject.Find("IntroMaster").GetComponent<IntroController>().EndScene();
         }
     }

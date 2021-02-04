@@ -2350,6 +2350,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogPoint
       objectReference: {fileID: 0}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: eccb820f433fed347b3ef10ebcb3b7d9, type: 3}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 05a22c3f9935a3e4ab04ee1592c11cb5, type: 3}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 5d4c3432896447d448391fd08a59e325, type: 3}
     m_RemovedComponents:
     - {fileID: 3373912202178638273, guid: b5383c7c2e4dde845886e6f821ede57b, type: 3}
     - {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b, type: 3}
@@ -2485,7 +2505,7 @@ MonoBehaviour:
   - 
   - Sheeeep?! Are you there?!
   - Nooo! I won't let you hurt her!
-  typingSpeed: 0.02
+  typingSpeed: 0.05
 --- !u!1001 &1759887412
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2824,6 +2844,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1620136685010915292, guid: 174ac70a4f0264d4a8a319c1cce647aa,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -35.225098
+      objectReference: {fileID: 0}
     - target: {fileID: 3044678452571871560, guid: 174ac70a4f0264d4a8a319c1cce647aa,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -2949,7 +2974,8 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3044678451861393548, guid: 174ac70a4f0264d4a8a319c1cce647aa, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 174ac70a4f0264d4a8a319c1cce647aa, type: 3}
 --- !u!114 &1965726536 stripped
 MonoBehaviour:

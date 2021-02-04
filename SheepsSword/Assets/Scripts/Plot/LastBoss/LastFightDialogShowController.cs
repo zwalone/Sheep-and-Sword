@@ -41,18 +41,18 @@ public class LastFightDialogShowController : MonoBehaviour
 
     public IEnumerator Type()
     {
-        dialog.GetComponent<AudioSource>().Play();
+        gameObject.GetComponent<SoundController>().PlaySound(index);
         foreach (char letter in sentences[index].ToCharArray())
         {
             textDisplay.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
-        dialog.GetComponent<AudioSource>().Stop();
 
         if (index == 2)
         {
+            yield return new WaitForSeconds(0.5f);
             sounds[1].Play();
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(0.5f);
             sounds[2].Play();
         }
     }
@@ -68,6 +68,7 @@ public class LastFightDialogShowController : MonoBehaviour
                 index++;
             }
             if (sentences[index - 1] != "") textDisplay.text = "";
+            else textDisplay.text = sentences[index - 2] + " ";
             StopCoroutine(typing);
             typing = StartCoroutine(Type());
         }

@@ -60,6 +60,7 @@ public class OutroDialogController : MonoBehaviour
             gameObject.SetActive(false);
             textDisplay.text = "";
             isDisplayed = false;
+            gameObject.GetComponent<AudioSource>().Stop();
             GameObject.Find("OutroMaster").GetComponent<OutroController>().EndScene();
         }
     }

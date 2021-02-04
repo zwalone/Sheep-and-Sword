@@ -39,13 +39,12 @@ public class DialogShowController : MonoBehaviour
 
     public IEnumerator Type()
     {
-        dialog.GetComponent<AudioSource>().Play();
+        gameObject.GetComponent<SoundController>().PlaySound(index);
         foreach (char letter in sentences[index].ToCharArray())
         {
             textDisplay.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
-        dialog.GetComponent<AudioSource>().Stop();
     }
 
     public void NextSentence() 
@@ -63,6 +62,7 @@ public class DialogShowController : MonoBehaviour
             textDisplay.text = "";
             isDisplayed = false;
             playerInfo.StopReading();
+            gameObject.GetComponent<AudioSource>().Stop();
         }
     }
 }

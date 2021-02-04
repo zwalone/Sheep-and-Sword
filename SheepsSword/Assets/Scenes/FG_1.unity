@@ -593,12 +593,12 @@ PrefabInstance:
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
       propertyPath: typingSpeed
-      value: 0.02
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: 3373912202178638275, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.0005665
+      value: 11.74
       objectReference: {fileID: 0}
     - target: {fileID: 3373912202178638275, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
@@ -650,11 +650,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3373912202178638275, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3373912202178638285, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
       propertyPath: m_Name
       value: DialogPoint 8
       objectReference: {fileID: 0}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 444edf5178d911c4991b4f1e76796715, type: 3}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: dc0469ef73d862f49a7df40e71de3845, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5383c7c2e4dde845886e6f821ede57b, type: 3}
 --- !u!4 &530309681 stripped
@@ -708,7 +728,7 @@ PrefabInstance:
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
       propertyPath: typingSpeed
-      value: 0.02
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
@@ -775,6 +795,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogPoint 5
       objectReference: {fileID: 0}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: d1d996084a847f54e821555b9c348cd3, type: 3}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 34d5294cfed5a7344a7d6d723aebd626, type: 3}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0e4f41d3daf5aab44a7eef8965c73fc9, type: 3}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 404cf22c92cca914bb5360571d9fa91e, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5383c7c2e4dde845886e6f821ede57b, type: 3}
 --- !u!4 &635254725 stripped
@@ -1272,7 +1317,7 @@ PrefabInstance:
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
       propertyPath: typingSpeed
-      value: 0.02
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
@@ -1339,6 +1384,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogPoint 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: c92825f48df4cb64cb73469a3da460c2, type: 3}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0fd0a3fbb50e3da42857495c5333ddee, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5383c7c2e4dde845886e6f821ede57b, type: 3}
 --- !u!4 &776197001 stripped
@@ -1392,7 +1452,7 @@ PrefabInstance:
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
       propertyPath: typingSpeed
-      value: 0.02
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
@@ -1459,6 +1519,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogPoint 4
       objectReference: {fileID: 0}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 4dfef027a95b457468199177af0c9ce9, type: 3}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 74e819d088c39154897e9140e42e84f8, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5383c7c2e4dde845886e6f821ede57b, type: 3}
 --- !u!4 &860176820 stripped
@@ -1576,12 +1651,12 @@ PrefabInstance:
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
       propertyPath: sentences.Array.data[3]
-      value: To jump, press W or UP.
+      value: To jump, press UP arrow or W button.
       objectReference: {fileID: 0}
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
       propertyPath: typingSpeed
-      value: 0.02
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
@@ -1648,6 +1723,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogPoint 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 54d4693904a18ea48a77bb4ef02c8028, type: 3}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 228fb099ef46edc45b9f2407a03333c4, type: 3}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 024d8d797426d7647acc0f19da3ac658, type: 3}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: cab162191ff9d874693f00ef2fc742c2, type: 3}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: f0354a5e6a20c7e4b977f26b1003d5c0, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5383c7c2e4dde845886e6f821ede57b, type: 3}
 --- !u!1001 &886246265
@@ -1875,12 +1980,12 @@ PrefabInstance:
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
       propertyPath: sentences.Array.data[3]
-      value: To crouch, simply press DOWN or S button.
+      value: To crouch, simply press DOWN or S.
       objectReference: {fileID: 0}
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
       propertyPath: typingSpeed
-      value: 0.02
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
@@ -1947,6 +2052,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogPoint 6
       objectReference: {fileID: 0}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 1cf0df5a0e1707a43a401de38468ac74, type: 3}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 453b207dedd3dd040ab903e6f46b1228, type: 3}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: a87d6d2a0864342439d8c5aeeb5fc40b, type: 3}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: cba180df53f2965409d1f91fc27704fb, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5383c7c2e4dde845886e6f821ede57b, type: 3}
 --- !u!1001 &1006212360
@@ -29737,7 +29867,7 @@ PrefabInstance:
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
       propertyPath: sentences.Array.data[1]
-      value: To double-jump, press W or UP again while you are in air.
+      value: To double-jump, press W or UP while you're in the air.
       objectReference: {fileID: 0}
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
@@ -29752,7 +29882,7 @@ PrefabInstance:
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
       propertyPath: typingSpeed
-      value: 0.02
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
@@ -29819,6 +29949,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogPoint 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: bde196e4a35136e468dfdb0a6657fbcb, type: 3}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 64976c971b6afa14995bcc41d3172377, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5383c7c2e4dde845886e6f821ede57b, type: 3}
 --- !u!1 &1434065084
@@ -30374,7 +30519,7 @@ PrefabInstance:
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
       propertyPath: typingSpeed
-      value: 0.02
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
@@ -30441,6 +30586,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogPoint 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 1bc66ee0379ab9b4bbc38d4b6fee89d4, type: 3}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 8475f947070eab34aa980353e4d85c30, type: 3}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 311d82300b3946e4f9535f533f61b041, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5383c7c2e4dde845886e6f821ede57b, type: 3}
 --- !u!1001 &1851962213
@@ -30488,7 +30653,7 @@ PrefabInstance:
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
       propertyPath: typingSpeed
-      value: 0.02
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
@@ -30555,6 +30720,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogPoint 7
       objectReference: {fileID: 0}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 966cada0dcb439a46bde4cada4764727, type: 3}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 8b5bdfedcb2616b46a71d86c4f89e4bc, type: 3}
+    - target: {fileID: 8241897573038246268, guid: b5383c7c2e4dde845886e6f821ede57b,
+        type: 3}
+      propertyPath: audioClip.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: ef11086b84bbbd247b87bb3042a4ff2f, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5383c7c2e4dde845886e6f821ede57b, type: 3}
 --- !u!1001 &1941933990
@@ -30824,6 +31009,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3006686844494175932, guid: 830e33f1c8bdf13499fbbd4985b8b3ab,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 3006686844494175933, guid: 830e33f1c8bdf13499fbbd4985b8b3ab,
         type: 3}
       propertyPath: m_LocalPosition.x
