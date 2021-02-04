@@ -4,11 +4,14 @@ using UnityEngine.UI;
 
 public class IntroDialogController : MonoBehaviour
 {
+    // displaying text:
     public Text textDisplay;
     public string[] sentences;
-    private int index;
+    private int index = 0;
     public float typingSpeed;
     private Coroutine typing;
+
+    // general:
     private bool isDisplayed = false;
 
     private void Update()
@@ -27,13 +30,12 @@ public class IntroDialogController : MonoBehaviour
 
     public IEnumerator Type()
     {
-        gameObject.GetComponent<AudioSource>().Play();
+        gameObject.GetComponent<SoundController>().PlaySound(index);
         foreach (char letter in sentences[index].ToCharArray())
         {
             textDisplay.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
-        gameObject.GetComponent<AudioSource>().Stop();
     }
 
     public void NextSentence()
@@ -46,7 +48,8 @@ public class IntroDialogController : MonoBehaviour
                 textDisplay.text += " ";
                 index++;
             }
-            if(sentences[index - 1] != "") textDisplay.text = "";
+            if (sentences[index - 1] != "") textDisplay.text = "";
+            else textDisplay.text = sentences[index - 2] + " ";
             StopCoroutine(typing);
             typing = StartCoroutine(Type());
         }

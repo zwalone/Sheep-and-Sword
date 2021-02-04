@@ -6,7 +6,7 @@ public class SoundController : MonoBehaviour
     AudioSource audioSource;
     public List<AudioClip> audioClip;
 
-    void Start()
+    void Awake()
     {
         audioSource = GetComponents<AudioSource>()[0];
     }

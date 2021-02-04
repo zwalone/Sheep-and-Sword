@@ -378,6 +378,25 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 968541540}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &305456875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 305456874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90cadfcd2f9a0fb4792413fbdddb9016, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClip:
+  - {fileID: 8300000, guid: e0e28be30000e2c4f86bdf523c39a7c8, type: 3}
+  - {fileID: 8300000, guid: 1dce869023f224249a730297c599483a, type: 3}
+  - {fileID: 8300000, guid: 13121b758e26472499d8db13cde3308d, type: 3}
+  - {fileID: 8300000, guid: 146290bd87d2e6448ad715bb35eaa13f, type: 3}
+  - {fileID: 0}
+  - {fileID: 8300000, guid: 1d64bebac97f4c846ad0eea3cbb1632a, type: 3}
 --- !u!114 &305456876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -399,7 +418,7 @@ MonoBehaviour:
   - This story begins with tragic past, but bad things can't forever last...
   - 
   - Right?
-  typingSpeed: 0.02
+  typingSpeed: 0.06
 --- !u!1001 &347583928
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -596,6 +615,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -8929267164231188436, guid: 3f1cc7920e0e4394db21bb3755573972,
         type: 2}
+    - target: {fileID: 3044678451861393548, guid: 1d0c42ce46c5bdb41914dcc5bb419718,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4400df1006b557347aba4e42056156eb, type: 3}
     - target: {fileID: 5771970276287064323, guid: 1d0c42ce46c5bdb41914dcc5bb419718,
         type: 3}
       propertyPath: m_Name
