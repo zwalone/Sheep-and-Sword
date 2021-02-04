@@ -138,7 +138,7 @@ public class PlayerController : MonoBehaviour, IEntityController
 
     private void Move()
     {
-        if (IsDead || isReading)
+        if (IsDead || isReading || Time.timeScale != 1)
         {
             rigbody.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
             return; 
@@ -202,7 +202,7 @@ public class PlayerController : MonoBehaviour, IEntityController
 
     private void Jump()
     {
-        if (IsDead || isReading) return;
+        if (IsDead || isReading || Time.timeScale != 1) return;
 
         if (isGrounded || isWalled != 0) canSomerSault = true;
 
@@ -244,7 +244,7 @@ public class PlayerController : MonoBehaviour, IEntityController
 
     private void Crouch()
     {
-        if (IsDead || isReading) return;
+        if (IsDead || isReading || Time.timeScale != 1) return;
 
         if (isGrounded)
         {
@@ -289,7 +289,7 @@ public class PlayerController : MonoBehaviour, IEntityController
 
     private void Attack()
     {
-        if (IsDead || isReading) return;
+        if (IsDead || isReading || Time.timeScale != 1) return;
 
         if (Input.GetKeyDown(KeyCode.Space) && isWalled == 0 && !isAttacking && !IsHurting)
         {
@@ -366,6 +366,8 @@ public class PlayerController : MonoBehaviour, IEntityController
 
     private void Animate()
     {
+        if (Time.timeScale != 1) return;
+
         // Flip:
         if (!IsDead && !isReading)
         {
@@ -422,8 +424,10 @@ public class PlayerController : MonoBehaviour, IEntityController
 
     private void Soundimate()
     {
+        // In pause-menu:
+        if (Time.timeScale != 1) movementAudioSource.Stop();
         // Running:
-        if (rigbody.velocity.x != 0 && isGrounded && !IsHurting
+        else if (rigbody.velocity.x != 0 && isGrounded && !IsHurting
             && !IsSliding && isWalled == 0 && !isCrouched)
         {
             movementAudioSource.clip = movementClips[0];
@@ -453,8 +457,8 @@ public class PlayerController : MonoBehaviour, IEntityController
 
 
         // Other sound effects:
-        if (isReading) return;
-        if (IsHurting || IsDead || IsSliding || isWalled != 0) return;
+        if (isReading || IsHurting || IsDead 
+            || IsSliding || isWalled != 0 || Time.timeScale != 1) return;
         else if (isGrounded) // on the ground
         {
             if (isCrouched)  // crouching
