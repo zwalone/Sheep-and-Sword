@@ -3,31 +3,30 @@ using UnityEngine;
 
 public class CameraTrackController : MonoBehaviour
 {
+    // tracking:
     [SerializeField]
     private Transform target;
-
     [SerializeField]
     private Vector3 offsetPosition = new Vector3(0, 2, -1);
+    
+    // stopping tracking:
+    private bool isLocked = false;
 
+    // lights on:
     private SpriteRenderer darkEffect;
     public float darkEffectSpeed = 0.01f;
-    private bool isLocked = false;
+    public Coroutine lightsOn;
 
     private void Awake()
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
         darkEffect = gameObject.GetComponentInChildren<SpriteRenderer>();
-        StartCoroutine(LightsOn());
+        lightsOn = StartCoroutine(LightsOn());
     }
 
     private void Update()
     {
-        if (target == null)
-        {
-            Debug.LogWarning("Missing Target ref!", this);
-            return;
-        }
-        
+        if (target == null) return;
         if (!isLocked) transform.position = target.position + offsetPosition;
     }
 
