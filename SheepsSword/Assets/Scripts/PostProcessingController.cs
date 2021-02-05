@@ -59,7 +59,7 @@ public class PostProcessingController : MonoBehaviour
 
     private void OnDestroy()
     {
-        RuntimeUtilities.DestroyVolume(ppv1, true, true);
-        RuntimeUtilities.DestroyVolume(ppv2, true, true);
+        if (ppv1 != null) RuntimeUtilities.DestroyVolume(ppv1, true, true);
+        if (ppv2 != null) RuntimeUtilities.DestroyVolume(ppv2, true, true);
     }
 }

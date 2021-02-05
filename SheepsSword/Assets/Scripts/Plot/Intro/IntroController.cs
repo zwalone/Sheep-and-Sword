@@ -10,9 +10,10 @@ public class IntroController : MonoBehaviour
 
     private void Awake()
     {
-        dialog = GameObject.Find("Dialog").gameObject;
         mainCamera = GameObject.Find("Main Camera");
+        dialog = GameObject.Find("Dialog").gameObject;
         dialog.GetComponent<IntroDialogController>().StartDialog();
+        GameObject.Find("Music").GetComponents<AudioSource>()[0].ignoreListenerPause = true;
     }
 
     public void EndScene()

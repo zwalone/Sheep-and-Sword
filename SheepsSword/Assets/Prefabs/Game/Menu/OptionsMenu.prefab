@@ -344,7 +344,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -7.8}
-  m_SizeDelta: {x: 100.9, y: 30.7}
+  m_SizeDelta: {x: 120, y: 30.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6164474305323673344
 CanvasRenderer:
@@ -386,7 +386,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Effect
+  m_Text: Effects
 --- !u!1 &3426562014541007401
 GameObject:
   m_ObjectHideFlags: 0
@@ -976,7 +976,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0, b: 1, a: 1}
-  m_EffectDistance: {x: 5, y: -5}
+  m_EffectDistance: {x: 3, y: -3}
   m_UseGraphicAlpha: 1
 --- !u!1 &5278503401831746158
 GameObject:

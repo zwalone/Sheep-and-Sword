@@ -18,6 +18,8 @@ public class OutroController : MonoBehaviour
         UI = GameObject.Find("UI");
         dialog = UI.transform.Find("Dialog").GetComponent<OutroDialogController>();
         credits = GameObject.Find("UI").transform.Find("CreditBoard").gameObject;
+        sounds[0].ignoreListenerPause = true;
+        sounds[2].ignoreListenerPause = true;
     }
     private void Start()
     {

@@ -1323,7 +1323,7 @@ PrefabInstance:
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
       propertyPath: sentences.Array.data[0]
-      value: Every time I look at the trees, I start to thinking about my roots...
+      value: Every time I look at the trees, I start thinking about my roots...
       objectReference: {fileID: 0}
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}

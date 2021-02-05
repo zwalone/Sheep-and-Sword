@@ -17,7 +17,7 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !player.IsDead)
+        if (Input.GetKeyDown(KeyCode.Escape) && (player == null || !player.IsDead))
         {
             if (!GameIsPaused)
             {
@@ -55,6 +55,7 @@ public class PauseMenu : MonoBehaviour
     {
         SceneManager.LoadScene(0);
         Time.timeScale = 1;
+        AudioListener.pause = false;
         Destroy(GameObject.Find("GameMaster"));
     }
 }
