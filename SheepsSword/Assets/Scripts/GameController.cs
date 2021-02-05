@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour
         GameObject.Find("RestartGameButton").SetActive(false);
         GameObject.Find("GoToMenuButton").SetActive(false);
         GameObject.Find("EnemyHealthBar").SetActive(false);
+        GameObject.Find("Music").GetComponents<AudioSource>()[0].ignoreListenerPause = true;
 
         if (instance == null)
         {

@@ -6,7 +6,7 @@ public class SoundController : MonoBehaviour
     AudioSource audioSource;
     public List<AudioClip> audioClip;
 
-    void Awake()
+    private void Awake()
     {
         audioSource = gameObject.GetComponents<AudioSource>()[0];
     }

@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,15 +7,17 @@ public class PauseMenu : MonoBehaviour
     public static bool GameIsPaused = false;
 
     public GameObject pauseMenu;
+    private PlayerController player;
 
     private void Start()
     {
         pauseMenu.SetActive(false);
+        player = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !player.IsDead)
         {
             if (!GameIsPaused)
             {
@@ -33,6 +34,7 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
+        AudioListener.pause = true;
         GameIsPaused = true;
     }
 
@@ -40,6 +42,7 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
+        AudioListener.pause = false;
         GameIsPaused = false;
     }
 
