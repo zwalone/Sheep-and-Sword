@@ -1,10 +1,16 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class CheckPointController : MonoBehaviour
 {
+    // General:
     private GameController gm;
     public bool isFirst;
     private bool hasBeenReached = false;
+
+    // Particles:
+    public GameObject particles;
+    public Vector2 particleDeltaPosition;
 
     private void Awake()
     {
@@ -43,6 +49,19 @@ public class CheckPointController : MonoBehaviour
                     child.gameObject.SetActive(true);
             }
             hasBeenReached = true;
+
+            StartCoroutine(ShowParticles());
         }
+    }
+
+    private IEnumerator ShowParticles()
+    {
+        GameObject firework = Instantiate(particles,
+            new Vector2(transform.position.x - particleDeltaPosition.x,
+            transform.position.y - particleDeltaPosition.y), Quaternion.identity);
+        firework.GetComponent<ParticleSystem>().Play();
+        float ttl = firework.gameObject.GetComponent<ParticleSystem>().main.duration;
+        yield return new WaitForSeconds(ttl);
+        Destroy(firework);
     }
 }

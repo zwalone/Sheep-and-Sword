@@ -38,6 +38,10 @@ public class SkeletonController : MonoBehaviour, IEntityController
     // Sounds:
     private SoundController actionSounds;
 
+    // Particles:
+    public GameObject particles;
+    public Vector2 particleDeltaPosition;
+
     private void Awake()
     {
         _view = this.GetComponent<SkeletonView>();
@@ -161,6 +165,8 @@ public class SkeletonController : MonoBehaviour, IEntityController
         }
 
         _model.HP -= dmg;
+        StartCoroutine(ShowParticles());
+
         if (_model.HP <= 0)
         {
             actionSounds.PlaySound(2);
@@ -188,6 +194,17 @@ public class SkeletonController : MonoBehaviour, IEntityController
         else if (IsHurting) _view.TakeDamage();
         else if (_isAttacking) _view.Attack();
         else _view.Walk();
+    }
+
+    private IEnumerator ShowParticles()
+    {
+        GameObject firework = Instantiate(particles,
+            new Vector2(transform.position.x - particleDeltaPosition.x,
+            transform.position.y - particleDeltaPosition.y), Quaternion.identity);
+        firework.GetComponent<ParticleSystem>().Play();
+        float ttl = firework.gameObject.GetComponent<ParticleSystem>().main.duration;
+        yield return new WaitForSeconds(ttl);
+        Destroy(firework);
     }
 
 

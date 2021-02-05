@@ -368,6 +368,9 @@ MonoBehaviour:
   _isGroundBottom: {fileID: 3724621145937342928}
   _isGroundOpposite: {fileID: 7599510268146885250}
   _changeDirection: 0
+  particles: {fileID: 5141940575662464037, guid: 1afee5a5cce1bda43906914fc1eef009,
+    type: 3}
+  particleDeltaPosition: {x: 0, y: 0}
 --- !u!114 &7490456043505767197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -452,6 +455,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: Player
   damage: 10
+  isBoss: 0
 --- !u!1 &3213318137300075425
 GameObject:
   m_ObjectHideFlags: 0

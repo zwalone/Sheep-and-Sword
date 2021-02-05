@@ -804,6 +804,9 @@ MonoBehaviour:
   SpeedDash: 3
   SpeedAttack: 3
   _changeDirection: 0
+  particles: {fileID: 5141940575662464037, guid: 1afee5a5cce1bda43906914fc1eef009,
+    type: 3}
+  particleDeltaPosition: {x: 0, y: 0}
 --- !u!114 &6790712745193472622
 MonoBehaviour:
   m_ObjectHideFlags: 0

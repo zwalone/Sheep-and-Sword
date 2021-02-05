@@ -3078,6 +3078,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -3508737700225787112, guid: ea4b9dccdd054e44485c2d6a2f09f2ad,
         type: 3}
+    - target: {fileID: 2651838252056015292, guid: d992681b16899634eb5e83de383cb727,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5
+      objectReference: {fileID: 0}
     - target: {fileID: 2651838252394047253, guid: d992681b16899634eb5e83de383cb727,
         type: 3}
       propertyPath: m_Tiles.Array.data[20].second.m_TileSpriteIndex

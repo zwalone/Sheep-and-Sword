@@ -780,6 +780,22 @@ PrefabInstance:
       propertyPath: damage
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 7272854928296611253, guid: cfc7dd12b6862ef44b8eb0c9f16b0b3f,
+        type: 3}
+      propertyPath: particles
+      value: 
+      objectReference: {fileID: 5141940575662464037, guid: 1afee5a5cce1bda43906914fc1eef009,
+        type: 3}
+    - target: {fileID: 7272854928296611253, guid: cfc7dd12b6862ef44b8eb0c9f16b0b3f,
+        type: 3}
+      propertyPath: particleDeltaPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7272854928296611253, guid: cfc7dd12b6862ef44b8eb0c9f16b0b3f,
+        type: 3}
+      propertyPath: particleDeltaPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfc7dd12b6862ef44b8eb0c9f16b0b3f, type: 3}
 --- !u!1 &390123425 stripped

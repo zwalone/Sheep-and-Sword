@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -52,6 +53,12 @@ public class PlayerController : MonoBehaviour, IEntityController
     private SoundController actionSounds;
     public List<AudioClip> movementClips;
     private AudioSource movementAudioSource;
+
+    // Particles:
+    public GameObject hitParticles;
+    public Vector2 hitParticlesDeltaPosition;
+    public GameObject slideParticles;
+    public Vector2 slideParticlesDeltaPosition;
 
     // For checkpoints:
     public float checkpointHeightDifference = 0.01f;
@@ -280,6 +287,7 @@ public class PlayerController : MonoBehaviour, IEntityController
         if (Input.GetAxisRaw("Horizontal") != 0 && !isCrouched && isWalled == 0 && !isAttacking && !IsHurting)
         {
             IsSliding = true;
+            StartCoroutine(ShowSlideParticles());
             AttackStart(); // hit just at the beginning of the animation
             Invoke(nameof(AttackStop), animationLength * 2.0f);  // this animation is two times longer than normal attack
         }
@@ -333,6 +341,7 @@ public class PlayerController : MonoBehaviour, IEntityController
         }
 
         // Animate:
+        StartCoroutine(ShowHitParticles()); // particles
         if (model.HP > 0)
         {
             actionSounds.PlaySound(5); // "Hurt" sound
@@ -486,6 +495,28 @@ public class PlayerController : MonoBehaviour, IEntityController
                 && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))) // somersault
                 actionSounds.PlaySound(3);
         }
+    }
+
+    private IEnumerator ShowHitParticles()
+    {
+        GameObject firework = Instantiate(hitParticles,
+            new Vector2(transform.position.x - hitParticlesDeltaPosition.x,
+            transform.position.y - hitParticlesDeltaPosition.y), Quaternion.identity);
+        firework.GetComponent<ParticleSystem>().Play();
+        float ttl = firework.gameObject.GetComponent<ParticleSystem>().main.duration;
+        yield return new WaitForSeconds(ttl);
+        Destroy(firework);
+    }
+
+    private IEnumerator ShowSlideParticles()
+    {
+        GameObject firework = Instantiate(slideParticles,
+            new Vector2(transform.position.x - slideParticlesDeltaPosition.x,
+            transform.position.y - slideParticlesDeltaPosition.y), Quaternion.identity);
+        firework.GetComponent<ParticleSystem>().Play();
+        float ttl = firework.gameObject.GetComponent<ParticleSystem>().main.duration;
+        yield return new WaitForSeconds(ttl);
+        Destroy(firework);
     }
 
 

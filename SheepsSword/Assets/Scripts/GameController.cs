@@ -54,7 +54,7 @@ public class GameController : MonoBehaviour
     {
         hiddenObject.SetActive(true);
         Image img = hiddenObject.GetComponent<Image>();
-        while (img.color.a < 1)
+        while (img != null && img.color.a < 1)
         {
             img.color = new Color(img.color.r, img.color.g, img.color.b, img.color.a + 0.01f);
             yield return new WaitForSeconds(showSpeed);
@@ -65,7 +65,7 @@ public class GameController : MonoBehaviour
     {
         hiddenObject.SetActive(true);
         Text txt = hiddenObject.GetComponent<Text>();
-        while (txt.color.a < 1)
+        while (txt != null && txt.color.a < 1)
         {
             txt.color = new Color(txt.color.r, txt.color.g, txt.color.b, txt.color.a + 0.01f);
             yield return new WaitForSeconds(showSpeed);

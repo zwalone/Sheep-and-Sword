@@ -51,6 +51,10 @@ public class Hammer_Controller : MonoBehaviour, IEntityController
     private AudioSource movementAudioSource;
 
 
+    // Particles:
+    public GameObject particles;
+    public Vector2 particleDeltaPosition;
+
     private void Awake()
     {
         _view = this.GetComponent<Hammer_View>();
@@ -206,6 +210,8 @@ public class Hammer_Controller : MonoBehaviour, IEntityController
         if (!_canDash)
         {
             _model.HP -= dmg;
+            StartCoroutine(ShowParticles());
+
             if (_model.HP <= 0)
             {
                 actionSounds.PlaySound(2);
@@ -274,6 +280,17 @@ public class Hammer_Controller : MonoBehaviour, IEntityController
             else _view.AttackSpinner();
         }
         else _view.Walk();
+    }
+
+    private IEnumerator ShowParticles()
+    {
+        GameObject firework = Instantiate(particles, 
+            new Vector2(transform.position.x - particleDeltaPosition.x, 
+            transform.position.y - particleDeltaPosition.y), Quaternion.identity);
+        firework.GetComponent<ParticleSystem>().Play();
+        float ttl = firework.gameObject.GetComponent<ParticleSystem>().main.duration;
+        yield return new WaitForSeconds(ttl);
+        Destroy(firework);
     }
 
 

@@ -1226,6 +1226,11 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: -0.48
       objectReference: {fileID: 0}
+    - target: {fileID: 4599650969280799321, guid: 41b31fcf86a076d42be08a51cc1393ad,
+        type: 3}
+      propertyPath: particleDeltaPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41b31fcf86a076d42be08a51cc1393ad, type: 3}
 --- !u!4 &737915576 stripped

@@ -72,6 +72,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: Player
   damage: 20
+  isBoss: 0
 --- !u!1 &2325511127231607623
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,7 +263,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.34375, y: 0.5}
+    oldSize: {x: 0.328125, y: 0.5}
     newSize: {x: 0.34375, y: 0.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -461,6 +462,9 @@ MonoBehaviour:
   _isGroundBottom: {fileID: 2325511128226906857}
   _isGroundOpposite: {fileID: 4369730026972571889}
   _changeDirection: 0
+  particles: {fileID: 5141940575662464037, guid: 1afee5a5cce1bda43906914fc1eef009,
+    type: 3}
+  particleDeltaPosition: {x: 0, y: 0}
 --- !u!114 &2325511127328417939
 MonoBehaviour:
   m_ObjectHideFlags: 0

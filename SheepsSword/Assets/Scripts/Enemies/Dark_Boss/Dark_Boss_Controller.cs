@@ -49,6 +49,10 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
     private SoundController actionSounds;
     private AudioSource movementAudioSource;
 
+    // Particles:
+    public GameObject particles;
+    public Vector2 particleDeltaPosition;
+
 
     // Boss health bar:
     private GameObject enemyHealthBar;
@@ -238,6 +242,8 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
         if (!_canDash)
         {
             _model.HP -= dmg;
+            StartCoroutine(ShowParticles());
+
             if (_model.HP <= 0)
             {
                 actionSounds.PlaySound(2);
@@ -313,6 +319,17 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
             else if (AttackNumber == 2) _view.Heal();
         }
         else _view.Walk();
+    }
+
+    private IEnumerator ShowParticles()
+    {
+        GameObject firework = Instantiate(particles,
+            new Vector2(transform.position.x - particleDeltaPosition.x,
+            transform.position.y - particleDeltaPosition.y), Quaternion.identity);
+        firework.GetComponent<ParticleSystem>().Play();
+        float ttl = firework.gameObject.GetComponent<ParticleSystem>().main.duration;
+        yield return new WaitForSeconds(ttl);
+        Destroy(firework);
     }
 
 

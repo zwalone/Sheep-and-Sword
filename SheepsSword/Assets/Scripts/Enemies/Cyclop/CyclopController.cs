@@ -24,6 +24,10 @@ public class CyclopController : MonoBehaviour, IEntityController
     // Sounds:
     private SoundController actionSounds;
 
+    // Particles:
+    public GameObject particles;
+    public Vector2 particleDeltaPosition;
+
 
     private void Awake()
     {
@@ -68,6 +72,7 @@ public class CyclopController : MonoBehaviour, IEntityController
         }
 
         _model.HP -= dmg;
+        StartCoroutine(ShowParticles());
 
         if (_model.HP <= 0)
         {
@@ -184,6 +189,17 @@ public class CyclopController : MonoBehaviour, IEntityController
         else if (IsDead) _view.DieRight();
         else if (_isAttacking) _view.AttackRight();
         else _view.WalkRight();
+    }
+
+    private IEnumerator ShowParticles()
+    {
+        GameObject firework = Instantiate(particles,
+            new Vector2(transform.position.x - particleDeltaPosition.x,
+            transform.position.y - particleDeltaPosition.y), Quaternion.identity);
+        firework.GetComponent<ParticleSystem>().Play();
+        float ttl = firework.gameObject.GetComponent<ParticleSystem>().main.duration;
+        yield return new WaitForSeconds(ttl);
+        Destroy(firework);
     }
 
 

@@ -463,6 +463,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _changeDirection: 0
+  particles: {fileID: 5141940575662464037, guid: 1afee5a5cce1bda43906914fc1eef009,
+    type: 3}
+  particleDeltaPosition: {x: 0, y: 0.5}
 --- !u!114 &4599650969280799325
 MonoBehaviour:
   m_ObjectHideFlags: 0

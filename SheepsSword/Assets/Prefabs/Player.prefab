@@ -507,6 +507,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 48c4d2db927bc8246ab22cc5f3c12064, type: 3}
   - {fileID: 8300000, guid: 413f2fe27f615824e892a568950df06a, type: 3}
   - {fileID: 8300000, guid: 21e3d0e7a05d0f142b35ce41ae14e601, type: 3}
+  hitParticles: {fileID: 5141940575662464037, guid: 1afee5a5cce1bda43906914fc1eef009,
+    type: 3}
+  hitParticlesDeltaPosition: {x: 0, y: 0}
+  slideParticles: {fileID: 3904309112216249592, guid: 5000555f0ee41f34f8dbbf8166a969a7,
+    type: 3}
+  slideParticlesDeltaPosition: {x: 0, y: 0}
   checkpointHeightDifference: 0.4
 --- !u!1 &8876845736051774822
 GameObject:
