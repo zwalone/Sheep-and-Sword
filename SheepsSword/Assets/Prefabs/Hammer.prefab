@@ -673,9 +673,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ef3e6787ef9cea418d8d6120a45d122, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHP: 50
-  _hp: 50
-  _speed: 0.35
+  _maxHP: 200
+  _hp: 200
+  _speed: 1
 --- !u!114 &7272854928296611253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -727,6 +727,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Wall: {fileID: 0}
+  Hole: []
 --- !u!1 &2648665418716889157
 GameObject:
   m_ObjectHideFlags: 0

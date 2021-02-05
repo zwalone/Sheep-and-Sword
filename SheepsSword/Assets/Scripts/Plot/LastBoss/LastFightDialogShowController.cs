@@ -78,6 +78,7 @@ public class LastFightDialogShowController : MonoBehaviour
             textDisplay.text = "";
             isDisplayed = false;
             playerInfo.StopReading();
+            gameObject.GetComponent<AudioSource>().Stop();
             sounds[0].Play();
         }
     }
