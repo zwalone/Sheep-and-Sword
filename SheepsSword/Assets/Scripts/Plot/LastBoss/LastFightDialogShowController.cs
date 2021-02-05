@@ -51,9 +51,9 @@ public class LastFightDialogShowController : MonoBehaviour
         if (index == 2)
         {
             yield return new WaitForSeconds(0.5f);
-            sounds[1].Play();
-            yield return new WaitForSeconds(0.5f);
             sounds[2].Play();
+            yield return new WaitForSeconds(0.5f);
+            sounds[1].Play();
         }
     }
 
