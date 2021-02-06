@@ -27,7 +27,7 @@ public class DialogShowController : MonoBehaviour
         if (Time.timeScale != 1) return;
 
         if (isDisplayed)
-            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+            if (Input.touchCount > 0 || Input.GetMouseButtonDown(0))
                 NextSentence();
     }
 

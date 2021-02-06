@@ -6,26 +6,29 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour, IEntityController
 {
+    // General:
     private GameController gm;
     private PlayerModel model;               // speed, jump force, health points
     private PlayerView view;                 // animations
+    
+    // Mobiles:
+    public Joystick joystick;                // input
+    private readonly float maxDeviation = 0.5f;
 
+    // Physics:
     private Rigidbody2D rigbody;          // for movement
     private CapsuleCollider2D capscol;    // for crouching
     private Transform playerGraphics;     // for displaying
 
-    // Player's children with parameters:
+    // Checkers (for better movement):
     private Transform groundChecker;    // for jumping
     public float groundCheckerRadius;
     public LayerMask groundLayer;
-
     private Transform ceilingChecker;   // for crouching
     public float ceilingCheckerRadius;
-
     private Transform wallCheckerLeft;  // for climbing walls
     private Transform wallCheckerRight;
     public float wallCheckerRadius;
-
     private GameObject hitPointRight;   // for attacking
     private GameObject hitPointLeft;
 
@@ -41,7 +44,11 @@ public class PlayerController : MonoBehaviour, IEntityController
     private bool isCeilinged; // contact with the ceiling
     private bool isCrouched;
     private int isWalled;     // contact with the wall
+    public float checkpointHeightDifference = 0.01f;
+    private bool hasJumped;
+    private bool hasAttacked;
 
+    // Health/Damage parameters:
     public bool IsHurting { get; private set; }
     public bool IsDead { get; private set; }
     public bool IsSliding { get; private set; } // can't be attacked if true
@@ -49,6 +56,8 @@ public class PlayerController : MonoBehaviour, IEntityController
     // UI:
     private Image playerHealthBar;
     private bool isReading; // can't move if true
+    private Button jumpButton;
+    private Button attackButton;
 
     // Sounds:
     private SoundController actionSounds;
@@ -61,8 +70,7 @@ public class PlayerController : MonoBehaviour, IEntityController
     public GameObject slideParticles;
     public Vector2 slideParticlesDeltaPosition;
 
-    // For checkpoints:
-    public float checkpointHeightDifference = 0.01f;
+
 
     private void Awake()
     {
@@ -86,6 +94,10 @@ public class PlayerController : MonoBehaviour, IEntityController
         // UI:
         playerHealthBar = GameObject.Find("PlayerHealthBar_Fill").GetComponent<Image>();
         UpdatePlayerHealthBar();
+        jumpButton = GameObject.Find("JumpButton").GetComponent<Button>();
+        jumpButton.onClick.AddListener(() => Jump());
+        attackButton = GameObject.Find("AttackButton").GetComponent<Button>();
+        attackButton.onClick.AddListener(() => Attack());
 
         // Sounds:
         movementAudioSource = gameObject.GetComponents<AudioSource>()[1];
@@ -106,11 +118,9 @@ public class PlayerController : MonoBehaviour, IEntityController
         CheckTheWall();
         CheckTheCeiling();
 
-        Jump();
         Crouch();
         FastFall();
         Move();
-        Attack();
         Soundimate();
         Animate();
 
@@ -170,7 +180,11 @@ public class PlayerController : MonoBehaviour, IEntityController
             -transform.right, slopeCheckerRadius, groundLayer);
 
         // Run (horizontal movement):
-        float xMove = Input.GetAxisRaw("Horizontal");
+        float xMove;
+        if (joystick.Horizontal < -maxDeviation) xMove = -1;
+        else if (joystick.Horizontal > maxDeviation) xMove = 1;
+        else xMove = 0;
+
         if (xMove != 0 && !IsDead)
         {
             rigbody.constraints = RigidbodyConstraints2D.FreezeRotation;
@@ -202,7 +216,11 @@ public class PlayerController : MonoBehaviour, IEntityController
         {
             AttackStop(); // hide sword, stop sliding
 
-            float yMove = Input.GetAxisRaw("Vertical");
+            float yMove;
+            if (joystick.Vertical < -maxDeviation) yMove = -1;
+            else if (joystick.Vertical > maxDeviation) yMove = 1;
+            else yMove = 0;
+
             if (yMove != 0)
             {
                 rigbody.constraints = RigidbodyConstraints2D.FreezeRotation;
@@ -221,17 +239,15 @@ public class PlayerController : MonoBehaviour, IEntityController
 
         if (isGrounded || isWalled != 0) canSomerSault = true;
 
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
-        {
-            // Restart all attacks:
-            attackViewNumber = -1;
-            CancelInvoke(nameof(AttackStart));
-            AttackStop();
+        // Restart all attacks:
+        attackViewNumber = -1;
+        CancelInvoke(nameof(AttackStart));
+        AttackStop();
 
-            if (isGrounded || isWalled != 0) // standard jump (from ground or wall)
-                rigbody.velocity = new Vector2(rigbody.velocity.x, model.JumpForce);
-            else SomerSault();               // somersault only while falling
-        }
+        hasJumped = true;
+        if (isGrounded || isWalled != 0) // standard jump (from ground or wall)
+            rigbody.velocity = new Vector2(rigbody.velocity.x, model.JumpForce);
+        else SomerSault();               // somersault only while falling
     }
 
     private void SomerSault()
@@ -251,7 +267,7 @@ public class PlayerController : MonoBehaviour, IEntityController
     {
         // after clicking DownArrow (or S), player goes down faster
         if (!isGrounded)
-            if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
+            if (joystick.Vertical < -maxDeviation)
                 rigbody.velocity = new Vector2(0, -model.JumpForce / 1.5f);
     }
 
@@ -265,7 +281,7 @@ public class PlayerController : MonoBehaviour, IEntityController
         {
             // "Or isCeilinged" helps in situations when there is still 
             // a ceiling above player (but user stopped holding button):
-            if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || isCeilinged)
+            if (joystick.Vertical < -maxDeviation || isCeilinged)
             {
                 Slide();
 
@@ -292,7 +308,7 @@ public class PlayerController : MonoBehaviour, IEntityController
 
     private void Slide()
     {
-        if (Input.GetAxisRaw("Horizontal") != 0 && !isCrouched && isWalled == 0 && !isAttacking && !IsHurting)
+        if (Math.Abs(joystick.Horizontal) > maxDeviation && !isCrouched && isWalled == 0 && !isAttacking && !IsHurting)
         {
             IsSliding = true;
             StartCoroutine(ShowSlideParticles());
@@ -307,11 +323,12 @@ public class PlayerController : MonoBehaviour, IEntityController
     {
         if (IsDead || isReading || Time.timeScale != 1) return;
 
-        if (Input.GetKeyDown(KeyCode.Space) && isWalled == 0 && !isAttacking && !IsHurting)
+        if (isWalled == 0 && !isAttacking && !IsHurting)
         {
             isAttacking = true;
             attackViewNumber = (attackViewNumber + 1) % 3;   // there are 3 types of attack
 
+            hasAttacked = true;
             Invoke(nameof(AttackStart), animationLength / 2.0f); // hit in the half of animation
             Invoke(nameof(AttackStop), animationLength);
 
@@ -388,12 +405,12 @@ public class PlayerController : MonoBehaviour, IEntityController
         // Flip:
         if (!IsDead && !isReading)
         {
-            if (Input.GetAxisRaw("Horizontal") < 0)
+            if (joystick.Horizontal < 0)
             {
                 playerGraphics.GetComponent<SpriteRenderer>().flipX = true;
                 view.LookRight = false;
             }
-            if (Input.GetAxisRaw("Horizontal") > 0)
+            if (joystick.Horizontal > 0)
             {
                 playerGraphics.GetComponent<SpriteRenderer>().flipX = false;
                 view.LookRight = true;
@@ -443,19 +460,21 @@ public class PlayerController : MonoBehaviour, IEntityController
     {
         // In pause-menu:
         if (Time.timeScale != 1) movementAudioSource.Stop();
+
         // Running:
-        else if (rigbody.velocity.x != 0 && isGrounded && !IsHurting
-            && !IsSliding && isWalled == 0 && !isCrouched)
+        else if (rigbody.velocity.x != 0 && isGrounded && !IsHurting && !IsSliding && isWalled == 0 && !isCrouched)
         {
             movementAudioSource.clip = movementClips[0];
             if (!movementAudioSource.isPlaying) movementAudioSource.Play();
         }
+
         // Sliding:
         else if (IsSliding)
         {
             movementAudioSource.clip = movementClips[1];
             if (!movementAudioSource.isPlaying) movementAudioSource.Play();
         }
+
         // Movement on the wall:
         else if (rigbody.velocity.y != 0.0f && isWalled != 0)
         {
@@ -474,34 +493,45 @@ public class PlayerController : MonoBehaviour, IEntityController
 
 
         // Other sound effects:
-        if (isReading || IsHurting || IsDead 
-            || IsSliding || isWalled != 0 || Time.timeScale != 1) return;
+        if (isReading || IsHurting || IsDead || IsSliding || isWalled != 0 || Time.timeScale != 1) return;
         else if (isGrounded) // on the ground
         {
             if (isCrouched)  // crouching
             {
-                if (isAttacking && Input.GetKeyDown(KeyCode.Space)) // attack while crouching
+                if (isAttacking && hasAttacked) // attack while crouching
+                {
                     actionSounds.PlaySound(0);
+                    hasAttacked = false;
+                }
             }
             else // standing
             {
-                if (isAttacking && Input.GetKeyDown(KeyCode.Space)) // attacks
+                if (isAttacking && hasAttacked) // attacks
                 {
                     if (attackViewNumber == 0) actionSounds.PlaySound(0);
                     else if (attackViewNumber == 1) actionSounds.PlaySound(1);
                     else actionSounds.PlaySound(2);
+                    hasAttacked = false;
                 }
-                else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) // jump from ground
+                else if (hasJumped) // jump from ground
+                {
                     actionSounds.PlaySound(4);
+                    hasJumped = false;
+                }
             }
         }
         else // in air
         {
-            if (isAttacking && Input.GetKeyDown(KeyCode.Space)) // attack in air
+            if (isAttacking && hasAttacked) // attack in air
+            {
                 actionSounds.PlaySound(0);
-            else if (isSomerSaulting
-                && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))) // somersault
+                hasAttacked = false;
+            }
+            else if (isSomerSaulting && hasJumped) // somersault
+            {
                 actionSounds.PlaySound(3);
+                hasJumped = false;
+            }
         }
     }
 

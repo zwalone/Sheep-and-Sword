@@ -233,9 +233,9 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 1
-  m_MatchWidthOrHeight: 0.5
+  m_ReferenceResolution: {x: 600, y: 800}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0.825
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -1004,10 +1004,20 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5362320546665881444, guid: ba29302b77425ef48965497b736db8ab,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5362320546665881444, guid: ba29302b77425ef48965497b736db8ab,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 9.9996
+      objectReference: {fileID: 0}
     - target: {fileID: 9028995365038897184, guid: ba29302b77425ef48965497b736db8ab,
         type: 3}
       propertyPath: m_Text
-      value: Press ENTER to continue
+      value: Touch screen to continue
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba29302b77425ef48965497b736db8ab, type: 3}
