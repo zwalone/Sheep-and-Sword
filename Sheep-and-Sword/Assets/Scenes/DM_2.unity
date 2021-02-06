@@ -824,6 +824,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 672387368}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &421390604 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2110625627314452517, guid: f60e30a0636e2e34d995ce96e08d8412,
+    type: 3}
+  m_PrefabInstance: {fileID: 899788381}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &672387368
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -831,6 +837,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6072012665330714998, guid: 014f43f00f526124fa8b7ed7e82a9970,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7882550350286781658, guid: 014f43f00f526124fa8b7ed7e82a9970,
         type: 3}
       propertyPath: m_ColliderPaths.Array.data[0].m_ColliderPaths.Array.data[0].Array.size
@@ -1561,7 +1572,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2957527168928816896, guid: 014f43f00f526124fa8b7ed7e82a9970, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 014f43f00f526124fa8b7ed7e82a9970, type: 3}
 --- !u!1001 &745769202
 PrefabInstance:
@@ -2149,6 +2161,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f60e30a0636e2e34d995ce96e08d8412, type: 3}
+--- !u!1 &957208336 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7882550349510362301, guid: 014f43f00f526124fa8b7ed7e82a9970,
+    type: 3}
+  m_PrefabInstance: {fileID: 672387368}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &957208339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957208336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da4830ab766555944b1bbe38c230659c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 421390604}
+  parallaxEffect: 0.9
 --- !u!1 &1070562077
 GameObject:
   m_ObjectHideFlags: 0
