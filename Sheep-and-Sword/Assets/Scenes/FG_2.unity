@@ -2307,7 +2307,7 @@ PrefabInstance:
     - target: {fileID: 6985563059524537453, guid: 2fd79a9370911ec4b88ec7b67b62f596,
         type: 3}
       propertyPath: m_Name
-      value: MC_Dark
+      value: MobileControls
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2fd79a9370911ec4b88ec7b67b62f596, type: 3}

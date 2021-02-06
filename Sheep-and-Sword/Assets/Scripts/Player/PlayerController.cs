@@ -99,7 +99,8 @@ public class PlayerController : MonoBehaviour, IEntityController
         jumpButton.GetComponent<Button>().onClick.AddListener(() => Jump());
         attackButton = GameObject.Find("AttackButton");
         attackButton.GetComponent<Button>().onClick.AddListener(() => Attack());
-        skipButton = GameObject.Find("MC_Dark").transform.Find("SkipButton").gameObject;
+        skipButton = GameObject.Find("MobileControls").transform.Find("SkipButton").gameObject;
+
         // Sounds:
         movementAudioSource = gameObject.GetComponents<AudioSource>()[1];
         actionSounds = gameObject.GetComponent<SoundController>();
