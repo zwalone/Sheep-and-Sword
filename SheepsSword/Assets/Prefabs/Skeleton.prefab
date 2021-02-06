@@ -462,7 +462,7 @@ MonoBehaviour:
   _isGroundBottom: {fileID: 2325511128226906857}
   _isGroundOpposite: {fileID: 4369730026972571889}
   _changeDirection: 0
-  particles: {fileID: 5141940575662464037, guid: 1afee5a5cce1bda43906914fc1eef009,
+  particles: {fileID: 200158856010989677, guid: 9069f9a9332d5674699965727e0cf876,
     type: 3}
   particleDeltaPosition: {x: 0, y: 0}
 --- !u!114 &2325511127328417939

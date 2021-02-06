@@ -675,6 +675,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 29106751711904974, guid: cfc7dd12b6862ef44b8eb0c9f16b0b3f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 29106751711904974, guid: cfc7dd12b6862ef44b8eb0c9f16b0b3f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.12
+      objectReference: {fileID: 0}
     - target: {fileID: 1368580192232854330, guid: cfc7dd12b6862ef44b8eb0c9f16b0b3f,
         type: 3}
       propertyPath: Hole.Array.size
@@ -795,6 +805,16 @@ PrefabInstance:
         type: 3}
       propertyPath: particleDeltaPosition.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8169635468220547282, guid: cfc7dd12b6862ef44b8eb0c9f16b0b3f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8169635468220547282, guid: cfc7dd12b6862ef44b8eb0c9f16b0b3f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.09
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfc7dd12b6862ef44b8eb0c9f16b0b3f, type: 3}
