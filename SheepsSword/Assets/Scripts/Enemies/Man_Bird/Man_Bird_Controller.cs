@@ -121,7 +121,7 @@ public class Man_Bird_Controller : MonoBehaviour, IEntityController
     //Check and Change direction
     private void ChangeMoveDirection(bool behind = false)
     {
-        if (IsDead || _isAttacking) return;
+        if (IsDead) return;
 
         if (behind)
         {
