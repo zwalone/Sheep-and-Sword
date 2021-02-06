@@ -512,7 +512,7 @@ MonoBehaviour:
   hitParticlesDeltaPosition: {x: 0, y: 0}
   slideParticles: {fileID: 3904309112216249592, guid: 5000555f0ee41f34f8dbbf8166a969a7,
     type: 3}
-  slideParticlesDeltaPosition: {x: 0, y: 0}
+  slideParticlesDeltaPosition: {x: 0, y: 0.45}
   checkpointHeightDifference: 0.4
 --- !u!1 &8876845736051774822
 GameObject:

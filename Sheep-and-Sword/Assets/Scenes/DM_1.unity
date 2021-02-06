@@ -951,6 +951,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8876845735882930970, guid: 503c72a7f03a1d340be18b839b18b220,
+        type: 3}
+      propertyPath: slideParticlesDeltaPosition.y
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 8876845735882930970, guid: 503c72a7f03a1d340be18b839b18b220,
+        type: 3}
+      propertyPath: slideParticlesDeltaPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8876845735882930974, guid: 503c72a7f03a1d340be18b839b18b220,
         type: 3}
       propertyPath: m_LocalPosition.x

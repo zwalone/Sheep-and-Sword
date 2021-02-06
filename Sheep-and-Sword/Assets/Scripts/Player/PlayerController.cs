@@ -507,31 +507,40 @@ public class PlayerController : MonoBehaviour, IEntityController
 
     private IEnumerator ShowHitParticles()
     {
-        GameObject firework = Instantiate(hitParticles,
+        GameObject particles = Instantiate(hitParticles,
             new Vector2(transform.position.x - hitParticlesDeltaPosition.x,
             transform.position.y - hitParticlesDeltaPosition.y), Quaternion.identity);
-        firework.GetComponent<ParticleSystem>().Play();
-        float ttl = firework.gameObject.GetComponent<ParticleSystem>().main.duration;
+        particles.GetComponent<ParticleSystem>().Play();
+        float ttl = particles.gameObject.GetComponent<ParticleSystem>().main.duration;
         yield return new WaitForSeconds(ttl);
-        Destroy(firework);
+        Destroy(particles);
     }
 
     private IEnumerator ShowSlideParticles()
     {
         Vector3 rot = slideParticles.transform.eulerAngles;
+        GameObject particles = Instantiate(slideParticles,
+            new Vector2(transform.position.x - slideParticlesDeltaPosition.x, transform.position.y - slideParticlesDeltaPosition.y),
+            Quaternion.Euler(rot.x, (view.LookRight) ? rot.y - 90 : rot.y + 90, rot.z));
+        particles.GetComponent<ParticleSystem>().Play();
 
-        GameObject firework = Instantiate(slideParticles,
-            new Vector2(transform.position.x - slideParticlesDeltaPosition.x,
-            transform.position.y - slideParticlesDeltaPosition.y),
-                Quaternion.Euler(rot.x,
-                    (view.LookRight) ? rot.y - 90 : rot.y + 90,
-                    rot.z)
-            );
+        float ttl = particles.gameObject.GetComponent<ParticleSystem>().main.duration;
+        float i = 0;
 
-        firework.GetComponent<ParticleSystem>().Play();
-        float ttl = firework.gameObject.GetComponent<ParticleSystem>().main.duration;
-        yield return new WaitForSeconds(ttl);
-        Destroy(firework);
+        while (i < ttl)
+        {
+            if (!IsSliding) { Destroy(particles); break; }
+
+            particles.transform.position = new Vector2(
+                (view.LookRight) ? transform.position.x + slideParticlesDeltaPosition.x : transform.position.x - slideParticlesDeltaPosition.x, 
+                transform.position.y - slideParticlesDeltaPosition.y);
+            particles.transform.rotation = Quaternion.Euler(rot.x, (view.LookRight) ? rot.y - 90 : rot.y + 90, rot.z);
+
+            i += 0.01f;
+            yield return new WaitForSeconds(0.01f);
+        }
+        
+        if (particles != null) Destroy(particles);
     }
 
 
