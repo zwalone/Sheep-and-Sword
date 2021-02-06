@@ -756,7 +756,7 @@ PrefabInstance:
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
       propertyPath: sentences.Array.data[1]
-      value: To use your sword, press SPACE.
+      value: To use your sword, press ATTACK button which is placed on the right.
       objectReference: {fileID: 0}
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
@@ -1516,7 +1516,7 @@ PrefabInstance:
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
       propertyPath: sentences.Array.data[1]
-      value: To do it, touch the wall and press UP/DOWN or W/S.
+      value: To do it, touch the wall and tilt the joystick up or down.
       objectReference: {fileID: 0}
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
@@ -1725,12 +1725,12 @@ PrefabInstance:
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
       propertyPath: sentences.Array.data[2]
-      value: To move, use arrows or A, S, D buttons.
+      value: To move, use joystick which is placed on the left.
       objectReference: {fileID: 0}
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
       propertyPath: sentences.Array.data[3]
-      value: To jump, press UP arrow or W button.
+      value: To jump, press JUMP button which is placed on the right.
       objectReference: {fileID: 0}
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
@@ -2059,7 +2059,7 @@ PrefabInstance:
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
       propertyPath: sentences.Array.data[3]
-      value: To crouch, simply press DOWN or S.
+      value: To crouch, simply tilt the joystick down.
       objectReference: {fileID: 0}
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
@@ -2656,7 +2656,7 @@ PrefabInstance:
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
       propertyPath: sentences.Array.data[1]
-      value: To double-jump, press W or UP while you're in the air.
+      value: To double-jump, press JUMP button while you're in the air.
       objectReference: {fileID: 0}
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
@@ -3679,7 +3679,7 @@ PrefabInstance:
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
       propertyPath: sentences.Array.data[2]
-      value: To slide, press DOWN or S while you are running.
+      value: To slide, tilt the joystick down while you are running.
       objectReference: {fileID: 0}
     - target: {fileID: 3373912202178638274, guid: b5383c7c2e4dde845886e6f821ede57b,
         type: 3}
