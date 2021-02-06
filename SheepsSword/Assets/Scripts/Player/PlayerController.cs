@@ -510,9 +510,16 @@ public class PlayerController : MonoBehaviour, IEntityController
 
     private IEnumerator ShowSlideParticles()
     {
+        Vector3 rot = slideParticles.transform.eulerAngles;
+
         GameObject firework = Instantiate(slideParticles,
             new Vector2(transform.position.x - slideParticlesDeltaPosition.x,
-            transform.position.y - slideParticlesDeltaPosition.y), Quaternion.identity);
+            transform.position.y - slideParticlesDeltaPosition.y),
+                Quaternion.Euler(rot.x,
+                    (view.LookRight) ? rot.y - 90 : rot.y + 90,
+                    rot.z)
+            );
+
         firework.GetComponent<ParticleSystem>().Play();
         float ttl = firework.gameObject.GetComponent<ParticleSystem>().main.duration;
         yield return new WaitForSeconds(ttl);
