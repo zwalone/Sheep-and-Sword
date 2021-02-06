@@ -237,7 +237,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!70 &8876845735017060407
 CapsuleCollider2D:
@@ -497,12 +497,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee6df7503e378644db71b4f0c364fb7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  joystick: {fileID: 0}
   groundCheckerRadius: 0.15
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
   ceilingCheckerRadius: 0.05
   wallCheckerRadius: 0.05
+  checkpointHeightDifference: 0.4
   movementClips:
   - {fileID: 8300000, guid: 48c4d2db927bc8246ab22cc5f3c12064, type: 3}
   - {fileID: 8300000, guid: 413f2fe27f615824e892a568950df06a, type: 3}
@@ -513,7 +515,6 @@ MonoBehaviour:
   slideParticles: {fileID: 3904309112216249592, guid: 5000555f0ee41f34f8dbbf8166a969a7,
     type: 3}
   slideParticlesDeltaPosition: {x: 0, y: 0.45}
-  checkpointHeightDifference: 0.4
 --- !u!1 &8876845736051774822
 GameObject:
   m_ObjectHideFlags: 0

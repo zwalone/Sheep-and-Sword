@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -8,29 +9,26 @@ public class PauseMenu : MonoBehaviour
 
     public GameObject pauseMenu;
     private PlayerController player;
+    private Button pauseButton;
 
     private void Start()
     {
         pauseMenu.SetActive(false);
         player = GameObject.Find("Player").GetComponent<PlayerController>();
+        pauseButton = GameObject.Find("PauseButton").GetComponent<Button>();
+        pauseButton.onClick.AddListener(() => PauseOrResume());
     }
 
-    void Update()
+    private void PauseOrResume()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && (player == null || !player.IsDead))
+        if (player == null || !player.IsDead)
         {
-            if (!GameIsPaused)
-            {
-                Pause();
-            }
-            else
-            {
-                Resume();
-            }
+            if (!GameIsPaused) Pause();
+            else Resume();
         }
     }
 
-    private void Pause()
+    public void Pause()
     {
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
