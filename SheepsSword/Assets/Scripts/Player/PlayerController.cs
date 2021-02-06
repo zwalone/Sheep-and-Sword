@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -112,13 +113,18 @@ public class PlayerController : MonoBehaviour, IEntityController
         Attack();
         Soundimate();
         Animate();
-    }
 
+        FixVelocity();
+    }
 
     private void CheckTheGround()
     {
         // Checking if player is on the ground:
         Collider2D collider = Physics2D.OverlapCircle(groundChecker.position, groundCheckerRadius, groundLayer);
+
+        if (isGrounded == false && collider != null && rigbody.velocity.y <= -11.0f)
+            TakeDamage((Math.Abs((int)rigbody.velocity.y) - 10) * 5);
+
         isGrounded = (collider != null);
     }
 
@@ -141,6 +147,12 @@ public class PlayerController : MonoBehaviour, IEntityController
         isCeilinged = (collider != null);
     }
 
+    private void FixVelocity()
+    {
+        if (!isGrounded && rigbody.velocity.y > model.JumpForce)
+            rigbody.velocity = new Vector2(rigbody.velocity.x, model.JumpForce);
+    }
+
 
 
     private void Move()
@@ -151,15 +163,13 @@ public class PlayerController : MonoBehaviour, IEntityController
             return; 
         }
 
-        //Check if you can go:
-        Vector2 slopeCheckerPosition = transform.position - new Vector3(0.0f, capscol.size.y / 2, 0.0f);
-        RaycastHit2D slopeHitRight = Physics2D.Raycast(slopeCheckerPosition,
+        //Checking slopes:
+        RaycastHit2D slopeHitRight = Physics2D.Raycast(groundChecker.position,
             transform.right, slopeCheckerRadius, groundLayer);
-        RaycastHit2D slopeHitLeft = Physics2D.Raycast(slopeCheckerPosition,
+        RaycastHit2D slopeHitLeft = Physics2D.Raycast(groundChecker.position,
             -transform.right, slopeCheckerRadius, groundLayer);
 
-
-        // Run (horizontal movement) + avoid auto-sliding down on slopes:
+        // Run (horizontal movement):
         float xMove = Input.GetAxisRaw("Horizontal");
         if (xMove != 0 && !IsDead)
         {
@@ -173,17 +183,15 @@ public class PlayerController : MonoBehaviour, IEntityController
                 hit.collider != null && Mathf.Abs(hit.normal.x) > 0.1f)
             {
                 if (hit.normal.x * xMove > 0) // running down
-                    rigbody.velocity = new Vector2(rigbody.velocity.x, -model.JumpForce);
+                    rigbody.velocity = new Vector2(rigbody.velocity.x, -model.JumpForce / 2);
                 else if (!slopeHitLeft && !slopeHitRight) // running up (at the end of the slope)
                     rigbody.velocity = new Vector2(rigbody.velocity.x, 1.0f);
             }
         }
         // Stopping on the slope => freezing whole movement:
-        else if (Input.GetAxisRaw("Vertical") == 0 && isGrounded && isWalled == 0 &&
-            ((slopeHitLeft && !view.LookRight) || (slopeHitRight && view.LookRight)))
-            rigbody.constraints = RigidbodyConstraints2D.FreezePositionX
-                                | RigidbodyConstraints2D.FreezePositionY
-                                | RigidbodyConstraints2D.FreezeRotation;
+        else if (Input.GetAxisRaw("Vertical") == 0 && isGrounded && isWalled == 0 && (slopeHitLeft || slopeHitRight))
+            rigbody.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+        
         // Not moving => freezing on the X:
         else rigbody.constraints = RigidbodyConstraints2D.FreezePositionX
                                  | RigidbodyConstraints2D.FreezeRotation;
