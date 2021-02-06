@@ -56,8 +56,9 @@ public class PlayerController : MonoBehaviour, IEntityController
     // UI:
     private Image playerHealthBar;
     private bool isReading; // can't move if true
-    private Button jumpButton;
-    private Button attackButton;
+    private GameObject jumpButton;
+    private GameObject attackButton;
+    private GameObject skipButton;
 
     // Sounds:
     private SoundController actionSounds;
@@ -94,11 +95,11 @@ public class PlayerController : MonoBehaviour, IEntityController
         // UI:
         playerHealthBar = GameObject.Find("PlayerHealthBar_Fill").GetComponent<Image>();
         UpdatePlayerHealthBar();
-        jumpButton = GameObject.Find("JumpButton").GetComponent<Button>();
-        jumpButton.onClick.AddListener(() => Jump());
-        attackButton = GameObject.Find("AttackButton").GetComponent<Button>();
-        attackButton.onClick.AddListener(() => Attack());
-
+        jumpButton = GameObject.Find("JumpButton");
+        jumpButton.GetComponent<Button>().onClick.AddListener(() => Jump());
+        attackButton = GameObject.Find("AttackButton");
+        attackButton.GetComponent<Button>().onClick.AddListener(() => Attack());
+        skipButton = GameObject.Find("MC_Dark").transform.Find("SkipButton").gameObject;
         // Sounds:
         movementAudioSource = gameObject.GetComponents<AudioSource>()[1];
         actionSounds = gameObject.GetComponent<SoundController>();
@@ -577,6 +578,6 @@ public class PlayerController : MonoBehaviour, IEntityController
 
     public int ReturnCurrentHP() { return model.HP;  }
     public int ReturnMaxHP() { return model.MaxHP; }
-    public void StartReading() { isReading = true; gameObject.layer = 31; }
-    public void StopReading() { isReading = false; gameObject.layer = 9; }
+    public void StartReading() { isReading = true; gameObject.layer = 31; attackButton.SetActive(false); jumpButton.SetActive(false); skipButton.SetActive(true); }
+    public void StopReading() { isReading = false; gameObject.layer = 9; attackButton.SetActive(true); jumpButton.SetActive(true); skipButton.SetActive(false); }
 }

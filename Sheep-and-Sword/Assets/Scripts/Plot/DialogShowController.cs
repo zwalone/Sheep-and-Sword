@@ -16,20 +16,22 @@ public class DialogShowController : MonoBehaviour
     private PlayerController playerInfo;
     private Coroutine typing;
 
+    // UI
+    private Button skipButton;
+
     private void Awake()
     {
         dialog = GameObject.Find("UI").transform.Find("Dialog").gameObject;
         playerInfo = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
-    private void Update()
+    private void Start()
     {
-        if (Time.timeScale != 1) return;
-
-        if (isDisplayed)
-            if (Input.touchCount > 0 || Input.GetMouseButtonDown(0))
-                NextSentence();
+        skipButton = GameObject.Find("MC_Dark").transform.Find("SkipButton").gameObject.GetComponent<Button>();
+        skipButton.onClick.AddListener(() => Skip());
     }
+
+    private void Skip() { if (Time.timeScale == 1 && isDisplayed) NextSentence(); }
 
     public void StartDialog()
     {
