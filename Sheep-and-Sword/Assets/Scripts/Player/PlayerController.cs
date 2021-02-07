@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour, IEntityController
     
     // Mobiles:
     public Joystick joystick;                // input
-    private readonly float maxDeviation = 0.4f;
+    private readonly float maxDeviation = 0.3f;
 
     // Physics:
     private Rigidbody2D rigbody;          // for movement
@@ -147,6 +147,7 @@ public class PlayerController : MonoBehaviour, IEntityController
         }
 
         isGrounded = (collider != null);
+        if (isGrounded) canSomerSault = true;
     }
 
     private void CheckTheWall()
@@ -160,7 +161,11 @@ public class PlayerController : MonoBehaviour, IEntityController
             isWalled = (collider != null && view.LookRight == false) ? 1 : 0;
         }
 
-        if (isWalled != 0) fallingDownVelocity = 0.0f;
+        if (isWalled != 0)
+        {
+            fallingDownVelocity = 0.0f;
+            canSomerSault = true;
+        }
     }
 
     private void CheckTheCeiling()
@@ -255,14 +260,12 @@ public class PlayerController : MonoBehaviour, IEntityController
     {
         if (IsDead || isReading || Time.timeScale != 1) return;
 
-        if (isGrounded || isWalled != 0) canSomerSault = true;
-
         // Restart all attacks:
         attackViewNumber = -1;
         CancelInvoke(nameof(AttackStart));
         AttackStop();
 
-        if (isGrounded || isWalled != 0) // standard jump (from ground or wall)
+        if (isGrounded || isWalled != 0) // jump from ground or wall
         {
             hasJumped = true;
             madeJumpSound = false;
@@ -273,7 +276,6 @@ public class PlayerController : MonoBehaviour, IEntityController
             hasJumped = true;
             SomerSault();
         }
-
         Invoke(nameof(StopJumping), 0.1f);
     }
     private void StopJumping() { hasJumped = false; }
