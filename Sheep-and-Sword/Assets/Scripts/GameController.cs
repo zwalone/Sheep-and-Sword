@@ -32,6 +32,9 @@ public class GameController : MonoBehaviour
 
     public void GameOver()
     {
+        // Hide MobileControlls:
+        GameObject.Find("MobileControls").SetActive(false);
+
         // Show Death-Menu and PostProcessing effects:
         StartCoroutine(ShowText(GameObject.Find("UI").transform.Find("GameOverText").gameObject));
         GameObject.Find("PostProcessing").GetComponent<PostProcessingController>().ApplyPostProcessing();

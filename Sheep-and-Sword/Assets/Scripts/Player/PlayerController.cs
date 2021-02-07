@@ -63,8 +63,8 @@ public class PlayerController : MonoBehaviour, IEntityController
     private SoundController actionSounds;
     public List<AudioClip> movementClips;
     private AudioSource movementAudioSource;
-    private bool madeAttackSound;
-    private bool madeJumpSound;
+    private bool madeAttackSound = true;
+    private bool madeJumpSound = true;
 
     // Particles:
     public GameObject hitParticles;
