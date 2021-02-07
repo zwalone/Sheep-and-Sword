@@ -54,6 +54,8 @@ public class PlayerController : MonoBehaviour, IEntityController
     private SoundController actionSounds;
     public List<AudioClip> movementClips;
     private AudioSource movementAudioSource;
+    private bool madeAttackSound = true;
+    private bool madeJumpSound = true;
 
     // Particles:
     public GameObject hitParticles;
@@ -229,7 +231,10 @@ public class PlayerController : MonoBehaviour, IEntityController
             AttackStop();
 
             if (isGrounded || isWalled != 0) // standard jump (from ground or wall)
+            {
+                madeJumpSound = false;
                 rigbody.velocity = new Vector2(rigbody.velocity.x, model.JumpForce);
+            }
             else SomerSault();               // somersault only while falling
         }
     }
@@ -238,6 +243,7 @@ public class PlayerController : MonoBehaviour, IEntityController
     {
         if (canSomerSault == true)
         {
+            madeJumpSound = false;
             isSomerSaulting = true;
             rigbody.velocity = new Vector2(rigbody.velocity.x, model.JumpForce);
             Invoke(nameof(SomerSaultCompleted), animationLength * 2);
@@ -312,6 +318,7 @@ public class PlayerController : MonoBehaviour, IEntityController
             isAttacking = true;
             attackViewNumber = (attackViewNumber + 1) % 3;   // there are 3 types of attack
 
+            madeAttackSound = false;
             Invoke(nameof(AttackStart), animationLength / 2.0f); // hit in the half of animation
             Invoke(nameof(AttackStop), animationLength);
 
@@ -480,28 +487,40 @@ public class PlayerController : MonoBehaviour, IEntityController
         {
             if (isCrouched)  // crouching
             {
-                if (isAttacking && Input.GetKeyDown(KeyCode.Space)) // attack while crouching
+                if (isAttacking && !madeAttackSound) // attack while crouching
+                {
                     actionSounds.PlaySound(0);
+                    madeAttackSound = true;
+                }
             }
             else // standing
             {
-                if (isAttacking && Input.GetKeyDown(KeyCode.Space)) // attacks
+                if (isAttacking && !madeAttackSound) // attacks
                 {
                     if (attackViewNumber == 0) actionSounds.PlaySound(0);
                     else if (attackViewNumber == 1) actionSounds.PlaySound(1);
                     else actionSounds.PlaySound(2);
+                    madeAttackSound = true;
                 }
-                else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) // jump from ground
+                else if (!madeJumpSound) // jump from ground
+                {
                     actionSounds.PlaySound(4);
+                    madeJumpSound = true;
+                }
             }
         }
         else // in air
         {
-            if (isAttacking && Input.GetKeyDown(KeyCode.Space)) // attack in air
+            if (isAttacking && !madeAttackSound) // attack in air
+            {
                 actionSounds.PlaySound(0);
-            else if (isSomerSaulting
-                && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))) // somersault
+                madeAttackSound = true;
+            }
+            else if (isSomerSaulting && !madeJumpSound) // somersault
+            {
                 actionSounds.PlaySound(3);
+                madeJumpSound = true;
+            }
         }
     }
 
