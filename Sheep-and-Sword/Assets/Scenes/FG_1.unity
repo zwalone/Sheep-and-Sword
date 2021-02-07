@@ -4446,7 +4446,7 @@ PrefabInstance:
     - target: {fileID: 6985563059524537453, guid: 2fd79a9370911ec4b88ec7b67b62f596,
         type: 3}
       propertyPath: m_Name
-      value: MobileControls
+      value: MC_Dark
       objectReference: {fileID: 0}
     - target: {fileID: 6985563059720984015, guid: 2fd79a9370911ec4b88ec7b67b62f596,
         type: 3}
