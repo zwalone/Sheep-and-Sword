@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour, IEntityController
     
     // Mobiles:
     public Joystick joystick;                // input
-    private readonly float maxDeviation = 0.5f;
+    private readonly float maxDeviation = 0.4f;
 
     // Physics:
     private Rigidbody2D rigbody;          // for movement
