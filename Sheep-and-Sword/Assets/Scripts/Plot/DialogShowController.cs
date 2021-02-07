@@ -16,7 +16,7 @@ public class DialogShowController : MonoBehaviour
     private PlayerController playerInfo;
     private Coroutine typing;
 
-    // UI
+    // UI:
     private Button skipButton;
 
     private void Awake()
@@ -27,7 +27,7 @@ public class DialogShowController : MonoBehaviour
 
     private void Start()
     {
-        skipButton = GameObject.Find("MC_Dark").transform.Find("SkipButton").gameObject.GetComponent<Button>();
+        skipButton = GameObject.Find("MobileControls").transform.Find("SkipButton").gameObject.GetComponent<Button>();
         skipButton.onClick.AddListener(() => Skip());
     }
 

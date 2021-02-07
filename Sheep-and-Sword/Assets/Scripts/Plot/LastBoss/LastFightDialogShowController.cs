@@ -17,7 +17,7 @@ public class LastFightDialogShowController : MonoBehaviour
     private Coroutine typing;
     private AudioSource[] sounds;
 
-    // UI
+    // UI:
     private Button skipButton;
 
     private void Awake()
@@ -30,7 +30,7 @@ public class LastFightDialogShowController : MonoBehaviour
 
     private void Start()
     {
-        skipButton = GameObject.Find("MC_Dark").transform.Find("SkipButton").gameObject.GetComponent<Button>();
+        skipButton = GameObject.Find("MobileControls").transform.Find("SkipButton").gameObject.GetComponent<Button>();
         skipButton.onClick.AddListener(() => Skip());
     }
 

@@ -4,21 +4,26 @@ using UnityEngine.UI;
 
 public class OutroDialogController : MonoBehaviour
 {
+    // displaying text:
     public Text textDisplay;
     public string[] sentences;
     private int index;
     public float typingSpeed;
     private Coroutine typing;
+
+    // general:
     private bool isDisplayed = false;
 
-    private void Update()
-    {
-        if (Time.timeScale != 1) return;
+    // UI:
+    private GameObject skipButton;
 
-        if (isDisplayed)
-            if (Input.touchCount > 0 || Input.GetMouseButtonDown(0))
-                NextSentence();
+    private void Start()
+    {
+        skipButton = GameObject.Find("MobileControls").transform.Find("SkipButton").gameObject;
+        skipButton.GetComponent<Button>().onClick.AddListener(() => Skip());
     }
+
+    private void Skip() { if (Time.timeScale == 1 && isDisplayed) NextSentence(); }
 
     public void StartDialog()
     {
@@ -59,6 +64,7 @@ public class OutroDialogController : MonoBehaviour
         }
         else
         {
+            skipButton.SetActive(false);
             gameObject.SetActive(false);
             textDisplay.text = "";
             isDisplayed = false;

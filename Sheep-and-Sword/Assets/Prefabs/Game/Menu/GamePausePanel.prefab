@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 7547950358480965857}
   - component: {fileID: 5015552856948024771}
   m_Layer: 5
-  m_Name: MainMenu
+  m_Name: MainMenuButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -352,7 +352,7 @@ GameObject:
   - component: {fileID: 8536629147088816493}
   - component: {fileID: 6474247940445476941}
   m_Layer: 5
-  m_Name: Slider (2)
+  m_Name: DialogSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -517,7 +517,7 @@ GameObject:
   - component: {fileID: 8224458647318266873}
   - component: {fileID: 3378599329659952170}
   m_Layer: 5
-  m_Name: ExitGame
+  m_Name: ExitGameButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -709,7 +709,7 @@ GameObject:
   - component: {fileID: 7422107408719756589}
   - component: {fileID: 7088577088018413929}
   m_Layer: 5
-  m_Name: Dialog
+  m_Name: DialogText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -786,7 +786,7 @@ GameObject:
   - component: {fileID: 3500040195679672763}
   - component: {fileID: 580113045865287340}
   m_Layer: 5
-  m_Name: SliderEffect
+  m_Name: EffectSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -995,7 +995,7 @@ GameObject:
   - component: {fileID: 7668639880408293762}
   - component: {fileID: 7754837491394344220}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: MusicSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1121,7 +1121,7 @@ GameObject:
   - component: {fileID: 2479427952922159461}
   - component: {fileID: 7441025644637278691}
   m_Layer: 5
-  m_Name: Effect
+  m_Name: EffectText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1309,7 +1309,7 @@ GameObject:
   - component: {fileID: 4685871904788027144}
   - component: {fileID: 5387695965074641615}
   m_Layer: 5
-  m_Name: Text
+  m_Name: ResumeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1569,7 +1569,7 @@ GameObject:
   - component: {fileID: 7962528776102131736}
   - component: {fileID: 2037957920906634746}
   m_Layer: 5
-  m_Name: Text
+  m_Name: MainMenuText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1722,7 +1722,7 @@ GameObject:
   - component: {fileID: 335770676234451617}
   - component: {fileID: 2624752850164197369}
   m_Layer: 5
-  m_Name: Resume
+  m_Name: ResumeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1918,7 +1918,7 @@ GameObject:
   - component: {fileID: 5751571084873656951}
   - component: {fileID: 1414727981214621302}
   m_Layer: 5
-  m_Name: ValumeText
+  m_Name: MusicText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1996,7 +1996,7 @@ GameObject:
   - component: {fileID: 6020756269130164209}
   - component: {fileID: 5403365422189271245}
   m_Layer: 5
-  m_Name: Text
+  m_Name: ExitGameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

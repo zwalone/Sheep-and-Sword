@@ -14,14 +14,16 @@ public class IntroDialogController : MonoBehaviour
     // general:
     private bool isDisplayed = false;
 
-    private void Update()
-    {
-        if (Time.timeScale != 1) return;
+    // UI:
+    private GameObject skipButton;
 
-        if (isDisplayed)
-            if (Input.touchCount > 0 || Input.GetMouseButtonDown(0))
-                NextSentence();
+    private void Start()
+    {
+        skipButton = GameObject.Find("MobileControls").transform.Find("SkipButton").gameObject;
+        skipButton.GetComponent<Button>().onClick.AddListener(() => Skip());
     }
+
+    private void Skip() { if (Time.timeScale == 1 && isDisplayed) NextSentence(); }
 
     public void StartDialog()
     {
@@ -57,6 +59,7 @@ public class IntroDialogController : MonoBehaviour
         }
         else
         {
+            skipButton.SetActive(false);
             gameObject.SetActive(false);
             textDisplay.text = "";
             isDisplayed = false;
