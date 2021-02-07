@@ -46,7 +46,6 @@ public class PlayerController : MonoBehaviour, IEntityController
     private int isWalled;     // contact with the wall
     public float checkpointHeightDifference = 0.01f;
     private bool hasJumped;
-    private bool hasAttacked;
 
     // Health/Damage parameters:
     public bool IsHurting { get; private set; }
@@ -64,6 +63,8 @@ public class PlayerController : MonoBehaviour, IEntityController
     private SoundController actionSounds;
     public List<AudioClip> movementClips;
     private AudioSource movementAudioSource;
+    private bool madeAttackSound;
+    private bool madeJumpSound;
 
     // Particles:
     public GameObject hitParticles;
@@ -195,7 +196,7 @@ public class PlayerController : MonoBehaviour, IEntityController
             // Running on the slopes:
             RaycastHit2D hit = Physics2D.Raycast(groundChecker.position, Vector2.down,
                 groundCheckerRadius, groundLayer);
-            if (isGrounded && Input.GetAxisRaw("Vertical") == 0 &&
+            if (isGrounded && !hasJumped &&
                 hit.collider != null && Mathf.Abs(hit.normal.x) > 0.1f)
             {
                 if (hit.normal.x * xMove > 0) // running down
@@ -205,7 +206,7 @@ public class PlayerController : MonoBehaviour, IEntityController
             }
         }
         // Stopping on the slope => freezing whole movement:
-        else if (Input.GetAxisRaw("Vertical") == 0 && isGrounded && isWalled == 0 && (slopeHitLeft || slopeHitRight))
+        else if (!hasJumped && isGrounded && isWalled == 0 && (slopeHitLeft || slopeHitRight))
             rigbody.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
         
         // Not moving => freezing on the X:
@@ -246,16 +247,27 @@ public class PlayerController : MonoBehaviour, IEntityController
         CancelInvoke(nameof(AttackStart));
         AttackStop();
 
-        hasJumped = true;
         if (isGrounded || isWalled != 0) // standard jump (from ground or wall)
+        {
+            hasJumped = true;
+            madeJumpSound = false;
             rigbody.velocity = new Vector2(rigbody.velocity.x, model.JumpForce);
-        else SomerSault();               // somersault only while falling
+        }
+        else                             // somersault only while falling
+        {
+            hasJumped = true;
+            SomerSault();
+        }
+
+        Invoke(nameof(StopJumping), 0.1f);
     }
+    private void StopJumping() { hasJumped = false; }
 
     private void SomerSault()
     {
         if (canSomerSault == true)
         {
+            madeJumpSound = false;
             isSomerSaulting = true;
             rigbody.velocity = new Vector2(rigbody.velocity.x, model.JumpForce);
             Invoke(nameof(SomerSaultCompleted), animationLength * 2);
@@ -330,7 +342,7 @@ public class PlayerController : MonoBehaviour, IEntityController
             isAttacking = true;
             attackViewNumber = (attackViewNumber + 1) % 3;   // there are 3 types of attack
 
-            hasAttacked = true;
+            madeAttackSound = false;
             Invoke(nameof(AttackStart), animationLength / 2.0f); // hit in the half of animation
             Invoke(nameof(AttackStop), animationLength);
 
@@ -407,12 +419,12 @@ public class PlayerController : MonoBehaviour, IEntityController
         // Flip:
         if (!IsDead && !isReading)
         {
-            if (joystick.Horizontal < 0)
+            if (joystick.Horizontal < -maxDeviation)
             {
                 playerGraphics.GetComponent<SpriteRenderer>().flipX = true;
                 view.LookRight = false;
             }
-            if (joystick.Horizontal > 0)
+            if (joystick.Horizontal > maxDeviation)
             {
                 playerGraphics.GetComponent<SpriteRenderer>().flipX = false;
                 view.LookRight = true;
@@ -500,39 +512,39 @@ public class PlayerController : MonoBehaviour, IEntityController
         {
             if (isCrouched)  // crouching
             {
-                if (isAttacking && hasAttacked) // attack while crouching
+                if (isAttacking && !madeAttackSound) // attack while crouching
                 {
                     actionSounds.PlaySound(0);
-                    hasAttacked = false;
+                    madeAttackSound = true;
                 }
             }
             else // standing
             {
-                if (isAttacking && hasAttacked) // attacks
+                if (isAttacking && !madeAttackSound) // attacks
                 {
                     if (attackViewNumber == 0) actionSounds.PlaySound(0);
                     else if (attackViewNumber == 1) actionSounds.PlaySound(1);
                     else actionSounds.PlaySound(2);
-                    hasAttacked = false;
+                    madeAttackSound = true;
                 }
-                else if (hasJumped) // jump from ground
+                else if (!madeJumpSound) // jump from ground
                 {
                     actionSounds.PlaySound(4);
-                    hasJumped = false;
+                    madeJumpSound = true;
                 }
             }
         }
         else // in air
         {
-            if (isAttacking && hasAttacked) // attack in air
+            if (isAttacking && !madeAttackSound) // attack in air
             {
                 actionSounds.PlaySound(0);
-                hasAttacked = false;
+                madeAttackSound = true;
             }
-            else if (isSomerSaulting && hasJumped) // somersault
+            else if (isSomerSaulting && !madeJumpSound) // somersault
             {
                 actionSounds.PlaySound(3);
-                hasJumped = false;
+                madeJumpSound = true;
             }
         }
     }
@@ -579,6 +591,20 @@ public class PlayerController : MonoBehaviour, IEntityController
 
     public int ReturnCurrentHP() { return model.HP;  }
     public int ReturnMaxHP() { return model.MaxHP; }
-    public void StartReading() { isReading = true; gameObject.layer = 31; attackButton.SetActive(false); jumpButton.SetActive(false); skipButton.SetActive(true); }
-    public void StopReading() { isReading = false; gameObject.layer = 9; attackButton.SetActive(true); jumpButton.SetActive(true); skipButton.SetActive(false); }
+    public void StartReading() 
+    { 
+        isReading = true; 
+        gameObject.layer = 31; 
+        attackButton.SetActive(false); 
+        jumpButton.SetActive(false); 
+        skipButton.SetActive(true);
+    }
+    public void StopReading() 
+    { 
+        isReading = false; 
+        gameObject.layer = 9; 
+        attackButton.SetActive(true); 
+        jumpButton.SetActive(true); 
+        skipButton.SetActive(false); 
+    }
 }
