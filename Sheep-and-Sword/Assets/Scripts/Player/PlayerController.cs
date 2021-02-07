@@ -66,6 +66,10 @@ public class PlayerController : MonoBehaviour, IEntityController
     // For checkpoints:
     public float checkpointHeightDifference = 0.01f;
 
+    // Falling down:
+    private float fallingDownVelocity = 0.0f;
+    private bool enabledFastFalling = false;
+
     private void Awake()
     {
         // Display:
@@ -117,6 +121,7 @@ public class PlayerController : MonoBehaviour, IEntityController
         Animate();
 
         FixVelocity();
+        MeasureFallingDownVelocity();
     }
 
     private void CheckTheGround()
@@ -124,8 +129,11 @@ public class PlayerController : MonoBehaviour, IEntityController
         // Checking if player is on the ground:
         Collider2D collider = Physics2D.OverlapCircle(groundChecker.position, groundCheckerRadius, groundLayer);
 
-        if (isGrounded == false && collider != null && rigbody.velocity.y <= -11.0f)
-            TakeDamage((Math.Abs((int)rigbody.velocity.y) - 10) * 5);
+        if (isGrounded == false && collider != null && fallingDownVelocity <= -11.0f)
+        {
+            TakeDamage((Math.Abs((int)fallingDownVelocity) - 10) * 5);
+            fallingDownVelocity = 0.0f;
+        }
 
         isGrounded = (collider != null);
     }
@@ -140,6 +148,8 @@ public class PlayerController : MonoBehaviour, IEntityController
             collider = Physics2D.OverlapCircle(wallCheckerLeft.position, wallCheckerRadius, groundLayer);
             isWalled = (collider != null && view.LookRight == false) ? 1 : 0;
         }
+
+        if (isWalled != 0) fallingDownVelocity = 0.0f;
     }
 
     private void CheckTheCeiling()
@@ -153,6 +163,12 @@ public class PlayerController : MonoBehaviour, IEntityController
     {
         if (!isGrounded && rigbody.velocity.y > model.JumpForce)
             rigbody.velocity = new Vector2(rigbody.velocity.x, model.JumpForce);
+    }
+
+    private void MeasureFallingDownVelocity() 
+    { 
+        if (!isGrounded && isWalled == 0) 
+            fallingDownVelocity = rigbody.velocity.y; 
     }
 
 
@@ -256,8 +272,8 @@ public class PlayerController : MonoBehaviour, IEntityController
     private void FastFall()
     {
         // after clicking DownArrow (or S), player goes down faster
-        if (!isGrounded)
-            if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
+            if (!isGrounded && !enabledFastFalling && rigbody.velocity.y > -model.JumpForce / 1.5f)
                 rigbody.velocity = new Vector2(0, -model.JumpForce / 1.5f);
     }
 
@@ -365,6 +381,7 @@ public class PlayerController : MonoBehaviour, IEntityController
         }
         else
         {
+            actionSounds.PlaySound(5); // "Hurt" sound
             IsDead = true;
             Invoke(nameof(GameOver), animationLength * 2.1f); // Game ends after Die animation
         }
