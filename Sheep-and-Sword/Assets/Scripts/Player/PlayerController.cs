@@ -467,19 +467,21 @@ public class PlayerController : MonoBehaviour, IEntityController
     {
         // In pause-menu:
         if (Time.timeScale != 1) movementAudioSource.Stop();
+
         // Running:
-        else if (rigbody.velocity.x != 0 && isGrounded && !IsHurting
-            && !IsSliding && isWalled == 0 && !isCrouched)
+        else if (rigbody.velocity.x != 0 && isGrounded && !IsHurting && !IsSliding && isWalled == 0 && !isCrouched)
         {
             movementAudioSource.clip = movementClips[0];
             if (!movementAudioSource.isPlaying) movementAudioSource.Play();
         }
+
         // Sliding:
         else if (IsSliding)
         {
             movementAudioSource.clip = movementClips[1];
             if (!movementAudioSource.isPlaying) movementAudioSource.Play();
         }
+
         // Movement on the wall:
         else if (rigbody.velocity.y != 0.0f && isWalled != 0)
         {
@@ -498,8 +500,7 @@ public class PlayerController : MonoBehaviour, IEntityController
 
 
         // Other sound effects:
-        if (isReading || IsHurting || IsDead 
-            || IsSliding || isWalled != 0 || Time.timeScale != 1) return;
+        if (isReading || IsHurting || IsDead || IsSliding || isWalled != 0 || Time.timeScale != 1) return;
         else if (isGrounded) // on the ground
         {
             if (isCrouched)  // crouching
@@ -519,7 +520,7 @@ public class PlayerController : MonoBehaviour, IEntityController
                     else actionSounds.PlaySound(2);
                     madeAttackSound = true;
                 }
-                else if (!madeJumpSound) // jump from ground
+                else if (!madeJumpSound && (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))) // jump from ground
                 {
                     actionSounds.PlaySound(4);
                     madeJumpSound = true;
