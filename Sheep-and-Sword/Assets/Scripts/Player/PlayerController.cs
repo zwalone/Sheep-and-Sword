@@ -77,6 +77,10 @@ public class PlayerController : MonoBehaviour, IEntityController
     private bool enabledFastFalling = false;
 
 
+    // Falling down:
+    private float fallingDownVelocity = 0.0f;
+    private bool enabledFastFalling = false;
+
     private void Awake()
     {
         // Display:
