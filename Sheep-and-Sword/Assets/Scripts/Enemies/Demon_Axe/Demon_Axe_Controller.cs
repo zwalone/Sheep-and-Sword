@@ -146,7 +146,8 @@ public class Demon_Axe_Controller : MonoBehaviour, IEntityController
         }
 
         // If there is a wall in front of demon_axe, turn around:
-        else if (isGroundOpposite.IsTouchingLayers(LayerMask.GetMask("Ground")) && changeDirection)
+        else if ((isGroundOpposite.IsTouchingLayers(LayerMask.GetMask("Ground"))
+               || isGroundOpposite.IsTouchingLayers(LayerMask.GetMask("NoAccessLine"))) && changeDirection)
         {
             changeDirection = false;
             StartCoroutine(ChangeDirectionCorutine());

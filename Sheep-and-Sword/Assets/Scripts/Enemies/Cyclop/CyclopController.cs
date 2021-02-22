@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CyclopController : MonoBehaviour, IEntityController
@@ -12,10 +11,20 @@ public class CyclopController : MonoBehaviour, IEntityController
     // Movement:
     private CyclopModel model;
     private Rigidbody2D rd2D;
-    private List<CircleCollider2D> checkGroundList;
-
+    [SerializeField]
+    private CircleCollider2D isGroundBottom;
+    [SerializeField]
+    private CircleCollider2D isGroundOpposite;
     [SerializeField]
     private bool changeDirection;
+
+    // Player tracking:
+    public Transform rayCast;
+    public LayerMask rayCastMask;
+    public float rayCastLength;
+    public float attackDistance;
+    private GameObject target;
+    private bool inRange;
 
     // Combat:
     private bool isAttacking;
@@ -36,7 +45,6 @@ public class CyclopController : MonoBehaviour, IEntityController
         view = GetComponent<CyclopView>();
         model = GetComponent<CyclopModel>();
         rd2D = GetComponent<Rigidbody2D>();
-        checkGroundList = new List<CircleCollider2D>(GetComponentsInChildren<CircleCollider2D>());
         actionSounds = gameObject.GetComponent<SoundController>();
     }
 
@@ -44,15 +52,119 @@ public class CyclopController : MonoBehaviour, IEntityController
 
     private void FixedUpdate()
     {
-        // Change cyclop's position:
-        rd2D.MovePosition(rd2D.position + new Vector2(model.Speed, 0) * Time.fixedDeltaTime);
+        // Change cyclop's position (if is not attacking):
+        if (!inRange && !isAttacking) 
+            rd2D.MovePosition(rd2D.position + new Vector2(model.Speed, 0) * Time.fixedDeltaTime);
 
         // Check if there is a wall or player in front of cyclop:
         ChangeMoveDirection();
-        RayCastCheckUpdate();
     }
 
-    private void Update() { Animate(); }
+    private void Update() 
+    {
+        Animate();
+        if (inRange) CheckAttack();
+    }
+
+
+
+    private void CheckAttack()
+    {
+        if (!isAttacking && !IsDead)
+            StartCoroutine(Attack());
+    }
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        // Check if living player showed up in front of cyclop:
+        if (collider.gameObject.CompareTag("Player") && !collider.gameObject.GetComponentInParent<IEntityController>().IsDead)
+        {
+            inRange = true;
+            target = collider.gameObject;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        // Check if player is no longer in front of cyclop:
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            inRange = false;
+            target = null;
+        }
+    }
+
+
+
+    IEnumerator Attack()
+    {
+        if (!IsDead)
+        {
+            isAttacking = true;
+
+            if (canUseLaser == true)
+            {
+                // Update state:
+                canUseLaser = false;
+
+                // Spawn a bullet:
+                if (model.Speed < 0) Instantiate(model.Laser, transform.position, Quaternion.Euler(0, 180, 0));
+                else Instantiate(model.Laser, transform.position, Quaternion.identity);
+
+                // Make a sound:
+                actionSounds.PlaySound(0);
+
+                // Update state after some time (prevent attacking constantly):
+                Invoke(nameof(CanUseLaser), laserCooldown);
+            }
+
+            // Wait a moment before stopping attacking:
+            yield return new WaitForSeconds(1.5f);
+            isAttacking = false;
+        }
+    }
+
+    private void CanUseLaser() { canUseLaser = true; }
+
+
+
+    // Checking if there is a need to turn around:
+    private void ChangeMoveDirection(bool behind = false)
+    {
+        // If cyclop is dead, do nothing:
+        if (IsDead) return;
+
+        // If player attacked from behind, turn around:
+        if (behind)
+        {
+            changeDirection = false;
+            StartCoroutine(ChangeDirectionCorutine());
+        }
+
+        // If there is no ground in front of cyclop, turn around:
+        if (!isGroundBottom.IsTouchingLayers(LayerMask.GetMask("Ground")) && changeDirection)
+        {
+            changeDirection = false;
+            StartCoroutine(ChangeDirectionCorutine());
+        }
+
+        // If there is a wall in front of cyclop, turn around:
+        else if ((isGroundOpposite.IsTouchingLayers(LayerMask.GetMask("Ground"))
+               || isGroundOpposite.IsTouchingLayers(LayerMask.GetMask("NoAccessLine"))) && changeDirection)
+        {
+            changeDirection = false;
+            StartCoroutine(ChangeDirectionCorutine());
+        }
+    }
+
+    // Turning around, changing direction:
+    IEnumerator ChangeDirectionCorutine()
+    {
+        model.Speed = -model.Speed;
+        transform.localRotation *= Quaternion.Euler(0, 180, 0);
+        yield return new WaitForSeconds(0.7f);
+        changeDirection = true;
+    }
 
 
 
@@ -106,101 +218,6 @@ public class CyclopController : MonoBehaviour, IEntityController
     private void DestroyMe() { Destroy(gameObject); }
 
     private void StopHurting() { IsHurting = false; }
-
-
-
-    // Checking collision with Player by Raycast:
-    private void RayCastCheckUpdate()
-    {
-        // Prepare a ray in specific direction:
-        Vector2 directionRay;
-        if (model.Speed < 0) directionRay = new Vector2(-1, 0);
-        else directionRay = new Vector2(1, 0);
-
-        // Add offset not to hit yourself:
-        float offset = (model.Speed < 0 ? -0.4f : 0.4f);
-        Vector2 start = new Vector2(transform.position.x + offset, transform.position.y - .5f);
-
-        // Show ray (in debug mode):
-        Debug.DrawRay(start, directionRay, Color.red);
-
-        // If found living player in front of cyclop, start attacking him:
-        RaycastHit2D hit = Physics2D.Raycast(start, directionRay, 5f);
-        if (hit.collider)
-            if (hit.collider.CompareTag("Player") && !hit.collider.gameObject.GetComponentInParent<IEntityController>().IsDead)
-                if (!isAttacking)
-                    StartCoroutine(Attack());
-    }
-
-    // Checking if there is a need to turn around:
-    private void ChangeMoveDirection(bool behind = false)
-    {
-        // If cyclop is dead, do nothing:
-        if (IsDead) return;
-
-        // If player attacked from behind, turn around:
-        if (behind)
-        {
-            changeDirection = false;
-            StartCoroutine(ChangeDirectionCorutine());
-        }
-
-        // If there is no ground in front of cyclop, turn around:
-        foreach (var col in checkGroundList)
-        {
-            if (!col.IsTouchingLayers(LayerMask.GetMask("Ground")) && changeDirection)
-            {
-                changeDirection = false;
-                StartCoroutine(ChangeDirectionCorutine());
-            }
-        }
-    }
-
-    // Turning around, changing direction:
-    IEnumerator ChangeDirectionCorutine()
-    {
-        model.Speed = -model.Speed;
-        transform.localRotation *= Quaternion.Euler(0, 180, 0);
-        yield return new WaitForSeconds(0.7f);
-        changeDirection = true;
-    }
-
-
-
-    IEnumerator Attack()
-    {
-        if (!IsDead)
-        {
-            isAttacking = true;
-            float prevSpeed = model.Speed;
-
-            if (canUseLaser == true)
-            {
-                // Update state:
-                canUseLaser = false;
-
-                // Spawn a bullet:
-                if (model.Speed < 0) Instantiate(model.Laser, transform.position, Quaternion.Euler(0, 180, 0));
-                else Instantiate(model.Laser, transform.position, Quaternion.identity);
-
-                // Make a sound:
-                actionSounds.PlaySound(0);
-
-                // Update state after some time (prevent attacking constantly):
-                Invoke(nameof(CanUseLaser), laserCooldown);
-            }
-
-            // Stop movement during shoot animation:
-            model.Speed = 0;
-            yield return new WaitForSeconds(1.5f);
-
-            // Go to previous movement:
-            model.Speed = prevSpeed;
-            isAttacking = false;
-        }
-    }
-
-    private void CanUseLaser() { canUseLaser = true; }
 
 
 

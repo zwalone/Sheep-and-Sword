@@ -185,7 +185,8 @@ public class Hammer_Controller : MonoBehaviour, IEntityController
         }
 
         // If there is a wall in front of Hammer, turn around:
-        else if (isGroundOpposite.IsTouchingLayers(LayerMask.GetMask("Ground")) && changeDirection)
+        else if ((isGroundOpposite.IsTouchingLayers(LayerMask.GetMask("Ground"))
+               || isGroundOpposite.IsTouchingLayers(LayerMask.GetMask("NoAccessLine"))) && changeDirection)
         {
             changeDirection = false;
             StartCoroutine(ChangeDirectionCorutine());

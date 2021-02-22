@@ -138,7 +138,8 @@ public class MinotaurController : MonoBehaviour, IEntityController
         }
 
         // If there is no ground in front of minotaur, turn around:
-        if (!isGroundBottom.IsTouchingLayers(LayerMask.GetMask("Ground")) && changeDirection)
+        else if ((isGroundOpposite.IsTouchingLayers(LayerMask.GetMask("Ground"))
+               || isGroundOpposite.IsTouchingLayers(LayerMask.GetMask("NoAccessLine"))) && changeDirection)
         {
             changeDirection = false;
             StartCoroutine(ChangeDirectionCorutine());
