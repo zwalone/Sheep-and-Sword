@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
@@ -19,17 +18,12 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) && (player == null || !player.IsDead))
         {
-            if (!GameIsPaused)
-            {
-                Pause();
-            }
-            else
-            {
-                Resume();
-            }
+            if (!GameIsPaused) Pause();
+            else Resume();
         }
     }
 
+    // Freeze movement and sounds, show pauseMenu
     private void Pause()
     {
         pauseMenu.SetActive(true);
@@ -38,6 +32,7 @@ public class PauseMenu : MonoBehaviour
         GameIsPaused = true;
     }
 
+    // Unfreeze movement and sounds, hide pauseMenu
     public void Resume()
     {
         pauseMenu.SetActive(false);
@@ -46,6 +41,7 @@ public class PauseMenu : MonoBehaviour
         GameIsPaused = false;
     }
 
+    // Quit the application
     public void ExitGame()
     {
         Application.Quit();

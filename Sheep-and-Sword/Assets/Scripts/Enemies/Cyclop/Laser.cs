@@ -3,19 +3,22 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour
 {
+    // Value responsible for changing position:
     [SerializeField]
-    private float _speed = 0.0f;
+    private float speed = 0.0f;
 
+    // Value responsible for decreasing target's health points:
     [SerializeField]
-    private int _dmg = 0;
+    private int dmg = 0;
 
-    private Rigidbody2D _rb2D;
-    private Animator _anim;
+    // Movement and animations:
+    private Rigidbody2D rb2D;
+    private Animator anim;
 
     private void Awake()
     {
-        _anim = this.GetComponent<Animator>();
-        _rb2D = this.GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        rb2D = GetComponent<Rigidbody2D>();
     }
 
     void Start()
@@ -25,23 +28,28 @@ public class Laser : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(!collision.CompareTag("Enemy"))
+        if (!collision.CompareTag("Enemy"))
         {
+            // Decrease player's health points after collision with him:
             if (collision.gameObject.CompareTag("Player"))
-            {
-                collision.gameObject.GetComponent<PlayerController>().TakeDamage(_dmg);
-                Destroy(this.gameObject);
-            }
-                
-            
+                collision.gameObject.GetComponent<PlayerController>().TakeDamage(dmg);
+
+            // Destroy the laser after collision with player or wall:
+            if (collision.gameObject.CompareTag("Player") || collision.gameObject.layer == 8)
+                Destroy(gameObject);
         }
     }
 
     IEnumerator Shoot()
     {
-        _anim.Play("Laser");
+        // Animate generating laser:
+        anim.Play("Laser");
         yield return new WaitForSeconds(0.07f);
-        _rb2D.velocity = transform.right * _speed;
+
+        // Give some velocity to the laser:
+        rb2D.velocity = transform.right * speed;
+
+        // Destroy the laser after 5 seconds (if it won't hit anything until this time):
         Destroy(gameObject, 5);
     }
 }

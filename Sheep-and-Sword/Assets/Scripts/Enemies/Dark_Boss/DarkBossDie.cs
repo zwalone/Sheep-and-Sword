@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
 
 public class DarkBossDie : MonoBehaviour
 {
@@ -10,10 +7,9 @@ public class DarkBossDie : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // Unlock way to next level after defeating Dark Boss:
         if (gameObject.GetComponent<Dark_Boss_Model>().HP <= 0)
-        {
             Wall.SetActive(false);
-        }
     }
 }
 

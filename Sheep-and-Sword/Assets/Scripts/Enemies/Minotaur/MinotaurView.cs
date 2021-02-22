@@ -1,61 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MinotaurView : MonoBehaviour
 {
+    // List of animations:
     private enum Anim
     {
-        WalkRight,
-        AttackRight,
-        Attack2Right,
-        DieRight,
-        GetDamage
+        Walk,
+        Attack,
+        Die,
+        Hurt
     }
 
-    private Anim _currentState;
+    private Anim currentState;
+    private Animator animator;
 
-    private Animator _animator;
-
-    // Start is called before the first frame update
     void Start()
     {
-        _animator = this.GetComponent<Animator>();
-        _currentState = Anim.WalkRight;
+        animator = GetComponent<Animator>();
+        currentState = Anim.Walk;
     }
 
     private void ChangeAnimState(Anim state)
     {
-        //Stop the same animation playing
-        if (_currentState == state) return;
+        // Do nothing if new action is the same as previous one:
+        if (currentState == state) return;
 
-        _currentState = state;
-
-        _animator.Play(_currentState.ToString());
+        // Show new animation:
+        currentState = state;
+        animator.Play(currentState.ToString());
     }
 
-    public void WalkRight()
-    {
-        ChangeAnimState(Anim.WalkRight);
-    }
-
-    public void AttackRight()
-    {
-        ChangeAnimState(Anim.AttackRight);
-    }
-
-    public void Attack2Right()
-    {
-        ChangeAnimState(Anim.Attack2Right);
-    }
-
-    public void DieRight()
-    {
-        ChangeAnimState(Anim.DieRight);
-    }
-
-    public void GetDamage()
-    {
-        ChangeAnimState(Anim.GetDamage);
-    }
+    // Change animations:
+    public void Walk() { ChangeAnimState(Anim.Walk); }
+    public void Attack() { ChangeAnimState(Anim.Attack); }
+    public void Hurt() { ChangeAnimState(Anim.Hurt); }
+    public void Die() { ChangeAnimState(Anim.Die); }
 }

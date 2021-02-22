@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 8403550586172030336}
   - component: {fileID: 2163303119198585517}
   m_Layer: 0
-  m_Name: Decoration (1)
+  m_Name: Decoration 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -583,7 +583,7 @@ GameObject:
   - component: {fileID: 4566754304896210197}
   - component: {fileID: 4566754304896210198}
   m_Layer: 0
-  m_Name: Hauses
+  m_Name: Houses
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2874,7 +2874,7 @@ GameObject:
   - component: {fileID: 4566754305628206253}
   - component: {fileID: 4566754305628206254}
   m_Layer: 8
-  m_Name: Ground
+  m_Name: Ground 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32936,7 +32936,7 @@ GameObject:
   - component: {fileID: 4234586312495128562}
   - component: {fileID: 3441819721938732289}
   m_Layer: 0
-  m_Name: Decoration (2)
+  m_Name: Decoration 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34544,10 +34544,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4566754304549050489}
     m_Modifications:
+    - target: {fileID: 3268621915905013582, guid: 20ee5b8e752483c4298d49f2d2347fc8,
+        type: 3}
+      propertyPath: m_Name
+      value: BackgroundSky
+      objectReference: {fileID: 0}
     - target: {fileID: 5628768794692656160, guid: 20ee5b8e752483c4298d49f2d2347fc8,
         type: 3}
       propertyPath: m_Name
-      value: background_sky (1)
+      value: Backgrounds
       objectReference: {fileID: 0}
     - target: {fileID: 5628768794692656161, guid: 20ee5b8e752483c4298d49f2d2347fc8,
         type: 3}
@@ -34604,7 +34609,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3889313073994433041, guid: 20ee5b8e752483c4298d49f2d2347fc8, type: 3}
+    - {fileID: 3764417495957997790, guid: 20ee5b8e752483c4298d49f2d2347fc8, type: 3}
+    - {fileID: 7618406028823346375, guid: 20ee5b8e752483c4298d49f2d2347fc8, type: 3}
+    - {fileID: 1584531565235439625, guid: 20ee5b8e752483c4298d49f2d2347fc8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 20ee5b8e752483c4298d49f2d2347fc8, type: 3}
 --- !u!4 &9157640341869220686 stripped
 Transform:
@@ -34622,7 +34631,7 @@ PrefabInstance:
     - target: {fileID: 6203990361199660171, guid: 04178a9ed316732498f03fd8646bf891,
         type: 3}
       propertyPath: m_Name
-      value: Ground2
+      value: Ground 2
       objectReference: {fileID: 0}
     - target: {fileID: 6203990361199660171, guid: 04178a9ed316732498f03fd8646bf891,
         type: 3}

@@ -1,56 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Demon_Axe_View : MonoBehaviour
 {
+    // List of animations:
     private enum Anim
     {
         Walk,
-        Attack1,
-        Dead,
-        Hit,
+        Attack,
+        Die,
+        Hurt
     }
 
-    private Anim _currentState;
+    private Anim currentState;
+    private Animator animator;
 
-    private Animator _animator;
-
-    // Start is called before the first frame update
     void Start()
     {
-        _animator = this.GetComponent<Animator>();
-        _currentState = Anim.Walk;
+        animator = GetComponent<Animator>();
+        currentState = Anim.Walk;
     }
 
     private void ChangeAnimState(Anim state)
     {
-        //Stop the same animation playing
-        if (_currentState == state) return;
+        // Do nothing if new action is the same as previous one:
+        if (currentState == state) return;
 
-        _currentState = state;
-
-        _animator.Play(_currentState.ToString());
+        // Show new animation:
+        currentState = state;
+        animator.Play(currentState.ToString());
     }
 
-    public void Walk()
-    {
-        ChangeAnimState(Anim.Walk);
-    }
-
-    public void Attack()
-    {
-        ChangeAnimState(Anim.Attack1);
-    }
-
-    public void TakeDamage()
-    {
-        ChangeAnimState(Anim.Hit);
-    }
-
-
-    public void Die()
-    {
-        ChangeAnimState(Anim.Dead);
-    }
+    // Change animations:
+    public void Walk() { ChangeAnimState(Anim.Walk); }
+    public void Attack() { ChangeAnimState(Anim.Attack); }
+    public void Hurt() { ChangeAnimState(Anim.Hurt); }
+    public void Die() { ChangeAnimState(Anim.Die); }
 }

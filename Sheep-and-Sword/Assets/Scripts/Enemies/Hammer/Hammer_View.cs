@@ -1,78 +1,44 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Hammer_View : MonoBehaviour
 {
+    // List of animations:
     private enum Anim
     {
         Attack1,
-        Attack_Spinner,
+        Attack2,
+        Attack3,
         Dash,
-        Dead,
-        Idle_Strip,
-        Jump,
-        Taunt,
+        Die,
+        Hurt,
         Walk
     }
 
-    private Anim _currentState;
+    private Anim currentState;
+    private Animator animator;
 
-    private Animator _animator;
-
-    // Start is called before the first frame update
     void Start()
     {
-        _animator = this.GetComponent<Animator>();
-        _currentState = Anim.Walk;
+        animator = GetComponent<Animator>();
+        currentState = Anim.Walk;
     }
 
     private void ChangeAnimState(Anim state)
     {
-        //Stop the same animation playing
-        if (_currentState == state) return;
+        // Do nothing if new action is the same as previous one:
+        if (currentState == state) return;
 
-        _currentState = state;
-
-        _animator.Play(_currentState.ToString());
+        // Show new animation:
+        currentState = state;
+        animator.Play(currentState.ToString());
     }
 
-    public void Walk()
-    {
-        ChangeAnimState(Anim.Walk);
-    }
-
-    public void Dash()
-    {
-        ChangeAnimState(Anim.Dash);
-    }
-
-    public void Attack2()
-    {
-        ChangeAnimState(Anim.Jump);
-    }
-
-    public void Attack()
-    {
-        ChangeAnimState(Anim.Attack1);
-    }
-    public void AttackSpinner()
-    {
-        ChangeAnimState(Anim.Attack_Spinner);
-    }
-
-    public void TakeDamage()
-    {
-        ChangeAnimState(Anim.Taunt);
-    }
-
-    public void Idle()
-    {
-        ChangeAnimState(Anim.Idle_Strip);
-    }
-
-    public void Die()
-    {
-        ChangeAnimState(Anim.Dead);
-    }
+    // Change animations:
+    public void Walk() { ChangeAnimState(Anim.Walk); }
+    public void Dash() { ChangeAnimState(Anim.Dash); }
+    public void Attack1() { ChangeAnimState(Anim.Attack1); }
+    public void Attack2() { ChangeAnimState(Anim.Attack2); }
+    public void Attack3() { ChangeAnimState(Anim.Attack3); }
+    public void Hurt() { ChangeAnimState(Anim.Hurt); }
+    public void Die() { ChangeAnimState(Anim.Die); }
 }

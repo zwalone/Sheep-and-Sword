@@ -2,74 +2,37 @@
 
 public class CyclopView : MonoBehaviour
 {
-
+    // List of animations:
     private enum Anim
     {
-        WalkRight,
-        WalkLeft,
-        AttackRight,
-        AttackLeft,
-        DieRight,
-        DieLeft,
-        TakeDamage,
-        TakeDamageLeft
+        Walk,
+        Attack,
+        Die,
+        Hurt
     }
 
-    private Anim _currentState;
+    private Anim currentState;
+    private Animator animator;
 
-    private Animator _animator;
-
-    // Start is called before the first frame update
     void Start()
     {
-        _animator = this.GetComponent<Animator>();
-        _currentState = Anim.WalkRight;
+        animator = GetComponent<Animator>();
+        currentState = Anim.Walk;
     }
 
     private void ChangeAnimState(Anim state)
     {
-        //Stop the same animation playing
-        if (_currentState == state) return;
+        // Do nothing if new action is the same as previous one:
+        if (currentState == state) return;
 
-        _currentState = state;
-
-        _animator.Play(_currentState.ToString());
-    }
-
-    public void WalkLeft()
-    {
-        ChangeAnimState(Anim.WalkLeft);
+        // Show new animation:
+        currentState = state;
+        animator.Play(currentState.ToString());
     }
 
-    public void WalkRight()
-    {
-        ChangeAnimState(Anim.WalkRight);
-    }
-
-    public void AttackRight()
-    {
-        ChangeAnimState(Anim.AttackRight);
-    }
-
-    public void AttackLeft()
-    {
-        ChangeAnimState(Anim.AttackLeft);
-    }
-
-    public void DieRight()
-    {
-        ChangeAnimState(Anim.DieRight);
-    }
-    public void DieLeft()
-    {
-        ChangeAnimState(Anim.DieLeft);
-    }
-    public void TakeDamage()
-    {
-        ChangeAnimState(Anim.TakeDamage);
-    }
-    public void TakeDamageLeft()
-    {
-        ChangeAnimState(Anim.TakeDamageLeft);
-    }
+    // Change animations:
+    public void Walk() { ChangeAnimState(Anim.Walk); }
+    public void Attack() { ChangeAnimState(Anim.Attack); }
+    public void Die() { ChangeAnimState(Anim.Die); }
+    public void Hurt() { ChangeAnimState(Anim.Hurt); }
 }
