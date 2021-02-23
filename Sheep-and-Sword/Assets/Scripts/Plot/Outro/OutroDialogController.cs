@@ -16,11 +16,13 @@ public class OutroDialogController : MonoBehaviour
 
     // UI:
     private GameObject skipButton;
+    private GameObject pauseButton;
 
     private void Start()
     {
         skipButton = GameObject.Find("MobileControls").transform.Find("SkipButton").gameObject;
         skipButton.GetComponent<Button>().onClick.AddListener(() => Skip());
+        pauseButton = GameObject.Find("MobileControls").transform.Find("PauseButton").gameObject;
     }
 
     private void Skip() { if (Time.timeScale == 1 && isDisplayed) NextSentence(); }
@@ -77,8 +79,9 @@ public class OutroDialogController : MonoBehaviour
         }
         else
         {
-            // Hide and reset the text and button:
+            // Hide and reset the text and buttons:
             skipButton.SetActive(false);
+            pauseButton.SetActive(false);
             gameObject.SetActive(false);
             textDisplay.text = "";
             isDisplayed = false;
