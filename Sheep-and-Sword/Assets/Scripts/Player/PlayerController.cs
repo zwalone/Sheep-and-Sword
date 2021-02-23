@@ -11,6 +11,10 @@ public class PlayerController : MonoBehaviour, IEntityController
     // Mobiles:
     public Joystick joystick;
     private readonly float maxDeviation = 0.3f;
+    private GameObject jumpButton;
+    private GameObject attackButton;
+    private GameObject skipButton;
+    private GameObject joystickAsGameObject;
 
     // Animations:
     private PlayerView view;         
@@ -29,6 +33,7 @@ public class PlayerController : MonoBehaviour, IEntityController
     // Jumping:
     private bool canSomerSault;
     private bool isSomerSaulting;
+    private bool hasJumped;
 
     // Touching the ground:
     private Transform groundChecker;
@@ -103,6 +108,7 @@ public class PlayerController : MonoBehaviour, IEntityController
         attackButton = GameObject.Find("AttackButton");
         attackButton.GetComponent<Button>().onClick.AddListener(() => Attack());
         skipButton = GameObject.Find("MobileControls").transform.Find("SkipButton").gameObject;
+        joystickAsGameObject = GameObject.Find("MobileControls").transform.Find("Fixed Joystick").gameObject;
 
         // Sounds:
         movementAudioSource = gameObject.GetComponents<AudioSource>()[1];
@@ -689,7 +695,9 @@ public class PlayerController : MonoBehaviour, IEntityController
         isReading = true; 
         gameObject.layer = 31; 
         attackButton.SetActive(false); 
-        jumpButton.SetActive(false); 
+        jumpButton.SetActive(false);
+        joystickAsGameObject.GetComponent<Image>().enabled = false;
+        joystickAsGameObject.transform.Find("Handle").gameObject.GetComponent<Image>().enabled = false;
         skipButton.SetActive(true);
     }
     public void StopReading() 
@@ -697,7 +705,9 @@ public class PlayerController : MonoBehaviour, IEntityController
         isReading = false; 
         gameObject.layer = 9; 
         attackButton.SetActive(true); 
-        jumpButton.SetActive(true); 
+        jumpButton.SetActive(true);
+        joystickAsGameObject.GetComponent<Image>().enabled = true;
+        joystickAsGameObject.transform.Find("Handle").gameObject.GetComponent<Image>().enabled = true;
         skipButton.SetActive(false); 
     }
 }
