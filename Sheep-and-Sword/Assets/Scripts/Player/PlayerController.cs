@@ -253,8 +253,8 @@ public class PlayerController : MonoBehaviour, IEntityController
 
     private void Jump()
     {
-        // If player is dead, is reading a dialog or is in pause-menu, do nothing:
-        if (IsDead || isReading || Time.timeScale != 1) return;
+        // If player is dead, is reading a dialog, is in pause-menu or is crouched, do nothing:
+        if (IsDead || isReading || Time.timeScale != 1 || isCrouched) return;
 
         // Restart possibility of somersaulting if player is touching the ground or the wall:
         if (isGrounded || isWalled != 0) canSomerSault = true;
