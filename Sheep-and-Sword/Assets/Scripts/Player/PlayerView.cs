@@ -3,7 +3,7 @@
 public class PlayerView : MonoBehaviour
 {
     // Flipping variable:
-    public bool LookRight { get; set; }
+    public bool LookRight = true;
 
     // List of animations:
     private enum Anim
@@ -33,7 +33,6 @@ public class PlayerView : MonoBehaviour
 
     void Awake()
     {
-        LookRight = true;
         animator = GetComponent<Animator>();
         currentState = Anim.Idle;
     }
