@@ -1,5 +1,5 @@
 # Sheep and Sword
-**Sheep and Sword** is a project written for "Development of Computer Games" course during the V semester of Informatics on Silesian University of Technology.
+**Sheep and Sword** is a project written for **Development of Computer Games** course during the 5th semester of Computer Science at the Silesian University of Technology.
 
 ### Table of contents
 * [Project description](#project-description)
