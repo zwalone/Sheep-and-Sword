@@ -388,7 +388,7 @@ GameObject:
   - component: {fileID: 5463250717536797374}
   - component: {fileID: 1938204967406617799}
   - component: {fileID: 6486305832930223000}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: 'Hitbox '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -460,7 +460,7 @@ GameObject:
   m_Component:
   - component: {fileID: 488836842820830056}
   - component: {fileID: 4853948062371076949}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: BodyHitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -517,7 +517,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5957097383888328029}
   - component: {fileID: 3724621145937342928}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -564,7 +564,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2676901443572955940}
   - component: {fileID: 3502829919299146538}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: 'TriggeredArea '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -610,7 +610,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1469077593514803581}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: CheckGroundColliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -643,7 +643,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7732637692580422997}
   - component: {fileID: 7599510268146885250}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Opposite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -10,13 +10,12 @@ public class PlayerController : MonoBehaviour, IEntityController
 
     // Animations:
     private PlayerView view;         
-    private Transform playerGraphics;
     private readonly float animationLength = 0.25f;
     public bool IsHurting { get; private set; }
     public bool IsDead { get; private set; }
 
     // Movement:
-    private PlayerModel model;            // speed, jump force, health points
+    private PlayerModel model;
     private Rigidbody2D rigbody;
     private CapsuleCollider2D capscol;
     private readonly float slopeCheckerRadius = 0.6f;
@@ -39,14 +38,13 @@ public class PlayerController : MonoBehaviour, IEntityController
     private bool isCeilinged;
 
     // Touching the walls:
-    private Transform wallCheckerLeft; 
-    private Transform wallCheckerRight;
+    private Transform wallChecker;
     public float wallCheckerRadius;
     private int isWalled;
 
     // Combat:
-    private GameObject hitPointRight;
-    private GameObject hitPointLeft;
+    [SerializeField]
+    private GameObject hitbox;
     private int attackViewNumber = -1;
     private bool isAttacking;
     public bool IsSliding { get; private set; }
@@ -83,8 +81,7 @@ public class PlayerController : MonoBehaviour, IEntityController
     private void Awake()
     {
         // Display:
-        playerGraphics = transform.Find("Graphics");
-        view = playerGraphics.GetComponent<PlayerView>();
+        view = GetComponent<PlayerView>();
 
         // Movement:
         model = GetComponent<PlayerModel>();
@@ -92,12 +89,7 @@ public class PlayerController : MonoBehaviour, IEntityController
         capscol = GetComponent<CapsuleCollider2D>();
         groundChecker = transform.Find("GroundChecker");
         ceilingChecker = transform.Find("CeilingChecker");
-        wallCheckerLeft = transform.Find("WallCheckerLeft");
-        wallCheckerRight = transform.Find("WallCheckerRight");
-        hitPointLeft = transform.Find("HitPointLeft").gameObject;
-        hitPointRight = transform.Find("HitPointRight").gameObject;
-        hitPointRight.SetActive(false);
-        hitPointLeft.SetActive(false);
+        wallChecker = transform.Find("WallChecker");
 
         // UI:
         playerHealthBar = GameObject.Find("PlayerHealthBar_Fill").GetComponent<Image>();
@@ -155,13 +147,13 @@ public class PlayerController : MonoBehaviour, IEntityController
     private void CheckTheWall()
     {
         // Checking if player is touching the wall:
-        Collider2D collider = Physics2D.OverlapCircle(wallCheckerRight.position, wallCheckerRadius, groundLayer);
+        Collider2D collider = Physics2D.OverlapCircle(wallChecker.position, wallCheckerRadius, groundLayer);
 
         // Update isWalled status:
         if (collider != null && view.LookRight == true) { isWalled = -1; }
         else
         {
-            collider = Physics2D.OverlapCircle(wallCheckerLeft.position, wallCheckerRadius, groundLayer);
+            collider = Physics2D.OverlapCircle(wallChecker.position, wallCheckerRadius, groundLayer);
             isWalled = (collider != null && view.LookRight == false) ? 1 : 0;
         }
 
@@ -272,7 +264,6 @@ public class PlayerController : MonoBehaviour, IEntityController
         {
             // Restart all attacks:
             attackViewNumber = -1;
-            CancelInvoke(nameof(AttackStart));
             AttackStop();
 
             if (isGrounded || isWalled != 0) // standard jump (from ground or wall)
@@ -362,8 +353,10 @@ public class PlayerController : MonoBehaviour, IEntityController
             // Show small particles behind the player:
             StartCoroutine(ShowSlideParticles());
 
-            // Enable hitboxes to hit enemy:
-            AttackStart(); // hit just at the beginning of the animation
+            // Enable hitbox to hit enemy:
+            hitbox.GetComponent<BoxCollider2D>().enabled = true;
+
+            // Revert everything after animation:
             Invoke(nameof(AttackStop), animationLength * 2.0f);  // this animation is two times longer than normal attack
         }
     }
@@ -385,8 +378,10 @@ public class PlayerController : MonoBehaviour, IEntityController
             // Make a sound:
             madeAttackSound = false;
 
-            // Enable hitboxes to hit enemy:
-            Invoke(nameof(AttackStart), animationLength / 2.0f); // hit in the half of animation
+            // Enable hitbox to hit enemy:
+            hitbox.GetComponent<BoxCollider2D>().enabled = true;
+
+            // Revert everything after animation:
             Invoke(nameof(AttackStop), animationLength);
 
             // Reset view of standard attacks while in air:
@@ -394,21 +389,11 @@ public class PlayerController : MonoBehaviour, IEntityController
         }
     }
 
-    // Enable hitbox:
-    private void AttackStart()
-    {
-        if (view.LookRight) hitPointRight.SetActive(true);
-        else hitPointLeft.SetActive(true);
-    }
-
-    // Disable hitbox:
     private void AttackStop()
     {
         isAttacking = false;
-        hitPointRight.SetActive(false);
-        hitPointLeft.SetActive(false);
-
         IsSliding = false;
+        hitbox.GetComponent<BoxCollider2D>().enabled = false;
     }
 
 
@@ -484,14 +469,14 @@ public class PlayerController : MonoBehaviour, IEntityController
         // Flip sprite depending on current movement:
         if (!IsDead && !isReading)
         {
-            if (Input.GetAxisRaw("Horizontal") < 0)
+            if (view.LookRight && Input.GetAxisRaw("Horizontal") < 0)
             {
-                playerGraphics.GetComponent<SpriteRenderer>().flipX = true;
+                transform.localRotation *= Quaternion.Euler(0, 180, 0);
                 view.LookRight = false;
             }
-            if (Input.GetAxisRaw("Horizontal") > 0)
+            if (!view.LookRight && Input.GetAxisRaw("Horizontal") > 0)
             {
-                playerGraphics.GetComponent<SpriteRenderer>().flipX = false;
+                transform.localRotation *= Quaternion.Euler(0, 180, 0);
                 view.LookRight = true;
             }
         }

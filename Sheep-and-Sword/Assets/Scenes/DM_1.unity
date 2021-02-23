@@ -948,6 +948,21 @@ PrefabInstance:
       propertyPath: audioClip.Array.data[6]
       value: 
       objectReference: {fileID: 8300000, guid: c4d87190aa879244485af056e8908b49, type: 3}
+    - target: {fileID: 6121788978605516548, guid: 503c72a7f03a1d340be18b839b18b220,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6121788978605516548, guid: 503c72a7f03a1d340be18b839b18b220,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 6121788978605516548, guid: 503c72a7f03a1d340be18b839b18b220,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.02
+      objectReference: {fileID: 0}
     - target: {fileID: 7260266559430736090, guid: 503c72a7f03a1d340be18b839b18b220,
         type: 3}
       propertyPath: m_Volume
@@ -3493,6 +3508,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Demon_Axe 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8296811539781933041, guid: 7b6e36f61487d13479bf5687d7263846,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8479540558135900708, guid: 7b6e36f61487d13479bf5687d7263846,
         type: 3}
