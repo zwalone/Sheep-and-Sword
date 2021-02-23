@@ -4,14 +4,14 @@ using UnityEngine.UI;
 
 public class IntroDialogController : MonoBehaviour
 {
-    // displaying text:
+    // Displaying text:
     public Text textDisplay;
     public string[] sentences;
     private int index = 0;
     public float typingSpeed;
     private Coroutine typing;
 
-    // general:
+    // General:
     private bool isDisplayed = false;
 
     // UI:
@@ -27,14 +27,20 @@ public class IntroDialogController : MonoBehaviour
 
     public void StartDialog()
     {
+        // Enable dialog element:
         textDisplay.text = "";
         isDisplayed = true;
+
+        // Start showing letters:
         typing = StartCoroutine(Type());
     }
 
     public IEnumerator Type()
     {
+        // Speak up:
         gameObject.GetComponent<SoundController>().PlaySound(index);
+
+        // Show letters one after another in certain gaps of time:
         foreach (char letter in sentences[index].ToCharArray())
         {
             textDisplay.text += letter;
@@ -47,23 +53,33 @@ public class IntroDialogController : MonoBehaviour
         if (index < sentences.Length - 1)
         {
             index++;
-            if(sentences[index] == "")
-            {
-                textDisplay.text += " ";
-                index++;
-            }
+
+            // If sentence is empty string, go to next sentence:
+            if (sentences[index] == "") index++;
+
+            // If previous wasn't empty string, reset the text,
+            // Otherwise add space sign:
             if (sentences[index - 1] != "") textDisplay.text = "";
             else textDisplay.text = sentences[index - 2] + " ";
+
+            // Stop typing current sentence:
             StopCoroutine(typing);
+
+            // Start typing next sentence:
             typing = StartCoroutine(Type());
         }
         else
         {
+            // Hide and reset the text and the button:
             skipButton.SetActive(false);
             gameObject.SetActive(false);
             textDisplay.text = "";
             isDisplayed = false;
+
+            // Stop making the sound (if is still hearable):
             gameObject.GetComponent<AudioSource>().Stop();
+
+            // End the scene:
             GameObject.Find("IntroMaster").GetComponent<IntroController>().EndScene();
         }
     }

@@ -2,6 +2,7 @@
 
 public class PlayerModel : MonoBehaviour
 {
+    // Maximum amount of health points:
     [SerializeField]
     private int maxHP;
     public int MaxHP
@@ -10,6 +11,7 @@ public class PlayerModel : MonoBehaviour
         set { maxHP = value; }
     }
 
+    // Current amount of health points:
     [SerializeField]
     private int hp;
     public int HP
@@ -21,6 +23,7 @@ public class PlayerModel : MonoBehaviour
         }
     }
 
+    // Value responsible for changing position (running, climbing):
     [SerializeField]
     private float speed;
     public float Speed
@@ -29,6 +32,7 @@ public class PlayerModel : MonoBehaviour
         set { speed = value; }
     }
 
+    // Value responsible for changing position while jumping:
     [SerializeField]
     private float jumpForce;
     public float JumpForce

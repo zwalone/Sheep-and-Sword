@@ -2,8 +2,10 @@
 
 public class PlayerView : MonoBehaviour
 {
+    // Flipping variable:
     public bool LookRight { get; set; }
 
+    // List of animations:
     private enum Anim
     {
         Idle,
@@ -27,25 +29,26 @@ public class PlayerView : MonoBehaviour
     }
 
     private Anim currentState;
-    public Animator GetAnimator { get; private set; }
+    private Animator animator;
 
-    // Start is called before the first frame update
     void Awake()
     {
         LookRight = true;
-        GetAnimator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         currentState = Anim.Idle;
     }
 
     private void ChangeAnimState(Anim state)
     {
-        //Stop the same animation playing
+        // Do nothing if new action is the same as previous one:
         if (currentState == state) return;
 
+        // Show new animation:
         currentState = state;
-        GetAnimator.Play(currentState.ToString());
+        animator.Play(currentState.ToString());
     }
 
+    // Changing animations:
     public void Idle() { ChangeAnimState(Anim.Idle); }
     public void Run() { ChangeAnimState(Anim.Run); }
     public void Jump() { ChangeAnimState(Anim.Jump); }

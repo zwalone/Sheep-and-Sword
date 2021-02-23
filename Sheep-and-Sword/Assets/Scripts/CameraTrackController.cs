@@ -3,20 +3,21 @@ using UnityEngine;
 
 public class CameraTrackController : MonoBehaviour
 {
-    // tracking:
+    // Tracking:
     [SerializeField]
     private Transform target;
     [SerializeField]
     private Vector3 offsetPosition = new Vector3(0, 2, -1);
     
-    // stopping tracking:
+    // Stopping tracking:
     private bool isLocked = false;
 
-    // lights on:
+    // Lights on:
     private SpriteRenderer darkEffect;
     public float darkEffectSpeed = 0.01f;
     public Coroutine lightsOn;
 
+    // Turn the lights on:
     private void Awake()
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
@@ -24,14 +25,17 @@ public class CameraTrackController : MonoBehaviour
         lightsOn = StartCoroutine(LightsOn());
     }
 
+    // Keep tracking the target:
     private void Update()
     {
         if (target == null) return;
         if (!isLocked) transform.position = target.position + offsetPosition;
     }
 
+    // Change state responsible for tracking (permanently):
     public void LockCamera() { isLocked = true; }
 
+    // Enabling dark camera effect:
     public IEnumerator LightsOff() 
     {
         while (darkEffect.color.a < 1)
@@ -42,6 +46,7 @@ public class CameraTrackController : MonoBehaviour
         }
     }
 
+    // Disabling dark camera effect:
     public IEnumerator LightsOn()
     {
         while (darkEffect.color.a > 0)

@@ -2,27 +2,30 @@
 
 public class Worm_Model : MonoBehaviour
 {
+    // Maximum amount of health points:
     [SerializeField]
-    private int _maxHP;
+    private int maxHP;
     public int MaxHP
     {
-        get { return _maxHP; }
-        set { _maxHP = value; }
+        get { return maxHP; }
+        set { maxHP = value; }
     }
 
+    // Current amount of health points:
     [SerializeField]
-    private int _hp;
+    private int hp;
     public int HP
     {
-        get { return _hp; }
-        set { _hp = value; }
+        get { return hp; }
+        set { hp = value; }
     }
 
+    // Value responsible for changing position:
     [SerializeField]
-    private float _speed;
+    private float speed;
     public float Speed
     {
-        get { return _speed; }
-        set { _speed = value; }
+        get { return speed; }
+        set { speed = value; }
     }
 }

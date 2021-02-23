@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 2651838252394047253}
   - component: {fileID: 2651838252394047254}
   m_Layer: 0
-  m_Name: Hause
+  m_Name: House
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -259,7 +259,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 4
-      m_TileSpriteIndex: 18
+      m_TileSpriteIndex: 19
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -540,11 +540,11 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: -1845371710272048550, guid: ea4b9dccdd054e44485c2d6a2f09f2ad,
       type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: -3508737700225787112, guid: ea4b9dccdd054e44485c2d6a2f09f2ad,
       type: 3}
@@ -44839,7 +44839,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 5
-      m_TileSpriteIndex: 18
+      m_TileSpriteIndex: 19
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -44848,7 +44848,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 4
-      m_TileSpriteIndex: 17
+      m_TileSpriteIndex: 18
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -46270,14 +46270,14 @@ Tilemap:
   - m_RefCount: 3
     m_Data: {fileID: -7068014762016616660, guid: ea4b9dccdd054e44485c2d6a2f09f2ad,
       type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: -1845371710272048550, guid: ea4b9dccdd054e44485c2d6a2f09f2ad,
       type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -3508737700225787112, guid: ea4b9dccdd054e44485c2d6a2f09f2ad,
       type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 200785977027671065, guid: ea4b9dccdd054e44485c2d6a2f09f2ad, type: 3}
   - m_RefCount: 1
@@ -47187,7 +47187,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 5
-      m_TileSpriteIndex: 18
+      m_TileSpriteIndex: 19
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -47196,7 +47196,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 4
-      m_TileSpriteIndex: 17
+      m_TileSpriteIndex: 18
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -48712,14 +48712,14 @@ Tilemap:
   - m_RefCount: 3
     m_Data: {fileID: -7068014762016616660, guid: ea4b9dccdd054e44485c2d6a2f09f2ad,
       type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: -1845371710272048550, guid: ea4b9dccdd054e44485c2d6a2f09f2ad,
       type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -3508737700225787112, guid: ea4b9dccdd054e44485c2d6a2f09f2ad,
       type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 200785977027671065, guid: ea4b9dccdd054e44485c2d6a2f09f2ad, type: 3}
   - m_RefCount: 1
@@ -49608,7 +49608,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 5
-      m_TileSpriteIndex: 18
+      m_TileSpriteIndex: 19
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -49617,7 +49617,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 4
-      m_TileSpriteIndex: 17
+      m_TileSpriteIndex: 18
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -50346,7 +50346,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 3
-      m_TileSpriteIndex: 14
+      m_TileSpriteIndex: 17
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -51043,9 +51043,8 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 4
     m_Data: {fileID: 589114166673801457, guid: ea4b9dccdd054e44485c2d6a2f09f2ad, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: -123626252767495958, guid: ea4b9dccdd054e44485c2d6a2f09f2ad,
-      type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 3
     m_Data: {fileID: 4831333476777677980, guid: ea4b9dccdd054e44485c2d6a2f09f2ad,
       type: 3}
@@ -51053,13 +51052,14 @@ Tilemap:
     m_Data: {fileID: -7068014762016616660, guid: ea4b9dccdd054e44485c2d6a2f09f2ad,
       type: 3}
   - m_RefCount: 1
+    m_Data: {fileID: -123626252767495958, guid: ea4b9dccdd054e44485c2d6a2f09f2ad,
+      type: 3}
+  - m_RefCount: 1
     m_Data: {fileID: -1845371710272048550, guid: ea4b9dccdd054e44485c2d6a2f09f2ad,
       type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -3508737700225787112, guid: ea4b9dccdd054e44485c2d6a2f09f2ad,
       type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 200785977027671065, guid: ea4b9dccdd054e44485c2d6a2f09f2ad, type: 3}
   - m_RefCount: 1
@@ -51353,10 +51353,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2651838252722399865}
     m_Modifications:
+    - target: {fileID: 3268621915905013582, guid: 20ee5b8e752483c4298d49f2d2347fc8,
+        type: 3}
+      propertyPath: m_Name
+      value: BackgroundSky
+      objectReference: {fileID: 0}
+    - target: {fileID: 4796021947462128100, guid: 20ee5b8e752483c4298d49f2d2347fc8,
+        type: 3}
+      propertyPath: m_Name
+      value: BackgroundTreeB
+      objectReference: {fileID: 0}
+    - target: {fileID: 5582768582676190326, guid: 20ee5b8e752483c4298d49f2d2347fc8,
+        type: 3}
+      propertyPath: m_Name
+      value: BackgroundTreeA
+      objectReference: {fileID: 0}
     - target: {fileID: 5628768794692656160, guid: 20ee5b8e752483c4298d49f2d2347fc8,
         type: 3}
       propertyPath: m_Name
-      value: background_sky
+      value: Backgrounds
       objectReference: {fileID: 0}
     - target: {fileID: 5628768794692656161, guid: 20ee5b8e752483c4298d49f2d2347fc8,
         type: 3}
@@ -51418,7 +51433,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8857396438293151532, guid: 20ee5b8e752483c4298d49f2d2347fc8,
+        type: 3}
+      propertyPath: m_Name
+      value: BackgroundTreeC
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3889313073994433041, guid: 20ee5b8e752483c4298d49f2d2347fc8, type: 3}
+    - {fileID: 3764417495957997790, guid: 20ee5b8e752483c4298d49f2d2347fc8, type: 3}
+    - {fileID: 7618406028823346375, guid: 20ee5b8e752483c4298d49f2d2347fc8, type: 3}
+    - {fileID: 1584531565235439625, guid: 20ee5b8e752483c4298d49f2d2347fc8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 20ee5b8e752483c4298d49f2d2347fc8, type: 3}
 --- !u!4 &2651838252056015292 stripped
 Transform:

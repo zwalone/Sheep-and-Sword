@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -10,7 +9,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenu;
     private PlayerController player;
     private Button pauseButton;
-    private GameObject mobileContorl;
+    private GameObject mobileControls;
 
 
     private void Start()
@@ -19,8 +18,7 @@ public class PauseMenu : MonoBehaviour
         player = GameObject.Find("Player").GetComponent<PlayerController>();
         pauseButton = GameObject.Find("PauseButton").GetComponent<Button>();
         pauseButton.onClick.AddListener(() => PauseOrResume());
-        mobileContorl = GameObject.Find("UI").transform.Find("MobileControls").gameObject;
-
+        mobileControls = GameObject.Find("UI").transform.Find("MobileControls").gameObject;
     }
 
     private void PauseOrResume()
@@ -32,24 +30,27 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    // Freeze movement and sounds, show pauseMenu:
     public void Pause()
     {
         pauseMenu.SetActive(true);
-        mobileContorl.SetActive(false);
+        mobileControls.SetActive(false);
         Time.timeScale = 0f;
         AudioListener.pause = true;
         GameIsPaused = true;
     }
 
+    // Unfreeze movement and sounds, hide pauseMenu:
     public void Resume()
     {
-        mobileContorl.SetActive(true);
+        mobileControls.SetActive(true);
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         AudioListener.pause = false;
         GameIsPaused = false;
     }
 
+    // Quit the application:
     public void ExitGame()
     {
         Application.Quit();

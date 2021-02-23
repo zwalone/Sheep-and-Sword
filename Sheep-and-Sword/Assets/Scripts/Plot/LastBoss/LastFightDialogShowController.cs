@@ -38,21 +38,28 @@ public class LastFightDialogShowController : MonoBehaviour
 
     public void StartDialog()
     {
+        // Enable dialog element:
         textDisplay.text = "";
         isDisplayed = true;
         dialog.SetActive(true);
+
+        // Start showing letters:
         typing = StartCoroutine(Type());
     }
 
     public IEnumerator Type()
     {
+        // Speak up:
         gameObject.GetComponent<SoundController>().PlaySound(index);
+
+        // Show letters one after another in certain gaps of time:
         foreach (char letter in sentences[index].ToCharArray())
         {
             textDisplay.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
 
+        // Make a "sheep sound" and "evil laugh sound" after third sentence:
         if (index == 2)
         {
             yield return new WaitForSeconds(0.5f);
@@ -67,29 +74,42 @@ public class LastFightDialogShowController : MonoBehaviour
         if (index < sentences.Length - 1)
         {
             index++;
-            if (sentences[index] == "")
-            {
-                textDisplay.text += " ";
-                index++;
-            }
+
+            // If sentence is empty string, go to next sentence:
+            if (sentences[index] == "") index++;
+
+            // If previous wasn't empty string, reset the text,
+            // Otherwise add space sign:
             if (sentences[index - 1] != "") textDisplay.text = "";
             else textDisplay.text = sentences[index - 2] + " ";
+
+            // Stop typing current sentence:
             StopCoroutine(typing);
+
+            // Start typing next sentence:
             typing = StartCoroutine(Type());
         }
         else
         {
-            dialog.SetActive(false);
+            // Hide and reset the text:
+            gameObject.SetActive(false);
             textDisplay.text = "";
             isDisplayed = false;
+
+            // Update player's state (he can be attacked now):
             playerInfo.StopReading();
+
+            // Stop making the sound (if is still hearable):
             gameObject.GetComponent<AudioSource>().Stop();
+
+            // Enable boss fight music:
             sounds[0].Play();
         }
     }
 
     public void BossMusicVolumeDown() { StartCoroutine(VolumeDown()); }
 
+    // Make the boss fight music quieter and quieter:
     private IEnumerator VolumeDown()
     {
         AudioSource music = GameObject.Find("Music").GetComponents<AudioSource>()[0];

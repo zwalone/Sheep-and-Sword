@@ -1,40 +1,37 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Man_Bird_Controller : MonoBehaviour, IEntityController
 {
-    public Transform rayCast;
-    public LayerMask rayCastMask;
-    public float rayCastLength;
-    public float attackDistance;
-
-    private GameObject target;
-    private bool _inRange;
-
-    private Man_Bird_Model _model;
-    private Man_Bird_View _view;
-
-    private Rigidbody2D _rd2D;
-
-    [SerializeField]
-    private GameObject hitbox;
-
-    [SerializeField]
-    private CircleCollider2D _isGroundBottom;
-
-    [SerializeField]
-    private CircleCollider2D _isGroundOpposite;
-
-
-    // Parameters:
-    [SerializeField]
-    private bool _changeDirection;
-    private bool _isAttacking;
-
+    // Animations:
+    private Man_Bird_View view;
     public bool IsHurting { get; private set; }
     public bool IsDead { get; private set; }
 
+    //Movement:
+    private Man_Bird_Model model;
+    private Rigidbody2D rd2D;
+    [SerializeField]
+    private CircleCollider2D isGroundBottom;
+    [SerializeField]
+    private CircleCollider2D isGroundOpposite;
+    [SerializeField]
+    private bool changeDirection;
+
+    // Player tracking:
+    private GameObject target;
+    private bool inRange;
+
+    // Combat:
+    [SerializeField]
+    private GameObject hitbox;
+    private bool isAttacking;
+    [SerializeField]
+    private float AttackSpeed = 3;
+
+    // Preventing multi-hit:
+    private bool canHurt = true;
+    private readonly float unhurtableCooldown = 0.2f;
 
     // Sounds:
     private SoundController actionSounds;
@@ -44,172 +41,214 @@ public class Man_Bird_Controller : MonoBehaviour, IEntityController
     public Vector2 particleDeltaPosition;
 
 
+
     private void Awake()
     {
-        _view = this.GetComponent<Man_Bird_View>();
-        _model = this.GetComponent<Man_Bird_Model>();
-        _rd2D = this.GetComponent<Rigidbody2D>();
+        view = GetComponent<Man_Bird_View>();
+        model = GetComponent<Man_Bird_Model>();
+        rd2D = GetComponent<Rigidbody2D>();
         actionSounds = gameObject.GetComponent<SoundController>();
     }
 
-    void Start()
-    {
-        _changeDirection = true;
-    }
+    void Start() { changeDirection = true; }
 
     private void FixedUpdate()
     {
-        //Move Enemy and check direction
-        _rd2D.MovePosition(_rd2D.position + new Vector2(_model.Speed, 0) * Time.fixedDeltaTime);
+        // Change Man_Bird's position:
+        rd2D.MovePosition(rd2D.position + new Vector2(model.Speed, 0) * Time.fixedDeltaTime);
+
+        // Check if there is a wall or player in front of Man_Bird:
         ChangeMoveDirection();
     }
 
     private void Update()
     {
         Animate();
-        if (_inRange) CheckAttack();
+        if (inRange) CheckAttack();
     }
 
 
 
-    //Attack
     private void CheckAttack()
     {
-        if (!_isAttacking && !IsDead)
-        {
+        if (!isAttacking && !IsDead)
             StartCoroutine(Attack());
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.CompareTag("Player")
-            && !collider.gameObject.GetComponentInParent<IEntityController>().IsDead)
+        // Check if living player showed up in front of Man_Bird:
+        if (collider.gameObject.CompareTag("Player") && collider.gameObject.layer != 31)
         {
-            _inRange = true;
+            inRange = true;
             target = collider.gameObject;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        // Check if player is no longer in front of Man_Bird:
         if (collision.gameObject.CompareTag("Player"))
         {
-            _inRange = false;
+            inRange = false;
             target = null;
         }
     }
 
-    // Coroutine for Attack
+
+
     IEnumerator Attack()
     {
+        // Enable hitbox to make it triggerable so player's health will be decreased after hit:
         hitbox.GetComponent<BoxCollider2D>().enabled = true;
-        _isAttacking = true;
-        _model.Speed *= 3;
 
+        // Update state (eg. for animations):
+        isAttacking = true;
+
+        // Let the Man_Bird move faster:
+        model.Speed *= AttackSpeed;
+
+        // Make a sound of attacking:
         Invoke(nameof(SoundAttack), 0.1f);
-        yield return new WaitForSeconds(0.55f);
 
-        _model.Speed /= 3;
-        _isAttacking = false;
+        // Revert everything:
+        yield return new WaitForSeconds(0.55f);
+        model.Speed /= AttackSpeed;
+        isAttacking = false;
         hitbox.GetComponent<BoxCollider2D>().enabled = false;
     }
+
     private void SoundAttack() { actionSounds.PlaySound(0); }
 
 
 
-    //Check and Change direction
+    // Checking if there is a need to turn around:
     private void ChangeMoveDirection(bool behind = false)
     {
+        // If Man_Bird is dead, do nothing:
         if (IsDead) return;
 
+        // If player attacked from behind, turn around:
         if (behind)
         {
-            _changeDirection = false;
+            changeDirection = false;
             StartCoroutine(ChangeDirectionCorutine());
         }
 
-        if (!_isGroundBottom.IsTouchingLayers(LayerMask.GetMask("Ground")) && _changeDirection)
+        // If there is no ground in front of Man_Bird, turn around:
+        if (!isGroundBottom.IsTouchingLayers(LayerMask.GetMask("Ground")) && changeDirection)
         {
-            _changeDirection = false;
+            changeDirection = false;
             StartCoroutine(ChangeDirectionCorutine());
         }
-        else if (_isGroundOpposite.IsTouchingLayers(LayerMask.GetMask("Ground")) && _changeDirection)
+
+        // If there is a wall in front of Man_Bird, turn around:
+        else if ((isGroundOpposite.IsTouchingLayers(LayerMask.GetMask("Ground"))
+               || isGroundOpposite.IsTouchingLayers(LayerMask.GetMask("NoAccessLine"))) && changeDirection)
         {
-            _changeDirection = false;
+            changeDirection = false;
             StartCoroutine(ChangeDirectionCorutine());
         }
     }
 
-    //Coroutine for Movement
+    // Turning around, changing direction:
     IEnumerator ChangeDirectionCorutine()
     {
-        _model.Speed = -_model.Speed;
-        this.transform.localRotation *= Quaternion.Euler(0, 180, 0);
+        model.Speed = -model.Speed;
+        transform.localRotation *= Quaternion.Euler(0, 180, 0);
         yield return new WaitForSeconds(0.7f);
-        _changeDirection = true;
+        changeDirection = true;
     }
 
 
 
     public void TakeDamage(int dmg)
     {
-        if (IsDead) return;
-        CancelInvoke(nameof(SoundAttack));
+        // If Man_Bird is dead or just received damage, do nothing:
+        if (IsDead || !canHurt) return;
 
-        //check distance
+        // Check if player is behind the Man_Bird and turn around:
         var p = GameObject.FindGameObjectWithTag("Player").transform;
         Vector3 toTarget = (p.position - transform.position).normalized;
         if (Vector3.Dot(toTarget, transform.forward) < 0)
-        {
             ChangeMoveDirection(true);
-        }
 
-        _model.HP -= dmg;
+        // Decrease health points:
+        model.HP -= dmg;
+
+        // Show hurt particles:
         StartCoroutine(ShowParticles());
 
-        if (_model.HP <= 0)
-        {
-            actionSounds.PlaySound(2);
-            _model.HP = 0;
-            _model.Speed = 0;
+        // Update canHurt state:
+        canHurt = false;
+        Invoke(nameof(MakeHurtable), unhurtableCooldown);
 
+        // Hurt or die:
+        if (model.HP <= 0)
+        {
+            // Don't make an attack sound if dying:
+            CancelInvoke(nameof(SoundAttack));
+            gameObject.GetComponents<AudioSource>()[0].Stop();
+
+            // Make a "die" sound:
+            actionSounds.PlaySound(2);
+
+            // Prevent situations of having less than 0 health points:
+            model.HP = 0;
+
+            // Stop the movement:
+            model.Speed = 0;
+
+            // Update states (eg. for animations):
             IsDead = true;
+
+            // Remove Man_Bird from the map:
             Invoke(nameof(DestroyMe), 1.0f);
         }
         else
         {
+            // Make a "hurt" sound:
             actionSounds.PlaySound(1);
+
+            // Update state (for animations):
             IsHurting = true;
             Invoke(nameof(StopHurting), 0.2f);
         }
     }
+
     private void DestroyMe() { Destroy(gameObject); }
+
     private void StopHurting() { IsHurting = false; }
+
+    private void MakeHurtable() { canHurt = true; }
 
 
 
     private void Animate()
     {
-        if (IsDead) _view.Die();
-        else if (IsHurting) _view.TakeDamage();
-        else if (_isAttacking) _view.Attack();
-        else _view.Walk();
+        if (IsDead) view.Die();
+        else if (IsHurting) view.Hurt();
+        else if (isAttacking) view.Attack();
+        else view.Walk();
     }
 
     private IEnumerator ShowParticles()
     {
-        GameObject firework = Instantiate(particles,
+        // Show hurt particles:
+        GameObject par = Instantiate(particles,
             new Vector2(transform.position.x - particleDeltaPosition.x,
             transform.position.y - particleDeltaPosition.y), Quaternion.identity);
-        firework.GetComponent<ParticleSystem>().Play();
-        float ttl = firework.gameObject.GetComponent<ParticleSystem>().main.duration;
+        par.GetComponent<ParticleSystem>().Play();
+
+        // Destroy hurt particles after ttl seconds:
+        float ttl = par.gameObject.GetComponent<ParticleSystem>().main.duration;
         yield return new WaitForSeconds(ttl);
-        Destroy(firework);
+        Destroy(par);
     }
 
 
 
-    public int ReturnCurrentHP() { return _model.HP; }
-    public int ReturnMaxHP() { return _model.MaxHP; }
+    // Get Man_Bird's health points' values:
+    public int ReturnCurrentHP() { return model.HP; }
+    public int ReturnMaxHP() { return model.MaxHP; }
 }

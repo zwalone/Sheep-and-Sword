@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
+        // Hide unnecessary UI:
         GameObject.Find("Dialog").SetActive(false);
         GameObject.Find("GameOverText").SetActive(false);
         GameObject.Find("RestartGameButton").SetActive(false);
@@ -47,12 +48,16 @@ public class GameController : MonoBehaviour
 
     private void ShowTheRest() 
     { 
+        // Show "Restart From Checkpoint" button:
         StartCoroutine(ShowImage(GameObject.Find("UI").transform.Find("RestartGameButton").gameObject));
         StartCoroutine(ShowText(GameObject.Find("UI").transform.Find("RestartGameButton").transform.Find("RestartGameText").gameObject));
+        
+        // Show "Go To Menu" button:
         StartCoroutine(ShowImage(GameObject.Find("UI").transform.Find("GoToMenuButton").gameObject));
         StartCoroutine(ShowText(GameObject.Find("UI").transform.Find("GoToMenuButton").transform.Find("GoToMenuText").gameObject));
     }
 
+    // Start showing image (button background):
     private IEnumerator ShowImage(GameObject hiddenObject)
     {
         hiddenObject.SetActive(true);
@@ -64,6 +69,7 @@ public class GameController : MonoBehaviour
         }
     }
 
+    // Start showing text (button foreground):
     private IEnumerator ShowText(GameObject hiddenObject)
     {
         hiddenObject.SetActive(true);
