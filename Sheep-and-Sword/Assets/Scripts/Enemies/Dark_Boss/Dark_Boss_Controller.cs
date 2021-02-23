@@ -20,10 +20,6 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
     private bool changeDirection;
 
     // Player tracking:
-    public Transform rayCast;
-    public LayerMask rayCastMask;
-    public float rayCastLength;
-    public float attackDistance;
     private GameObject target;
     private bool inRange;
 
@@ -40,7 +36,11 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
     [SerializeField]
     private float AttackSpeed = 3;
     [SerializeField]
-    private int hpToAdd = 5;
+    private int hpToAdd = 5; // for healing
+
+    // Preventing multi-hit:
+    private bool canHurt = true;
+    private readonly float unhurtableCooldown = 0.2f;
 
     // Sounds:
     private SoundController actionSounds;
@@ -100,7 +100,7 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
     private void OnTriggerEnter2D(Collider2D collider)
     {
         // Check if living player showed up in front of dark_boss:
-        if (collider.gameObject.CompareTag("Player") && !collider.gameObject.GetComponentInParent<IEntityController>().IsDead)
+        if (collider.gameObject.CompareTag("Player") && collider.gameObject.layer != 31)
         {
             inRange = true;
             target = collider.gameObject;
@@ -258,11 +258,8 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
 
     public void TakeDamage(int dmg)
     {
-        // If dark_boss is dead, do nothing:
-        if (IsDead) return;
-
-        // Don't make a sword sound if hurting:
-        CancelInvoke(nameof(SoundAttack));
+        // If dark_boss is dead or just received damage, do nothing:
+        if (IsDead || !canHurt) return;
 
         // Check if player is behind the dark_boss and turn around:
         var p = GameObject.FindGameObjectWithTag("Player").transform;
@@ -278,9 +275,19 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
             // Show hurt particles:
             StartCoroutine(ShowParticles());
 
+            // Update canHurt state:
+            canHurt = false;
+            Invoke(nameof(MakeHurtable), unhurtableCooldown);
+
             // Hurt or die:
             if (model.HP <= 0)
             {
+                // Don't make an attack sound if dying:
+                CancelInvoke(nameof(SoundAttack));
+                CancelInvoke(nameof(SoundAttack));
+                CancelInvoke(nameof(SoundAttack));
+                gameObject.GetComponents<AudioSource>()[0].Stop();
+
                 // Make a "die" sound:
                 actionSounds.PlaySound(2);
 
@@ -294,7 +301,7 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
                 IsDead = true;
 
                 // Remove dark_boss from the map:
-                Invoke(nameof(DestroyMe), 1.0f);
+                Invoke(nameof(DestroyMe), 0.8f);
             }
             else
             {
@@ -313,8 +320,10 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
 
     private void StopHurting() { IsHurting = false; }
 
-    
-    
+    private void MakeHurtable() { canHurt = true; }
+
+
+
     private void Dash()
     {
         // Make a Dash sound:
@@ -326,7 +335,6 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
 
         // Don't attack anyone:
         gameObject.layer = 30;
-        gameObject.GetComponentInChildren<HitBoxController>().damage = 0;
 
         // Update speed (move faster when attacking):
         model.Speed *= DashSpeed;
@@ -346,7 +354,6 @@ public class Dark_Boss_Controller : MonoBehaviour, IEntityController
         // Update states, speed and possibility to attack:
         isDashing = false;
         gameObject.layer = 0;
-        gameObject.GetComponentInChildren<HitBoxController>().damage = 5;
         model.Speed /= DashSpeed;
     }
 

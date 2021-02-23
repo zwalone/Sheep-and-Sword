@@ -29,15 +29,6 @@ public class CyclopModel : MonoBehaviour
         set { speed = value; }
     }
 
-    // Value responsible for tracking player:
-    [SerializeField]
-    private float raycastDistance;
-    public float RaycastDistance
-    {
-        get { return raycastDistance; }
-        set { raycastDistance = value; }
-    }
-
     // Object spawned when cyclop is attacking:
     [SerializeField]
     private GameObject laser;

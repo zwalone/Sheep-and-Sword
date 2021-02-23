@@ -51,6 +51,10 @@ public class PlayerController : MonoBehaviour, IEntityController
     private bool isAttacking;
     public bool IsSliding { get; private set; }
 
+    // Preventing multi-hit:
+    private bool canHurt = true;
+    private readonly float unhurtableCooldown = 0.2f;
+
     // Falling down:
     private float fallingDownVelocity = 0.0f;
     private readonly bool enabledFastFalling = false;
@@ -411,8 +415,8 @@ public class PlayerController : MonoBehaviour, IEntityController
 
     public void TakeDamage(int dmg)
     {
-        // If player is dead or is reading a dialog, do nothing:
-        if (IsDead || isReading) return;
+        // If player is dead, is reading a dialog or just received damage, do nothing:
+        if (IsDead || isReading || !canHurt) return;
 
         // Decrease health:
         if (model.HP > 0)
@@ -424,6 +428,10 @@ public class PlayerController : MonoBehaviour, IEntityController
 
         // Show hit particles:
         StartCoroutine(ShowHitParticles());
+
+        // Update canHurt state:
+        canHurt = false;
+        Invoke(nameof(MakeHurtable), unhurtableCooldown);
 
         // Make "hurt" sound:
         actionSounds.PlaySound(5);
@@ -442,6 +450,8 @@ public class PlayerController : MonoBehaviour, IEntityController
     }
 
     private void StopHurting() { IsHurting = false; }
+
+    private void MakeHurtable() { canHurt = true; }
 
     private void GameOver()
     {

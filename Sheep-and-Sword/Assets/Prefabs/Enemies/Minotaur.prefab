@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7169329271894773356}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &2364615619792497392
 BoxCollider2D:
@@ -86,7 +86,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7169329271894773356}
-  m_RootOrder: 5
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &324579358795859894
 BoxCollider2D:
@@ -269,7 +269,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7169329271894773356}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &7169329270457782990
 CapsuleCollider2D:
@@ -317,7 +317,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7169329271894773356}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &7169329271631723780
 BoxCollider2D:
@@ -397,11 +397,10 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 7169329270355546559}
-  - {fileID: 7169329270457782985}
-  - {fileID: 7169329271631723783}
-  - {fileID: 7169329272047668845}
   - {fileID: 6019683266790802295}
   - {fileID: 2047068950829490730}
+  - {fileID: 7169329270457782985}
+  - {fileID: 7169329271631723783}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -665,12 +664,6 @@ MonoBehaviour:
   isGroundBottom: {fileID: 7169329270332535958}
   isGroundOpposite: {fileID: 7169329270196217629}
   changeDirection: 0
-  rayCast: {fileID: 7169329272047668845}
-  rayCastMask:
-    serializedVersion: 2
-    m_Bits: 512
-  rayCastLength: 5
-  attackDistance: 5
   hitbox: {fileID: 7169329271631723782}
   AttackSpeed: 3
   particles: {fileID: 5141940575662464037, guid: 1afee5a5cce1bda43906914fc1eef009,
@@ -688,33 +681,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3f1e3dd7caca754bb74b92282d51b9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &7169329272047668844
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7169329272047668845}
-  m_Layer: 0
-  m_Name: RayCast
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7169329272047668845
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7169329272047668844}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.27, y: -0.03, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 7169329271894773356}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

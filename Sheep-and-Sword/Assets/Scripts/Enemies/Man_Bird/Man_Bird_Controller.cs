@@ -19,10 +19,6 @@ public class Man_Bird_Controller : MonoBehaviour, IEntityController
     private bool changeDirection;
 
     // Player tracking:
-    public Transform rayCast;
-    public LayerMask rayCastMask;
-    public float rayCastLength;
-    public float attackDistance;
     private GameObject target;
     private bool inRange;
 
@@ -32,6 +28,10 @@ public class Man_Bird_Controller : MonoBehaviour, IEntityController
     private bool isAttacking;
     [SerializeField]
     private float AttackSpeed = 3;
+
+    // Preventing multi-hit:
+    private bool canHurt = true;
+    private readonly float unhurtableCooldown = 0.2f;
 
     // Sounds:
     private SoundController actionSounds;
@@ -78,7 +78,7 @@ public class Man_Bird_Controller : MonoBehaviour, IEntityController
     private void OnTriggerEnter2D(Collider2D collider)
     {
         // Check if living player showed up in front of Man_Bird:
-        if (collider.gameObject.CompareTag("Player") && !collider.gameObject.GetComponentInParent<IEntityController>().IsDead)
+        if (collider.gameObject.CompareTag("Player") && collider.gameObject.layer != 31)
         {
             inRange = true;
             target = collider.gameObject;
@@ -164,11 +164,8 @@ public class Man_Bird_Controller : MonoBehaviour, IEntityController
 
     public void TakeDamage(int dmg)
     {
-        // If Man_Bird is dead, do nothing:
-        if (IsDead) return;
-
-        // Don't make an attack sound if hurting:
-        CancelInvoke(nameof(SoundAttack));
+        // If Man_Bird is dead or just received damage, do nothing:
+        if (IsDead || !canHurt) return;
 
         // Check if player is behind the Man_Bird and turn around:
         var p = GameObject.FindGameObjectWithTag("Player").transform;
@@ -182,9 +179,17 @@ public class Man_Bird_Controller : MonoBehaviour, IEntityController
         // Show hurt particles:
         StartCoroutine(ShowParticles());
 
+        // Update canHurt state:
+        canHurt = false;
+        Invoke(nameof(MakeHurtable), unhurtableCooldown);
+
         // Hurt or die:
         if (model.HP <= 0)
         {
+            // Don't make an attack sound if dying:
+            CancelInvoke(nameof(SoundAttack));
+            gameObject.GetComponents<AudioSource>()[0].Stop();
+
             // Make a "die" sound:
             actionSounds.PlaySound(2);
 
@@ -214,6 +219,8 @@ public class Man_Bird_Controller : MonoBehaviour, IEntityController
     private void DestroyMe() { Destroy(gameObject); }
 
     private void StopHurting() { IsHurting = false; }
+
+    private void MakeHurtable() { canHurt = true; }
 
 
 

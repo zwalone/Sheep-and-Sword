@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2325511127328417948}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &2325511127013240611
 BoxCollider2D:
@@ -73,36 +73,6 @@ MonoBehaviour:
   target: Player
   damage: 20
   isBoss: 0
---- !u!1 &2325511127231607623
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2325511127231607622}
-  m_Layer: 0
-  m_Name: 'RayCast '
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2325511127231607622
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2325511127231607623}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.088, y: -0.156, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2325511127328417948}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2325511127321674255
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,7 +102,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2325511127328417948}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &2325511127321674249
 CapsuleCollider2D:
@@ -187,11 +157,10 @@ Transform:
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_Children:
   - {fileID: 2325511128543358597}
-  - {fileID: 2325511127321674254}
-  - {fileID: 2325511127013240608}
-  - {fileID: 2325511127231607622}
   - {fileID: 7376297801787760861}
   - {fileID: 8890517970343237572}
+  - {fileID: 2325511127321674254}
+  - {fileID: 2325511127013240608}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -439,7 +408,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 20
   hp: 20
-  speed: 0.4
+  speed: 0.7
 --- !u!114 &2325511127328417938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,12 +424,6 @@ MonoBehaviour:
   isGroundBottom: {fileID: 2325511128226906857}
   isGroundOpposite: {fileID: 4369730026972571889}
   changeDirection: 0
-  rayCast: {fileID: 2325511127231607622}
-  rayCastMask:
-    serializedVersion: 2
-    m_Bits: 512
-  rayCastLength: 5
-  attackDistance: 5
   hitbox: {fileID: 2325511127013240609}
   AttackSpeed: 3
   particles: {fileID: 200158856010989677, guid: 9069f9a9332d5674699965727e0cf876,
@@ -586,7 +549,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2325511127328417948}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &8473807805893563364
 BoxCollider2D:
@@ -643,7 +606,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2325511127328417948}
-  m_RootOrder: 5
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &654040535317916140
 BoxCollider2D:

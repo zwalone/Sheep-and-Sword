@@ -19,10 +19,6 @@ public class CyclopController : MonoBehaviour, IEntityController
     private bool changeDirection;
 
     // Player tracking:
-    public Transform rayCast;
-    public LayerMask rayCastMask;
-    public float rayCastLength;
-    public float attackDistance;
     private GameObject target;
     private bool inRange;
 
@@ -30,6 +26,10 @@ public class CyclopController : MonoBehaviour, IEntityController
     private bool isAttacking;
     private bool canUseLaser = true;
     private readonly float laserCooldown = 1.5f;
+
+    // Preventing multi-hit:
+    private bool canHurt = true;
+    private readonly float unhurtableCooldown = 0.2f;
 
     // Sounds:
     private SoundController actionSounds;
@@ -77,7 +77,7 @@ public class CyclopController : MonoBehaviour, IEntityController
     private void OnTriggerEnter2D(Collider2D collider)
     {
         // Check if living player showed up in front of cyclop:
-        if (collider.gameObject.CompareTag("Player") && !collider.gameObject.GetComponentInParent<IEntityController>().IsDead)
+        if (collider.gameObject.CompareTag("Player") && collider.gameObject.layer != 31)
         {
             inRange = true;
             target = collider.gameObject;
@@ -170,8 +170,8 @@ public class CyclopController : MonoBehaviour, IEntityController
 
     public void TakeDamage(int dmg)
     {
-        // If cyclop is dead, do nothing:
-        if (IsDead) return;
+        // If cyclop is dead or just received damage, do nothing:
+        if (IsDead || !canHurt) return;
 
         // Check if player is behind the cyclop and turn around:
         var p = GameObject.FindGameObjectWithTag("Player").transform;
@@ -184,6 +184,10 @@ public class CyclopController : MonoBehaviour, IEntityController
 
         // Show hurt particles:
         StartCoroutine(ShowParticles());
+
+        // Update canHurt state:
+        canHurt = false;
+        Invoke(nameof(MakeHurtable), unhurtableCooldown);
 
         // Hurt or die:
         if (model.HP <= 0)
@@ -219,13 +223,15 @@ public class CyclopController : MonoBehaviour, IEntityController
 
     private void StopHurting() { IsHurting = false; }
 
+    private void MakeHurtable() { canHurt = true; }
+
 
 
     private void Animate()
     {
         if (IsHurting) view.Hurt();
         else if (IsDead) view.Die();
-        else if (isAttacking) view.Attack();
+        else if (inRange || isAttacking) view.Attack();
         else view.Walk();
     }
 
