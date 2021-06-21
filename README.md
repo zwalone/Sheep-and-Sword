@@ -2,6 +2,8 @@
 ### Table of contents
 * [Project description](#project-description)
 * [How to play?](#how-to-play)
+* [Project stauts](#project-status)
+* [Credits](#credits)
 
 ### Project description
 **Sheep and Sword** is a 2D platformer, adventure game full of monsters that need to be killed. 
@@ -48,3 +50,40 @@ There you can restart the game from the checkpoint or return to the main menu.
 <p align="center">
   <img src="https://user-images.githubusercontent.com/43967269/108603684-b0559c80-73a9-11eb-9351-0f94e7645cc3.png" alt="GameOverScreen" width="750">
 </p>
+
+### Project status
+The project is considered as **finished**.
+
+### Credits
+Special thanks for all amazing graphic assets to:
+* [rvros](https://rvros.itch.io/animated-pixel-hero) from [itch.io](https://itch.io/) - for main character of the game,
+* [Jesse M](https://jesse-m.itch.io/skeleton-pack) from [itch.io](https://itch.io/) - for Skeleton enemy,
+* [Elthen](https://elthen.itch.io/) from [itch.io](https://itch.io/) - for Cyclop and Minotaur enemies,
+* [sanctumpixel](https://sanctumpixel.itch.io/imp-axe-demon-pixel-art-character) from [itch.io](https://itch.io/) - for Demon Axe enemy,
+* [Szadi art](https://szadiart.itch.io/crystal-world-platformer-set) from [itch.io](https://itch.io/) - for Worm and Man-Bird enemies,
+* [Kronovi](https://darkpixel-kronovi.itch.io/rogue-knight) from [itch.io](https://itch.io/) - for Rogue Knight enemy (first boss of the game),
+* [OcO](https://oco.itch.io/medieval-fantasy-character-pack-2) from [itch.io](https://itch.io/) - for Black Smith enemy (second boss of the game),
+* [Quintino Pixels](https://quintino-pixels.itch.io/starry-night) from [itch.io](https://itch.io/) - for Dark Mountain map,
+* [Trixie](https://trixelized.itch.io/starstring-fields) from [itch.io](https://itch.io/) - for Forest Green map,
+* [UilleagGodwin](https://uilleaggodwin.itch.io/roguelike-dungeon-asset-bundle) from [itch.io](https://itch.io/) - for Health Potion,
+* [Tiny Worlds](https://tinyworlds.itch.io/free-pixel-font-thaleah) from [itch.io](https://itch.io/) - for Thaleah Fat font,
+* [daneeklu](https://opengameart.org/content/lpc-style-farm-animals) from [OpenGameArt.org](https://opengameart.org/) - for sheep character,
+* [Brackeys](https://github.com/Brackeys/Health-Bar) - for health bar design.
+
+Special thanks for all sound effects and music to:
+* [artisticdude](https://opengameart.org/content/rpg-sound-pack) from [OpenGameArt.org](https://opengameart.org/) - for attack and dying sounds,
+* [IgnasD](https://opengameart.org/content/jumping-man-sounds) from [OpenGameArt.org](https://opengameart.org/) - for jumping sounds,
+* [yd](https://opengameart.org/content/platformer-sounds-terminal-interaction-door-shots-bang-and-footsteps) from [OpenGameArt.org](https://opengameart.org/) - for running sound,
+* [Aharabada](https://opengameart.org/content/man-hurt-sounds) from [OpenGameArt.org](https://opengameart.org/) - for hurting sound,
+* [zeroisnotnull](https://opengameart.org/content/crow-caw) from [OpenGameArt.org](https://opengameart.org/) - for checkpoint's crow sound,
+* [Partners In Rhyme](https://www.freesoundeffects.com/free-track/wind01-428702/) from [FreeSoundEffects.com](https://www.freesoundeffects.com/) - for sliding sound,
+* [Ladislav Weyrostek](https://www.dreamstime.com/stock-sound-fx-climbing-step-ladder-person-climbing-step-ladder-audio115660774) - from [Dreamstime.com](https://www.dreamstime.com/) - for climbing sound,
+* [Mike Koenig](https://soundbible.com/1875-Bullet-Whizzing-By.html) from [SoundBible.com](https://soundbible.com/) - for cyclop's laser sound,
+* [Timothy](https://soundbible.com/2096-Maniacal-Laugh-2.html) from [SoundBible.com](https://soundbible.com/) - for game-over's sound,
+* [Audio Hero](https://www.zapsplat.com/music/goat-sheep-bleat-external/) from [ZapSplat.com](https://www.zapsplat.com/) - for sheep sound,
+* [Voicebooking.com](https://www.voicebooking.com/en/free-voice-over-generator) - for all generated dialogs,
+* [liljahmin](https://www.looperman.com/loops/detail/209501/proud-of-u-155bpm-pop-synth-loop) from [Looperman.com](https://www.looperman.com/) - for menu and intro music,
+* [prodbyfendyy](https://www.looperman.com/loops/detail/189612/video-game-pierre-bourne-type-melody-149bpm-trap-flute-loop) from [Looperman.com](https://www.looperman.com/) - for Forest Green scenes' music,
+* [AcidParadox](https://www.looperman.com/loops/detail/10868/video-game-forest-by-acidparadox-free-140bpm-trance-synth-loop) from [Looperman.com](https://www.looperman.com/) - for Dark Mountain scenes' music,
+* [dripchord](https://www.looperman.com/loops/detail/149903/gucci-mane-video-game-vibes-147bpm-trap-synth-loop) from [Looperman.com](https://www.looperman.com/) - for Dark boss stages' music,
+* [40A](https://www.looperman.com/loops/detail/79193/end-game-by-40a-free-80bpm-hip-hop-pad-loop) from [Looperman.com](https://www.looperman.com/) - for ending music.
